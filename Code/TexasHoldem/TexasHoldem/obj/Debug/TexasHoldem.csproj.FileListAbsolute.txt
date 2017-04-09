@@ -1,0 +1,7 @@
+c:\users\matan\documents\visual studio 2013\Projects\TexasHoldem\TexasHoldem\bin\Debug\TexasHoldem.exe.config
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\TexasHoldem.exe.config
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\TexasHoldem.exe
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\TexasHoldem.pdb
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\obj\Debug\TexasHoldem.csprojResolveAssemblyReference.cache
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\obj\Debug\TexasHoldem.exe
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\obj\Debug\TexasHoldem.pdb
