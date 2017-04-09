@@ -41,7 +41,7 @@ public class CardAnalyzer {
 
     public HandRank analyze(){
         for(HandRank rank : HandRank.values()) {
-            if (map.get(rank).operate()) {
+            if (map.get(rank).operate()!=0) {
                 return rank;
             }
         }
@@ -60,12 +60,14 @@ public class CardAnalyzer {
             if(!CheckIfCardExists(new Card(1,suit)))
                 breakLoop = true;
             if(!breakLoop)
-                return true;
+                return 10;
         }
-        return false;
+        return 0;
     };
 
     AnalyzeOp StraightFlush = () ->{
+        int return_value = 0;
+        boolean hasStraight = false;
         for(Card.Suit suit : Card.Suit.values()) {
             int straightInARow = 0;
             for (int value = 1; value <= ACE; value++) {
@@ -73,28 +75,35 @@ public class CardAnalyzer {
                     straightInARow=0;
                 }
                 else{
-                    straightInARow++;
-                    if(straightInARow>4){
-                        return true;
+                    if(straightInARow<5)
+                        straightInARow++;
+                    if(straightInARow>=5){
+                        hasStraight = true;
+                        return_value = value;
                     }
                 }
             }
             if(CheckIfCardExists(new Card(1,suit)) && straightInARow==4)
-                return true;
+                return 1;
 
         }
-        //System.out.println(straightInARow);
-        return false;
+        //System.out.println(return_value);
+        if(hasStraight)
+            return return_value;
+        else
+            return 0;
     };
 
     AnalyzeOp FourOfAKind = () -> {
         int[] instanceCounter = countInstancesByValue();
+        int i=0;
         for(int instances : instanceCounter){
+            i++;
             if (instances==4){
-                return true;
+                return i;
             }
         }
-        return false;
+        return 0;
     };
 
     AnalyzeOp FullHouse = () -> {
@@ -103,25 +112,27 @@ public class CardAnalyzer {
             if (instanceCounter[i]>=3){
                 for(int j=0;j<instanceCounter.length;j++){
                     if(instanceCounter[j]>=2 && i!=j)
-                        return true;
+                        return i;
                 }
             }
         }
-        return false;
+        return 0;
     };
 
     AnalyzeOp Flush = () -> {
         int[] instanceCounter = countInstancesBySuit();
         for(int instances : instanceCounter){
             if (instances==5){
-                return true;
+                return 10;
             }
         }
-        return false;
+        return 0;
     };
 
     AnalyzeOp Straight = () -> {
         int straightInARow = 0;
+        int return_value = 0;
+        boolean hasStraight = false;
         for (int value = 1; value <= ACE; value++) {
             boolean valueAppeared = false;
             for (Card.Suit suit : Card.Suit.values()) {
@@ -129,10 +140,13 @@ public class CardAnalyzer {
                     valueAppeared = true;
             }
             if (valueAppeared) {
-                straightInARow++;
+                if(straightInARow<5)
+                    straightInARow++;
+                if(straightInARow==5)
+                    return_value = value;
                 //System.out.println("increased int to "+straightInARow);
                 if(straightInARow>=5)
-                    return true;
+                    hasStraight = true;
             }
             else {
                 straightInARow = 0;
@@ -140,20 +154,27 @@ public class CardAnalyzer {
             }
         }
         for (Card.Suit suit : Card.Suit.values()) {
-            if (CheckIfCardExists(new Card(1, suit)) && straightInARow == 4)
-                return true;
+            if (CheckIfCardExists(new Card(1, suit)) && straightInARow >= 4)
+                return 1;
         }
-        return false;
+        if(hasStraight) {
+            //System.out.println("im returning "+return_value);
+            return return_value;
+        }
+        else
+            return 0;
     };
 
     AnalyzeOp ThreeOfAKind = () -> {
         int[] instanceCounter = countInstancesByValue();
+        int i=0;
         for(int instances : instanceCounter){
+            i++;
             if (instances>=3){
-                return true;
+                return i;
             }
         }
-        return false;
+        return 0;
     };
 
     AnalyzeOp TwoPair = () -> {
@@ -162,26 +183,49 @@ public class CardAnalyzer {
             if (instanceCounter[i]>=2){
                 for(int j=0;j<instanceCounter.length;j++){
                     if(instanceCounter[j]>=2 && i!=j)
-                        return true;
+
+                        return i>j ? i : j;
                 }
             }
         }
-        return false;
+        return 0;
     };
 
     AnalyzeOp OnePair = () -> {
         int[] instanceCounter = countInstancesByValue();
+        int i=0;
         for(int instances : instanceCounter){
+            i++;
             if (instances>=2){
-                return true;
+                return i;
             }
+
         }
-        return false;
+        return 0;
     };
 
     AnalyzeOp HighCard = () -> {
-        return true;
+        int[] instances = countInstancesByValue();
+        for(int i=instances.length-1;i>=0;i--) {
+            if (instances[i] > 0) {
+                return i;
+            }
+        }
+        return 0;//Should Never Get Here!!
     };
+
+    public PlayerHand tieBreaker(HandRank rank,PlayerHand hand1, PlayerHand hand2){
+        this.setHand(hand1);
+        int hand1rank = map.get(rank).operate();
+        this.setHand(hand2);
+        int hand2rank = map.get(rank).operate();
+        if(hand1rank>hand2rank)
+            return hand1;
+        else if(hand2rank>hand1rank)
+            return hand2;
+        else
+            return null;
+    }
 
     private int[] countInstancesByValue(){
         int[] instanceCounter = new int[15];
@@ -228,5 +272,5 @@ public class CardAnalyzer {
 }
 
 interface AnalyzeOp{
-    boolean operate();
+    int operate();
 }
