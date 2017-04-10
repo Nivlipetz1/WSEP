@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TexasHoldem", "TexasHoldem\TexasHoldem.csproj", "{C25E63FF-8ADC-460D-922B-DC31F600828D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TexasHoldemSystem", "TexasHoldem\TexasHoldemSystem.csproj", "{C25E63FF-8ADC-460D-922B-DC31F600828D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gaming", "GamingLibrary\Gaming.csproj", "{2972ACE2-BF33-4F5F-990F-CA94DE288CD4}"
 EndProject
