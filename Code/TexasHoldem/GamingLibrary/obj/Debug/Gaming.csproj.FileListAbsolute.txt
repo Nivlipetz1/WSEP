@@ -2,3 +2,4 @@ C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingLibrary
 C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingLibrary\bin\Debug\Gaming.pdb
 C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingLibrary\obj\Debug\Gaming.dll
 C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingLibrary\obj\Debug\Gaming.pdb
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingLibrary\obj\Debug\Gaming.csprojResolveAssemblyReference.cache

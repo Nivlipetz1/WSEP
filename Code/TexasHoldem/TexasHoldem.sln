@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TexasHoldem", "TexasHoldem\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gaming", "GamingLibrary\Gaming.csproj", "{2972ACE2-BF33-4F5F-990F-CA94DE288CD4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "Logger\Logger.csproj", "{34810670-13D7-4D6C-BE96-78C2382A793C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "User", "User\User.csproj", "{EA8F8CE0-841A-433A-A6C5-24C4B359A14F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{2972ACE2-BF33-4F5F-990F-CA94DE288CD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2972ACE2-BF33-4F5F-990F-CA94DE288CD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2972ACE2-BF33-4F5F-990F-CA94DE288CD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34810670-13D7-4D6C-BE96-78C2382A793C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34810670-13D7-4D6C-BE96-78C2382A793C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34810670-13D7-4D6C-BE96-78C2382A793C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34810670-13D7-4D6C-BE96-78C2382A793C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA8F8CE0-841A-433A-A6C5-24C4B359A14F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA8F8CE0-841A-433A-A6C5-24C4B359A14F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA8F8CE0-841A-433A-A6C5-24C4B359A14F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA8F8CE0-841A-433A-A6C5-24C4B359A14F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

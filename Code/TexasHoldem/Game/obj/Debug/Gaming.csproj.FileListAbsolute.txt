@@ -1,6 +1,0 @@
-C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\Game\obj\Debug\Gaming.csprojResolveAssemblyReference.cache
-C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\Game\bin\Debug\Gaming.exe.config
-C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\Game\bin\Debug\Gaming.exe
-C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\Game\bin\Debug\Gaming.pdb
-C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\Game\obj\Debug\Gaming.exe
-C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\Game\obj\Debug\Gaming.pdb
