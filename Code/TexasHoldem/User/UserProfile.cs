@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace User
 {
-    public class Class1
+    public class UserProfile
     {
+
     }
 }
