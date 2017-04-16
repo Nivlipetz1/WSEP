@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace User
 {
     interface Users
     {
-        bool register(string userName, string password);
+        bool register(string userName,string password);
         bool login(string userName, string password);
         bool logout();
         bool editUserName(string userName);
         bool editPassword(string password);
+        bool editAvatar(Image avatar);
     }
 }
