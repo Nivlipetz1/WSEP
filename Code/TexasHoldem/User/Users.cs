@@ -11,9 +11,9 @@ namespace User
     {
         bool register(string userName,string password);
         bool login(string userName, string password);
-        bool logout();
-        bool editUserName(string userName);
-        bool editPassword(string password);
-        bool editAvatar(Image avatar);
+        bool logout(user u);
+        bool editUserName(string userName,user u);
+        bool editPassword(string password,user u);
+        bool editAvatar(Image avatar,user u);
     }
 }

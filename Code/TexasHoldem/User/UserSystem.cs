@@ -9,51 +9,31 @@ namespace User
 {
     class UserSystem : Users
     {
-        private user activeUser;
+        public class userSystemFactory
+        {
+            private static UserSystem instance = null;
+            public  static UserSystem getInstance()
+            {
+                if (instance == null)
+                    return new UserSystem();
+                return instance;
+            }
+        }
+        private Dictionary<String, user> activeUsers;
         private Dictionary<String, user> users;
-
-        public UserSystem()
+        private UserSystem()
         {
-            activeUser = null;
+            activeUsers = new Dictionary<string, user>();
             users = new Dictionary<string, user>();
-        }
-
-        public user getActiveUser()
-        {
-            return activeUser;
-        }
-
-        public bool editAvatar(Image avatar)
-        {
-            if (activeUser == null)
-                return false;
-            activeUser.Avatar = avatar;
-            return true;
-        }
-
-        public bool editPassword(string password)
-        {
-            if (activeUser == null)
-                return false;
-            activeUser.Password = password;
-            return true;
-        }
-
-        public bool editUserName(string userName)
-        {
-            if (activeUser == null)
-                return false;
-            activeUser.Username = userName;
-            return true;
         }
 
         public bool login(string userName, string password)
         {
-            if (activeUser == null)
+            if (!activeUsers.ContainsKey(userName))
             {
                 try
                 {
-                    activeUser = getUser(userName, password);
+                    activeUsers.Add(userName,getUser(userName, password));
                 }
                 catch
                 {
@@ -64,13 +44,6 @@ namespace User
             return true;
         }
 
-        public bool logout()
-        {
-            if (activeUser == null)
-                return false;
-            activeUser = null;
-            return true;
-        }
 
         public bool register(string userName, string password)
         {
@@ -80,9 +53,49 @@ namespace User
             return true;
         }
 
-        private user getUser(string username, string password)
+        public user getUser(string username, string password)
+        {
+            user u = users[username];
+            if (u.Password.Equals(password))
+                return users[username];
+            else
+                throw new Exception("Wrong password");
+        }
+        public user getUser(string username)
         {
             return users[username];
+        }
+
+        public bool editUserName(string userName, user u)
+        {
+            if (activeUsers.ContainsKey(u.Username))
+                u.Username = userName;
+            else return false;
+            return true;
+        }
+
+        public bool editPassword(string password, user u)
+        {
+            if (activeUsers.ContainsKey(u.Username))
+                u.Password = password;
+            else return false;
+            return true;
+        }
+
+        public bool editAvatar(Image avatar, user u)
+        {
+            if (activeUsers.ContainsKey(u.Username))
+                u.Avatar = avatar;
+            else return false;
+            return true;
+        }
+
+        public bool logout(user u)
+        {
+            if (activeUsers.ContainsKey(u.Username))
+                activeUsers.Remove(u.Username);
+            else return false;
+            return true;
         }
     }
 }
