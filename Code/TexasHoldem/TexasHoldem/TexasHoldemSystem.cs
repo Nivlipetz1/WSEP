@@ -4,24 +4,26 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using User;
 
-namespace User
+namespace TexasHoldemSystem
 {
-    class UserSystem : Users
+    class TexasHoldemSystem : System
     {
         public class userSystemFactory
         {
-            private static UserSystem instance = null;
-            public  static UserSystem getInstance()
+            private static TexasHoldemSystem instance = null;
+            public  static TexasHoldemSystem getInstance()
             {
                 if (instance == null)
-                    return new UserSystem();
+                    return new TexasHoldemSystem();
                 return instance;
             }
         }
         private Dictionary<String, user> activeUsers;
         private Dictionary<String, user> users;
-        private UserSystem()
+
+        private TexasHoldemSystem()
         {
             activeUsers = new Dictionary<string, user>();
             users = new Dictionary<string, user>();
@@ -52,6 +54,7 @@ namespace User
             else return false;
             return true;
         }
+
 
         public user getUser(string username, string password)
         {
@@ -97,5 +100,12 @@ namespace User
             else return false;
             return true;
         }
+
+        public bool isConnected(string username)
+        {
+            return activeUsers.ContainsKey(username);
+        }
+        
+        
     }
 }

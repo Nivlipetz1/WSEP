@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
+using User;
 
-namespace User
+namespace TexasHoldemSystem
 {
     [TestFixture]
 
@@ -14,13 +16,13 @@ namespace User
         [TestCase]
         public void registerTest()
         {
-            UserSystem us = UserSystem.userSystemFactory.getInstance();
+            TexasHoldemSystem us = TexasHoldemSystem.userSystemFactory.getInstance();
             Assert.True(us.register("abc", "123"));
         }
         [TestCase]
         public void registerWithUsedNameTest()
         {
-            UserSystem us = UserSystem.userSystemFactory.getInstance();
+            TexasHoldemSystem us = TexasHoldemSystem.userSystemFactory.getInstance();
             Assert.True(us.register("abc", "123"));
             Assert.False(us.register("abc", "321"));
         }
@@ -28,14 +30,14 @@ namespace User
         [TestCase]
         public void SuccesfullLoginTest()
         {
-            UserSystem us = UserSystem.userSystemFactory.getInstance();
+            TexasHoldemSystem us = TexasHoldemSystem.userSystemFactory.getInstance();
             us.register("abc", "123");
             Assert.True(us.login("abc", "123"));
         }
         [TestCase]
         public void failureLoginTest()
         {
-            UserSystem us = UserSystem.userSystemFactory.getInstance();
+            TexasHoldemSystem us = TexasHoldemSystem.userSystemFactory.getInstance();
             us.register("abc", "123");
             us.register("aaa", "123");
             us.login("aaa", "123");
@@ -45,7 +47,7 @@ namespace User
         public void editUsernameAndPasswordTest()
         {
             
-            UserSystem us = UserSystem.userSystemFactory.getInstance();
+            TexasHoldemSystem us = TexasHoldemSystem.userSystemFactory.getInstance();
             us.register("abc", "123");
             us.login("abc", "123");
             user user = us.getUser("abc","123");
@@ -58,10 +60,21 @@ namespace User
         [TestCase]
         public void editProfileToLoggedOutUser()
         {
-            UserSystem us = UserSystem.userSystemFactory.getInstance();
+            TexasHoldemSystem us = TexasHoldemSystem.userSystemFactory.getInstance();
             us.register("abc", "123");
             user user = us.getUser("abc", "123");
-            Assert.False(us.editUserName("aaaaa",user));  
+            Assert.False(us.editUserName("aaaaa",user));
+        }
+        [TestCase]
+        public void editAvatarTest()
+        {
+            Image avatar = new Bitmap("C:/Users/pc/Desktop/avatar.png");
+            TexasHoldemSystem us = TexasHoldemSystem.userSystemFactory.getInstance();
+            us.register("abc", "123");
+            us.login("abc", "123");
+            user user = us.getUser("abc", "123");
+            Assert.True(us.editAvatar(avatar, user));
+            Assert.AreEqual(user.Avatar, avatar);
         }
 
     }

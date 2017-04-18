@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace User
 {
-    class user
+    public class user
     {
         private string username;
         private string password;
