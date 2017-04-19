@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using User;
+
+namespace TexasHoldemSystem
+{
+    interface LeagueAPI
+    {
+        bool createNewLeague(int minimumRank);
+        bool addUserToLeague(UserProfile user, LeagueAPI league);
+        bool removeUserFromLeague(UserProfile user, LeagueAPI league);
+        League getLeagueByUser(UserProfile user);
+    }
+}
