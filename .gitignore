@@ -1,2 +1,6 @@
-Diagrams/~$intainLeagues.docx
-Diagrams/~$gisterUseCase.docx
+*.suo
+*.cache
+*.dll
+*.pdb
+*.exe
+*.tmp
