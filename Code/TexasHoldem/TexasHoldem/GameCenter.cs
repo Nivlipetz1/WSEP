@@ -8,7 +8,7 @@ using Gaming;
 
 namespace TexasHoldemSystem
 {
-    class GameCenter
+    class GameCenter : GameCenterInterface
     {
         List<Game> games = new List<Game>();
 
