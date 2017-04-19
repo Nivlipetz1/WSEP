@@ -20,13 +20,13 @@ namespace TexasHoldemSystem
                 return instance;
             }
         }
-        private Dictionary<String, user> activeUsers;
-        private Dictionary<String, user> users;
+        private Dictionary<String, UserProfile> activeUsers;
+        private Dictionary<String, UserProfile> users;
 
         private TexasHoldemSystem()
         {
-            activeUsers = new Dictionary<string, user>();
-            users = new Dictionary<string, user>();
+            activeUsers = new Dictionary<string, UserProfile>();
+            users = new Dictionary<string, UserProfile>();
         }
 
         public bool login(string userName, string password)
@@ -50,26 +50,26 @@ namespace TexasHoldemSystem
         public bool register(string userName, string password)
         {
             if (!users.ContainsKey(userName))
-                users.Add(userName, new user(userName, password));
+                users.Add(userName, new UserProfile(userName, password));
             else return false;
             return true;
         }
 
 
-        public user getUser(string username, string password)
+        public UserProfile getUser(string username, string password)
         {
-            user u = users[username];
+            UserProfile u = users[username];
             if (u.Password.Equals(password))
                 return users[username];
             else
                 throw new Exception("Wrong password");
         }
-        public user getUser(string username)
+        public UserProfile getUser(string username)
         {
             return users[username];
         }
 
-        public bool editUserName(string userName, user u)
+        public bool editUserName(string userName, UserProfile u)
         {
             if (activeUsers.ContainsKey(u.Username))
                 u.Username = userName;
@@ -77,7 +77,7 @@ namespace TexasHoldemSystem
             return true;
         }
 
-        public bool editPassword(string password, user u)
+        public bool editPassword(string password, UserProfile u)
         {
             if (activeUsers.ContainsKey(u.Username))
                 u.Password = password;
@@ -85,7 +85,7 @@ namespace TexasHoldemSystem
             return true;
         }
 
-        public bool editAvatar(Image avatar, user u)
+        public bool editAvatar(Image avatar, UserProfile u)
         {
             if (activeUsers.ContainsKey(u.Username))
                 u.Avatar = avatar;
@@ -93,7 +93,7 @@ namespace TexasHoldemSystem
             return true;
         }
 
-        public bool logout(user u)
+        public bool logout(UserProfile u)
         {
             if (activeUsers.ContainsKey(u.Username))
                 activeUsers.Remove(u.Username);
@@ -105,7 +105,5 @@ namespace TexasHoldemSystem
         {
             return activeUsers.ContainsKey(username);
         }
-        
-        
     }
 }
