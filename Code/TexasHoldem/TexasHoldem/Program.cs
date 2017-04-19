@@ -11,7 +11,7 @@ namespace TexasHoldemSystem
     {
         static void Main(string[] args)
         {
-            Game g = new Game("niv1");
+            Game g = new Game("niv");
             Console.Write(g.name);
             Console.Read();
         }
