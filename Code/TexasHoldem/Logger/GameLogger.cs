@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Logger
 {
-    public class Class1
+    public class GameLogger
     {
     }
 }
