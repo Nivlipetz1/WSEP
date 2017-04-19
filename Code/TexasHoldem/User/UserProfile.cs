@@ -9,6 +9,7 @@ namespace User
 {
     public class UserProfile
     {
+
         private string username;
         private string password;
         private Image avatar;
