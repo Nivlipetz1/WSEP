@@ -1,2 +1,11 @@
 Diagrams/~$intainLeagues.docx
 Diagrams/~$gisterUseCase.docx
+*.suo
+*.exe
+*.dll
+Code/TexasHoldem/GamingLibrary/bin/Debug/Gaming.dll
+*.pdb
+Code/TexasHoldem/GamingLibrary/bin/Debug/nunit_random_seed.tmp
+*.dll
+Code/TexasHoldem/User/obj/Debug/User.dll
+*.cache

@@ -13,5 +13,6 @@ namespace TexasHoldemSystem
         bool removeUserFormLeague(UserProfile user, League league);
         League getLeagueByUser(UserProfile user);
         League CreateNewLeague(int minimumRank);
+
     }
 }
