@@ -12,6 +12,7 @@ namespace TexasHoldemSystem
         bool createNewLeague(int minimumRank);
         bool addUserToLeague(UserProfile user, LeagueAPI league);
         bool removeUserFromLeague(UserProfile user, LeagueAPI league);
+        bool changeLeagueMinimumRank(League league, int newRank);
         League getLeagueByUser(UserProfile user);
     }
 }
