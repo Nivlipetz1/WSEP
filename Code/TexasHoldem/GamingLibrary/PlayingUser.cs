@@ -7,7 +7,7 @@ using User;
 
 namespace Gaming
 {
-    public class PlayingUser : SpectatingUser
+    public class PlayingUser : SpectatingUser, Player
     {
         private int credit;
         private string status;
@@ -29,7 +29,7 @@ namespace Gaming
             this.hand = hand;
         }
 
-        public PlayerHand getHand()
+        public PlayerHand GetHand()
         {
             return hand;
         }
@@ -39,7 +39,7 @@ namespace Gaming
             return status;
         }
 
-        public int getBlind(int amount)
+        public int GetBlind(int amount)
         {
             credit -= amount;
             return amount;
@@ -55,6 +55,11 @@ namespace Gaming
 
             //credit -=betInput; ?????
             return betInput;
+        }
+
+        public void PostMessage()
+        {
+            game.Message(this, Console.ReadLine());
         }
     }
 }

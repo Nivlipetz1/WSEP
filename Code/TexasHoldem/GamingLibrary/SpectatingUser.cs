@@ -11,7 +11,7 @@ namespace Gaming
     {
 
         private UserProfile account;
-        private Game game;
+        protected Game game;
 
         public SpectatingUser(UserProfile user, Game game)
         {
@@ -23,12 +23,6 @@ namespace Gaming
         public UserProfile GetAccount()
         {
             return account;
-        }
-
-
-        public void PostMessage()
-        {
-            game.Message(this, Console.ReadLine());
         }
 
         public void PushMove(Move move)
