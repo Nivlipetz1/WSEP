@@ -50,7 +50,7 @@ namespace TexasHoldemSystem
             TexasHoldemSystem us = TexasHoldemSystem.userSystemFactory.getInstance();
             us.register("abc", "123");
             us.login("abc", "123");
-            user user = us.getUser("abc","123");
+            UserProfile user = us.getUser("abc","123");
             Assert.True(us.editPassword("123456",user));
             Assert.True(us.editUserName("abcdef",user));     
             Assert.AreEqual(user.Password, "123456");
@@ -62,7 +62,7 @@ namespace TexasHoldemSystem
         {
             TexasHoldemSystem us = TexasHoldemSystem.userSystemFactory.getInstance();
             us.register("abc", "123");
-            user user = us.getUser("abc", "123");
+            UserProfile user = us.getUser("abc", "123");
             Assert.False(us.editUserName("aaaaa",user));
         }
         [TestCase]
@@ -72,7 +72,7 @@ namespace TexasHoldemSystem
             TexasHoldemSystem us = TexasHoldemSystem.userSystemFactory.getInstance();
             us.register("abc", "123");
             us.login("abc", "123");
-            user user = us.getUser("abc", "123");
+            UserProfile user = us.getUser("abc", "123");
             Assert.True(us.editAvatar(avatar, user));
             Assert.AreEqual(user.Avatar, avatar);
         }
