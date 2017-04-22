@@ -8,3 +8,8 @@ C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\Logger\bin\De
 C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\Logger\obj\Debug\Logger.csprojResolveAssemblyReference.cache
 C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\Logger\obj\Debug\Logger.dll
 C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\Logger\obj\Debug\Logger.pdb
+C:\Users\omerh\Source\Repos\WSEP\Code\TexasHoldem\Logger\bin\Debug\Logger.dll
+C:\Users\omerh\Source\Repos\WSEP\Code\TexasHoldem\Logger\bin\Debug\Logger.pdb
+C:\Users\omerh\Source\Repos\WSEP\Code\TexasHoldem\Logger\obj\Debug\Logger.csprojResolveAssemblyReference.cache
+C:\Users\omerh\Source\Repos\WSEP\Code\TexasHoldem\Logger\obj\Debug\Logger.dll
+C:\Users\omerh\Source\Repos\WSEP\Code\TexasHoldem\Logger\obj\Debug\Logger.pdb

@@ -12,6 +12,7 @@ namespace Gaming
         private int credit;
         private string status;
         private PlayerHand hand;
+        private UserInput userInput;
 
         public PlayingUser(UserProfile account, int credit, Game game) : base (account,game)
         {
@@ -57,8 +58,8 @@ namespace Gaming
             string input;
             int betInput;
             do
-                input = Console.ReadLine();
-            while (Int32.TryParse(input, out betInput) && betInput>=minimumBet);
+                input = userInput.GetInput();
+            while (Int32.TryParse(input, out betInput) && betInput >= minimumBet);
 
             status = "Talked";
 
@@ -75,7 +76,7 @@ namespace Gaming
 
         public void PostMessage()
         {
-            game.Message(this, Console.ReadLine());
+            game.Message(this, userInput.GetInput());
         }
     }
 }

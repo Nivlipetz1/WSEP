@@ -11,11 +11,8 @@ namespace TexasHoldemSystem
     {
         static void Main(string[] args)
         {
-            /*Game g = new Game("niv");
-            Console.Write(g.name);*/
-            PlayingUser omer = new PlayingUser(null, 50, null);
-            omer.PushMove(new NewCardMove(new Card[] { null, null, new Card(4, Card.Suit.CLUB), null }));
-            omer.DisplayCards();
+            //Game g = new Game("niv");
+            //Console.Write(g.name);
             Console.Read();
         }
     }

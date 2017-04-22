@@ -20,18 +20,16 @@ namespace Gaming
         private Boolean revealed = false;
         private int dealerOffSet = 0;
         private GameLogger logger;
-        private IDictionary<string, int> playerBets = new Dictionary<string,int>();
+        private IDictionary<PlayingUser, int> playerBets = new Dictionary<PlayingUser,int>();
         private Card[] cards;
 
-        public Game(GamePreferences gp, PlayingUser creatingPlayer, int buyIn)
+        public Game(GamePreferences gp, int buyIn)
         {
             gameDeck = new Deck();
             players = new List<PlayingUser>();
             spectators = new List<SpectatingUser>();
             pot = new int[2];
             ca = new CardAnalyzer();
-            players.Add(creatingPlayer);
-            playerBets.Add(creatingPlayer.GetAccount().Username, 0);
             gamePref = gp;
             logger = new GameLogger();
         }
@@ -42,7 +40,7 @@ namespace Gaming
             //announce game started
 
             //send the array of players to all the observers
-            PushMoveToObservers(new GameStartMove(playerBets));
+            PushStartGameMove();
 
             //choose dealer
             dealerOffSet = 0;
@@ -51,19 +49,19 @@ namespace Gaming
             PlayingUser smallBlindPlayer = players.ElementAt((dealerOffSet + 1) % players.Count);
             int smallBlindBet = smallBlindPlayer.Bet(gamePref.GetsB());
             bettingRound += smallBlindBet;
-            playerBets[smallBlindPlayer.GetAccount().Username] = smallBlindBet; 
+            playerBets[smallBlindPlayer] = smallBlindBet;
 
             //send small blind move
-            PushMoveToObservers(new BetMove(playerBets));
+            PushBetMove();
 
             //request big blind
             PlayingUser bigBlindPlayer = players.ElementAt((dealerOffSet+2)%players.Count);
             int bigBlindBet = bigBlindPlayer.Bet(gamePref.GetbB());
             bettingRound += bigBlindBet;
-            playerBets[bigBlindPlayer.GetAccount().Username] = bigBlindBet; 
+            playerBets[bigBlindPlayer] = bigBlindBet;
 
             //send big blind move
-            PushMoveToObservers(new BetMove(playerBets));
+            PushBetMove();
 
             //draw hands
             foreach (PlayingUser player in players)
@@ -100,7 +98,7 @@ namespace Gaming
 
         }
 
-        private void DetermineWinner()
+        private List<PlayingUser> DetermineWinner()
         {
             Dictionary<PlayingUser,CardAnalyzer.HandRank> playerScores= new Dictionary<PlayingUser,CardAnalyzer.HandRank>();
             ca.setCardArray(cards);
@@ -115,13 +113,35 @@ namespace Gaming
             CardAnalyzer.HandRank minValue = playerScores.Values.Min();
             //NEED TO GROUP BY MINVALUE AND DO A TOURNAMENT TEST TO DETERMINE THE WINNER USING THE
             //TIEBREAKER FUNCTION IN CARDANALYZER
+
+
             foreach (PlayingUser player in playerScores.Keys)
             {
                 if (playerScores[player] != minValue)
                     playerScores.Remove(player);
             }
-            
-//            ca.tieBreaker()
+            List<PlayingUser> winners = new List<PlayingUser>();
+            foreach (PlayingUser player in playerScores.Keys)
+            {
+                if (winners.Count == 0)
+                {
+                    winners.Add(player);
+                }
+                else
+                {
+                    PlayerHand winner = ca.tieBreaker(minValue,winners.First().GetHand(),player.GetHand());
+                    if (winner == null)
+                    {
+                        winners.Add(player);
+                    }
+                    else if(winner == player.GetHand())
+                    {
+                        winners.Clear();
+                        winners.Add(player);
+                    }
+                }
+            }
+            return winners;
         }
 
         private int GetMaxBet()
@@ -129,15 +149,35 @@ namespace Gaming
             return playerBets.Values.Max();
         }
 
+        private void PushBetMove()
+        {
+            IDictionary<string, int> playerBetsString = new Dictionary<string, int>();
+            foreach(PlayingUser player in playerBets.Keys)
+            {
+                playerBetsString.Add(player.GetAccount().Username, playerBets[player]);
+            }
+            PushMoveToObservers(new BetMove(playerBetsString));
+        }
+
+        private void PushStartGameMove()
+        {
+            IDictionary<string, int> playerBetsString = new Dictionary<string, int>();
+            foreach (PlayingUser player in playerBets.Keys)
+            {
+                playerBetsString.Add(player.GetAccount().Username, playerBets[player]);
+            }
+            PushMoveToObservers(new GameStartMove(playerBetsString));
+        }
+
         private void TraversePlayers(int index){
             while (!EndOfBettingRound())
             {
 
-                string currentUser = players.ElementAt(index).GetAccount().Username;
+                PlayingUser currentUser = players.ElementAt(index);
                 int bet = players[index].Bet(GetMaxBet()-playerBets[currentUser]);
                 playerBets[currentUser] += bet;
                 bettingRound += bet;
-                PushMoveToObservers(new BetMove(playerBets));
+                PushBetMove();
                 index = index+1 % players.Count;
             }
             pot[0] += bettingRound;
@@ -185,7 +225,7 @@ namespace Gaming
 
             PlayingUser newPlayer = new PlayingUser(player, 0, this);
             players.Add(newPlayer);
-            playerBets.Add(newPlayer.GetAccount().Username, 0);
+            playerBets.Add(newPlayer, 0);
 
         }
 
@@ -205,7 +245,7 @@ namespace Gaming
                 throw new InvalidOperationException("player.getName()" + " is not playing in this game");
 
             players.Remove(removeThisPlayer);
-            playerBets.Remove(removeThisPlayer.GetAccount().Username);
+            playerBets.Remove(removeThisPlayer);
         }
 
         private void addSpectator(UserProfile user)

@@ -33,10 +33,5 @@ namespace Gaming
             m.update(ref playerBets,ref cards, ref playerHands);
         }
 
-        public void DisplayCards(){
-            Console.Write(cards[2].toString());
-        }
-
-
     }
 }
