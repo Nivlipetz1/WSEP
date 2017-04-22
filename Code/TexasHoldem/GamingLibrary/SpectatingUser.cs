@@ -12,6 +12,9 @@ namespace Gaming
 
         private UserProfile account;
         protected Game game;
+        private Card[] cards;
+        private IDictionary<string, int> playerBets;
+        private IDictionary<string, PlayerHand> playerHands;
 
         public SpectatingUser(UserProfile user, Game game)
         {
@@ -25,9 +28,15 @@ namespace Gaming
             return account;
         }
 
-        public void PushMove(Move move)
+        public void PushMove(Move m)
         {
-            //Got the last move;
+            m.update(ref playerBets,ref cards, ref playerHands);
         }
+
+        public void DisplayCards(){
+            Console.Write(cards[2].toString());
+        }
+
+
     }
 }
