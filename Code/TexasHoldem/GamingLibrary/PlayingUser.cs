@@ -7,7 +7,7 @@ using User;
 
 namespace Gaming
 {
-    public class PlayingUser : SpectatingUser, Player
+    public class PlayingUser : SpectatingUser
     {
         private int credit;
         private string status;
@@ -19,12 +19,14 @@ namespace Gaming
             status = "Active";
         }
 
+
+
         public int GetCredit()
         {
             return credit;
         }
 
-        public void setHand(PlayerHand hand)
+        public void SetHand(PlayerHand hand)
         {
             this.hand = hand;
         }
@@ -37,6 +39,11 @@ namespace Gaming
         public String GetStatus()
         {
             return status;
+        }
+
+        public void SetStatus(string st)
+        {
+            status = st;
         }
 
         public int GetBlind(int amount)
@@ -53,7 +60,16 @@ namespace Gaming
                 input = Console.ReadLine();
             while (Int32.TryParse(input, out betInput) && betInput>=minimumBet);
 
-            //credit -=betInput; ?????
+            status = "Talked";
+
+            if (credit == 0)
+            {
+                status = "AllIn";
+            }
+            else if(betInput==-1){
+                status = "Fold";
+            }
+
             return betInput;
         }
 

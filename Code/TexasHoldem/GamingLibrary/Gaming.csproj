@@ -39,8 +39,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Card.cs" />
+    <Compile Include="CardAnalyzer.cs" />
+    <Compile Include="CardAnalyzerTests.cs" />
+    <Compile Include="Deck.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="GameLogger.cs" />
+    <Compile Include="GameParticipantsTests.cs" />
+    <Compile Include="GamePreferences.cs" />
+    <Compile Include="LoggerPusher.cs" />
+    <Compile Include="Move.cs" />
+    <Compile Include="MoveTypes.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="PlayerHand.cs" />
+    <Compile Include="PlayingUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SpectatingUser.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Logger\Logger.csproj">
+      <Project>{34810670-13d7-4d6c-be96-78c2382a793c}</Project>
+      <Name>Logger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\User\User.csproj">
+      <Project>{ea8f8ce0-841a-433a-a6c5-24c4b359a14f}</Project>
+      <Name>User</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

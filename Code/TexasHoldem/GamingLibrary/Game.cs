@@ -19,6 +19,9 @@ namespace Gaming
         private GamePreferences gamePref;
         private Boolean revealed = false;
         private int dealerOffSet = 0;
+        private GameLogger logger;
+        private IDictionary<string, int> playerBets = new Dictionary<string,int>();
+        private Card[] cards;
 
         public Game(GamePreferences gp, PlayingUser creatingPlayer, int buyIn)
         {
@@ -28,7 +31,9 @@ namespace Gaming
             pot = new int[2];
             ca = new CardAnalyzer();
             players.Add(creatingPlayer);
-            gamePref = gp;            
+            playerBets.Add(creatingPlayer.GetAccount().Username, 0);
+            gamePref = gp;
+            logger = new GameLogger();
         }
 
         public void StartGame()
@@ -36,34 +41,132 @@ namespace Gaming
             int potInt = pot[0];
             //announce game started
 
+            //send the array of players to all the observers
+            PushMoveToObservers(new GameStartMove(playerBets));
+
             //choose dealer
             dealerOffSet = 0;
 
             //request small blind
             PlayingUser smallBlindPlayer = players.ElementAt((dealerOffSet + 1) % players.Count);
-            bettingRound += smallBlindPlayer.Bet(gamePref.GetsB());
+            int smallBlindBet = smallBlindPlayer.Bet(gamePref.GetsB());
+            bettingRound += smallBlindBet;
+            playerBets[smallBlindPlayer.GetAccount().Username] = smallBlindBet; 
 
             //send small blind move
-
-
+            PushMoveToObservers(new BetMove(playerBets));
 
             //request big blind
             PlayingUser bigBlindPlayer = players.ElementAt((dealerOffSet+2)%players.Count);
-            bettingRound += smallBlindPlayer.Bet(gamePref.GetbB());
+            int bigBlindBet = bigBlindPlayer.Bet(gamePref.GetbB());
+            bettingRound += bigBlindBet;
+            playerBets[bigBlindPlayer.GetAccount().Username] = bigBlindBet; 
 
             //send big blind move
+            PushMoveToObservers(new BetMove(playerBets));
+
+            //draw hands
+            foreach (PlayingUser player in players)
+            {
+                player.SetHand(gameDeck.drawPlayerHand());
+            }
+
 
             //request bet from rest of players
+            TraversePlayers(dealerOffSet + 3);
 
+            cards = new Card[5]; 
+            Card[] flop = gameDeck.drawFlop();
+            cards[0] = flop[0];
+            cards[1] = flop[1];
+            cards[2] = flop[2];
 
+            PushMoveToObservers(new NewCardMove(cards));
 
+            TraversePlayers(dealerOffSet + 1);
 
+            cards[3] = gameDeck.drawRiver();
 
-            //end of betting round:
+            PushMoveToObservers(new NewCardMove(cards));
 
-            pot[0] += bettingRound;
+            TraversePlayers(dealerOffSet + 1);
+
+            cards[4] = gameDeck.drawTurn();
+
+            PushMoveToObservers(new NewCardMove(cards));
+
+            TraversePlayers(dealerOffSet + 1);
+
 
         }
+
+        private void DetermineWinner()
+        {
+            Dictionary<PlayingUser,CardAnalyzer.HandRank> playerScores= new Dictionary<PlayingUser,CardAnalyzer.HandRank>();
+            ca.setCardArray(cards);
+            foreach (PlayingUser player in players)
+            {
+                if (player.GetStatus() != "Fold")
+                {
+                    ca.setHand(player.GetHand());
+                    playerScores.Add(player,ca.analyze());
+                }
+            }
+            CardAnalyzer.HandRank minValue = playerScores.Values.Min();
+            //NEED TO GROUP BY MINVALUE AND DO A TOURNAMENT TEST TO DETERMINE THE WINNER USING THE
+            //TIEBREAKER FUNCTION IN CARDANALYZER
+            foreach (PlayingUser player in playerScores.Keys)
+            {
+                if (playerScores[player] != minValue)
+                    playerScores.Remove(player);
+            }
+            
+//            ca.tieBreaker()
+        }
+
+        private int GetMaxBet()
+        {
+            return playerBets.Values.Max();
+        }
+
+        private void TraversePlayers(int index){
+            while (!EndOfBettingRound())
+            {
+
+                string currentUser = players.ElementAt(index).GetAccount().Username;
+                int bet = players[index].Bet(GetMaxBet()-playerBets[currentUser]);
+                playerBets[currentUser] += bet;
+                bettingRound += bet;
+                PushMoveToObservers(new BetMove(playerBets));
+                index = index+1 % players.Count;
+            }
+            pot[0] += bettingRound;
+            bettingRound = 0;
+
+            foreach (PlayingUser player in players)
+            {
+                if (player.GetStatus() == "Talked")
+                {
+                    player.SetStatus("Active");
+                }
+            }
+        }
+
+        private bool EndOfBettingRound()
+        {
+            List<int> exceptThis = new List<int>();
+            exceptThis.Add(-1); //take out the folds
+
+            foreach(PlayingUser player in players){
+                if (player.GetStatus() == "Active"){
+                    return false;
+                }
+            }
+
+            return playerBets.Values.ToList().Except(exceptThis).Distinct().ToList().Count == 1;
+           
+        }
+        
 
         public GamePreferences GetGamePref()
         {
@@ -82,6 +185,8 @@ namespace Gaming
 
             PlayingUser newPlayer = new PlayingUser(player, 0, this);
             players.Add(newPlayer);
+            playerBets.Add(newPlayer.GetAccount().Username, 0);
+
         }
 
         private void removePlayer(UserProfile player)
@@ -100,6 +205,7 @@ namespace Gaming
                 throw new InvalidOperationException("player.getName()" + " is not playing in this game");
 
             players.Remove(removeThisPlayer);
+            playerBets.Remove(removeThisPlayer.GetAccount().Username);
         }
 
         private void addSpectator(UserProfile user)
@@ -203,32 +309,28 @@ namespace Gaming
             {
                 PlayerHand hand = null;
                 if (revealedFlag)//Reveal only if needs to
-                    hand = player.getHand();
+                    hand = player.GetHand();
             }
 
             return playersAndHands;
         }
 
-        private Move makeBetMove(bool revealedFlag, int[] betMove)
+        /*private Move makeBetMove(bool revealedFlag, int[] betMove)
         {
             return new Move(Move.MoveType.Bet, getPlayerDictionary(revealedFlag), betMove);
         }
 
         private Move makeCardRevealMove(bool revealedFlag, Card[] revealedCards)
         {
-            return new Move(Move.MoveType.Bet, getPlayerDictionary(revealedFlag),revealedCards);
-        }
+            //return new Move(Move.MoveType.Bet, getPlayerDictionary(revealedFlag),revealedCards);
+        }*/
 
-        private void PushMovePlayers(Move move)
-        {
-            foreach (SpectatingUser player in players)
-                player.PushMove(move);
-        }
-
-        private void PushMoveSpectators(Move move)
-        {
+        private void PushMoveToObservers(Move m){
             foreach (SpectatingUser spectator in spectators)
-                spectator.PushMove(move);
+                spectator.PushMove(m);
+            foreach (PlayingUser player in players)
+                player.PushMove(m);
+            logger.AddMove(m);
         }
 
     }
