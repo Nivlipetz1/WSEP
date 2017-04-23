@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<test-run id="2" testcasecount="2" result="Passed" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="3" engine-version="3.6.1.0" clr-version="4.0.30319.42000" start-time="2017-04-23 17:28:32Z" end-time="2017-04-23 17:28:37Z" duration="4.811834">
+<test-run id="2" testcasecount="3" result="Passed" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="4" engine-version="3.6.1.0" clr-version="4.0.30319.42000" start-time="2017-04-23 18:33:58Z" end-time="2017-04-23 18:34:03Z" duration="5.012383">
   <command-line><![CDATA["C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\.\packages\NUnit.ConsoleRunner.3.6.1\tools\nunit3-console.exe" .\GamingTests\bin\Debug\GamingTests.dll]]></command-line>
-  <test-suite type="Assembly" id="0-1006" name="GamingTests.dll" fullname="C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingTests\bin\Debug\GamingTests.dll" runstate="Runnable" testcasecount="2" result="Passed" start-time="2017-04-23 17:28:36Z" end-time="2017-04-23 17:28:37Z" duration="0.218380" total="2" passed="2" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="3">
+  <test-suite type="Assembly" id="0-1008" name="GamingTests.dll" fullname="C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingTests\bin\Debug\GamingTests.dll" runstate="Runnable" testcasecount="3" result="Passed" start-time="2017-04-23 18:34:03Z" end-time="2017-04-23 18:34:03Z" duration="0.381114" total="3" passed="3" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="4">
     <environment framework-version="3.6.1.0" clr-version="4.0.30319.42000" os-version="Microsoft Windows NT 10.0.14393.0" platform="Win32NT" cwd="C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem" machine-name="NIVHAMAGNIV" user="matan" user-domain="NIVHAMAGNIV" culture="en-US" uiculture="en-US" os-architecture="x64" />
     <settings>
       <setting name="DisposeRunners" value="True" />
@@ -13,20 +13,37 @@
       <setting name="NumberOfTestWorkers" value="4" />
     </settings>
     <properties>
-      <property name="_PID" value="10848" />
+      <property name="_PID" value="14200" />
       <property name="_APPDOMAIN" value="domain-" />
     </properties>
-    <test-suite type="TestSuite" id="0-1007" name="Gaming" fullname="Gaming" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-23 17:28:36Z" end-time="2017-04-23 17:28:36Z" duration="0.144763" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="2">
-      <test-suite type="TestFixture" id="0-1000" name="GameParticipantsTests" fullname="Gaming.GameParticipantsTests" classname="Gaming.GameParticipantsTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-23 17:28:36Z" end-time="2017-04-23 17:28:36Z" duration="0.139125" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="2">
-        <test-suite type="ParameterizedMethod" id="0-1002" name="addPlayer" fullname="Gaming.GameParticipantsTests.addPlayer" classname="Gaming.GameParticipantsTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-23 17:28:36Z" end-time="2017-04-23 17:28:36Z" duration="0.119854" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="2">
-          <test-case id="0-1001" name="addPlayer()" fullname="Gaming.GameParticipantsTests.addPlayer()" methodname="addPlayer" classname="Gaming.GameParticipantsTests" runstate="Runnable" seed="2068015528" result="Passed" start-time="2017-04-23 17:28:36Z" end-time="2017-04-23 17:28:36Z" duration="0.103868" asserts="2" />
+    <test-suite type="TestSuite" id="0-1009" name="Gaming" fullname="Gaming" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-23 18:34:03Z" end-time="2017-04-23 18:34:03Z" duration="0.136969" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="2">
+      <test-suite type="TestFixture" id="0-1000" name="GameParticipantsTests" fullname="Gaming.GameParticipantsTests" classname="Gaming.GameParticipantsTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-23 18:34:03Z" end-time="2017-04-23 18:34:03Z" duration="0.130913" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="2">
+        <test-suite type="ParameterizedMethod" id="0-1002" name="addPlayer" fullname="Gaming.GameParticipantsTests.addPlayer" classname="Gaming.GameParticipantsTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-23 18:34:03Z" end-time="2017-04-23 18:34:03Z" duration="0.113419" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="2">
+          <test-case id="0-1001" name="addPlayer()" fullname="Gaming.GameParticipantsTests.addPlayer()" methodname="addPlayer" classname="Gaming.GameParticipantsTests" runstate="Runnable" seed="1783323403" result="Passed" start-time="2017-04-23 18:34:03Z" end-time="2017-04-23 18:34:03Z" duration="0.099097" asserts="2" />
         </test-suite>
       </test-suite>
     </test-suite>
-    <test-suite type="TestSuite" id="0-1008" name="GamingTests" fullname="GamingTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-23 17:28:36Z" end-time="2017-04-23 17:28:36Z" duration="0.190759" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
-      <test-suite type="TestFixture" id="0-1003" name="GamePlayTests" fullname="GamingTests.GamePlayTests" classname="GamingTests.GamePlayTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-23 17:28:36Z" end-time="2017-04-23 17:28:36Z" duration="0.044051" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
-        <test-suite type="ParameterizedMethod" id="0-1005" name="foldFirstMove" fullname="GamingTests.GamePlayTests.foldFirstMove" classname="GamingTests.GamePlayTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-23 17:28:36Z" end-time="2017-04-23 17:28:36Z" duration="0.040579" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
-          <test-case id="0-1004" name="foldFirstMove()" fullname="GamingTests.GamePlayTests.foldFirstMove()" methodname="foldFirstMove" classname="GamingTests.GamePlayTests" runstate="Runnable" seed="1108715120" result="Passed" start-time="2017-04-23 17:28:36Z" end-time="2017-04-23 17:28:36Z" duration="0.037841" asserts="1">
+    <test-suite type="TestSuite" id="0-1010" name="GamingTests" fullname="GamingTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2017-04-23 18:34:03Z" end-time="2017-04-23 18:34:03Z" duration="0.353947" total="2" passed="2" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="2">
+      <test-suite type="TestFixture" id="0-1003" name="GamePlayTests" fullname="GamingTests.GamePlayTests" classname="GamingTests.GamePlayTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2017-04-23 18:34:03Z" end-time="2017-04-23 18:34:03Z" duration="0.215514" total="2" passed="2" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="2">
+        <test-suite type="ParameterizedMethod" id="0-1007" name="testAllPlayersCheck" fullname="GamingTests.GamePlayTests.testAllPlayersCheck" classname="GamingTests.GamePlayTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-23 18:34:03Z" end-time="2017-04-23 18:34:03Z" duration="0.200549" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1006" name="testAllPlayersCheck()" fullname="GamingTests.GamePlayTests.testAllPlayersCheck()" methodname="testAllPlayersCheck" classname="GamingTests.GamePlayTests" runstate="Runnable" seed="1472512050" result="Passed" start-time="2017-04-23 18:34:03Z" end-time="2017-04-23 18:34:03Z" duration="0.197814" asserts="1">
+            <output><![CDATA[2
+0
+1
+0
+1
+2
+0
+1
+2
+0
+1
+2
+]]></output>
+          </test-case>
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1005" name="testAllPlayersFold" fullname="GamingTests.GamePlayTests.testAllPlayersFold" classname="GamingTests.GamePlayTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-23 18:34:03Z" end-time="2017-04-23 18:34:03Z" duration="0.008524" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1004" name="testAllPlayersFold()" fullname="GamingTests.GamePlayTests.testAllPlayersFold()" methodname="testAllPlayersFold" classname="GamingTests.GamePlayTests" runstate="Runnable" seed="1496286179" result="Passed" start-time="2017-04-23 18:34:03Z" end-time="2017-04-23 18:34:03Z" duration="0.004639" asserts="1">
             <output><![CDATA[2
 0
 ]]></output>
