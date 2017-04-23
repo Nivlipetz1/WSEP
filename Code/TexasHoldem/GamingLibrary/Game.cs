@@ -328,33 +328,23 @@ namespace Gaming
             playerBets.Remove(player);
         }
 
-        public void addSpectator(UserProfile user)
+        public void addSpectator(SpectatingUser spec)
         {
             if (!gamePref.AllowSpec())
                 throw new InvalidOperationException("Spectating is not allowed in this game");
 
-            SpectatingUser spec = new SpectatingUser(user, this);
-
             spectators.Add(spec);
         }
 
-        public void removeSpectator(UserProfile spec)
+        public void removeSpectator(SpectatingUser spec)
         {
             if (spectators.Count == 0)
                 throw new InvalidOperationException("No spectators to remove");
 
-            SpectatingUser removeThisPlayer = null;
-
-            foreach (SpectatingUser pl in spectators)
-            {
-                if (pl.GetAccount() == spec)
-                    removeThisPlayer = pl;
-            }
-
-            if (removeThisPlayer == null)
+            if (!spectators.Contains(spec))
                 throw new InvalidOperationException("player.getName()" + " is not spectating in this game");
 
-            spectators.Remove(removeThisPlayer);
+            spectators.Remove(spec);
         
         }
 
