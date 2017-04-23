@@ -20,7 +20,10 @@ namespace Gaming
             status = "Active";
         }
 
-
+        public void SetFakeUserInput(int amount)
+        {
+            userInput = new FakeInput(amount);
+        }
 
         public int GetCredit()
         {
@@ -59,7 +62,7 @@ namespace Gaming
             int betInput;
             do
                 input = userInput.GetInput();
-            while (Int32.TryParse(input, out betInput) && betInput >= minimumBet);
+            while (!Int32.TryParse(input, out betInput));
 
             status = "Talked";
 
@@ -71,12 +74,40 @@ namespace Gaming
                 status = "Fold";
             }
 
+            if(betInput>0)
+               credit -= betInput;
             return betInput;
         }
 
         public void PostMessage()
         {
             game.Message(this, userInput.GetInput());
+        }
+
+        internal void ReceiveWinnings(int amount)
+        {
+            credit+=amount;
+        }
+    }
+
+    class FakeInput : UserInput
+    {
+        int amount;
+        bool flag = true;
+        public FakeInput(int amount)
+        {
+            this.amount = amount;
+        }
+        public string GetInput()
+        {
+            if (flag)
+            {
+                flag = false;
+                return amount.ToString();
+
+            }
+            return "0";
+
         }
     }
 }

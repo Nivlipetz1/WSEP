@@ -11,7 +11,7 @@ namespace TexasHoldemSystem
 {
     [TestFixture]
 
-    class testUserSystem
+    public class testUserSystem
     {
         [TestCase]
         public void registerTest()

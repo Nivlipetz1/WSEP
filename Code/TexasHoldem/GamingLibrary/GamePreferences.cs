@@ -35,9 +35,15 @@ namespace Gaming
             allowSpectators = aS;
         }
 
+        //testing
         public GamePreferences()
         {
-
+            maxPlayers = 6;
+            minPlayers = 2;
+            smallBlind = 5;
+            bigBlind = 10;
+            allowSpectators = true;
+            buyInPolicy = 50;
         }
 
         public Boolean AllowSpec()
@@ -56,7 +62,7 @@ namespace Gaming
 
         public int GetsB()
         {
-            return bigBlind;
+            return smallBlind;
         }
 
         public void setSmallBlind(int sb)

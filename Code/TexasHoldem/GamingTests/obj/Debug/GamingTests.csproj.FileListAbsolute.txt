@@ -1,0 +1,11 @@
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingTests\bin\Debug\GamingTests.dll
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingTests\bin\Debug\GamingTests.pdb
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingTests\bin\Debug\Gaming.dll
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingTests\bin\Debug\nunit.framework.dll
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingTests\bin\Debug\User.dll
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingTests\bin\Debug\Gaming.pdb
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingTests\bin\Debug\User.pdb
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingTests\bin\Debug\nunit.framework.xml
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingTests\obj\Debug\GamingTests.csprojResolveAssemblyReference.cache
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingTests\obj\Debug\GamingTests.dll
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingTests\obj\Debug\GamingTests.pdb

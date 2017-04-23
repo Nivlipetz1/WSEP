@@ -3,14 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NUnit.Framework;
 using Gaming;
 using User;
 
-namespace TexasHoldemSystem
+namespace GamingTests
 {
-    class Program
+
+    [TestFixture]
+
+    public class GamePlayTests
     {
-        static void Main(string[] args)
+
+
+        [TestCase]
+        public void testFold()
         {
             Game g = new Game(new GamePreferences());
             GameLogger logger = g.GetLogger();
@@ -27,14 +34,15 @@ namespace TexasHoldemSystem
             g.addPlayer(OPlayer);
             g.addPlayer(NPlayer);
 
-            nivPlayer.SetFakeUserInput(5);
-            OPlayer.SetFakeUserInput(0);
-            NPlayer.SetFakeUserInput(10);
+            nivPlayer.SetFakeUserInput(-1);
+            OPlayer.SetFakeUserInput(2);
+            NPlayer.SetFakeUserInput(-1);
 
             g.StartGame();
 
-            Console.Write("");
-
+            Assert.True(true);
         }
+
+
     }
 }

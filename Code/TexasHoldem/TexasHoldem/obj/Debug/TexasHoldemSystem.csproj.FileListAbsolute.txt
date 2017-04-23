@@ -1,11 +1,3 @@
-C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\Gaming.dll
-C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\Gaming.pdb
-C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\obj\Debug\TexasHoldemSystem.csprojResolveAssemblyReference.cache
-C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\TexasHoldemSystem.exe.config
-C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\TexasHoldemSystem.exe
-C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\TexasHoldemSystem.pdb
-C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\obj\Debug\TexasHoldemSystem.exe
-C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\obj\Debug\TexasHoldemSystem.pdb
 C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\TexasHoldemSystem.exe.config
 C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\TexasHoldemSystem.exe
 C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\TexasHoldemSystem.pdb
@@ -18,10 +10,6 @@ C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHo
 C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\User.dll
 C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\User.pdb
 C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\nunit.framework.xml
-C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\nunit.framework.dll
-C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\User.dll
-C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\User.pdb
-C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\nunit.framework.xml
 D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\TexasHoldemSystem.exe.config
 D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\obj\Debug\TexasHoldemSystem.exe
 D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\obj\Debug\TexasHoldemSystem.pdb
@@ -38,3 +26,15 @@ C:\Users\omerh\Source\Repos\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\User.dll
 C:\Users\omerh\Source\Repos\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\Gaming.pdb
 C:\Users\omerh\Source\Repos\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\User.pdb
 C:\Users\omerh\Source\Repos\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\nunit.framework.xml
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\TexasHoldemSystem.exe.config
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\TexasHoldemSystem.exe
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\TexasHoldemSystem.pdb
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\Gaming.dll
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\nunit.framework.dll
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\User.dll
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\Gaming.pdb
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\User.pdb
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\nunit.framework.xml
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\obj\Debug\TexasHoldemSystem.csprojResolveAssemblyReference.cache
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\obj\Debug\TexasHoldemSystem.exe
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\obj\Debug\TexasHoldemSystem.pdb
