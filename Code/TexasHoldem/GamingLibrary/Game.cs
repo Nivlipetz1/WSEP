@@ -299,11 +299,7 @@ namespace Gaming
             List<int> checkDistinctAmounts = playerBets.Values.ToList().Except(new List<int> { -1 }).Distinct().ToList();
             return (checkDistinctAmounts.Count == 1);
         }
-   
-        public GamePreferences GetGamePref()
-        {
-            return gamePref;
-        }
+  
 
         internal void Message(SpectatingUser spectaitngUser, string v)
         {
@@ -402,16 +398,6 @@ namespace Gaming
             return playersAndHands;
         }
 
-        /*private Move makeBetMove(bool revealedFlag, int[] betMove)
-        {
-            return new Move(Move.MoveType.Bet, getPlayerDictionary(revealedFlag), betMove);
-        }
-
-        private Move makeCardRevealMove(bool revealedFlag, Card[] revealedCards)
-        {
-            //return new Move(Move.MoveType.Bet, getPlayerDictionary(revealedFlag),revealedCards);
-        }*/
-
         private void PushMoveToObservers(Move m){
             foreach (SpectatingUser spectator in spectators)
                 spectator.PushMove(m);
@@ -423,6 +409,26 @@ namespace Gaming
         public GameLogger GetLogger()
         {
             return logger;
+        }
+
+        public List<PlayingUser> GetPlayers()
+        {
+            return players;
+        }
+
+        public List<SpectatingUser> GetSpectators()
+        {
+            return spectators;
+        }
+
+        public Card[] GetCards()
+        {
+            return cards;
+        }
+
+        public GamePreferences GetGamePref()
+        {
+            return gamePref;
         }
     }
 }

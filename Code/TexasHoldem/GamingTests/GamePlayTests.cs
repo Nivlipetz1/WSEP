@@ -17,7 +17,7 @@ namespace GamingTests
 
 
         [TestCase]
-        public void testFold()
+        public void foldFirstMove()
         {
             Game g = new Game(new GamePreferences());
             GameLogger logger = g.GetLogger();

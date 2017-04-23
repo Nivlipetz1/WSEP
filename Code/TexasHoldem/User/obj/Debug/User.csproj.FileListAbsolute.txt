@@ -25,4 +25,5 @@ C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\User\bin\Debu
 C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\User\bin\Debug\nunit.framework.xml
 C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\User\obj\Debug\User.dll
 C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\User\obj\Debug\User.pdb
-C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\User\obj\Debug\User.csprojResolveAssemblyReference.cache
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\User\bin\Debug\User.dll.CodeAnalysisLog.xml
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\User\bin\Debug\User.dll.lastcodeanalysissucceeded

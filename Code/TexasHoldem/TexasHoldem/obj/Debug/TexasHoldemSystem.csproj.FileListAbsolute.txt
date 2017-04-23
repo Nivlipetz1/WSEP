@@ -38,3 +38,5 @@ C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\b
 C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\obj\Debug\TexasHoldemSystem.csprojResolveAssemblyReference.cache
 C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\obj\Debug\TexasHoldemSystem.exe
 C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\obj\Debug\TexasHoldemSystem.pdb
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\TexasHoldemSystem.exe.CodeAnalysisLog.xml
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\TexasHoldem\bin\Debug\TexasHoldemSystem.exe.lastcodeanalysissucceeded
