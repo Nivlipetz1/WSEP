@@ -20,8 +20,8 @@ namespace Gaming
         for(int i=0;i<3;i++) {
             cardsOnTable[i] = flop[i];
         }
-        cardsOnTable[3] = deck.drawTurn();
-        cardsOnTable[4] = deck.drawRiver();
+        cardsOnTable[3] = deck.DrawTableCard();
+        cardsOnTable[4] = deck.DrawTableCard();
         CardAnalyzer analyzer = new CardAnalyzer(); /*niv changed this*/
         analyzer.setCardArray(cardsOnTable); /*niv changed this*/
         analyzer.setHand(hand1);

@@ -53,15 +53,7 @@ namespace Gaming
 
         }
 
-        public Card drawRiver()
-        {
-            int index = new Random().Next(cards.Count);
-            Card card = cards.ElementAt(index);
-            cards.RemoveAt(index);
-            return card;
-        }
-
-        public Card drawTurn()
+        public Card DrawTableCard()
         {
             int index = new Random().Next(cards.Count);
             Card card = cards.ElementAt(index);

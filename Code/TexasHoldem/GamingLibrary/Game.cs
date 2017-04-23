@@ -95,7 +95,7 @@ namespace Gaming
                 return;
             }
 
-            cards[3] = gameDeck.drawRiver();
+            cards[3] = gameDeck.DrawTableCard();
 
             PushMoveToObservers(new NewCardMove(cards));
 
@@ -107,7 +107,7 @@ namespace Gaming
                 return;
             }
 
-            cards[4] = gameDeck.drawTurn();
+            cards[4] = gameDeck.DrawTableCard();
 
             PushMoveToObservers(new NewCardMove(cards));
 
