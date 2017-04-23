@@ -1,0 +1,1 @@
+<Playlist Version="1.0"><Add Test="GamingTests.GamePlayTests.testAllPlayersFold()" /><Add Test="GamingTests.GamePlayTests.testAllPlayersCheck()" /></Playlist>
