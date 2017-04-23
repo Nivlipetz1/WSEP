@@ -20,9 +20,9 @@ namespace Gaming
             status = "Active";
         }
 
-        public void SetFakeUserInput(int amount)
+        public void SetFakeUserInput(Queue<string> inputs)
         {
-            userInput = new FakeInput(amount);
+            userInput = new FakeInput(inputs);
         }
 
         public int GetCredit()
@@ -92,22 +92,20 @@ namespace Gaming
 
     class FakeInput : UserInput
     {
-        int amount;
+        Queue<string> inputs;
+        string input = "0";
         bool flag = true;
-        public FakeInput(int amount)
+        public FakeInput(Queue<string> inputs)
         {
-            this.amount = amount;
+            this.inputs = inputs;
         }
         public string GetInput()
         {
-            if (flag)
+            if (inputs.Count > 0)
             {
-                flag = false;
-                return amount.ToString();
-
+                input = inputs.Dequeue();
             }
-            return "0";
-
+            return input;
         }
     }
 }

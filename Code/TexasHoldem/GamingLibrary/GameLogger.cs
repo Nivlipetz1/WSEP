@@ -22,6 +22,11 @@ namespace Gaming
             return true;
         }
 
+        public List<Move> GetMoves()
+        {
+            return gameMoves;
+        }
+
 
     }
 }
