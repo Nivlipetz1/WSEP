@@ -242,7 +242,7 @@ namespace Gaming
                 if (currentUser.GetStatus() != "Fold")
                 {
                     int bet = players[index].Bet(GetMaxBet() - playerBets[currentUser]);
-                    if (bet > 0)
+                    if (bet >= 0)
                     {
                         playerBets[currentUser] += bet;
                         bettingRound += bet;
