@@ -12,6 +12,7 @@ namespace Gaming
         private int credit;
         private string status;
         private PlayerHand hand;
+        private UserInput userInput;
 
         public PlayingUser(UserProfile account, int credit, Game game) : base (account,game)
         {
@@ -19,7 +20,10 @@ namespace Gaming
             status = "Active";
         }
 
-
+        public void SetFakeUserInput(Queue<string> inputs)
+        {
+            userInput = new FakeInput(inputs);
+        }
 
         public int GetCredit()
         {
@@ -57,8 +61,8 @@ namespace Gaming
             string input;
             int betInput;
             do
-                input = Console.ReadLine();
-            while (Int32.TryParse(input, out betInput) && betInput>=minimumBet);
+                input = userInput.GetInput();
+            while (!Int32.TryParse(input, out betInput));
 
             status = "Talked";
 
@@ -70,12 +74,38 @@ namespace Gaming
                 status = "Fold";
             }
 
+            if(betInput>0)
+               credit -= betInput;
             return betInput;
         }
 
         public void PostMessage()
         {
-            game.Message(this, Console.ReadLine());
+            game.Message(this, userInput.GetInput());
+        }
+
+        internal void ReceiveWinnings(int amount)
+        {
+            credit+=amount;
+        }
+    }
+
+    class FakeInput : UserInput
+    {
+        Queue<string> inputs;
+        string input = "0";
+        bool flag = true;
+        public FakeInput(Queue<string> inputs)
+        {
+            this.inputs = inputs;
+        }
+        public string GetInput()
+        {
+            if (inputs.Count > 0)
+            {
+                input = inputs.Dequeue();
+            }
+            return input;
         }
     }
 }

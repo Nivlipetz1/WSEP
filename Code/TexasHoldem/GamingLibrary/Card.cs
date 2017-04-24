@@ -59,12 +59,5 @@ namespace Gaming
             }
             return suit == card.suit;
         }
-
-        public override int GetHashCode()
-        {
-            int result = suit != 0 ? suit.GetHashCode() : 0;
-            result = 31 * result + value;
-            return result;
-        }
     }
 }

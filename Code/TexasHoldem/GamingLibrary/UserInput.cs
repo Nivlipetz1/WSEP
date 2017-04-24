@@ -6,16 +6,8 @@ using System.Threading.Tasks;
 
 namespace Gaming
 {
-
-    /**
-     * 
-     * Class for testing players and spectators
-     * 
-     * */
-    class GameParticipantsTests
+    interface UserInput
     {
-
-        
-
+        string GetInput();
     }
 }

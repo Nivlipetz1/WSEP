@@ -15,55 +15,56 @@ namespace Gaming
         private int[] pot; // pot[0] = main pot ||| pot[1] = sidepot
         private int bettingRound;
         private CardAnalyzer ca;
-        private int playerCounter = 0;
         private GamePreferences gamePref;
-        private Boolean revealed = false;
-        private int dealerOffSet = 0;
         private GameLogger logger;
-        private IDictionary<string, int> playerBets = new Dictionary<string,int>();
+        private IDictionary<PlayingUser, int> playerBets = new Dictionary<PlayingUser,int>();
         private Card[] cards;
+        private bool gameEnded;
 
-        public Game(GamePreferences gp, PlayingUser creatingPlayer, int buyIn)
+        public Game(GamePreferences gp)
         {
+            if (gp == null)
+            {
+                return;
+            }
             gameDeck = new Deck();
             players = new List<PlayingUser>();
             spectators = new List<SpectatingUser>();
             pot = new int[2];
             ca = new CardAnalyzer();
-            players.Add(creatingPlayer);
-            playerBets.Add(creatingPlayer.GetAccount().Username, 0);
             gamePref = gp;
             logger = new GameLogger();
         }
+
 
         public void StartGame()
         {
             int potInt = pot[0];
             //announce game started
+            gameEnded = false;
+            gameDeck.Shuffle();
 
             //send the array of players to all the observers
-            PushMoveToObservers(new GameStartMove(playerBets));
+            PushStartGameMove();
 
-            //choose dealer
-            dealerOffSet = 0;
 
             //request small blind
-            PlayingUser smallBlindPlayer = players.ElementAt((dealerOffSet + 1) % players.Count);
-            int smallBlindBet = smallBlindPlayer.Bet(gamePref.GetsB());
+            PlayingUser smallBlindPlayer = players.ElementAt(0);
+            int smallBlindBet = smallBlindPlayer.GetBlind(gamePref.GetsB());
             bettingRound += smallBlindBet;
-            playerBets[smallBlindPlayer.GetAccount().Username] = smallBlindBet; 
+            playerBets[smallBlindPlayer] = smallBlindBet;
 
             //send small blind move
-            PushMoveToObservers(new BetMove(playerBets));
+            PushBetMove();
 
             //request big blind
-            PlayingUser bigBlindPlayer = players.ElementAt((dealerOffSet+2)%players.Count);
-            int bigBlindBet = bigBlindPlayer.Bet(gamePref.GetbB());
+            PlayingUser bigBlindPlayer = players.ElementAt(1);
+            int bigBlindBet = bigBlindPlayer.GetBlind(gamePref.GetbB());
             bettingRound += bigBlindBet;
-            playerBets[bigBlindPlayer.GetAccount().Username] = bigBlindBet; 
+            playerBets[bigBlindPlayer] = bigBlindBet;
 
             //send big blind move
-            PushMoveToObservers(new BetMove(playerBets));
+            PushBetMove();
 
             //draw hands
             foreach (PlayingUser player in players)
@@ -73,7 +74,14 @@ namespace Gaming
 
 
             //request bet from rest of players
-            TraversePlayers(dealerOffSet + 3);
+
+            TraversePlayers(2);
+            if (gameEnded)
+            {
+                GiveWinnings();
+                ResetGame();
+                return;
+            }
 
             cards = new Card[5]; 
             Card[] flop = gameDeck.drawFlop();
@@ -83,24 +91,75 @@ namespace Gaming
 
             PushMoveToObservers(new NewCardMove(cards));
 
-            TraversePlayers(dealerOffSet + 1);
+            TraversePlayers(0);
+            if (gameEnded)
+            {
+                GiveWinnings();
+                ResetGame();
+                return;
+            }
 
-            cards[3] = gameDeck.drawRiver();
+            cards[3] = gameDeck.DrawTableCard();
 
             PushMoveToObservers(new NewCardMove(cards));
 
-            TraversePlayers(dealerOffSet + 1);
+            TraversePlayers(0);
+            if (gameEnded)
+            {
+                GiveWinnings();
+                ResetGame();
+                return;
+            }
 
-            cards[4] = gameDeck.drawTurn();
+            cards[4] = gameDeck.DrawTableCard();
 
             PushMoveToObservers(new NewCardMove(cards));
 
-            TraversePlayers(dealerOffSet + 1);
+            TraversePlayers(0);
+            if (gameEnded)
+            {
+                GiveWinnings();
+                ResetGame();
+                return;
+            }
 
+            List<PlayingUser> winners = DetermineWinner();
+            foreach (PlayingUser player in winners)
+            {
+                player.ReceiveWinnings(pot[0] / winners.Count);
+            }
+
+            ResetGame();
 
         }
 
-        private void DetermineWinner()
+        private void GiveWinnings()
+        {
+            foreach (PlayingUser player in players)
+            {
+                if (player.GetStatus() != "Fold")
+                    player.ReceiveWinnings(pot[0]);
+            }
+        }
+
+
+        private void ResetGame(){
+            pot[0] = 0;
+            bettingRound = 0;
+            cards = null;
+            gameDeck = new Deck();
+            PlayingUser dealer = players.First();
+            players.Remove(dealer);
+            players.Add(dealer);
+
+            foreach (PlayingUser player in players)
+            {
+                player.SetStatus("Active");
+            }
+
+        }
+
+        private List<PlayingUser> DetermineWinner()
         {
             Dictionary<PlayingUser,CardAnalyzer.HandRank> playerScores= new Dictionary<PlayingUser,CardAnalyzer.HandRank>();
             ca.setCardArray(cards);
@@ -112,16 +171,46 @@ namespace Gaming
                     playerScores.Add(player,ca.analyze());
                 }
             }
-            CardAnalyzer.HandRank minValue = playerScores.Values.Min();
-            //NEED TO GROUP BY MINVALUE AND DO A TOURNAMENT TEST TO DETERMINE THE WINNER USING THE
-            //TIEBREAKER FUNCTION IN CARDANALYZER
+
+            CardAnalyzer.HandRank minValue = CardAnalyzer.HandRank.HighCard;
+            foreach (CardAnalyzer.HandRank rank in playerScores.Values)
+            {
+                if (rank < minValue)
+                    minValue = rank;
+            }
+
+            Dictionary<PlayingUser, CardAnalyzer.HandRank> bestPlayerScores = new Dictionary<PlayingUser, CardAnalyzer.HandRank>();
+            
             foreach (PlayingUser player in playerScores.Keys)
             {
-                if (playerScores[player] != minValue)
-                    playerScores.Remove(player);
+                if (playerScores[player] == minValue)
+                    bestPlayerScores.Add(player,playerScores[player]);
             }
-            
-//            ca.tieBreaker()
+
+
+
+            List<PlayingUser> winners = new List<PlayingUser>();
+            foreach (PlayingUser player in bestPlayerScores.Keys)
+            {
+                if (winners.Count == 0)
+                {
+                    winners.Add(player);
+                }
+                else
+                {
+                    PlayerHand winner = ca.tieBreaker(minValue,winners.First().GetHand(),player.GetHand());
+                    if (winner == null)
+                    {
+                        winners.Add(player);
+                    }
+                    else if(winner == player.GetHand())
+                    {
+                        winners.Clear();
+                        winners.Add(player);
+                    }
+                }
+            }
+            return winners;
         }
 
         private int GetMaxBet()
@@ -129,16 +218,53 @@ namespace Gaming
             return playerBets.Values.Max();
         }
 
+        private void PushBetMove()
+        {
+            IDictionary<string, int> playerBetsString = new Dictionary<string, int>();
+            foreach(PlayingUser player in playerBets.Keys)
+            {
+                playerBetsString.Add(player.GetAccount().Username, playerBets[player]);
+            }
+            PushMoveToObservers(new BetMove(playerBetsString));
+        }
+
+        private void PushStartGameMove()
+        {
+            IDictionary<string, int> playerBetsString = new Dictionary<string, int>();
+            foreach (PlayingUser player in playerBets.Keys)
+            {
+                playerBetsString.Add(player.GetAccount().Username, playerBets[player]);
+            }
+            PushMoveToObservers(new GameStartMove(playerBetsString));
+        }
+        
         private void TraversePlayers(int index){
             while (!EndOfBettingRound())
             {
-
-                string currentUser = players.ElementAt(index).GetAccount().Username;
-                int bet = players[index].Bet(GetMaxBet()-playerBets[currentUser]);
-                playerBets[currentUser] += bet;
-                bettingRound += bet;
-                PushMoveToObservers(new BetMove(playerBets));
-                index = index+1 % players.Count;
+                Console.WriteLine(index);
+                PlayingUser currentUser = players.ElementAt(index);
+                if (currentUser.GetStatus() != "Fold")
+                {
+                    int bet = players[index].Bet(GetMaxBet() - playerBets[currentUser]);
+                    if (bet >= 0)
+                    {
+                        playerBets[currentUser] += bet;
+                        bettingRound += bet;
+                    }
+                    else
+                        playerBets[currentUser] = bet;
+                    PushBetMove();
+                    if (DidEveryoneFold())
+                    {
+                        pot[0] += bettingRound;
+                        bettingRound = 0;
+                        gameEnded = true;
+                        return;
+                    }
+                }
+                index++;
+                if (index == players.Count)
+                    index = 0;
             }
             pot[0] += bettingRound;
             bettingRound = 0;
@@ -152,129 +278,80 @@ namespace Gaming
             }
         }
 
+
+        private bool DidEveryoneFold()
+        {
+            int inc=0;
+            foreach (PlayingUser player in playerBets.Keys)
+            {
+                if (playerBets[player] != -1)
+                    inc++;
+            }
+            return (inc==1);
+        }
+
         private bool EndOfBettingRound()
         {
-            List<int> exceptThis = new List<int>();
-            exceptThis.Add(-1); //take out the folds
-
-            foreach(PlayingUser player in players){
-                if (player.GetStatus() == "Active"){
+            foreach (PlayingUser player in players)
+            {
+                if (player.GetStatus() == "Active")
+                {
                     return false;
                 }
             }
 
-            return playerBets.Values.ToList().Except(exceptThis).Distinct().ToList().Count == 1;
-           
+            List<int> checkDistinctAmounts = playerBets.Values.ToList().Except(new List<int> { -1 }).Distinct().ToList();
+            return (checkDistinctAmounts.Count == 1);
         }
-        
-
-        public GamePreferences GetGamePref()
-        {
-            return gamePref;
-        }
+  
 
         internal void Message(SpectatingUser spectaitngUser, string v)
         {
             throw new NotImplementedException();
         }
 
-        private void addPlayer(UserProfile player)
+        public void addPlayer(PlayingUser player)
         {
-            if (players.Count == gamePref.GetMax())
+            if (players.Count == gamePref.GetMaxPlayers())
                 throw new InvalidOperationException("Maximum number of players reached");
-
-            PlayingUser newPlayer = new PlayingUser(player, 0, this);
-            players.Add(newPlayer);
-            playerBets.Add(newPlayer.GetAccount().Username, 0);
+            
+            players.Add(player);
+            playerBets.Add(player, 0);
 
         }
 
-        private void removePlayer(UserProfile player)
+        public void removePlayer(PlayingUser player)
         {
             if (players.Count == 0)
                 throw new InvalidOperationException("No players to remove");
 
-            PlayingUser removeThisPlayer = null;
+            if(!players.Contains(player))
+                throw new InvalidOperationException("Player not in game");
 
-            foreach(PlayingUser pl in players){
-                if (pl.GetAccount() == player)
-                    removeThisPlayer = pl;
-            }
-
-            if (removeThisPlayer == null)
-                throw new InvalidOperationException("player.getName()" + " is not playing in this game");
-
-            players.Remove(removeThisPlayer);
-            playerBets.Remove(removeThisPlayer.GetAccount().Username);
+            players.Remove(player);
+            playerBets.Remove(player);
         }
 
-        private void addSpectator(UserProfile user)
+        public void addSpectator(SpectatingUser spec)
         {
             if (!gamePref.AllowSpec())
                 throw new InvalidOperationException("Spectating is not allowed in this game");
 
-            SpectatingUser spec = new SpectatingUser(user, this);
-
             spectators.Add(spec);
         }
 
-        private void removeSpectator(UserProfile spec)
+        public void removeSpectator(SpectatingUser spec)
         {
             if (spectators.Count == 0)
                 throw new InvalidOperationException("No spectators to remove");
 
-            SpectatingUser removeThisPlayer = null;
-
-            foreach (SpectatingUser pl in spectators)
-            {
-                if (pl.GetAccount() == spec)
-                    removeThisPlayer = pl;
-            }
-
-            if (removeThisPlayer == null)
+            if (!spectators.Contains(spec))
                 throw new InvalidOperationException("player.getName()" + " is not spectating in this game");
 
-            spectators.Remove(removeThisPlayer);
+            spectators.Remove(spec);
         
         }
 
-
-        /**
-         * 
-         * Method where the player will choose to bet/raise/fold/check
-         */
-
-        public void turn()
-        {
-            PlayingUser nextP = nextPlayer();
-
-            //does this need to be asynchronous / lambda function? we are waiting for a callback (bet amount) from the player to bet
-            int betAmount = nextP.Bet(gamePref.GetbB());//need to send minimum bet to player
-            bettingRound += betAmount;
-
-            if (true)
-            {
-                pot[CheckPot()] = bettingRound;
-                bettingRound = 0;
-            }
-        }
-
-
-        /** 
-         * This method will return only the players with active hands in the game (not the ones who folded/went all in)
-         * 
-         * **/
-        private PlayingUser nextPlayer()
-        {
-            playerCounter++;
-            PlayingUser nextPlayer = players.ElementAt(playerCounter % players.Count); 
-            while(nextPlayer.GetStatus()!="Active"){
-                playerCounter++;
-                nextPlayer = players.ElementAt(playerCounter % players.Count); 
-            }
-
-            return nextPlayer;
-        }
 
 
         /**
@@ -315,16 +392,6 @@ namespace Gaming
             return playersAndHands;
         }
 
-        /*private Move makeBetMove(bool revealedFlag, int[] betMove)
-        {
-            return new Move(Move.MoveType.Bet, getPlayerDictionary(revealedFlag), betMove);
-        }
-
-        private Move makeCardRevealMove(bool revealedFlag, Card[] revealedCards)
-        {
-            //return new Move(Move.MoveType.Bet, getPlayerDictionary(revealedFlag),revealedCards);
-        }*/
-
         private void PushMoveToObservers(Move m){
             foreach (SpectatingUser spectator in spectators)
                 spectator.PushMove(m);
@@ -333,5 +400,29 @@ namespace Gaming
             logger.AddMove(m);
         }
 
+        public GameLogger GetLogger()
+        {
+            return logger;
+        }
+
+        public List<PlayingUser> GetPlayers()
+        {
+            return players;
+        }
+
+        public List<SpectatingUser> GetSpectators()
+        {
+            return spectators;
+        }
+
+        public Card[] GetCards()
+        {
+            return cards;
+        }
+
+        public GamePreferences GetGamePref()
+        {
+            return gamePref;
+        }
     }
 }
