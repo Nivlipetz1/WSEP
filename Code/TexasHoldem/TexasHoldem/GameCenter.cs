@@ -13,12 +13,12 @@ namespace TexasHoldemSystem
         List<Game> games = new List<Game>();
 
 
-        /*public bool createGame(GamePreferences preferecnces, Player creatingUser, int buyIn)
+        public bool createGame(GamePreferences preferecnces)
         {
-            Game game = new Game(preferecnces, creatingUser, buyIn);
+            Game game = new Game(preferecnces);
             games.Add(game);
             return true;
-        }*/
+        }
 
         public List<Game> getAllSpectatingGames(UserProfile u)
         {
@@ -30,9 +30,9 @@ namespace TexasHoldemSystem
             List<Game> activeGames = new List<Game>();
             foreach (Game game in games)
             {
-                //List<UserProfile> players = game.getPlayers();
-                //if (players.Where(u => ((UserProfile)u).name == playerName).ToList().Count > 0)
-                  //  activeGames.Add(game);
+                List<UserProfile> players = game.GetPlayers();
+                if (players.Where(u => ((UserProfile)u).Username == playerName).ToList().Count > 0)
+                    activeGames.Add(game);
             }
 
             return activeGames;
