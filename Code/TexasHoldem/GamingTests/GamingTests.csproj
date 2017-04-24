@@ -44,9 +44,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CardAnalyzerTests.cs" />
-    <Compile Include="DeckTests.cs" />
+    <Compile Include="CardAndDeckTests.cs" />
     <Compile Include="GameParticipantsTests.cs" />
     <Compile Include="GamePlayTests.cs" />
+    <Compile Include="GamePropertiesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

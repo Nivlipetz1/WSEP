@@ -14,11 +14,8 @@ namespace GamingTests
 
     public class GamePlayTests
     {
-
-
-
         [TestCase]
-        public void testAllPlayersFold()
+        public void AllPlayersFold()
         {
             Game g = new Game(new GamePreferences());
             GameLogger logger = g.GetLogger();
@@ -45,7 +42,7 @@ namespace GamingTests
         }
 
         [TestCase]
-        public void testAllPlayersCheck()
+        public void AllPlayersCheck()
         {
             Game g = new Game(new GamePreferences());
             GameLogger logger = g.GetLogger();

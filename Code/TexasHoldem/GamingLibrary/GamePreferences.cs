@@ -25,6 +25,10 @@ namespace Gaming
         
         public GamePreferences(int maxP, int minP, int sB, int bB, int tP, int bIP, int cP, Boolean aS)
         {
+            if (maxP > 8)
+                throw new InvalidOperationException("Maximum number of players must be at most 8");
+            if (minP < 2)
+                throw new InvalidOperationException("Minimum number of players must be atleast 2");
             maxPlayers = maxP;
             minPlayers = minP;
             smallBlind = sB;
@@ -51,8 +55,12 @@ namespace Gaming
             return allowSpectators;
         }
 
-        public int GetMax(){
+        public int GetMaxPlayers(){
             return maxPlayers;
+        }
+        public int GetMinPlayers()
+        {
+            return minPlayers;
         }
 
         public int GetbB()
@@ -65,6 +73,21 @@ namespace Gaming
             return smallBlind;
         }
 
+        public int GetTypePolicy()
+        {
+            return typePolicy;
+        }
+
+        public int GetChipPolicy()
+        {
+            return chipPolicy;
+        }
+
+        public int GetBuyInPolicy()
+        {
+            return buyInPolicy;
+        }
+
         public void setSmallBlind(int sb)
         {
             smallBlind = sb;
@@ -73,6 +96,11 @@ namespace Gaming
         public void setBigBlind(int bb)
         {
             bigBlind = bb;
+        }
+
+        public void SetAllowSpec(bool aS)
+        {
+            allowSpectators = aS;
         }
     }
 }

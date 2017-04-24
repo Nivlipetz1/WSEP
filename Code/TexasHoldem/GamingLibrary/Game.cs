@@ -23,6 +23,10 @@ namespace Gaming
 
         public Game(GamePreferences gp)
         {
+            if (gp == null)
+            {
+                return;
+            }
             gameDeck = new Deck();
             players = new List<PlayingUser>();
             spectators = new List<SpectatingUser>();
@@ -308,7 +312,7 @@ namespace Gaming
 
         public void addPlayer(PlayingUser player)
         {
-            if (players.Count == gamePref.GetMax())
+            if (players.Count == gamePref.GetMaxPlayers())
                 throw new InvalidOperationException("Maximum number of players reached");
             
             players.Add(player);

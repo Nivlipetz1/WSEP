@@ -10,8 +10,31 @@ using User;
 namespace GamingTests
 {
     [TestFixture]
-    public class DeckTests
+    public class CardAndDeckTests
     {
+
+        [TestCase]
+        public void CompareEqualCards()
+        {
+            Card c1 = new Card(1, Card.Suit.CLUB);
+            Card c2 = new Card(1, Card.Suit.CLUB);
+            Assert.True(c1.equals(c2));
+            Assert.True(c1.equals(c1));
+        }
+
+        [TestCase]
+        public void CompareUnequalCards()
+        {
+            Card c1 = new Card(1, Card.Suit.CLUB);
+            Card c2 = new Card(1, Card.Suit.DIAMOND);
+            Card c3 = new Card(10, Card.Suit.CLUB);
+            Deck d = new Deck();
+            Assert.False(c1.equals(c2));
+            Assert.False(c2.equals(c3));
+            Assert.False(c1.equals(d));
+
+        
+        }
 
         [TestCase]
         public void CreateDeckWithCorrectCards()
