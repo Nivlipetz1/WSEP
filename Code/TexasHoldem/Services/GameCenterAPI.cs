@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Gaming;
-using User;
+using GameUtilities;
 
 namespace TexasHoldemSystem
 {
