@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using User;
+using GameUtilities;
 
 namespace Gaming
 {
@@ -23,10 +23,6 @@ namespace Gaming
 
         public Game(GamePreferences gp)
         {
-            if (gp == null)
-            {
-                return;
-            }
             gameDeck = new Deck();
             players = new List<PlayingUser>();
             spectators = new List<SpectatingUser>();
@@ -423,6 +419,26 @@ namespace Gaming
         public GamePreferences GetGamePref()
         {
             return gamePref;
+        }
+
+        public int GetPotSize()
+        {
+            return pot[0];
+        }
+
+        public List<UserProfile> GetUserProfiles()
+        {
+            List<UserProfile> users = new List<UserProfile>();
+            foreach (PlayingUser player in players)
+            {
+                users.Add(player.GetAccount());
+            }
+            return users;
+        }
+
+        public int GetNumberOfPlayers()
+        {
+            return players.Count;
         }
     }
 }
