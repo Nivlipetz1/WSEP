@@ -55,9 +55,9 @@
       <Project>{2972ace2-bf33-4f5f-990f-ca94de288cd4}</Project>
       <Name>Gaming</Name>
     </ProjectReference>
-    <ProjectReference Include="..\User\User.csproj">
+    <ProjectReference Include="..\User\GameUtilities.csproj">
       <Project>{ea8f8ce0-841a-433a-a6c5-24c4b359a14f}</Project>
-      <Name>User</Name>
+      <Name>GameUtilities</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

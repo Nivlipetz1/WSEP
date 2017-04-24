@@ -5,13 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
-namespace User
+namespace GameUtilities
 {
     public class UserProfile
     {
         private string username;
         private string password;
         private Image avatar;
+        private int credit;
 
         public string Username
         {
