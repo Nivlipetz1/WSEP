@@ -8,9 +8,9 @@ using GameUtilities;
 
 namespace Services
 {
-    public class GameAPI
+    public abstract class GameAPI
     {
-        public void sendMessage();
-        public void receiveMessage();
+        public abstract void sendMessage();
+        public abstract void receiveMessage();
     }
 }

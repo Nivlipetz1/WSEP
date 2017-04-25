@@ -30,7 +30,7 @@ namespace TexasHoldemSystem
             List<Game> activeGames = new List<Game>();
             foreach (Game game in games)
             {
-                List<UserProfile> players = game.GetPlayers();
+                List<UserProfile> players = null;//game.GetPlayers();
                 if (players.Where(u => ((UserProfile)u).Username == playerName).ToList().Count > 0)
                     activeGames.Add(game);
             }
