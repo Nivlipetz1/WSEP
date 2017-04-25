@@ -40,6 +40,7 @@ namespace TexasHoldemSystem
             nivPlayer.SendMessage("Got That!");
             //g.StartGame();
             int num_of_moves = g.GetLogger().GetMoves().Count;
+            childThread.Join();
 
             Console.Write("");
 
