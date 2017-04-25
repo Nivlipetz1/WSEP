@@ -27,9 +27,9 @@ namespace TexasHoldemSystem
             g.addPlayer(OPlayer);
             g.addPlayer(NPlayer);
 
-            nivPlayer.SetFakeUserInput(new Queue<string>(new[] { "5","0", "-1" }));
-            OPlayer.SetFakeUserInput(new Queue<string>(new[] { "0" , "0","-1" }));
-            NPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100" }));
+            nivPlayer.SetFakeUserInput(new Queue<string>(new[] { "5", "50", "50", "100", "0" }));
+            OPlayer.SetFakeUserInput(new Queue<string>(new[] { "0", "50", "50", "100", "0" }));
+            NPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100", "0", "100", "0" }));
 
             g.StartGame();
             int num_of_moves = g.GetLogger().GetMoves().Count;

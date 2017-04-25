@@ -46,6 +46,19 @@ namespace Gaming
         }
 
         [TestCase]
+        public void AddSpectatorsToGameThatDoesntAllowSpecators()
+        {
+            Assert.Throws(typeof(InvalidOperationException), delegate()
+            {
+                Game g = new Game(new GamePreferences(8, 2, 5, 10, 1, 2, 3, false));
+                UserProfile Niv = new UserProfile("Niv", "123");
+                SpectatingUser N = new SpectatingUser(Niv, g);
+                Assert.False(g.GetGamePref().AllowSpec());
+                g.addSpectator(N);
+            });
+        }
+
+        [TestCase]
         public void RemovePlayerFromGame()
         {
             Game g = new Game(new GamePreferences());

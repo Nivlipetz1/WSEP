@@ -159,6 +159,39 @@ namespace GamingTests
             Assert.AreEqual(1320, OPlayer.GetCredit());
         }
 
+        public void HeadToHead3Players()
+        {
+            Game g = new Game(new GamePreferences());
+            GameLogger logger = g.GetLogger();
+
+            UserProfile Niv = new UserProfile("Niv", "123");
+            UserProfile Omer = new UserProfile("Omer", "456");
+            UserProfile Naor = new UserProfile("Naor", "789");
+
+            PlayingUser nivPlayer = new PlayingUser(Niv, 1000, g);
+            PlayingUser OPlayer = new PlayingUser(Omer, 1000, g);
+            PlayingUser NPlayer = new PlayingUser(Naor, 1000, g);
+
+            g.addPlayer(nivPlayer);
+            g.addPlayer(OPlayer);
+            g.addPlayer(NPlayer);
+
+            nivPlayer.SetFakeUserInput(new Queue<string>(new[] { "5", "50", "50", "100", "0"}));
+            OPlayer.SetFakeUserInput(new Queue<string>(new[] { "0", "50", "50", "100", "0" }));
+            NPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100", "0", "100", "0" }));
+
+            g.StartGame();
+            BetMove lastMove = (BetMove)logger.GetMoves().ElementAt(logger.GetMoves().Count-1);
+            IDictionary<string, int> playerBets = lastMove.GetPlayerBets();
+            int potSize=0;
+            foreach (string s in playerBets.Keys)
+            {
+                potSize += playerBets[s];
+            }
+
+            /*if()
+            Assert.AreEqual(1000+420, OPlayer.GetCredit());*/
+        }
 
     }
 }
