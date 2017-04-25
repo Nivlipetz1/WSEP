@@ -19,6 +19,7 @@ namespace Gaming
         private GameLogger logger;
         private IDictionary<PlayingUser, int> playerBets = new Dictionary<PlayingUser,int>();
         private Card[] cards;
+        private GameChat chat;
         private bool gameEnded;
 
         public Game(GamePreferences gp)
@@ -30,8 +31,13 @@ namespace Gaming
             ca = new CardAnalyzer();
             gamePref = gp;
             logger = new GameLogger();
+            chat = new GameChat(this);
         }
 
+        public GameChat GetChat()
+        {
+            return chat;
+        }
 
         public void StartGame()
         {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using Gaming;
 using GameUtilities;
 
@@ -31,8 +32,15 @@ namespace TexasHoldemSystem
             OPlayer.SetFakeUserInput(new Queue<string>(new[] { "0", "50", "50", "100", "0" }));
             NPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100", "0", "100", "0" }));
 
-            g.StartGame();
+
+            ThreadStart childref = new ThreadStart(g.StartGame);
+            Thread childThread = new Thread(childref);
+            childThread.Start();
+            OPlayer.SendMessage("hello world");
+            nivPlayer.SendMessage("Got That!");
+            //g.StartGame();
             int num_of_moves = g.GetLogger().GetMoves().Count;
+            childThread.Join();
 
             Console.Write("");
 
