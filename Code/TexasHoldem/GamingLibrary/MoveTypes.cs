@@ -62,6 +62,11 @@ namespace Gaming
         {
             playerBets = this.playerBets;
         }
+
+        public IDictionary<string, int> GetPlayerBets()
+        {
+            return playerBets;
+        }
     }
 
 }

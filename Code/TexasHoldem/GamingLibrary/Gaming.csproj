@@ -52,7 +52,6 @@
     <Compile Include="LoggerPusher.cs" />
     <Compile Include="Move.cs" />
     <Compile Include="MoveTypes.cs" />
-    <Compile Include="Player.cs" />
     <Compile Include="PlayerHand.cs" />
     <Compile Include="PlayingUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

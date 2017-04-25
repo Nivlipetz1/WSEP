@@ -35,6 +35,10 @@ namespace Gaming
 
         public void StartGame()
         {
+
+            if (gamePref.GetMinPlayers() > GetNumberOfPlayers())
+                throw new InvalidOperationException("Can't start game with less than the minimum number of players");
+
             int potInt = pot[0];
             //announce game started
             gameEnded = false;
