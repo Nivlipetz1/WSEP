@@ -15,11 +15,13 @@ namespace Gaming
         private Card[] cards;
         private IDictionary<string, int> playerBets;
         private IDictionary<string, PlayerHand> playerHands;
+        private List<string> messages;
 
         public SpectatingUser(UserProfile user, Game game)
         {
             account = user;
             this.game = game;
+            messages = new List<string>();
         }
 
 
@@ -31,6 +33,16 @@ namespace Gaming
         public void PushMove(Move m)
         {
             m.update(ref playerBets,ref cards, ref playerHands);
+        }
+
+        public void PushMessage(string m)
+        {
+            messages.Add(m);
+        }
+
+        public void SendMessage(string m)
+        {
+            game.GetChat().SendMessage(m);
         }
 
     }
