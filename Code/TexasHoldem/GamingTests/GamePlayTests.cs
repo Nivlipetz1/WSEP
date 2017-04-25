@@ -78,6 +78,87 @@ namespace GamingTests
             Assert.AreEqual(18, num_of_moves);
         }
 
+        [TestCase]
+        public void PlayersCloseBlindAndThenFold()
+        {
+            Game g = new Game(new GamePreferences());
+            GameLogger logger = g.GetLogger();
+
+            UserProfile Niv = new UserProfile("Niv", "123");
+            UserProfile Omer = new UserProfile("Omer", "456");
+            UserProfile Naor = new UserProfile("Naor", "789");
+
+            PlayingUser nivPlayer = new PlayingUser(Niv, 1000, g);
+            PlayingUser OPlayer = new PlayingUser(Omer, 1000, g);
+            PlayingUser NPlayer = new PlayingUser(Naor, 1000, g);
+
+            g.addPlayer(nivPlayer);
+            g.addPlayer(OPlayer);
+            g.addPlayer(NPlayer);
+
+            nivPlayer.SetFakeUserInput(new Queue<string>(new[] { "5","0","-1" }));
+            OPlayer.SetFakeUserInput(new Queue<string>(new[] { "0","0","-1" }));
+            NPlayer.SetFakeUserInput(new Queue<string>(new[] { "10" , "100" }));
+
+            g.StartGame();
+
+            Assert.AreEqual(1020, NPlayer.GetCredit());
+        }
+
+        [TestCase]
+        public void HeadToHeadAndFold()
+        {
+            Game g = new Game(new GamePreferences());
+            GameLogger logger = g.GetLogger();
+
+            UserProfile Niv = new UserProfile("Niv", "123");
+            UserProfile Omer = new UserProfile("Omer", "456");
+            UserProfile Naor = new UserProfile("Naor", "789");
+
+            PlayingUser nivPlayer = new PlayingUser(Niv, 1000, g);
+            PlayingUser OPlayer = new PlayingUser(Omer, 1000, g);
+            PlayingUser NPlayer = new PlayingUser(Naor, 1000, g);
+
+            g.addPlayer(nivPlayer);
+            g.addPlayer(OPlayer);
+            g.addPlayer(NPlayer);
+
+            nivPlayer.SetFakeUserInput(new Queue<string>(new[] { "5", "0", "-1" }));
+            OPlayer.SetFakeUserInput(new Queue<string>(new[] { "0", "0", "100" ,"100" }));
+            NPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100","-1" }));
+
+            g.StartGame();
+
+            Assert.AreEqual(1120, OPlayer.GetCredit());
+        }
+
+        [TestCase]
+        public void HeadToHeadTwiceAndFold()
+        {
+            Game g = new Game(new GamePreferences());
+            GameLogger logger = g.GetLogger();
+
+            UserProfile Niv = new UserProfile("Niv", "123");
+            UserProfile Omer = new UserProfile("Omer", "456");
+            UserProfile Naor = new UserProfile("Naor", "789");
+
+            PlayingUser nivPlayer = new PlayingUser(Niv, 1000, g);
+            PlayingUser OPlayer = new PlayingUser(Omer, 1000, g);
+            PlayingUser NPlayer = new PlayingUser(Naor, 1000, g);
+
+            g.addPlayer(nivPlayer);
+            g.addPlayer(OPlayer);
+            g.addPlayer(NPlayer);
+
+            nivPlayer.SetFakeUserInput(new Queue<string>(new[] { "5", "0", "100","100","0","-1" }));
+            OPlayer.SetFakeUserInput(new Queue<string>(new[] { "0", "0", "100", "100","200" }));
+            NPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100", "-1" }));
+
+            g.StartGame();
+
+            Assert.AreEqual(1320, OPlayer.GetCredit());
+        }
+
 
     }
 }
