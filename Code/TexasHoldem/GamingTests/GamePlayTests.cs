@@ -75,7 +75,7 @@ namespace GamingTests
             //turn - 1
             //bets - 3
 
-            Assert.AreEqual(18, num_of_moves);
+            Assert.AreEqual(19, num_of_moves);
         }
 
         [TestCase]
