@@ -28,24 +28,24 @@ namespace GamingTests
             g.addPlayer(nivPlayer);
             g.addPlayer(OPlayer);
 
-            nivPlayer.SetFakeUserInput(new Queue<string>(new[] { "5", "0"}));
+            nivPlayer.SetFakeUserInput(new Queue<string>(new[] { "5", "0" }));
             OPlayer.SetFakeUserInput(new Queue<string>(new[] { "0" }));
 
             g.StartGame();
 
-            IDictionary<string, int> playerBets = new Dictionary<string,int>();
+            IDictionary<string, int> playerBets = new Dictionary<string, int>();
             playerBets.Add(nivPlayer.GetAccount().Username, 5);
             playerBets.Add(OPlayer.GetAccount().Username, 10);
             BetMove bm = new BetMove(playerBets);
             BetMove compareToBetMove = ((BetMove)logger.GetMoves()[2]); //third move in game -> bigblind (first = start game, second = small blind, third=bigblind)
 
 
-            foreach(string s in bm.GetPlayerBets().Keys){
+            foreach (string s in bm.GetPlayerBets().Keys)
+            {
                 int testBet = bm.GetPlayerBets()[s];
                 int gameBet = compareToBetMove.GetPlayerBets()[s];
                 Assert.AreEqual(testBet, gameBet);
             }
-        
         }
 
         [TestCase]
@@ -65,6 +65,6 @@ namespace GamingTests
         public void ValidEndGameMoves()
         {
 
-        } 
+        }
     }
 }
