@@ -193,5 +193,32 @@ namespace GamingTests
             Assert.AreEqual(1000+420, OPlayer.GetCredit());*/
         }
 
+        [TestCase]
+        public void BadBetAndThenFixes()
+        {
+            Game g = new Game(new GamePreferences());
+            GameLogger logger = g.GetLogger();
+
+            UserProfile Niv = new UserProfile("Niv", "123");
+            UserProfile Omer = new UserProfile("Omer", "456");
+            UserProfile Naor = new UserProfile("Naor", "789");
+
+            PlayingUser nivPlayer = new PlayingUser(Niv, 1000, g);
+            PlayingUser OPlayer = new PlayingUser(Omer, 1000, g);
+            PlayingUser NPlayer = new PlayingUser(Naor, 1000, g);
+
+            g.addPlayer(nivPlayer);
+            g.addPlayer(OPlayer);
+            g.addPlayer(NPlayer);
+
+            nivPlayer.SetFakeUserInput(new Queue<string>(new[] { "5", "0", "-1" }));
+            OPlayer.SetFakeUserInput(new Queue<string>(new[] { "0", "0", "100","100","0","50","-1" }));
+            NPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100","100","100" }));
+
+            g.StartGame();
+
+            Assert.AreEqual(790, OPlayer.GetCredit());
+        }
+
     }
 }

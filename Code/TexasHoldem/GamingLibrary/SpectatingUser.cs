@@ -45,5 +45,9 @@ namespace Gaming
             game.GetChat().SendMessage(m);
         }
 
+        public List<string> GetMessages()
+        {
+            return messages;
+        }
     }
 }

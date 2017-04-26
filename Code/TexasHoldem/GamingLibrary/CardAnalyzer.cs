@@ -381,6 +381,11 @@ namespace Gaming
             return false;
         }
 
+        public PlayerHand GetHand()
+        {
+            return hand;
+        }
+
     }
 
 

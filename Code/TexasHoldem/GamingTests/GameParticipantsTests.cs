@@ -46,6 +46,22 @@ namespace Gaming
         }
 
         [TestCase]
+        public void ChatTest()
+        {
+            Game g = new Game(new GamePreferences());
+            UserProfile Niv = new UserProfile("Niv", "123");
+            SpectatingUser nivPlayer = new SpectatingUser(Niv, g);
+            UserProfile Omer = new UserProfile("Omer", "123");
+            SpectatingUser omerPlayer = new SpectatingUser(Omer, g);
+            g.addSpectator(nivPlayer);
+            g.addSpectator(omerPlayer);
+            nivPlayer.SendMessage("hello world!");
+
+
+            Assert.AreEqual("hello world!", omerPlayer.GetMessages().First());
+        }
+
+        [TestCase]
         public void AddSpectatorsToGameThatDoesntAllowSpecators()
         {
             Assert.Throws(typeof(InvalidOperationException), delegate()

@@ -50,6 +50,7 @@
     <Compile Include="GameChat.cs" />
     <Compile Include="GameLogger.cs" />
     <Compile Include="GamePreferences.cs" />
+    <Compile Include="IllegalBetException.cs" />
     <Compile Include="LoggerPusher.cs" />
     <Compile Include="Move.cs" />
     <Compile Include="MoveTypes.cs" />
