@@ -57,10 +57,12 @@ namespace GamingTests
             Deck d = new Deck();
             Assert.AreEqual(d.getCards().Count, 52);
             Card cardIndex24= d.getCards().ElementAt(24);
+            Card cardIndex34 = d.getCards().ElementAt(34);
             d.Shuffle();
             Assert.AreEqual(d.getCards().Count, 52);
             Card cardAfterShuffleIndex24 = d.getCards().ElementAt(24);
-            Assert.AreNotEqual(cardIndex24, cardAfterShuffleIndex24);
+            Card cardAfterShuffleIndex34 = d.getCards().ElementAt(34);
+            Assert.False(cardIndex24.equals(cardAfterShuffleIndex24) && cardIndex34.equals(cardAfterShuffleIndex34));
         }
 
         [TestCase]

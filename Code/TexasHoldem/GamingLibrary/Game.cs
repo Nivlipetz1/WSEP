@@ -84,7 +84,7 @@ namespace Gaming
 
             //request bet from rest of players
 
-            TraversePlayers(2);
+            TraversePlayers(2 % players.Count);
             if (gameEnded)
             {
                 GiveWinnings();

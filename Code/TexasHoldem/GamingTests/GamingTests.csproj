@@ -48,6 +48,7 @@
     <Compile Include="GameParticipantsTests.cs" />
     <Compile Include="GamePlayTests.cs" />
     <Compile Include="GamePropertiesTests.cs" />
+    <Compile Include="MoveTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
