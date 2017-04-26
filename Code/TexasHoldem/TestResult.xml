@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
 <test-run id="2" testcasecount="52" result="Passed" total="52" passed="52" failed="0" inconclusive="0" skipped="0" asserts="81" engine-version="3.6.1.0" clr-version="4.0.30319.42000" start-time="2017-04-26 21:53:25Z" end-time="2017-04-26 21:53:31Z" duration="5.782049">
   <command-line><![CDATA["C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\.\packages\NUnit.ConsoleRunner.3.6.1\tools\nunit3-console.exe" .\GamingTests\bin\Debug\GamingTests.dll]]></command-line>
   <test-suite type="Assembly" id="0-1110" name="GamingTests.dll" fullname="C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingTests\bin\Debug\GamingTests.dll" runstate="Runnable" testcasecount="52" result="Passed" start-time="2017-04-26 21:53:29Z" end-time="2017-04-26 21:53:31Z" duration="1.623437" total="52" passed="52" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="81">

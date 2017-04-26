@@ -18,6 +18,7 @@ namespace Gaming
         private GamePreferences gamePref;
         private GameLogger logger;
         private IDictionary<PlayingUser, int> playerBets = new Dictionary<PlayingUser,int>();
+        private IDictionary<string, PlayerHand> playerHands = new Dictionary<string, PlayerHand>();
         private Card[] cards;
         private GameChat chat;
         private bool gameEnded;
@@ -75,17 +76,19 @@ namespace Gaming
             //draw hands
             foreach (PlayingUser player in players)
             {
-                player.SetHand(gameDeck.drawPlayerHand());
+                PlayerHand ph = gameDeck.drawPlayerHand();
+                player.SetHand(ph);
+                playerHands.Add(player.GetAccount().Username, ph);
             }
 
 
             //request bet from rest of players
 
             TraversePlayers(2 % players.Count);
-
             if (gameEnded)
             {
                 GiveWinnings();
+                PushMoveToObservers(new EndGameMove(playerHands));
                 ResetGame();
                 return;
             }
@@ -102,6 +105,7 @@ namespace Gaming
             if (gameEnded)
             {
                 GiveWinnings();
+                PushMoveToObservers(new EndGameMove(playerHands));
                 ResetGame();
                 return;
             }
@@ -114,6 +118,7 @@ namespace Gaming
             if (gameEnded)
             {
                 GiveWinnings();
+                PushMoveToObservers(new EndGameMove(playerHands));
                 ResetGame();
                 return;
             }
@@ -126,10 +131,12 @@ namespace Gaming
             if (gameEnded)
             {
                 GiveWinnings();
+                PushMoveToObservers(new EndGameMove(playerHands));
                 ResetGame();
                 return;
             }
 
+            PushMoveToObservers(new EndGameMove(playerHands));
             List<PlayingUser> winners = DetermineWinner();
             foreach (PlayingUser player in winners)
             {
@@ -244,7 +251,7 @@ namespace Gaming
             }
             PushMoveToObservers(new GameStartMove(playerBetsString));
         }
-        
+
         private void TraversePlayers(int index){
             while (!EndOfBettingRound())
             {
@@ -258,13 +265,16 @@ namespace Gaming
                     {
                         bet = currentUser.BadBet(bet, minimumBet);
                     }
-                    if (bet >= 0)
+                    if (bet >= 0) //check|call|raise
                     {
                         playerBets[currentUser] += bet;
                         bettingRound += bet;
                     }
-                    else
+                    else //fold
+                    {
                         playerBets[currentUser] = bet;
+                        playerHands.Remove(currentUser.GetAccount().Username);
+                    }
                     PushBetMove();
                     if (DidEveryoneFold())
                     {
@@ -329,7 +339,6 @@ namespace Gaming
             
             players.Add(player);
             playerBets.Add(player, 0);
-
         }
 
         public void removePlayer(PlayingUser player)

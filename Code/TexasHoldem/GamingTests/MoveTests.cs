@@ -46,7 +46,6 @@ namespace GamingTests
                 int gameBet = compareToBetMove.GetPlayerBets()[s];
                 Assert.AreEqual(testBet, gameBet);
             }
-
         }
 
         [TestCase]

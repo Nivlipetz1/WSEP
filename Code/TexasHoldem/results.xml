@@ -9,7 +9,7 @@
       <Classes />
     </Module>
     <Module skippedDueTo="MissingPdb" hash="70-0A-8C-00-26-D7-8E-3A-41-3C-43-6D-01-3C-09-CC-C9-73-85-C0">
-      <ModulePath>C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\packages\NUnit.ConsoleRunner.3.6.1\tools\nunit3-console.exe</ModulePath>
+      <ModulePath>C:\Users\matan\Desktop\bgu\year 3\2\×¡×“× ×\WSEP\Code\TexasHoldem\packages\NUnit.ConsoleRunner.3.6.1\tools\nunit3-console.exe</ModulePath>
       <ModuleTime>2017-04-25T20:36:50.828506Z</ModuleTime>
       <ModuleName>nunit3-console</ModuleName>
       <Classes />
@@ -21,13 +21,13 @@
       <Classes />
     </Module>
     <Module skippedDueTo="MissingPdb" hash="90-A5-CB-F1-B1-A1-C2-DE-2A-BF-0B-6F-28-E9-82-CA-41-44-09-3A">
-      <ModulePath>C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\packages\NUnit.ConsoleRunner.3.6.1\tools\nunit.engine.api.dll</ModulePath>
+      <ModulePath>C:\Users\matan\Desktop\bgu\year 3\2\×¡×“× ×\WSEP\Code\TexasHoldem\packages\NUnit.ConsoleRunner.3.6.1\tools\nunit.engine.api.dll</ModulePath>
       <ModuleTime>2017-04-25T20:36:50.7754679Z</ModuleTime>
       <ModuleName>nunit.engine.api</ModuleName>
       <Classes />
     </Module>
     <Module skippedDueTo="MissingPdb" hash="96-DE-EF-3F-02-DC-0C-37-07-3E-B9-1D-D2-EF-F9-A2-D3-8E-11-00">
-      <ModulePath>C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\packages\NUnit.ConsoleRunner.3.6.1\tools\nunit.engine.dll</ModulePath>
+      <ModulePath>C:\Users\matan\Desktop\bgu\year 3\2\×¡×“× ×\WSEP\Code\TexasHoldem\packages\NUnit.ConsoleRunner.3.6.1\tools\nunit.engine.dll</ModulePath>
       <ModuleTime>2017-04-25T20:36:50.7999855Z</ModuleTime>
       <ModuleName>nunit.engine</ModuleName>
       <Classes />
@@ -45,7 +45,7 @@
       <Classes />
     </Module>
     <Module skippedDueTo="MissingPdb" hash="8A-2E-8F-D6-9D-39-02-4A-2F-30-FC-06-42-F7-0F-A8-32-69-07-72">
-      <ModulePath>C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\packages\NUnit.ConsoleRunner.3.6.1\tools\Mono.Cecil.dll</ModulePath>
+      <ModulePath>C:\Users\matan\Desktop\bgu\year 3\2\×¡×“× ×\WSEP\Code\TexasHoldem\packages\NUnit.ConsoleRunner.3.6.1\tools\Mono.Cecil.dll</ModulePath>
       <ModuleTime>2017-04-25T20:36:50.7014153Z</ModuleTime>
       <ModuleName>Mono.Cecil</ModuleName>
       <Classes />
@@ -63,13 +63,13 @@
       <Classes />
     </Module>
     <Module skippedDueTo="MissingPdb" hash="75-5F-1A-C1-0E-E6-C9-A3-EC-A1-F0-6E-89-B4-98-86-0B-A8-B2-AD">
-      <ModulePath>C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\packages\NUnit.ConsoleRunner.3.6.1\tools\nunit-agent.exe</ModulePath>
+      <ModulePath>C:\Users\matan\Desktop\bgu\year 3\2\×¡×“× ×\WSEP\Code\TexasHoldem\packages\NUnit.ConsoleRunner.3.6.1\tools\nunit-agent.exe</ModulePath>
       <ModuleTime>2017-04-25T20:36:50.7534522Z</ModuleTime>
       <ModuleName>nunit-agent</ModuleName>
       <Classes />
     </Module>
     <Module skippedDueTo="MissingPdb" hash="6C-04-8C-57-BA-16-AC-9A-1E-6F-C5-9B-72-58-A4-91-04-FA-A5-1E">
-      <ModulePath>C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingTests\bin\Debug\nunit.framework.dll</ModulePath>
+      <ModulePath>C:\Users\matan\Desktop\bgu\year 3\2\×¡×“× ×\WSEP\Code\TexasHoldem\GamingTests\bin\Debug\nunit.framework.dll</ModulePath>
       <ModuleTime>2017-04-25T08:42:16Z</ModuleTime>
       <ModuleName>nunit.framework</ModuleName>
       <Classes />
@@ -82,16 +82,16 @@
     </Module>
     <Module hash="B9-3B-6C-FA-6B-27-EE-E0-D8-C7-ED-37-69-5A-DB-EA-92-E2-19-7C">
       <Summary numSequencePoints="515" visitedSequencePoints="488" numBranchPoints="59" visitedBranchPoints="58" sequenceCoverage="94.76" branchCoverage="98.31" maxCyclomaticComplexity="3" minCyclomaticComplexity="1" visitedClasses="6" numClasses="6" visitedMethods="54" numMethods="55" />
-      <ModulePath>C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingTests\bin\Debug\GamingTests.dll</ModulePath>
+      <ModulePath>C:\Users\matan\Desktop\bgu\year 3\2\×¡×“× ×\WSEP\Code\TexasHoldem\GamingTests\bin\Debug\GamingTests.dll</ModulePath>
       <ModuleTime>2017-04-26T21:53:09.0550284Z</ModuleTime>
       <ModuleName>GamingTests</ModuleName>
       <Files>
-        <File uid="1" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingTests\CardAnalyzerTests.cs" />
-        <File uid="2" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingTests\CardAndDeckTests.cs" />
-        <File uid="3" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingTests\GameParticipantsTests.cs" />
-        <File uid="4" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingTests\GamePlayTests.cs" />
-        <File uid="5" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingTests\GamePropertiesTests.cs" />
-        <File uid="6" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingTests\MoveTests.cs" />
+        <File uid="1" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\×¡×“× ×\WSEP\Code\TexasHoldem\GamingTests\CardAnalyzerTests.cs" />
+        <File uid="2" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\×¡×“× ×\WSEP\Code\TexasHoldem\GamingTests\CardAndDeckTests.cs" />
+        <File uid="3" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\×¡×“× ×\WSEP\Code\TexasHoldem\GamingTests\GameParticipantsTests.cs" />
+        <File uid="4" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\×¡×“× ×\WSEP\Code\TexasHoldem\GamingTests\GamePlayTests.cs" />
+        <File uid="5" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\×¡×“× ×\WSEP\Code\TexasHoldem\GamingTests\GamePropertiesTests.cs" />
+        <File uid="6" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\×¡×“× ×\WSEP\Code\TexasHoldem\GamingTests\MoveTests.cs" />
       </Files>
       <Classes>
         <Class>
@@ -1258,22 +1258,22 @@
     </Module>
     <Module hash="50-48-22-0F-09-D8-FE-D2-F0-6C-7B-76-5A-13-49-50-7B-04-34-D3">
       <Summary numSequencePoints="1007" visitedSequencePoints="906" numBranchPoints="285" visitedBranchPoints="247" sequenceCoverage="89.97" branchCoverage="86.67" maxCyclomaticComplexity="14" minCyclomaticComplexity="1" visitedClasses="15" numClasses="17" visitedMethods="96" numMethods="113" />
-      <ModulePath>C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingTests\bin\Debug\Gaming.dll</ModulePath>
+      <ModulePath>C:\Users\matan\Desktop\bgu\year 3\2\×¡×“× ×\WSEP\Code\TexasHoldem\GamingTests\bin\Debug\Gaming.dll</ModulePath>
       <ModuleTime>2017-04-26T21:53:08.5977032Z</ModuleTime>
       <ModuleName>Gaming</ModuleName>
       <Files>
-        <File uid="13" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingLibrary\Card.cs" />
-        <File uid="14" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingLibrary\CardAnalyzer.cs" />
-        <File uid="15" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingLibrary\Deck.cs" />
-        <File uid="17" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingLibrary\Game.cs" />
-        <File uid="18" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingLibrary\GameChat.cs" />
-        <File uid="19" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingLibrary\GameLogger.cs" />
-        <File uid="20" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingLibrary\GamePreferences.cs" />
-        <File uid="21" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingLibrary\IllegalBetException.cs" />
-        <File uid="22" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingLibrary\MoveTypes.cs" />
-        <File uid="26" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingLibrary\PlayerHand.cs" />
-        <File uid="27" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingLibrary\SpectatingUser.cs" />
-        <File uid="28" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingLibrary\PlayingUser.cs" />
+        <File uid="13" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\×¡×“× ×\WSEP\Code\TexasHoldem\GamingLibrary\Card.cs" />
+        <File uid="14" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\×¡×“× ×\WSEP\Code\TexasHoldem\GamingLibrary\CardAnalyzer.cs" />
+        <File uid="15" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\×¡×“× ×\WSEP\Code\TexasHoldem\GamingLibrary\Deck.cs" />
+        <File uid="17" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\×¡×“× ×\WSEP\Code\TexasHoldem\GamingLibrary\Game.cs" />
+        <File uid="18" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\×¡×“× ×\WSEP\Code\TexasHoldem\GamingLibrary\GameChat.cs" />
+        <File uid="19" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\×¡×“× ×\WSEP\Code\TexasHoldem\GamingLibrary\GameLogger.cs" />
+        <File uid="20" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\×¡×“× ×\WSEP\Code\TexasHoldem\GamingLibrary\GamePreferences.cs" />
+        <File uid="21" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\×¡×“× ×\WSEP\Code\TexasHoldem\GamingLibrary\IllegalBetException.cs" />
+        <File uid="22" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\×¡×“× ×\WSEP\Code\TexasHoldem\GamingLibrary\MoveTypes.cs" />
+        <File uid="26" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\×¡×“× ×\WSEP\Code\TexasHoldem\GamingLibrary\PlayerHand.cs" />
+        <File uid="27" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\×¡×“× ×\WSEP\Code\TexasHoldem\GamingLibrary\SpectatingUser.cs" />
+        <File uid="28" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\×¡×“× ×\WSEP\Code\TexasHoldem\GamingLibrary\PlayingUser.cs" />
       </Files>
       <Classes>
         <Class>
@@ -3789,11 +3789,11 @@
     </Module>
     <Module hash="5A-05-43-15-C4-72-72-F3-F0-5F-E8-20-3F-11-BE-3B-5A-48-90-99">
       <Summary numSequencePoints="29" visitedSequencePoints="14" numBranchPoints="8" visitedBranchPoints="4" sequenceCoverage="48.28" branchCoverage="50" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" visitedClasses="1" numClasses="1" visitedMethods="4" numMethods="8" />
-      <ModulePath>C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingTests\bin\Debug\User.dll</ModulePath>
+      <ModulePath>C:\Users\matan\Desktop\bgu\year 3\2\×¡×“× ×\WSEP\Code\TexasHoldem\GamingTests\bin\Debug\User.dll</ModulePath>
       <ModuleTime>2017-04-26T21:53:08.2564619Z</ModuleTime>
       <ModuleName>User</ModuleName>
       <Files>
-        <File uid="47" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\User\UserProfile.cs" />
+        <File uid="47" fullPath="c:\Users\matan\Desktop\bgu\year 3\2\×¡×“× ×\WSEP\Code\TexasHoldem\User\UserProfile.cs" />
       </Files>
       <Classes>
         <Class>
