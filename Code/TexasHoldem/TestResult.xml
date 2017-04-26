@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<test-run id="2" testcasecount="14" result="Passed" total="14" passed="14" failed="0" inconclusive="0" skipped="0" asserts="39" engine-version="3.6.1.0" clr-version="4.0.30319.42000" start-time="2017-04-24 14:01:48Z" end-time="2017-04-24 14:01:55Z" duration="7.018811">
+<test-run id="2" testcasecount="52" result="Passed" total="52" passed="52" failed="0" inconclusive="0" skipped="0" asserts="80" engine-version="3.6.1.0" clr-version="4.0.30319.42000" start-time="2017-04-26 21:35:44Z" end-time="2017-04-26 21:35:50Z" duration="6.146883">
   <command-line><![CDATA["C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\.\packages\NUnit.ConsoleRunner.3.6.1\tools\nunit3-console.exe" .\GamingTests\bin\Debug\GamingTests.dll]]></command-line>
-  <test-suite type="Assembly" id="0-1031" name="GamingTests.dll" fullname="C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingTests\bin\Debug\GamingTests.dll" runstate="Runnable" testcasecount="14" result="Passed" start-time="2017-04-24 14:01:53Z" end-time="2017-04-24 14:01:55Z" duration="1.762646" total="14" passed="14" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="39">
+  <test-suite type="Assembly" id="0-1110" name="GamingTests.dll" fullname="C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\GamingTests\bin\Debug\GamingTests.dll" runstate="Runnable" testcasecount="52" result="Passed" start-time="2017-04-26 21:35:48Z" end-time="2017-04-26 21:35:50Z" duration="1.700877" total="52" passed="52" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="80">
     <environment framework-version="3.6.1.0" clr-version="4.0.30319.42000" os-version="Microsoft Windows NT 10.0.14393.0" platform="Win32NT" cwd="C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem" machine-name="NIVHAMAGNIV" user="matan" user-domain="NIVHAMAGNIV" culture="en-US" uiculture="en-US" os-architecture="x64" />
     <settings>
       <setting name="DisposeRunners" value="True" />
@@ -13,55 +13,135 @@
       <setting name="NumberOfTestWorkers" value="4" />
     </settings>
     <properties>
-      <property name="_PID" value="4840" />
+      <property name="_PID" value="368" />
       <property name="_APPDOMAIN" value="domain-" />
     </properties>
-    <test-suite type="TestSuite" id="0-1033" name="Gaming" fullname="Gaming" runstate="Runnable" testcasecount="4" result="Passed" start-time="2017-04-24 14:01:53Z" end-time="2017-04-24 14:01:54Z" duration="0.500731" total="4" passed="4" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="8">
-      <test-suite type="TestFixture" id="0-1017" name="GameParticipantsTests" fullname="Gaming.GameParticipantsTests" classname="Gaming.GameParticipantsTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2017-04-24 14:01:53Z" end-time="2017-04-24 14:01:54Z" duration="0.453850" total="4" passed="4" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="8">
-        <test-suite type="ParameterizedMethod" id="0-1019" name="AddPlayerToGame" fullname="Gaming.GameParticipantsTests.AddPlayerToGame" classname="Gaming.GameParticipantsTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-24 14:01:53Z" end-time="2017-04-24 14:01:53Z" duration="0.179584" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="2">
-          <test-case id="0-1018" name="AddPlayerToGame()" fullname="Gaming.GameParticipantsTests.AddPlayerToGame()" methodname="AddPlayerToGame" classname="Gaming.GameParticipantsTests" runstate="Runnable" seed="19148894" result="Passed" start-time="2017-04-24 14:01:53Z" end-time="2017-04-24 14:01:53Z" duration="0.132338" asserts="2" />
+    <test-suite type="TestSuite" id="0-1112" name="Gaming" fullname="Gaming" runstate="Runnable" testcasecount="6" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.216100" total="6" passed="6" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="10">
+      <test-suite type="TestFixture" id="0-1066" name="GameParticipantsTests" fullname="Gaming.GameParticipantsTests" classname="Gaming.GameParticipantsTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.209114" total="6" passed="6" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="10">
+        <test-suite type="ParameterizedMethod" id="0-1068" name="AddPlayerToGame" fullname="Gaming.GameParticipantsTests.AddPlayerToGame" classname="Gaming.GameParticipantsTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.106062" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="2">
+          <test-case id="0-1067" name="AddPlayerToGame()" fullname="Gaming.GameParticipantsTests.AddPlayerToGame()" methodname="AddPlayerToGame" classname="Gaming.GameParticipantsTests" runstate="Runnable" seed="1464368576" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.091016" asserts="2" />
         </test-suite>
-        <test-suite type="ParameterizedMethod" id="0-1021" name="AddSpectatorToGame" fullname="Gaming.GameParticipantsTests.AddSpectatorToGame" classname="Gaming.GameParticipantsTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-24 14:01:53Z" end-time="2017-04-24 14:01:54Z" duration="0.031328" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="2">
-          <test-case id="0-1020" name="AddSpectatorToGame()" fullname="Gaming.GameParticipantsTests.AddSpectatorToGame()" methodname="AddSpectatorToGame" classname="Gaming.GameParticipantsTests" runstate="Runnable" seed="801523354" result="Passed" start-time="2017-04-24 14:01:53Z" end-time="2017-04-24 14:01:53Z" duration="0.002516" asserts="2" />
+        <test-suite type="ParameterizedMethod" id="0-1074" name="AddSpectatorsToGameThatDoesntAllowSpecators" fullname="Gaming.GameParticipantsTests.AddSpectatorsToGameThatDoesntAllowSpecators" classname="Gaming.GameParticipantsTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.020601" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1073" name="AddSpectatorsToGameThatDoesntAllowSpecators()" fullname="Gaming.GameParticipantsTests.AddSpectatorsToGameThatDoesntAllowSpecators()" methodname="AddSpectatorsToGameThatDoesntAllowSpecators" classname="Gaming.GameParticipantsTests" runstate="Runnable" seed="1616980842" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.017606" asserts="1" />
         </test-suite>
-        <test-suite type="ParameterizedMethod" id="0-1023" name="RemovePlayerFromGame" fullname="Gaming.GameParticipantsTests.RemovePlayerFromGame" classname="Gaming.GameParticipantsTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-24 14:01:54Z" end-time="2017-04-24 14:01:54Z" duration="0.068437" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="2">
-          <test-case id="0-1022" name="RemovePlayerFromGame()" fullname="Gaming.GameParticipantsTests.RemovePlayerFromGame()" methodname="RemovePlayerFromGame" classname="Gaming.GameParticipantsTests" runstate="Runnable" seed="1882195712" result="Passed" start-time="2017-04-24 14:01:54Z" end-time="2017-04-24 14:01:54Z" duration="0.033313" asserts="2" />
+        <test-suite type="ParameterizedMethod" id="0-1070" name="AddSpectatorToGame" fullname="Gaming.GameParticipantsTests.AddSpectatorToGame" classname="Gaming.GameParticipantsTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.004530" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="2">
+          <test-case id="0-1069" name="AddSpectatorToGame()" fullname="Gaming.GameParticipantsTests.AddSpectatorToGame()" methodname="AddSpectatorToGame" classname="Gaming.GameParticipantsTests" runstate="Runnable" seed="302226868" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.001954" asserts="2" />
         </test-suite>
-        <test-suite type="ParameterizedMethod" id="0-1025" name="RemoveSpectatorFromGame" fullname="Gaming.GameParticipantsTests.RemoveSpectatorFromGame" classname="Gaming.GameParticipantsTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-24 14:01:54Z" end-time="2017-04-24 14:01:54Z" duration="0.037744" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="2">
-          <test-case id="0-1024" name="RemoveSpectatorFromGame()" fullname="Gaming.GameParticipantsTests.RemoveSpectatorFromGame()" methodname="RemoveSpectatorFromGame" classname="Gaming.GameParticipantsTests" runstate="Runnable" seed="1452366385" result="Passed" start-time="2017-04-24 14:01:54Z" end-time="2017-04-24 14:01:54Z" duration="0.005132" asserts="2" />
+        <test-suite type="ParameterizedMethod" id="0-1072" name="ChatTest" fullname="Gaming.GameParticipantsTests.ChatTest" classname="Gaming.GameParticipantsTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.010538" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1071" name="ChatTest()" fullname="Gaming.GameParticipantsTests.ChatTest()" methodname="ChatTest" classname="Gaming.GameParticipantsTests" runstate="Runnable" seed="2114844089" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.007958" asserts="1" />
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1076" name="RemovePlayerFromGame" fullname="Gaming.GameParticipantsTests.RemovePlayerFromGame" classname="Gaming.GameParticipantsTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.021538" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="2">
+          <test-case id="0-1075" name="RemovePlayerFromGame()" fullname="Gaming.GameParticipantsTests.RemovePlayerFromGame()" methodname="RemovePlayerFromGame" classname="Gaming.GameParticipantsTests" runstate="Runnable" seed="1537650509" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.018266" asserts="2" />
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1078" name="RemoveSpectatorFromGame" fullname="Gaming.GameParticipantsTests.RemoveSpectatorFromGame" classname="Gaming.GameParticipantsTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.005046" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="2">
+          <test-case id="0-1077" name="RemoveSpectatorFromGame()" fullname="Gaming.GameParticipantsTests.RemoveSpectatorFromGame()" methodname="RemoveSpectatorFromGame" classname="Gaming.GameParticipantsTests" runstate="Runnable" seed="1855020713" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.002036" asserts="2" />
         </test-suite>
       </test-suite>
     </test-suite>
-    <test-suite type="TestSuite" id="0-1032" name="GamingTests" fullname="GamingTests" runstate="Runnable" testcasecount="10" result="Passed" start-time="2017-04-24 14:01:53Z" end-time="2017-04-24 14:01:55Z" duration="1.685949" total="10" passed="10" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="31">
-      <test-suite type="TestFixture" id="0-1000" name="CardAndDeckTests" fullname="GamingTests.CardAndDeckTests" classname="GamingTests.CardAndDeckTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2017-04-24 14:01:54Z" end-time="2017-04-24 14:01:54Z" duration="0.569532" total="8" passed="8" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="29">
-        <test-suite type="ParameterizedMethod" id="0-1002" name="CompareEqualCards" fullname="GamingTests.CardAndDeckTests.CompareEqualCards" classname="GamingTests.CardAndDeckTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-24 14:01:54Z" end-time="2017-04-24 14:01:54Z" duration="0.031280" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="2">
-          <test-case id="0-1001" name="CompareEqualCards()" fullname="GamingTests.CardAndDeckTests.CompareEqualCards()" methodname="CompareEqualCards" classname="GamingTests.CardAndDeckTests" runstate="Runnable" seed="227914753" result="Passed" start-time="2017-04-24 14:01:54Z" end-time="2017-04-24 14:01:54Z" duration="0.007022" asserts="2" />
+    <test-suite type="TestSuite" id="0-1111" name="GamingTests" fullname="GamingTests" runstate="Runnable" testcasecount="46" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:50Z" duration="1.674473" total="46" passed="46" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="70">
+      <test-suite type="TestFixture" id="0-1000" name="CardAnalyzerTest" fullname="GamingTests.CardAnalyzerTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" testcasecount="24" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.675297" total="24" passed="24" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="24">
+        <test-suite type="ParameterizedMethod" id="0-1040" name="fullHouseAnalyzeTest" fullname="GamingTests.CardAnalyzerTest.fullHouseAnalyzeTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.035615" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1039" name="fullHouseAnalyzeTest()" fullname="GamingTests.CardAnalyzerTest.fullHouseAnalyzeTest()" methodname="fullHouseAnalyzeTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" seed="1467678713" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.032421" asserts="1" />
         </test-suite>
-        <test-suite type="ParameterizedMethod" id="0-1004" name="CompareUnequalCards" fullname="GamingTests.CardAndDeckTests.CompareUnequalCards" classname="GamingTests.CardAndDeckTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-24 14:01:54Z" end-time="2017-04-24 14:01:54Z" duration="0.037472" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="3">
-          <test-case id="0-1003" name="CompareUnequalCards()" fullname="GamingTests.CardAndDeckTests.CompareUnequalCards()" methodname="CompareUnequalCards" classname="GamingTests.CardAndDeckTests" runstate="Runnable" seed="1592032300" result="Passed" start-time="2017-04-24 14:01:54Z" end-time="2017-04-24 14:01:54Z" duration="0.005067" asserts="3" />
+        <test-suite type="ParameterizedMethod" id="0-1022" name="hasFlushTest" fullname="GamingTests.CardAnalyzerTest.hasFlushTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.022556" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1021" name="hasFlushTest()" fullname="GamingTests.CardAnalyzerTest.hasFlushTest()" methodname="hasFlushTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" seed="1987518067" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.019871" asserts="1" />
         </test-suite>
-        <test-suite type="ParameterizedMethod" id="0-1006" name="CreateDeckWithCorrectCards" fullname="GamingTests.CardAndDeckTests.CreateDeckWithCorrectCards" classname="GamingTests.CardAndDeckTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-24 14:01:54Z" end-time="2017-04-24 14:01:54Z" duration="0.069298" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="4">
-          <test-case id="0-1005" name="CreateDeckWithCorrectCards()" fullname="GamingTests.CardAndDeckTests.CreateDeckWithCorrectCards()" methodname="CreateDeckWithCorrectCards" classname="GamingTests.CardAndDeckTests" runstate="Runnable" seed="1778211360" result="Passed" start-time="2017-04-24 14:01:54Z" end-time="2017-04-24 14:01:54Z" duration="0.036623" asserts="4" />
+        <test-suite type="ParameterizedMethod" id="0-1014" name="hasFourOfAKindTest" fullname="GamingTests.CardAnalyzerTest.hasFourOfAKindTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.015030" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1013" name="hasFourOfAKindTest()" fullname="GamingTests.CardAnalyzerTest.hasFourOfAKindTest()" methodname="hasFourOfAKindTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" seed="162243084" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.012184" asserts="1" />
         </test-suite>
-        <test-suite type="ParameterizedMethod" id="0-1012" name="DrawFlop" fullname="GamingTests.CardAndDeckTests.DrawFlop" classname="GamingTests.CardAndDeckTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-24 14:01:54Z" end-time="2017-04-24 14:01:54Z" duration="0.031524" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="5">
-          <test-case id="0-1011" name="DrawFlop()" fullname="GamingTests.CardAndDeckTests.DrawFlop()" methodname="DrawFlop" classname="GamingTests.CardAndDeckTests" runstate="Runnable" seed="1918046826" result="Passed" start-time="2017-04-24 14:01:54Z" end-time="2017-04-24 14:01:54Z" duration="0.008274" asserts="5" />
+        <test-suite type="ParameterizedMethod" id="0-1018" name="hasFullHouseTest" fullname="GamingTests.CardAnalyzerTest.hasFullHouseTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.017167" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1017" name="hasFullHouseTest()" fullname="GamingTests.CardAnalyzerTest.hasFullHouseTest()" methodname="hasFullHouseTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" seed="2030856006" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.014455" asserts="1" />
         </test-suite>
-        <test-suite type="ParameterizedMethod" id="0-1010" name="DrawPlayerHand" fullname="GamingTests.CardAndDeckTests.DrawPlayerHand" classname="GamingTests.CardAndDeckTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-24 14:01:54Z" end-time="2017-04-24 14:01:54Z" duration="0.034350" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="5">
-          <test-case id="0-1009" name="DrawPlayerHand()" fullname="GamingTests.CardAndDeckTests.DrawPlayerHand()" methodname="DrawPlayerHand" classname="GamingTests.CardAndDeckTests" runstate="Runnable" seed="1990579418" result="Passed" start-time="2017-04-24 14:01:54Z" end-time="2017-04-24 14:01:54Z" duration="0.009052" asserts="5" />
+        <test-suite type="ParameterizedMethod" id="0-1002" name="hasRoyalFlushTest" fullname="GamingTests.CardAnalyzerTest.hasRoyalFlushTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.007518" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1001" name="hasRoyalFlushTest()" fullname="GamingTests.CardAnalyzerTest.hasRoyalFlushTest()" methodname="hasRoyalFlushTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" seed="1012095699" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.004482" asserts="1" />
         </test-suite>
-        <test-suite type="ParameterizedMethod" id="0-1014" name="DrawRiver" fullname="GamingTests.CardAndDeckTests.DrawRiver" classname="GamingTests.CardAndDeckTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-24 14:01:54Z" end-time="2017-04-24 14:01:54Z" duration="0.037495" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="3">
-          <test-case id="0-1013" name="DrawRiver()" fullname="GamingTests.CardAndDeckTests.DrawRiver()" methodname="DrawRiver" classname="GamingTests.CardAndDeckTests" runstate="Runnable" seed="1191441283" result="Passed" start-time="2017-04-24 14:01:54Z" end-time="2017-04-24 14:01:54Z" duration="0.007408" asserts="3" />
+        <test-suite type="ParameterizedMethod" id="0-1012" name="hasStraightFlush2Test" fullname="GamingTests.CardAnalyzerTest.hasStraightFlush2Test" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.009027" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1011" name="hasStraightFlush2Test()" fullname="GamingTests.CardAnalyzerTest.hasStraightFlush2Test()" methodname="hasStraightFlush2Test" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" seed="1049689981" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.006300" asserts="1" />
         </test-suite>
-        <test-suite type="ParameterizedMethod" id="0-1016" name="DrawTurn" fullname="GamingTests.CardAndDeckTests.DrawTurn" classname="GamingTests.CardAndDeckTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-24 14:01:54Z" end-time="2017-04-24 14:01:54Z" duration="0.031413" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="4">
-          <test-case id="0-1015" name="DrawTurn()" fullname="GamingTests.CardAndDeckTests.DrawTurn()" methodname="DrawTurn" classname="GamingTests.CardAndDeckTests" runstate="Runnable" seed="4177177" result="Passed" start-time="2017-04-24 14:01:54Z" end-time="2017-04-24 14:01:54Z" duration="0.004631" asserts="4" />
+        <test-suite type="ParameterizedMethod" id="0-1010" name="hasStraightFlushTest" fullname="GamingTests.CardAnalyzerTest.hasStraightFlushTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.011011" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1009" name="hasStraightFlushTest()" fullname="GamingTests.CardAnalyzerTest.hasStraightFlushTest()" methodname="hasStraightFlushTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" seed="469679396" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.008041" asserts="1" />
         </test-suite>
-        <test-suite type="ParameterizedMethod" id="0-1008" name="ShuffleCards" fullname="GamingTests.CardAndDeckTests.ShuffleCards" classname="GamingTests.CardAndDeckTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-24 14:01:54Z" end-time="2017-04-24 14:01:54Z" duration="0.031394" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="3">
-          <test-case id="0-1007" name="ShuffleCards()" fullname="GamingTests.CardAndDeckTests.ShuffleCards()" methodname="ShuffleCards" classname="GamingTests.CardAndDeckTests" runstate="Runnable" seed="340096346" result="Passed" start-time="2017-04-24 14:01:54Z" end-time="2017-04-24 14:01:54Z" duration="0.007687" asserts="3" />
+        <test-suite type="ParameterizedMethod" id="0-1026" name="hasStraightTest" fullname="GamingTests.CardAnalyzerTest.hasStraightTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.032535" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1025" name="hasStraightTest()" fullname="GamingTests.CardAnalyzerTest.hasStraightTest()" methodname="hasStraightTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" seed="1069572405" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.029628" asserts="1" />
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1030" name="hasThreeOfAKindTest" fullname="GamingTests.CardAnalyzerTest.hasThreeOfAKindTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.031142" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1029" name="hasThreeOfAKindTest()" fullname="GamingTests.CardAnalyzerTest.hasThreeOfAKindTest()" methodname="hasThreeOfAKindTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" seed="1664819830" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.026981" asserts="1" />
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1034" name="hasTwoPairTest" fullname="GamingTests.CardAnalyzerTest.hasTwoPairTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.035543" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1033" name="hasTwoPairTest()" fullname="GamingTests.CardAnalyzerTest.hasTwoPairTest()" methodname="hasTwoPairTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" seed="1928423368" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.032721" asserts="1" />
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1038" name="highCardAnalyzeTest" fullname="GamingTests.CardAnalyzerTest.highCardAnalyzeTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.042880" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1037" name="highCardAnalyzeTest()" fullname="GamingTests.CardAnalyzerTest.highCardAnalyzeTest()" methodname="highCardAnalyzeTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" seed="119214870" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.040093" asserts="1" />
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1044" name="highStraightAnalyzeTest" fullname="GamingTests.CardAnalyzerTest.highStraightAnalyzeTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.025028" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1043" name="highStraightAnalyzeTest()" fullname="GamingTests.CardAnalyzerTest.highStraightAnalyzeTest()" methodname="highStraightAnalyzeTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" seed="1274637289" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.022415" asserts="1" />
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1042" name="lowStraightAnalyzeTest" fullname="GamingTests.CardAnalyzerTest.lowStraightAnalyzeTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.024468" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1041" name="lowStraightAnalyzeTest()" fullname="GamingTests.CardAnalyzerTest.lowStraightAnalyzeTest()" methodname="lowStraightAnalyzeTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" seed="1432730073" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.021676" asserts="1" />
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1024" name="noFlushTest" fullname="GamingTests.CardAnalyzerTest.noFlushTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.038061" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1023" name="noFlushTest()" fullname="GamingTests.CardAnalyzerTest.noFlushTest()" methodname="noFlushTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" seed="215064463" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.035231" asserts="1" />
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1016" name="noFourOfAKindTest" fullname="GamingTests.CardAnalyzerTest.noFourOfAKindTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.009549" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1015" name="noFourOfAKindTest()" fullname="GamingTests.CardAnalyzerTest.noFourOfAKindTest()" methodname="noFourOfAKindTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" seed="321798724" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.006914" asserts="1" />
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1020" name="noFullHouseTest" fullname="GamingTests.CardAnalyzerTest.noFullHouseTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.025548" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1019" name="noFullHouseTest()" fullname="GamingTests.CardAnalyzerTest.noFullHouseTest()" methodname="noFullHouseTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" seed="1905151565" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.022961" asserts="1" />
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1006" name="noRoyalFlush2Test" fullname="GamingTests.CardAnalyzerTest.noRoyalFlush2Test" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.021127" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1005" name="noRoyalFlush2Test()" fullname="GamingTests.CardAnalyzerTest.noRoyalFlush2Test()" methodname="noRoyalFlush2Test" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" seed="823353048" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.018558" asserts="1" />
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1004" name="noRoyalFlushTest" fullname="GamingTests.CardAnalyzerTest.noRoyalFlushTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.028044" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1003" name="noRoyalFlushTest()" fullname="GamingTests.CardAnalyzerTest.noRoyalFlushTest()" methodname="noRoyalFlushTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" seed="2050972076" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.025052" asserts="1" />
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1008" name="noStraightFlushTest" fullname="GamingTests.CardAnalyzerTest.noStraightFlushTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.025829" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1007" name="noStraightFlushTest()" fullname="GamingTests.CardAnalyzerTest.noStraightFlushTest()" methodname="noStraightFlushTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" seed="184442623" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.022591" asserts="1" />
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1028" name="noStraightTest" fullname="GamingTests.CardAnalyzerTest.noStraightTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.038112" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1027" name="noStraightTest()" fullname="GamingTests.CardAnalyzerTest.noStraightTest()" methodname="noStraightTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" seed="1556310243" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.034266" asserts="1" />
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1032" name="noThreeOfAKindTest" fullname="GamingTests.CardAnalyzerTest.noThreeOfAKindTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.037985" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1031" name="noThreeOfAKindTest()" fullname="GamingTests.CardAnalyzerTest.noThreeOfAKindTest()" methodname="noThreeOfAKindTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" seed="395039957" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.035425" asserts="1" />
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1036" name="noTwoPairTest" fullname="GamingTests.CardAnalyzerTest.noTwoPairTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.037143" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1035" name="noTwoPairTest()" fullname="GamingTests.CardAnalyzerTest.noTwoPairTest()" methodname="noTwoPairTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" seed="2075151307" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.034080" asserts="1" />
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1046" name="pairTieBreakerTest" fullname="GamingTests.CardAnalyzerTest.pairTieBreakerTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.013033" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1045" name="pairTieBreakerTest()" fullname="GamingTests.CardAnalyzerTest.pairTieBreakerTest()" methodname="pairTieBreakerTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" seed="1786866152" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.010062" asserts="1" />
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1048" name="straightTieBreakerTest" fullname="GamingTests.CardAnalyzerTest.straightTieBreakerTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.013535" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1047" name="straightTieBreakerTest()" fullname="GamingTests.CardAnalyzerTest.straightTieBreakerTest()" methodname="straightTieBreakerTest" classname="GamingTests.CardAnalyzerTest" runstate="Runnable" seed="1610121887" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.010770" asserts="1" />
         </test-suite>
       </test-suite>
-      <test-suite type="TestFixture" id="0-1026" name="GamePlayTests" fullname="GamingTests.GamePlayTests" classname="GamingTests.GamePlayTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2017-04-24 14:01:54Z" end-time="2017-04-24 14:01:55Z" duration="0.555406" total="2" passed="2" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="2">
-        <test-suite type="ParameterizedMethod" id="0-1030" name="testAllPlayersCheck" fullname="GamingTests.GamePlayTests.testAllPlayersCheck" classname="GamingTests.GamePlayTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-24 14:01:54Z" end-time="2017-04-24 14:01:55Z" duration="0.452163" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
-          <test-case id="0-1029" name="testAllPlayersCheck()" fullname="GamingTests.GamePlayTests.testAllPlayersCheck()" methodname="testAllPlayersCheck" classname="GamingTests.GamePlayTests" runstate="Runnable" seed="1470703872" result="Passed" start-time="2017-04-24 14:01:54Z" end-time="2017-04-24 14:01:55Z" duration="0.432628" asserts="1">
+      <test-suite type="TestFixture" id="0-1049" name="CardAndDeckTests" fullname="GamingTests.CardAndDeckTests" classname="GamingTests.CardAndDeckTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.073873" total="8" passed="8" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="29">
+        <test-suite type="ParameterizedMethod" id="0-1051" name="CompareEqualCards" fullname="GamingTests.CardAndDeckTests.CompareEqualCards" classname="GamingTests.CardAndDeckTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.004520" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="2">
+          <test-case id="0-1050" name="CompareEqualCards()" fullname="GamingTests.CardAndDeckTests.CompareEqualCards()" methodname="CompareEqualCards" classname="GamingTests.CardAndDeckTests" runstate="Runnable" seed="84832320" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.001844" asserts="2" />
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1053" name="CompareUnequalCards" fullname="GamingTests.CardAndDeckTests.CompareUnequalCards" classname="GamingTests.CardAndDeckTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.004433" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="3">
+          <test-case id="0-1052" name="CompareUnequalCards()" fullname="GamingTests.CardAndDeckTests.CompareUnequalCards()" methodname="CompareUnequalCards" classname="GamingTests.CardAndDeckTests" runstate="Runnable" seed="790516114" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.001215" asserts="3" />
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1055" name="CreateDeckWithCorrectCards" fullname="GamingTests.CardAndDeckTests.CreateDeckWithCorrectCards" classname="GamingTests.CardAndDeckTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.008837" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="4">
+          <test-case id="0-1054" name="CreateDeckWithCorrectCards()" fullname="GamingTests.CardAndDeckTests.CreateDeckWithCorrectCards()" methodname="CreateDeckWithCorrectCards" classname="GamingTests.CardAndDeckTests" runstate="Runnable" seed="1546387048" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.005844" asserts="4" />
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1061" name="DrawFlop" fullname="GamingTests.CardAndDeckTests.DrawFlop" classname="GamingTests.CardAndDeckTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.006543" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="5">
+          <test-case id="0-1060" name="DrawFlop()" fullname="GamingTests.CardAndDeckTests.DrawFlop()" methodname="DrawFlop" classname="GamingTests.CardAndDeckTests" runstate="Runnable" seed="1109491507" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.003745" asserts="5" />
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1059" name="DrawPlayerHand" fullname="GamingTests.CardAndDeckTests.DrawPlayerHand" classname="GamingTests.CardAndDeckTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.006028" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="5">
+          <test-case id="0-1058" name="DrawPlayerHand()" fullname="GamingTests.CardAndDeckTests.DrawPlayerHand()" methodname="DrawPlayerHand" classname="GamingTests.CardAndDeckTests" runstate="Runnable" seed="267064584" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.002700" asserts="5" />
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1063" name="DrawRiver" fullname="GamingTests.CardAndDeckTests.DrawRiver" classname="GamingTests.CardAndDeckTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.005541" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="3">
+          <test-case id="0-1062" name="DrawRiver()" fullname="GamingTests.CardAndDeckTests.DrawRiver()" methodname="DrawRiver" classname="GamingTests.CardAndDeckTests" runstate="Runnable" seed="1427883071" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.002710" asserts="3" />
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1065" name="DrawTurn" fullname="GamingTests.CardAndDeckTests.DrawTurn" classname="GamingTests.CardAndDeckTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.004551" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="4">
+          <test-case id="0-1064" name="DrawTurn()" fullname="GamingTests.CardAndDeckTests.DrawTurn()" methodname="DrawTurn" classname="GamingTests.CardAndDeckTests" runstate="Runnable" seed="2110190409" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.001736" asserts="4" />
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1057" name="ShuffleCards" fullname="GamingTests.CardAndDeckTests.ShuffleCards" classname="GamingTests.CardAndDeckTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.006529" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="3">
+          <test-case id="0-1056" name="ShuffleCards()" fullname="GamingTests.CardAndDeckTests.ShuffleCards()" methodname="ShuffleCards" classname="GamingTests.CardAndDeckTests" runstate="Runnable" seed="1001628789" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:49Z" duration="0.003658" asserts="3" />
+        </test-suite>
+      </test-suite>
+      <test-suite type="TestFixture" id="0-1079" name="GamePlayTests" fullname="GamingTests.GamePlayTests" classname="GamingTests.GamePlayTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:50Z" duration="0.480458" total="6" passed="6" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="6">
+        <test-suite type="ParameterizedMethod" id="0-1083" name="AllPlayersCheck" fullname="GamingTests.GamePlayTests.AllPlayersCheck" classname="GamingTests.GamePlayTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:50Z" duration="0.264620" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1082" name="AllPlayersCheck()" fullname="GamingTests.GamePlayTests.AllPlayersCheck()" methodname="AllPlayersCheck" classname="GamingTests.GamePlayTests" runstate="Runnable" seed="674794943" result="Passed" start-time="2017-04-26 21:35:49Z" end-time="2017-04-26 21:35:50Z" duration="0.262022" asserts="1">
             <output><![CDATA[2
 0
 1
@@ -77,12 +157,120 @@
 ]]></output>
           </test-case>
         </test-suite>
-        <test-suite type="ParameterizedMethod" id="0-1028" name="testAllPlayersFold" fullname="GamingTests.GamePlayTests.testAllPlayersFold" classname="GamingTests.GamePlayTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-24 14:01:55Z" end-time="2017-04-24 14:01:55Z" duration="0.032445" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
-          <test-case id="0-1027" name="testAllPlayersFold()" fullname="GamingTests.GamePlayTests.testAllPlayersFold()" methodname="testAllPlayersFold" classname="GamingTests.GamePlayTests" runstate="Runnable" seed="1362998904" result="Passed" start-time="2017-04-24 14:01:55Z" end-time="2017-04-24 14:01:55Z" duration="0.011380" asserts="1">
+        <test-suite type="ParameterizedMethod" id="0-1081" name="AllPlayersFold" fullname="GamingTests.GamePlayTests.AllPlayersFold" classname="GamingTests.GamePlayTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:50Z" end-time="2017-04-26 21:35:50Z" duration="0.008536" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1080" name="AllPlayersFold()" fullname="GamingTests.GamePlayTests.AllPlayersFold()" methodname="AllPlayersFold" classname="GamingTests.GamePlayTests" runstate="Runnable" seed="2055561976" result="Passed" start-time="2017-04-26 21:35:50Z" end-time="2017-04-26 21:35:50Z" duration="0.005605" asserts="1">
             <output><![CDATA[2
 0
 ]]></output>
           </test-case>
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1091" name="BadBetAndThenFixes" fullname="GamingTests.GamePlayTests.BadBetAndThenFixes" classname="GamingTests.GamePlayTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:50Z" end-time="2017-04-26 21:35:50Z" duration="0.048717" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1090" name="BadBetAndThenFixes()" fullname="GamingTests.GamePlayTests.BadBetAndThenFixes()" methodname="BadBetAndThenFixes" classname="GamingTests.GamePlayTests" runstate="Runnable" seed="485634417" result="Passed" start-time="2017-04-26 21:35:50Z" end-time="2017-04-26 21:35:50Z" duration="0.045673" asserts="1">
+            <output><![CDATA[2
+0
+1
+0
+1
+2
+0
+1
+0
+1
+2
+0
+1
+2
+0
+1
+]]></output>
+          </test-case>
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1087" name="HeadToHeadAndFold" fullname="GamingTests.GamePlayTests.HeadToHeadAndFold" classname="GamingTests.GamePlayTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:50Z" end-time="2017-04-26 21:35:50Z" duration="0.044029" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1086" name="HeadToHeadAndFold()" fullname="GamingTests.GamePlayTests.HeadToHeadAndFold()" methodname="HeadToHeadAndFold" classname="GamingTests.GamePlayTests" runstate="Runnable" seed="1164119389" result="Passed" start-time="2017-04-26 21:35:50Z" end-time="2017-04-26 21:35:50Z" duration="0.040991" asserts="1">
+            <output><![CDATA[2
+0
+1
+0
+1
+2
+0
+1
+0
+1
+2
+]]></output>
+          </test-case>
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1089" name="HeadToHeadTwiceAndFold" fullname="GamingTests.GamePlayTests.HeadToHeadTwiceAndFold" classname="GamingTests.GamePlayTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:50Z" end-time="2017-04-26 21:35:50Z" duration="0.047537" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1088" name="HeadToHeadTwiceAndFold()" fullname="GamingTests.GamePlayTests.HeadToHeadTwiceAndFold()" methodname="HeadToHeadTwiceAndFold" classname="GamingTests.GamePlayTests" runstate="Runnable" seed="1941631866" result="Passed" start-time="2017-04-26 21:35:50Z" end-time="2017-04-26 21:35:50Z" duration="0.044752" asserts="1">
+            <output><![CDATA[2
+0
+1
+0
+1
+2
+0
+1
+0
+1
+2
+0
+1
+2
+0
+]]></output>
+          </test-case>
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1085" name="PlayersCloseBlindAndThenFold" fullname="GamingTests.GamePlayTests.PlayersCloseBlindAndThenFold" classname="GamingTests.GamePlayTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:50Z" end-time="2017-04-26 21:35:50Z" duration="0.046552" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1084" name="PlayersCloseBlindAndThenFold()" fullname="GamingTests.GamePlayTests.PlayersCloseBlindAndThenFold()" methodname="PlayersCloseBlindAndThenFold" classname="GamingTests.GamePlayTests" runstate="Runnable" seed="992099409" result="Passed" start-time="2017-04-26 21:35:50Z" end-time="2017-04-26 21:35:50Z" duration="0.043943" asserts="1">
+            <output><![CDATA[2
+0
+1
+0
+1
+2
+0
+1
+]]></output>
+          </test-case>
+        </test-suite>
+      </test-suite>
+      <test-suite type="TestFixture" id="0-1092" name="GamePropertiesTests" fullname="GamingTests.GamePropertiesTests" classname="GamingTests.GamePropertiesTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2017-04-26 21:35:50Z" end-time="2017-04-26 21:35:50Z" duration="0.033099" total="4" passed="4" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="9">
+        <test-suite type="ParameterizedMethod" id="0-1098" name="GameStartWithLessThanMinimumPlayers" fullname="GamingTests.GamePropertiesTests.GameStartWithLessThanMinimumPlayers" classname="GamingTests.GamePropertiesTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:50Z" end-time="2017-04-26 21:35:50Z" duration="0.005048" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <test-case id="0-1097" name="GameStartWithLessThanMinimumPlayers()" fullname="GamingTests.GamePropertiesTests.GameStartWithLessThanMinimumPlayers()" methodname="GameStartWithLessThanMinimumPlayers" classname="GamingTests.GamePropertiesTests" runstate="Runnable" seed="1946160570" result="Passed" start-time="2017-04-26 21:35:50Z" end-time="2017-04-26 21:35:50Z" duration="0.002073" asserts="1" />
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1094" name="InvalidGameCreation" fullname="GamingTests.GamePropertiesTests.InvalidGameCreation" classname="GamingTests.GamePropertiesTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:50Z" end-time="2017-04-26 21:35:50Z" duration="0.003473" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="0">
+          <test-case id="0-1093" name="InvalidGameCreation()" fullname="GamingTests.GamePropertiesTests.InvalidGameCreation()" methodname="InvalidGameCreation" classname="GamingTests.GamePropertiesTests" runstate="Runnable" seed="273853703" result="Passed" start-time="2017-04-26 21:35:50Z" end-time="2017-04-26 21:35:50Z" duration="0.000696" asserts="0" />
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1100" name="MoreThanMaxPlayersJoinGame" fullname="GamingTests.GamePropertiesTests.MoreThanMaxPlayersJoinGame" classname="GamingTests.GamePropertiesTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:50Z" end-time="2017-04-26 21:35:50Z" duration="0.004490" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="0">
+          <test-case id="0-1099" name="MoreThanMaxPlayersJoinGame()" fullname="GamingTests.GamePropertiesTests.MoreThanMaxPlayersJoinGame()" methodname="MoreThanMaxPlayersJoinGame" classname="GamingTests.GamePropertiesTests" runstate="Runnable" seed="1217510667" result="Passed" start-time="2017-04-26 21:35:50Z" end-time="2017-04-26 21:35:50Z" duration="0.001066" asserts="0" />
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1096" name="ValidGameCreation" fullname="GamingTests.GamePropertiesTests.ValidGameCreation" classname="GamingTests.GamePropertiesTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:50Z" end-time="2017-04-26 21:35:50Z" duration="0.007035" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="8">
+          <test-case id="0-1095" name="ValidGameCreation()" fullname="GamingTests.GamePropertiesTests.ValidGameCreation()" methodname="ValidGameCreation" classname="GamingTests.GamePropertiesTests" runstate="Runnable" seed="1272154769" result="Passed" start-time="2017-04-26 21:35:50Z" end-time="2017-04-26 21:35:50Z" duration="0.002938" asserts="8" />
+        </test-suite>
+      </test-suite>
+      <test-suite type="TestFixture" id="0-1101" name="MoveTests" fullname="GamingTests.MoveTests" classname="GamingTests.MoveTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2017-04-26 21:35:50Z" end-time="2017-04-26 21:35:50Z" duration="0.182898" total="4" passed="4" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="2">
+        <test-suite type="ParameterizedMethod" id="0-1103" name="ValidBetMove" fullname="GamingTests.MoveTests.ValidBetMove" classname="GamingTests.MoveTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:50Z" end-time="2017-04-26 21:35:50Z" duration="0.157881" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="2">
+          <test-case id="0-1102" name="ValidBetMove()" fullname="GamingTests.MoveTests.ValidBetMove()" methodname="ValidBetMove" classname="GamingTests.MoveTests" runstate="Runnable" seed="784059357" result="Passed" start-time="2017-04-26 21:35:50Z" end-time="2017-04-26 21:35:50Z" duration="0.154412" asserts="2">
+            <output><![CDATA[0
+1
+0
+1
+0
+1
+0
+1
+]]></output>
+          </test-case>
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1109" name="ValidEndGameMoves" fullname="GamingTests.MoveTests.ValidEndGameMoves" classname="GamingTests.MoveTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:50Z" end-time="2017-04-26 21:35:50Z" duration="0.004457" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="0">
+          <test-case id="0-1108" name="ValidEndGameMoves()" fullname="GamingTests.MoveTests.ValidEndGameMoves()" methodname="ValidEndGameMoves" classname="GamingTests.MoveTests" runstate="Runnable" seed="113079080" result="Passed" start-time="2017-04-26 21:35:50Z" end-time="2017-04-26 21:35:50Z" duration="0.000533" asserts="0" />
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1105" name="ValidNewCardMove" fullname="GamingTests.MoveTests.ValidNewCardMove" classname="GamingTests.MoveTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:50Z" end-time="2017-04-26 21:35:50Z" duration="0.004028" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="0">
+          <test-case id="0-1104" name="ValidNewCardMove()" fullname="GamingTests.MoveTests.ValidNewCardMove()" methodname="ValidNewCardMove" classname="GamingTests.MoveTests" runstate="Runnable" seed="692187267" result="Passed" start-time="2017-04-26 21:35:50Z" end-time="2017-04-26 21:35:50Z" duration="0.001143" asserts="0" />
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="0-1107" name="ValidNewGameMove" fullname="GamingTests.MoveTests.ValidNewGameMove" classname="GamingTests.MoveTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2017-04-26 21:35:50Z" end-time="2017-04-26 21:35:50Z" duration="0.003523" total="1" passed="1" failed="0" warnings="0" inconclusive="0" skipped="0" asserts="0">
+          <test-case id="0-1106" name="ValidNewGameMove()" fullname="GamingTests.MoveTests.ValidNewGameMove()" methodname="ValidNewGameMove" classname="GamingTests.MoveTests" runstate="Runnable" seed="700999978" result="Passed" start-time="2017-04-26 21:35:50Z" end-time="2017-04-26 21:35:50Z" duration="0.000674" asserts="0" />
         </test-suite>
       </test-suite>
     </test-suite>
