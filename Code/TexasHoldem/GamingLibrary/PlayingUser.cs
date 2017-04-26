@@ -84,6 +84,12 @@ namespace Gaming
             game.Message(this, userInput.GetInput());
         }
 
+        public int BadBet(int returnAmount ,int minimumBet)
+        {
+            credit += returnAmount;
+            return Bet(minimumBet);
+        }
+
         internal void ReceiveWinnings(int amount)
         {
             credit+=amount;

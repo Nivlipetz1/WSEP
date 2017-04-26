@@ -249,9 +249,14 @@ namespace Gaming
             {
                 Console.WriteLine(index);
                 PlayingUser currentUser = players.ElementAt(index);
+                int minimumBet = GetMaxBet() - playerBets[currentUser];
                 if (currentUser.GetStatus() != "Fold")
                 {
-                    int bet = players[index].Bet(GetMaxBet() - playerBets[currentUser]);
+                    int bet = players[index].Bet(minimumBet);
+                    while (bet < minimumBet && bet>=0)
+                    {
+                        bet = currentUser.BadBet(bet, minimumBet);
+                    }
                     if (bet >= 0)
                     {
                         playerBets[currentUser] += bet;
