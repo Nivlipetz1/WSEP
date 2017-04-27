@@ -17,6 +17,7 @@ namespace Gaming
         private int buyInPolicy;
         private int chipPolicy;
         private Boolean allowSpectators;
+        private string status;
 
         //typePolicy:
         const int LIMIT = 1;
@@ -37,6 +38,7 @@ namespace Gaming
             buyInPolicy = bIP;
             chipPolicy = cP;
             allowSpectators = aS;
+            status = "active";
         }
 
         //testing
@@ -48,6 +50,17 @@ namespace Gaming
             bigBlind = 10;
             allowSpectators = true;
             buyInPolicy = 50;
+            status = "active"
+        }
+
+        public string GetStatus()
+        {
+            return status;
+        }
+
+        public void SetStatus(string status)
+        {
+            this.status = status;
         }
 
         public Boolean AllowSpec()
