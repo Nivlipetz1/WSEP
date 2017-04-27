@@ -13,6 +13,7 @@ namespace GameUtilities
         private string password;
         private Image avatar;
         private int credit;
+        private League league;
         private List<Notification> notifications = new List<Notification>();
 
         public string Username
@@ -55,6 +56,11 @@ namespace GameUtilities
         {
             Notification notification = new Notification(message);
             notifications.Add(notification);
+        }
+
+        public void setUserLeague(League league)
+        {
+            this.league = league;
         }
     }
 }

@@ -7,12 +7,13 @@ using GameUtilities;
 
 namespace TexasHoldemSystem
 {
-    interface LeagueAPI
+    public interface LeagueAPI
     {
         bool createNewLeague(int minimumRank);
-        bool addUserToLeague(UserProfile user, LeagueAPI league);
-        bool removeUserFromLeague(UserProfile user, LeagueAPI league);
+        bool addUserToLeague(UserProfile user, League league);
+        bool removeUserFromLeague(UserProfile user, League league);
         bool changeLeagueMinimumRank(League league, int newRank);
         League getLeagueByUser(UserProfile user);
+        League getLeagueByRank(int Rank);
     }
 }
