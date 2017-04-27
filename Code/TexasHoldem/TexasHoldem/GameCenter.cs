@@ -11,14 +11,14 @@ namespace TexasHoldemSystem
         List<Game> games = new List<Game>();
        public List<League> leagues = new List<League>();
 
-        public bool createGame(GamePreferences preferecnces)
+        public Game createGame(GamePreferences preferecnces)
         {
             Game game = new Game(preferecnces);
             games.Add(game);
-            return true;
+            return game;
         }
 
-        public List<Game> getAllSpectatingGames(UserProfile u)
+        public List<Game> getAllSpectatingGames()
         {
             return games.Where(game => game.GetGamePref().AllowSpec()).ToList();
         }
@@ -29,7 +29,7 @@ namespace TexasHoldemSystem
             foreach (Game game in games.Where(game => game.GetGamePref().GetStatus().Equals("active")).ToList())
             {
                 List<UserProfile> players = game.GetUserProfiles();
-                if (players.Where(u => ((UserProfile)u).Username == playerName).ToList().Count > 0)
+                if (players.Where(u => ((UserProfile)u).Username.Equals(playerName)).ToList().Count > 0)
                     activeGames.Add(game);
             }
 
@@ -100,7 +100,7 @@ namespace TexasHoldemSystem
             return true;
         }
 
-        public List<List<Move>> getAllReplayesOfInActveGames()
+        public List<List<Move>> getAllReplayesOfInActiveGames()
         {
             List<List<Move>> replayes = new List<List<Move>>();
             games.Where(game => !game.GetGamePref().GetStatus().Equals("active")).ToList().ForEach(game => replayes.Add(game.GetGameReplay()));

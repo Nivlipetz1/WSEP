@@ -10,9 +10,9 @@ namespace TexasHoldemSystem
 {
     public interface GameCenterInterface
     {
-        bool createGame(GamePreferences preferecnces, UserProfile creatingUser, int buyIn);
+        Game createGame(GamePreferences preferecnces, UserProfile creatingUser, int buyIn);
 
-        List<Game> getAllSpectatingGames(UserProfile u);
+        List<Game> getAllSpectatingGames();
 
         List<Game> getAllActiveGamesByPlayerName(String playerName);
 
@@ -20,8 +20,10 @@ namespace TexasHoldemSystem
 
         List<Game> getAllActiveGamesByGamePreference(GamePreferences preferences);
 
-        void joinGame(Game game, UserProfile u);
+        bool joinGame(Game game, UserProfile u);
 
-        void spectateGame(Game game, UserProfile u);
+        bool spectateGame(Game game, UserProfile u);
+
+        List<List<Move>> getAllReplayesOfInActiveGames();
     }
 }
