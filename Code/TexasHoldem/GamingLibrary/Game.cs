@@ -336,7 +336,8 @@ namespace Gaming
         {
             if (players.Count == gamePref.GetMaxPlayers())
                 throw new InvalidOperationException("Maximum number of players reached");
-            
+
+            player.GetAccount().Credit -= player.GetCredit();
             players.Add(player);
             playerBets.Add(player, 0);
         }
@@ -349,8 +350,10 @@ namespace Gaming
             if(!players.Contains(player))
                 throw new InvalidOperationException("Player not in game");
 
+            player.GetAccount().Credit += player.GetCredit();
             players.Remove(player);
             playerBets.Remove(player);
+            player = null;
         }
 
         public void addSpectator(SpectatingUser spec)
@@ -370,7 +373,7 @@ namespace Gaming
                 throw new InvalidOperationException("player.getName()" + " is not spectating in this game");
 
             spectators.Remove(spec);
-        
+            spec = null;
         }
 
 
