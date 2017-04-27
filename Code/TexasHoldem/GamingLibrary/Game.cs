@@ -353,6 +353,7 @@ namespace Gaming
             player.GetAccount().Credit += player.GetCredit();
             players.Remove(player);
             playerBets.Remove(player);
+            player = null;
         }
 
         public void addSpectator(SpectatingUser spec)
@@ -372,7 +373,7 @@ namespace Gaming
                 throw new InvalidOperationException("player.getName()" + " is not spectating in this game");
 
             spectators.Remove(spec);
-        
+            spec = null;
         }
 
 
