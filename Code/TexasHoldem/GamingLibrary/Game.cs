@@ -349,6 +349,7 @@ namespace Gaming
             if(!players.Contains(player))
                 throw new InvalidOperationException("Player not in game");
 
+            player.GetAccount().Credit += player.GetCredit();
             players.Remove(player);
             playerBets.Remove(player);
         }
