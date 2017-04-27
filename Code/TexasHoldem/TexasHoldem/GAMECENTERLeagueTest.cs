@@ -15,16 +15,18 @@ namespace TexasHoldemSystem
         public void CreateNewLeagueTest()
         {
             GameCenter gc = new GameCenter();
+            Dictionary<int,League> le = gc.getLeagues();
             Assert.True(gc.createNewLeague(10));
-            Assert.True(gc.leagues[0].MinimumRank == 10);
+            Assert.True(le.Keys.Contains(10));
         }
         [TestCase]
         public void CreateNewLeagueWithSameRankTest()
         {
             GameCenter gc = new GameCenter();
+            Dictionary<int,League> le = gc.getLeagues();
             Assert.True(gc.createNewLeague(10));
             Assert.False(gc.createNewLeague(10));
-            Assert.True(gc.leagues.Count==1);
+            Assert.True(le.Count==1);
         }
         [TestCase]
         public void addUserToAppropriateLeague()

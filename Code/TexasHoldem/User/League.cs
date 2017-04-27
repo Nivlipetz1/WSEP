@@ -9,9 +9,11 @@ namespace GameUtilities
     public class League
     {
          int minimumRank;
+        string name; 
         HashSet<UserProfile> users;
-        public League(int minimumRank)
+        public League(int minimumRank,string name)
         {
+            this.name = name;
             this.minimumRank = minimumRank;
             users = new HashSet<UserProfile>();
         }
@@ -26,6 +28,7 @@ namespace GameUtilities
             if (users.Contains(user))
                 return false;
             users.Add(user);
+            user.addNotify("You Added to League " + name + " with rank " + minimumRank+" !");
             return true;
         }
 
@@ -36,7 +39,7 @@ namespace GameUtilities
             users.Remove(user);
             return true;
         }
-        public void update(int newRank)
+        public List<UserProfile> update(int newRank)
         {
             List<UserProfile> UserToRemove = new List<UserProfile>();
             foreach(UserProfile user in users)
@@ -49,6 +52,7 @@ namespace GameUtilities
                 users.Remove(user);
             }
             minimumRank = newRank;
+            return UserToRemove;
         }
         public bool isUser(UserProfile user)
         {
