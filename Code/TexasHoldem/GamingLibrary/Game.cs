@@ -336,7 +336,8 @@ namespace Gaming
         {
             if (players.Count == gamePref.GetMaxPlayers())
                 throw new InvalidOperationException("Maximum number of players reached");
-            
+
+            player.GetAccount().Credit -= player.GetCredit();
             players.Add(player);
             playerBets.Add(player, 0);
         }
