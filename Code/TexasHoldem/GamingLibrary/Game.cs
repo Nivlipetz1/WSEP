@@ -93,7 +93,7 @@ namespace Gaming
                 return;
             }
 
-            cards = new Card[5]; 
+            cards = new Card[5];
             Card[] flop = gameDeck.drawFlop();
             cards[0] = flop[0];
             cards[1] = flop[1];
@@ -146,7 +146,6 @@ namespace Gaming
             ResetGame();
 
         }
-
         private void GiveWinnings()
         {
             foreach (PlayingUser player in players)
