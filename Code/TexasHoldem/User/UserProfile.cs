@@ -13,6 +13,7 @@ namespace GameUtilities
         private string password;
         private Image avatar;
         private int credit;
+        private List<Notification> notifications = new List<Notification>();
 
         public string Username
         {
@@ -32,6 +33,12 @@ namespace GameUtilities
             set {avatar = value;}
         }
 
+        public int Credit
+        {
+            get { return credit; }
+            set { credit = value; }
+        }
+
         public UserProfile(string username, string password)
         {
             this.Username = username;
@@ -42,6 +49,12 @@ namespace GameUtilities
             this.Username = username;
             this.Password = password;
             this.Avatar = avatar;
+        }
+
+        public void addNotify(String message)
+        {
+            Notification notification = new Notification(message);
+            notifications.Add(notification);
         }
     }
 }

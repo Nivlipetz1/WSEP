@@ -12,7 +12,6 @@ namespace TexasHoldemSystem
     {
         List<Game> games = new List<Game>();
 
-
         public bool createGame(GamePreferences preferecnces)
         {
             Game game = new Game(preferecnces);
@@ -22,40 +21,94 @@ namespace TexasHoldemSystem
 
         public List<Game> getAllSpectatingGames(UserProfile u)
         {
-            return games;
+            return games.Where(game => game.GetGamePref().AllowSpec()).ToList();
         }
 
         public List<Game> getAllActiveGamesByPlayerName(String playerName)
         {
             List<Game> activeGames = new List<Game>();
-            foreach (Game game in games)
+            foreach (Game game in games.Where(game => game.GetGamePref().GetStatus().Equals("active")).ToList())
             {
-                List<UserProfile> players = null;//game.GetPlayers();
+                List<UserProfile> players = game.GetUserProfiles();
                 if (players.Where(u => ((UserProfile)u).Username == playerName).ToList().Count > 0)
                     activeGames.Add(game);
             }
 
             return activeGames;
         }
-        /*
+        
         public List<Game> getAllActiveGamesByPotSize(int potSize)
         {
-            return games.Where(game => ((Game)game).potSize == potSize).ToList();
-        }*/
-
-        /*public List<Game> getAllActiveGamesByGamePreference(GamePreferences preferences)
-        {
-            return games.Where(game => ((Game)game).preferecnces.Equals(preferences)).ToList();
-        }*/
-        /*
-        public void joinGame(Game game, UserProfile u)
-        {
-            game.addPlayer(u);
+            return games.Where(game => ((Game)game).GetPotSize() == potSize).ToList();
         }
 
-        public void spectateGame(Game game, UserProfile u)
+        public List<Game> getAllActiveGamesByGamePreference(GamePreferences preferences)
         {
-            game.addSpectator(u);
-        }*/
+            return games.Where(game => contained(((Game)game).GetGamePref() , preferences)).ToList();
+        }
+
+        private bool contained(GamePreferences gamePreferences, GamePreferences preferences)
+        {
+            int smallBlind = gamePreferences.GetsB();
+            int bigBlind = gamePreferences.GetbB();
+            int typePolicy = gamePreferences.GetTypePolicy();
+            int buyInPolicy = gamePreferences.GetBuyInPolicy();
+            int chipPolicy = gamePreferences.GetChipPolicy();
+
+            if (preferences.GetsB() > 0 && preferences.GetsB() != smallBlind)
+                return false;
+
+            if (preferences.GetbB() > 0 && preferences.GetbB() != bigBlind)
+                return false;
+
+            if (preferences.GetTypePolicy() > 0 && preferences.GetTypePolicy() != typePolicy)
+                return false;
+
+            if(preferences.GetBuyInPolicy() > 0 && preferences.GetBuyInPolicy() != buyInPolicy)
+                return false;
+
+            if (preferences.GetChipPolicy() > 0 && preferences.GetChipPolicy() != chipPolicy)
+                return false;
+
+
+            return true;
+        }
+
+        public bool joinGame(Game game, UserProfile u , int credit)
+        {
+            if (credit > u.Credit)
+                return false;
+            if (game.GetGamePref().GetBuyInPolicy() > credit)
+                return false;
+            if (game.GetNumberOfPlayers() == game.GetGamePref().GetMaxPlayers())
+                return false;
+
+            PlayingUser playingUser = new PlayingUser(u, credit, game);
+            game.addPlayer(playingUser);
+
+            u.Credit = u.Credit - credit;
+            return true;
+        }
+
+        public bool spectateGame(Game game, UserProfile u)
+        {
+            if (!game.GetGamePref().AllowSpec())
+                return false;
+
+            SpectatingUser spectatingUser = new SpectatingUser(u, game);
+            game.addSpectator(spectatingUser);
+
+            return true;
+        }
+
+        public List<List<Move>> getAllReplayesOfInActveGames()
+        {
+            List<List<Move>> replayes = new List<List<Move>>();
+            games.Where(game => !game.GetGamePref().GetStatus().Equals("active")).ToList().ForEach(game => replayes.Add(game.GetGameReplay()));
+
+            return replayes;
+
+        }
+        
     }
 }

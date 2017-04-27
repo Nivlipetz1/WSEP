@@ -10,9 +10,11 @@ namespace TexasHoldemSystem
 {
     class TexasHoldemSystem : System
     {
+        public delegate void Notify(string message);
         public class userSystemFactory
         {
             private static TexasHoldemSystem instance = null;
+
             public  static TexasHoldemSystem getInstance()
             {
                 if (instance == null)
@@ -22,6 +24,7 @@ namespace TexasHoldemSystem
         }
         private Dictionary<String, UserProfile> activeUsers;
         private Dictionary<String, UserProfile> users;
+        public static event Notify evt; 
 
         private TexasHoldemSystem()
         {
@@ -52,6 +55,8 @@ namespace TexasHoldemSystem
             if (!users.ContainsKey(userName))
                 users.Add(userName, new UserProfile(userName, password));
             else return false;
+
+            evt += users[userName].addNotify;
             return true;
         }
 
@@ -104,6 +109,13 @@ namespace TexasHoldemSystem
         public bool isConnected(string username)
         {
             return activeUsers.ContainsKey(username);
+        }
+
+        public void notifyAllUsers(String message)
+        {
+            var e = evt;
+            if (e != null)
+                e(message);
         }
     }
 }
