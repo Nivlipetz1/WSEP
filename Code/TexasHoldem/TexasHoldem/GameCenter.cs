@@ -161,17 +161,16 @@ namespace TexasHoldemSystem
         public void updateLeagueToUser(UserProfile user)
         {
             League currLeague = getLeagueByUser(user);
-            List<UserProfile> freeUsers = new List<UserProfile>();
             foreach(League league in leagues.Values)
             {
-                if(league.MinimumRank<user.Credit&&league.MinimumRank>currLeague.MinimumRank)
+                if(league.MinimumRank<=user.Credit&&
+                    (currLeague.MinimumRank > user.Credit||league.MinimumRank>currLeague.MinimumRank))
                 {
                     currLeague.removeUser(user);
                     league.addUser(user);
                     return;
                 }
             }
-            
         }
 
         public Dictionary<int,League> getLeagues()

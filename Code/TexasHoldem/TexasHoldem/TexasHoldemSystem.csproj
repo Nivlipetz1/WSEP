@@ -47,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameCenter.cs" />
-    <Compile Include="GAMECENTERLeagueTest.cs" />
+    <Compile Include="GameCenterLeagueTest.cs" />
     <Compile Include="GameCenterTest.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
