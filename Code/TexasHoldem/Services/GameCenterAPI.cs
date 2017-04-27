@@ -8,7 +8,7 @@ using GameUtilities;
 
 namespace TexasHoldemSystem
 {
-    interface GameCenterInterface
+    public interface GameCenterInterface
     {
         bool createGame(GamePreferences preferecnces, UserProfile creatingUser, int buyIn);
 

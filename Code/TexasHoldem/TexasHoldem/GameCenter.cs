@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GameUtilities;
 using Gaming;
 
 namespace TexasHoldemSystem
 {
-    public class GameCenter
+    public class GameCenter : LeagueAPI
     {
         List<Game> games = new List<Game>();
+       public List<League> leagues = new List<League>();
 
         public bool createGame(GamePreferences preferecnces)
         {
@@ -109,6 +108,58 @@ namespace TexasHoldemSystem
             return replayes;
 
         }
-        
+
+        public bool createNewLeague(int minimumRank)
+        {
+            foreach (League l in leagues )
+            {
+                if (l.MinimumRank == minimumRank)
+                    return false;
+            }
+            League league = new League(minimumRank);
+            leagues.Add(league);
+            return true;
+        }
+
+        public bool addUserToLeague(UserProfile user, League league)
+        {
+            if (user.Credit < league.MinimumRank)
+                return false;
+            return league.addUser(user);
+        }
+        public bool removeUserFromLeague(UserProfile user, League league)
+        {
+            return league.removeUser(user);
+        }
+        public bool changeLeagueMinimumRank(League league, int newRank)
+        {
+            foreach (League l in leagues)
+            {
+                if (l.MinimumRank == newRank)
+                    return false;
+            }
+            league.update(newRank);
+            return true;
+        }
+        public League getLeagueByUser(UserProfile user)
+        {
+            foreach(League league in leagues)
+            {
+                if (league.isUser(user))
+                    return league;
+            }
+            return null;
+        }
+        public League getLeagueByRank(int Rank)
+        {
+            foreach (League league in leagues)
+            {
+                if (league.MinimumRank==Rank)
+                    return league;
+            }
+            return null;
+        }
+
+
     }
 }
