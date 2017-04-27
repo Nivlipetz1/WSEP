@@ -473,7 +473,7 @@ namespace Gaming
 
         public void InactivateGame()
         {
-            gamePref.SetStatus("inactivate");
+            gamePref.SetStatus("inactive");
         }
     }
 }

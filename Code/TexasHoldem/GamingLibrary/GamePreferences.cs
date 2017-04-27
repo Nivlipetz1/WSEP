@@ -50,7 +50,7 @@ namespace Gaming
             bigBlind = 10;
             allowSpectators = true;
             buyInPolicy = 50;
-            status = "active"
+            status = "active";
         }
 
         public string GetStatus()
