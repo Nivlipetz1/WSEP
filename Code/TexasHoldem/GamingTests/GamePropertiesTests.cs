@@ -53,5 +53,14 @@ namespace GamingTests
             Game g = new Game(new GamePreferences());
 
         }
+
+        [TestCase]
+        public void ActiveGame()
+        {
+            Game g = new Game(new GamePreferences());
+            Assert.True(g.GetGamePref().GetStatus().Equals("active"));
+            g.InactivateGame();
+            Assert.True(g.GetGamePref().GetStatus().Equals("inactive"));
+        }
     }
 }

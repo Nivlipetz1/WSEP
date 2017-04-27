@@ -465,5 +465,15 @@ namespace Gaming
         {
             return players.Count;
         }
+
+        public List<Move> GetGameReplay()
+        {
+            return logger.GetMoves();
+        }
+
+        public void InactivateGame()
+        {
+            gamePref.SetStatus("inactive");
+        }
     }
 }
