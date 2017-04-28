@@ -9,22 +9,24 @@ using GameUtilities;
 namespace TexasHoldemSystem
 {
     [TestFixture]
-    public class GAMECENTERLeagueTest
+    public class GameCenterLeagueTest
     {
         [TestCase]
         public void CreateNewLeagueTest()
         {
             GameCenter gc = new GameCenter();
+            Dictionary<int,League> le = gc.getLeagues();
             Assert.True(gc.createNewLeague(10));
-            Assert.True(gc.leagues[0].MinimumRank == 10);
+            Assert.True(le.Keys.Contains(10));
         }
         [TestCase]
         public void CreateNewLeagueWithSameRankTest()
         {
             GameCenter gc = new GameCenter();
+            Dictionary<int,League> le = gc.getLeagues();
             Assert.True(gc.createNewLeague(10));
             Assert.False(gc.createNewLeague(10));
-            Assert.True(gc.leagues.Count==1);
+            Assert.True(le.Count==1);
         }
         [TestCase]
         public void addUserToAppropriateLeague()
@@ -107,7 +109,34 @@ namespace TexasHoldemSystem
             Assert.True(gc.createNewLeague(15));
             League l = gc.getLeagueByRank(10);
             Assert.False(gc.changeLeagueMinimumRank(l, 15));
-
+        }
+        [TestCase]
+        public void updateLeaguesTest()
+        {
+            GameCenter gc = new GameCenter();
+            gc.createNewLeague(50);
+            gc.createNewLeague(30);
+            UserProfile u = new UserProfile("Ohad", "Dali");
+            u.Credit = 60;
+            gc.addUserToLeague(u, gc.getLeagueByRank(50));
+            u.Credit = 45;
+            gc.updateLeagueToUser(u);
+            Assert.AreEqual(gc.getLeagueByRank(30), gc.getLeagueByUser(u));
+            Assert.False(gc.getLeagueByRank(50).isUser(u));
+        }
+        [TestCase]
+        public void updateLeaguesWithoutChangeTest()
+        {
+            GameCenter gc = new GameCenter();
+            gc.createNewLeague(50);
+            gc.createNewLeague(30);
+            UserProfile u = new UserProfile("Ohad", "Dali");
+            u.Credit = 60;
+            gc.addUserToLeague(u, gc.getLeagueByRank(50));
+            u.Credit = 50;
+            gc.updateLeagueToUser(u);
+            Assert.AreEqual(gc.getLeagueByRank(50), gc.getLeagueByUser(u));
+            Assert.True(gc.getLeagueByRank(50).isUser(u));
         }
     }
 }

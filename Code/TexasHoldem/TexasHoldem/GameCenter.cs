@@ -9,8 +9,8 @@ namespace TexasHoldemSystem
     public class GameCenter : LeagueAPI
     {
         List<Game> games = new List<Game>();
-       public List<League> leagues = new List<League>();
-
+        //List<League> leagues = new List<League>();
+        Dictionary<int, League> leagues = new Dictionary<int, League>();
         public Game createGame(GamePreferences preferecnces)
         {
             Game game = new Game(preferecnces);
@@ -111,13 +111,13 @@ namespace TexasHoldemSystem
 
         public bool createNewLeague(int minimumRank)
         {
-            foreach (League l in leagues )
+            foreach (League l in leagues.Values )
             {
                 if (l.MinimumRank == minimumRank)
                     return false;
             }
-            League league = new League(minimumRank);
-            leagues.Add(league);
+            League league = new League(minimumRank,"League"+leagues.Count);
+            leagues.Add(minimumRank,league);
             return true;
         }
 
@@ -133,17 +133,14 @@ namespace TexasHoldemSystem
         }
         public bool changeLeagueMinimumRank(League league, int newRank)
         {
-            foreach (League l in leagues)
-            {
-                if (l.MinimumRank == newRank)
-                    return false;
-            }
+            if (leagues.Keys.Contains(newRank))
+                return false;
             league.update(newRank);
             return true;
         }
         public League getLeagueByUser(UserProfile user)
         {
-            foreach(League league in leagues)
+            foreach(League league in leagues.Values)
             {
                 if (league.isUser(user))
                     return league;
@@ -152,13 +149,46 @@ namespace TexasHoldemSystem
         }
         public League getLeagueByRank(int Rank)
         {
-            foreach (League league in leagues)
-            {
-                if (league.MinimumRank==Rank)
-                    return league;
+            try {
+                return leagues[Rank];
             }
-            return null;
+            catch
+            {
+                throw new InvalidOperationException("No league with Rank" + Rank);
+            }
         }
+
+        public void updateLeagueToUser(UserProfile user)
+        {
+            League currLeague = getLeagueByUser(user);
+<<<<<<< HEAD
+            foreach(League league in leagues.Values)
+            {
+                if(league.MinimumRank<=user.Credit&&
+                    (currLeague.MinimumRank > user.Credit||league.MinimumRank>currLeague.MinimumRank))
+=======
+            List<UserProfile> freeUsers = new List<UserProfile>();
+            foreach(League league in leagues.Values)
+            {
+                if(league.MinimumRank<user.Credit&&league.MinimumRank>currLeague.MinimumRank)
+>>>>>>> origin/MaintainLeagues2-Ohad
+                {
+                    currLeague.removeUser(user);
+                    league.addUser(user);
+                    return;
+                }
+            }
+<<<<<<< HEAD
+=======
+            
+>>>>>>> origin/MaintainLeagues2-Ohad
+        }
+
+        public Dictionary<int,League> getLeagues()
+        {
+            return leagues;
+        }
+
 
 
     }
