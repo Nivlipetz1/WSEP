@@ -8,14 +8,14 @@ using GameUtilities;
 
 namespace TexasHoldemSystem
 {
-    class TexasHoldemSystem : System
+    public class TexasHoldemSystem : System
     {
         public delegate void Notify(string message);
         public class userSystemFactory
         {
             private static TexasHoldemSystem instance = null;
 
-            public  static TexasHoldemSystem getInstance()
+            public static TexasHoldemSystem getInstance()
             {
                 if (instance == null)
                     return new TexasHoldemSystem();
@@ -41,7 +41,7 @@ namespace TexasHoldemSystem
             {
                 try
                 {
-                    activeUsers.Add(userName,getUser(userName, password));
+                    activeUsers.Add(userName, getUser(userName, password));
                 }
                 catch
                 {
