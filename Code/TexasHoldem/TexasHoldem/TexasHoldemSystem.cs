@@ -24,12 +24,15 @@ namespace TexasHoldemSystem
         }
         private Dictionary<String, UserProfile> activeUsers;
         private Dictionary<String, UserProfile> users;
-        public static event Notify evt; 
+        public static event Notify evt;
+        private GameCenter gc;
 
         private TexasHoldemSystem()
         {
             activeUsers = new Dictionary<string, UserProfile>();
             users = new Dictionary<string, UserProfile>();
+            gc = new GameCenter();
+            gc.setUsers(users.Values);
         }
 
         public bool login(string userName, string password)
@@ -48,7 +51,6 @@ namespace TexasHoldemSystem
             else return false;
             return true;
         }
-
 
         public bool register(string userName, string password)
         {

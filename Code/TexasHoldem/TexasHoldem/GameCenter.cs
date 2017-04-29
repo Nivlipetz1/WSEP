@@ -9,8 +9,11 @@ namespace TexasHoldemSystem
     public class GameCenter : LeagueAPI
     {
         List<Game> games = new List<Game>();
-        //List<League> leagues = new List<League>();
         Dictionary<int, League> leagues = new Dictionary<int, League>();
+        private ICollection<UserProfile> Users;
+        private UserProfile HighestRankUser=null;
+
+
         public Game createGame(GamePreferences preferecnces)
         {
             Game game = new Game(preferecnces);
@@ -125,6 +128,11 @@ namespace TexasHoldemSystem
         {
             if (user.Credit < league.MinimumRank)
                 return false;
+            foreach(League lea in leagues.Values)
+            {
+                if (lea.removeUser(user))
+                    break;
+            }
             return league.addUser(user);
         }
         public bool removeUserFromLeague(UserProfile user, League league)
@@ -157,10 +165,20 @@ namespace TexasHoldemSystem
                 throw new InvalidOperationException("No league with Rank" + Rank);
             }
         }
-
+ 
+        public void updateState()
+        {
+            foreach (UserProfile user in Users)
+            {
+                if (HighestRankUser == null || HighestRankUser.Credit < user.Credit)
+                    HighestRankUser = user;
+            }
+        }
         public void updateLeagueToUser(UserProfile user)
         {
             League currLeague = getLeagueByUser(user);
+            if (HighestRankUser==null ||user.Credit > HighestRankUser.Credit)
+                HighestRankUser = user;
             foreach (League league in leagues.Values)
             {
                 if (league.MinimumRank <= user.Credit &&
@@ -172,14 +190,22 @@ namespace TexasHoldemSystem
                 }
             }
         }
-    
+        public UserProfile getHighestRankUser()
+        {
+            return HighestRankUser;
+        }
+
+        public void setUsers(ICollection<UserProfile> Users)
+        {
+            this.Users = Users;
+            updateState();
+        }
+
 
         public Dictionary<int,League> getLeagues()
         {
             return leagues;
         }
-
-
 
     }
 }
