@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using System.Drawing;
 using GameUtilities;
 
-namespace TexasHoldemSystem
+namespace Services
 {
-    interface System
+    public interface SystemAPI
     {
         bool register(string userName,string password);
         bool login(string userName, string password);
@@ -18,5 +18,6 @@ namespace TexasHoldemSystem
         bool editAvatar(Image avatar,UserProfile u);
         bool isConnected(string username);
         UserProfile getUser(string username);
+        UserProfile getUser(string username, string password);
     }
 }
