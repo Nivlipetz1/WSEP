@@ -7,17 +7,19 @@ using TexasHoldemSystem;
 using NUnit.Framework;
 using GameUtilities;
 using System.Drawing;
+using ServiceLayer;
+
 
 namespace AT
 {
     class UpdateUserProfileAT
     {
-        private TexasHoldemSystem.TexasHoldemSystem us;
-
+       
+        private UserSystem_Service us;
         [SetUp]
         public void before()
         {
-            us = TexasHoldemSystem.TexasHoldemSystem.userSystemFactory.getInstance();
+            us = new UserSystem_Service();
             us.register("abc", "123");
         }
 
@@ -67,7 +69,8 @@ namespace AT
         [TestCase]
         public void editAvatar()
         {
-            Image avatar = new Bitmap("C:\\Users\\user\\Desktop\\avatar.jpg");
+            
+            Image avatar = new Bitmap("C:\\Users\\pc\\Desktop\\capture.png");
             us.login("abc", "123");
             UserProfile user = us.getUser("abc", "123");
             Assert.True(us.editAvatar(avatar, user));

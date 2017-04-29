@@ -4,11 +4,12 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Services;
 using GameUtilities;
 
 namespace TexasHoldemSystem
 {
-    class TexasHoldemSystem : System
+    public class TexasHoldemSystem : SystemAPI
     {
         public delegate void Notify(string message);
         public class userSystemFactory

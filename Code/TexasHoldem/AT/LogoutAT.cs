@@ -5,17 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using GameUtilities;
+using Services;
+using ServiceLayer;
 
 namespace AT
 {
     class LogoutAT
     {
-        private TexasHoldemSystem.TexasHoldemSystem us;
+        private SystemAPI us;
 
         [SetUp]
         public void before()
         {
-            us = TexasHoldemSystem.TexasHoldemSystem.userSystemFactory.getInstance();
+            us =new UserSystem_Service();
             us.register("abc", "123");
         }
 

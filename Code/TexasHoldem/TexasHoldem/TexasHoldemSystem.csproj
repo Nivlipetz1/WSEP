@@ -51,7 +51,6 @@
     <Compile Include="GameCenterTest.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="System.cs" />
     <Compile Include="testUserSystem.cs" />
     <Compile Include="TexasHoldemSystem.cs" />
   </ItemGroup>

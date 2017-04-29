@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using GameUtilities;
 using Gaming;
+using Services;
 
 namespace TexasHoldemSystem
 {
-    public class GameCenter : LeagueAPI
+    public class GameCenter : LeagueAPI , GameCenterInterface
     {
         List<Game> games = new List<Game>();
+
         Dictionary<int, League> leagues = new Dictionary<int, League>();
         private ICollection<UserProfile> Users;
         private UserProfile HighestRankUser=null;
