@@ -40,3 +40,25 @@ C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHo
 C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\nunit.framework.xml
 C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\obj\Debug\AT.exe
 C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\obj\Debug\AT.pdb
+D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\AT.exe.config
+D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\AT.exe
+D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\AT.pdb
+D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\Gaming.dll
+D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\GamingTests.dll
+D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\Logger.dll
+D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\nunit.framework.dll
+D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\ServiceLayer.exe
+D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\Services.dll
+D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\TexasHoldemSystem.exe
+D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\User.dll
+D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\Gaming.pdb
+D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\GamingTests.pdb
+D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\Logger.pdb
+D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\ServiceLayer.pdb
+D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\Services.pdb
+D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\TexasHoldemSystem.pdb
+D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\User.pdb
+D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\nunit.framework.xml
+D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\obj\Debug\AT.csprojResolveAssemblyReference.cache
+D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\obj\Debug\AT.exe
+D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\obj\Debug\AT.pdb

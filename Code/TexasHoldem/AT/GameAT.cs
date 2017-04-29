@@ -13,7 +13,7 @@ namespace AT
     [TestFixture]
     class GameAT
     {
-        Game game1;
+        Game game1 = null;
         
         [SetUp]
         public void before()
