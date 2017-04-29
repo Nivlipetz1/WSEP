@@ -8,7 +8,7 @@ using GameUtilities;
 
 namespace TexasHoldemSystem
 {
-    class TexasHoldemSystem : System
+    public class TexasHoldemSystem : System
     {
         public delegate void Notify(string message);
         public class userSystemFactory

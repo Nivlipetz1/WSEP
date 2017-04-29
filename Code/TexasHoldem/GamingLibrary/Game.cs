@@ -163,11 +163,13 @@ namespace Gaming
             gameDeck = new Deck();
             PlayingUser dealer = players.First();
             players.Remove(dealer);
-            players.Add(dealer);
+            players.Insert(players.Count, dealer);
 
             foreach (PlayingUser player in players)
             {
                 player.SetStatus("Active");
+                playerHands.Remove(player.GetAccount().Username);
+                playerBets[player] = 0;
             }
 
         }

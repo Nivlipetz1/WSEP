@@ -220,7 +220,7 @@ namespace GamingTests
         }
 
         [TestCase]
-        public void GameReplay20Moves()
+        public void CheckGameReplay_20Moves()
         {
             Game g = new Game(new GamePreferences());
             GameLogger logger = g.GetLogger();
@@ -247,7 +247,7 @@ namespace GamingTests
         }
 
         [TestCase]
-        public void GameReplay29Moves()
+        public void CheckGameReplay_29Moves()
         {
             Game g = new Game(new GamePreferences());
             GameLogger logger = g.GetLogger();
@@ -281,6 +281,49 @@ namespace GamingTests
             g.StartGame();
 
             Assert.AreEqual(logger.GetMoves().Count, 29);
+        }
+
+
+        [TestCase]
+        public void MultipleRoundsIn1Game()
+        {
+            Game g = new Game(new GamePreferences());
+            GameLogger logger = g.GetLogger();
+
+            UserProfile Niv = new UserProfile("Niv", "123");
+            UserProfile Omer = new UserProfile("Omer", "456");
+            UserProfile Naor = new UserProfile("Naor", "789");
+            UserProfile Koren = new UserProfile("Koren", "9");
+            UserProfile Ohad = new UserProfile("Ohad", "8");
+
+            PlayingUser nivPlayer = new PlayingUser(Niv, 1000, g);
+            PlayingUser OPlayer = new PlayingUser(Omer, 1000, g);
+            PlayingUser NPlayer = new PlayingUser(Naor, 1000, g);
+            PlayingUser KPlayer = new PlayingUser(Koren, 1000, g);
+            PlayingUser OhPlayer = new PlayingUser(Ohad, 1000, g);
+
+            g.addPlayer(nivPlayer);
+            g.addPlayer(OPlayer);
+            g.addPlayer(NPlayer);
+            g.addPlayer(KPlayer);
+            g.addPlayer(OhPlayer);
+
+            nivPlayer.SetFakeUserInput(new Queue<string>(new[] { "5", "0", "100" }));
+            OPlayer.SetFakeUserInput(new Queue<string>(new[] { "0", "0", "100", "100", "0", "50", "-1" }));
+            NPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100", "100", "100" }));
+            KPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100", "100", "100" }));
+            OhPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100", "100", "100" }));
+            g.StartGame();
+            Assert.AreEqual(logger.GetMoves().Count, 29);
+
+            nivPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100", "100", "100" }));
+            OPlayer.SetFakeUserInput(new Queue<string>(new[] { "5", "0", "100" }));
+            NPlayer.SetFakeUserInput(new Queue<string>(new[] { "0", "0", "100", "100", "0", "50", "-1" }));
+            KPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100", "100", "100" }));
+            OhPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100", "100", "100" }));
+            g.StartGame();
+            Assert.AreEqual(logger.GetMoves().Count, (29*2));
+
         }
 
     }

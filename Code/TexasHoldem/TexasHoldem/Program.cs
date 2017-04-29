@@ -54,6 +54,15 @@ namespace TexasHoldemSystem
 
             Console.Write("");
 
+            nivPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100", "100", "100" }));
+            OPlayer.SetFakeUserInput(new Queue<string>(new[] { "5", "0", "100" }));
+            NPlayer.SetFakeUserInput(new Queue<string>(new[] { "0", "0", "100", "100", "0", "50", "-1" }));
+            KPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100", "100", "100" }));
+            OhPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100", "100", "100" }));
+
+            g.StartGame();
+            Console.Write("");
+
         }
     }
 }
