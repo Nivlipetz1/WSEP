@@ -20,6 +20,8 @@ namespace TexasHoldemSystem
         {
             Game game = new Game(preferecnces);
             games.Add(game);
+
+            game.evt += updateLeagueToUser;
             return game;
         }
 
@@ -208,6 +210,7 @@ namespace TexasHoldemSystem
         {
             return leagues;
         }
+
 
     }
 }
