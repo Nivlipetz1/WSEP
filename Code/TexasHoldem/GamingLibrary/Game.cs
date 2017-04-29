@@ -23,6 +23,9 @@ namespace Gaming
         private GameChat chat;
         private bool gameEnded;
 
+        public delegate void Update(UserProfile user);
+        public event Update evt;
+
         public Game(GamePreferences gp)
         {
             gameDeck = new Deck();
@@ -356,7 +359,13 @@ namespace Gaming
             player.GetAccount().Credit += player.GetCredit();
             players.Remove(player);
             playerBets.Remove(player);
+
+            var e = evt;
+            if (e != null)
+                evt(player.GetAccount());
+
             player = null;
+
         }
 
         public void addSpectator(SpectatingUser spec)
