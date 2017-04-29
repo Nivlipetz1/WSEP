@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Drawing;
 using NUnit.Framework;
 using TexasHoldemSystem;
+using Services;
+using ServiceLayer;
 
 namespace AT
 {
@@ -13,12 +15,13 @@ namespace AT
 
     public class RegistrationAT
     {
-        private TexasHoldemSystem.TexasHoldemSystem us;
+       
+        private SystemAPI us;
 
         [SetUp]
         public void before()
         {
-            us = TexasHoldemSystem.TexasHoldemSystem.userSystemFactory.getInstance();
+            us = new UserSystem_Service();
         }
 
         [TestCase]

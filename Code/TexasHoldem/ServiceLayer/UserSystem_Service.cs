@@ -7,6 +7,7 @@ using System.Drawing;
 using Services;
 using GameUtilities;
 using TexasHoldemSystem;
+using System.Text.RegularExpressions;
 
 namespace ServiceLayer
 {
@@ -32,7 +33,15 @@ namespace ServiceLayer
 
         public bool editUserName(string userName, UserProfile u)
         {
-            if (string.IsNullOrWhiteSpace(userName))
+            if(string.IsNullOrWhiteSpace(userName))
+                return false;
+            Regex r = new Regex("^[a-zA-Z0-9]*$");
+            if (!r.IsMatch(userName))
+            {
+                return false;
+            }
+            r = new Regex("^[0-9]*$");
+            if (r.IsMatch(""+userName[0]))
                 return false;
             return system.editUserName(userName, u);
         }
@@ -66,7 +75,17 @@ namespace ServiceLayer
 
         public bool register(string userName, string password)
         {
-            if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(password))
+            if (string.IsNullOrWhiteSpace(userName))
+                return false;
+            Regex r = new Regex("^[a-zA-Z0-9]*$");
+            if (!r.IsMatch(userName))
+            {
+                return false;
+            }
+            r = new Regex("^[0-9]*$");
+            if (r.IsMatch("" + userName[0]))
+                return false;
+            if (string.IsNullOrWhiteSpace(password))
                 return false;
             return system.register(userName, password);
         }

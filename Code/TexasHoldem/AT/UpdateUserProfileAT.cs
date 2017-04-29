@@ -14,12 +14,11 @@ namespace AT
 {
     class UpdateUserProfileAT
     {
-       // private TexasHoldemSystem.TexasHoldemSystem us;
+       
         private UserSystem_Service us;
         [SetUp]
         public void before()
         {
-            //us = TexasHoldemSystem.TexasHoldemSystem.userSystemFactory.getInstance();
             us = new UserSystem_Service();
             us.register("abc", "123");
         }
