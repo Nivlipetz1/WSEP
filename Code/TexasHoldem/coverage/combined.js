@@ -312,29 +312,16 @@ window.matchMedia || (window.matchMedia = function() {
 
 var assemblies = [
   {
-    "name" : "AT",
-    "classes" : [
-    {  "name" : "AT.CreateGameAT", "reportPath" : "AT_CreateGameAT.htm", "coveredLines" : 16, "uncoveredLines" : 2, "coverableLines" : 18, "totalLines" : 47, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
-    {  "name" : "AT.GameAT", "reportPath" : "AT_GameAT.htm", "coveredLines" : 119, "uncoveredLines" : 0, "coverableLines" : 119, "totalLines" : 174, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
-    {  "name" : "AT.Join_SpectateGameAT", "reportPath" : "AT_Join_SpectateGameAT.htm", "coveredLines" : 60, "uncoveredLines" : 0, "coverableLines" : 60, "totalLines" : 107, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
-    {  "name" : "AT.LeaguesAT", "reportPath" : "AT_LeaguesAT.htm", "coveredLines" : 74, "uncoveredLines" : 0, "coverableLines" : 74, "totalLines" : 130, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
-    {  "name" : "AT.LoginAT", "reportPath" : "AT_LoginAT.htm", "coveredLines" : 25, "uncoveredLines" : 0, "coverableLines" : 25, "totalLines" : 56, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
-    {  "name" : "AT.LogoutAT", "reportPath" : "AT_LogoutAT.htm", "coveredLines" : 14, "uncoveredLines" : 0, "coverableLines" : 14, "totalLines" : 40, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
-    {  "name" : "AT.Program", "reportPath" : "AT_Program.htm", "coveredLines" : 0, "uncoveredLines" : 2, "coverableLines" : 2, "totalLines" : 18, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
-    {  "name" : "AT.RegistrationAT", "reportPath" : "AT_RegistrationAT.htm", "coveredLines" : 27, "uncoveredLines" : 0, "coverableLines" : 27, "totalLines" : 66, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
-    {  "name" : "AT.UpdateUserProfileAT", "reportPath" : "AT_UpdateUserProfileAT.htm", "coveredLines" : 34, "uncoveredLines" : 5, "coverableLines" : 39, "totalLines" : 80, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
-  ]},
-  {
     "name" : "Gaming",
     "classes" : [
     {  "name" : "FisherYates", "reportPath" : "Gaming_FisherYates.htm", "coveredLines" : 10, "uncoveredLines" : 0, "coverableLines" : 10, "totalLines" : 81, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 2, "totalBranches" : 2, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
     {  "name" : "Gaming.BetMove", "reportPath" : "Gaming_BetMove.htm", "coveredLines" : 10, "uncoveredLines" : 0, "coverableLines" : 10, "totalLines" : 104, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
     {  "name" : "Gaming.Card", "reportPath" : "Gaming_Card.htm", "coveredLines" : 24, "uncoveredLines" : 3, "coverableLines" : 27, "totalLines" : 63, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 6, "totalBranches" : 6, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
-    {  "name" : "Gaming.CardAnalyzer", "reportPath" : "Gaming_CardAnalyzer.htm", "coveredLines" : 307, "uncoveredLines" : 6, "coverableLines" : 313, "totalLines" : 393, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 82, "totalBranches" : 86, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
+    {  "name" : "Gaming.CardAnalyzer", "reportPath" : "Gaming_CardAnalyzer.htm", "coveredLines" : 309, "uncoveredLines" : 4, "coverableLines" : 313, "totalLines" : 393, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 83, "totalBranches" : 86, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
     {  "name" : "Gaming.Deck", "reportPath" : "Gaming_Deck.htm", "coveredLines" : 39, "uncoveredLines" : 0, "coverableLines" : 39, "totalLines" : 81, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 4, "totalBranches" : 4, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
     {  "name" : "Gaming.EndGameMove", "reportPath" : "Gaming_EndGameMove.htm", "coveredLines" : 21, "uncoveredLines" : 0, "coverableLines" : 21, "totalLines" : 104, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 4, "totalBranches" : 4, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
     {  "name" : "Gaming.FakeInput", "reportPath" : "Gaming_FakeInput.htm", "coveredLines" : 12, "uncoveredLines" : 0, "coverableLines" : 12, "totalLines" : 116, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 2, "totalBranches" : 2, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
-    {  "name" : "Gaming.Game", "reportPath" : "Gaming_Game.htm", "coveredLines" : 292, "uncoveredLines" : 40, "coverableLines" : 332, "totalLines" : 486, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 48, "totalBranches" : 60, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
+    {  "name" : "Gaming.Game", "reportPath" : "Gaming_Game.htm", "coveredLines" : 290, "uncoveredLines" : 42, "coverableLines" : 332, "totalLines" : 486, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 47, "totalBranches" : 60, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
     {  "name" : "Gaming.GameChat", "reportPath" : "Gaming_GameChat.htm", "coveredLines" : 11, "uncoveredLines" : 3, "coverableLines" : 14, "totalLines" : 30, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
     {  "name" : "Gaming.GameLogger", "reportPath" : "Gaming_GameLogger.htm", "coveredLines" : 11, "uncoveredLines" : 0, "coverableLines" : 11, "totalLines" : 32, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
     {  "name" : "Gaming.GamePreferences", "reportPath" : "Gaming_GamePreferences.htm", "coveredLines" : 56, "uncoveredLines" : 9, "coverableLines" : 65, "totalLines" : 119, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 4, "totalBranches" : 4, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
@@ -349,16 +336,6 @@ var assemblies = [
     {  "name" : "Logger.LoggerPusher", "reportPath" : "Gaming_LoggerPusher.htm", "coveredLines" : 0, "uncoveredLines" : 0, "coverableLines" : 0, "totalLines" : 0, "coverageType" : "MethodCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
   ]},
   {
-    "name" : "GamingTests",
-    "classes" : [
-    {  "name" : "Gaming.GameParticipantsTests", "reportPath" : "GamingTests_GameParticipantsTests.htm", "coveredLines" : 55, "uncoveredLines" : 0, "coverableLines" : 55, "totalLines" : 107, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
-    {  "name" : "GamingTests.CardAnalyzerTest", "reportPath" : "GamingTests_CardAnalyzerTest.htm", "coveredLines" : 360, "uncoveredLines" : 0, "coverableLines" : 360, "totalLines" : 493, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
-    {  "name" : "GamingTests.CardAndDeckTests", "reportPath" : "GamingTests_CardAndDeckTests.htm", "coveredLines" : 72, "uncoveredLines" : 0, "coverableLines" : 72, "totalLines" : 116, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 2, "totalBranches" : 2, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
-    {  "name" : "GamingTests.GamePlayTests", "reportPath" : "GamingTests_GamePlayTests.htm", "coveredLines" : 186, "uncoveredLines" : 25, "coverableLines" : 211, "totalLines" : 330, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
-    {  "name" : "GamingTests.GamePropertiesTests", "reportPath" : "GamingTests_GamePropertiesTests.htm", "coveredLines" : 32, "uncoveredLines" : 0, "coverableLines" : 32, "totalLines" : 66, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
-    {  "name" : "GamingTests.MoveTests", "reportPath" : "GamingTests_MoveTests.htm", "coveredLines" : 30, "uncoveredLines" : 0, "coverableLines" : 30, "totalLines" : 70, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
-  ]},
-  {
     "name" : "ServiceLayer",
     "classes" : [
     {  "name" : "ServiceLayer.GameCenterService", "reportPath" : "ServiceLayer_GameCenterService.htm", "coveredLines" : 19, "uncoveredLines" : 6, "coverableLines" : 25, "totalLines" : 57, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
@@ -370,13 +347,6 @@ var assemblies = [
     "name" : "Services",
     "classes" : [
     {  "name" : "Services.GameAPI", "reportPath" : "Services_GameAPI.htm", "coveredLines" : 0, "uncoveredLines" : 0, "coverableLines" : 0, "totalLines" : 0, "coverageType" : "MethodCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
-  ]},
-  {
-    "name" : "SystemTests",
-    "classes" : [
-    {  "name" : "SystemTests.GameCenterLeagueTest", "reportPath" : "SystemTests_GameCenterLeagueTest.htm", "coveredLines" : 112, "uncoveredLines" : 0, "coverableLines" : 112, "totalLines" : 157, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
-    {  "name" : "SystemTests.GameCenterTest", "reportPath" : "SystemTests_GameCenterTest.htm", "coveredLines" : 55, "uncoveredLines" : 9, "coverableLines" : 64, "totalLines" : 108, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
-    {  "name" : "SystemTests.testUserSystem", "reportPath" : "SystemTests_testUserSystem.htm", "coveredLines" : 43, "uncoveredLines" : 0, "coverableLines" : 43, "totalLines" : 84, "coverageType" : "LineCoverage", "methodCoverage" : "-", "coveredBranches" : 0, "totalBranches" : 0, "lineCoverageHistory" : [], "branchCoverageHistory" : [] },
   ]},
   {
     "name" : "TexasHoldemSystem",
