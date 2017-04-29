@@ -80,7 +80,7 @@ namespace AT
             Assert.True(gc.addUserToLeague(user, gc.getLeagueByRank(minRank + 10)));
             user.Credit = minRank;
             gc.updateLeagueToUser(user);
-            Assert.AreNotEqual(gc.getLeagueByRank(minRank), gc.getLeagueByUser(user));
+            Assert.AreEqual(gc.getLeagueByRank(minRank), gc.getLeagueByUser(user));
         }
 
         [TestCase]
@@ -90,7 +90,7 @@ namespace AT
             gc.createNewLeague(minRank + 10);
             UserProfile user = us.getUser("user");
             user.Credit = minRank + 20;
-            Assert.True(gc.addUserToLeague(user, gc.getLeagueByRank(user.Credit)));
+            Assert.True(gc.addUserToLeague(user, gc.getLeagueByRank(minRank+10)));
             Assert.AreEqual(gc.getLeagueByRank(minRank + 10), gc.getLeagueByUser(user));
         }
 
@@ -111,7 +111,8 @@ namespace AT
             UserProfile user = us.getUser("user");
             user.Credit = minRank + 20;
             Assert.True(gc.addUserToLeague(user, gc.getLeagueByRank(minRank + 10)));
-            Assert.False(gc.addUserToLeague(user, gc.getLeagueByRank(minRank)));
+            Assert.True(gc.addUserToLeague(user, gc.getLeagueByRank(minRank)));
+            Assert.False(gc.getLeagueByRank(minRank + 10).isUser(user));
         }
 
         [TestCase]
