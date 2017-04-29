@@ -9,7 +9,7 @@ namespace Gaming
 {
     public class Game
     {
-        private Deck gameDeck; 
+        private Deck gameDeck;
         private List<PlayingUser> players; //these will be of type playingUsers
         private List<SpectatingUser> spectators; //these will be of type spectators
         private int[] pot; // pot[0] = main pot ||| pot[1] = sidepot
@@ -17,7 +17,7 @@ namespace Gaming
         private CardAnalyzer ca;
         private GamePreferences gamePref;
         private GameLogger logger;
-        private IDictionary<PlayingUser, int> playerBets = new Dictionary<PlayingUser,int>();
+        private IDictionary<PlayingUser, int> playerBets = new Dictionary<PlayingUser, int>();
         private IDictionary<string, PlayerHand> playerHands = new Dictionary<string, PlayerHand>();
         private Card[] cards;
         private GameChat chat;
@@ -156,32 +156,35 @@ namespace Gaming
         }
 
 
-        private void ResetGame(){
+        private void ResetGame()
+        {
             pot[0] = 0;
             bettingRound = 0;
             cards = null;
             gameDeck = new Deck();
             PlayingUser dealer = players.First();
             players.Remove(dealer);
-            players.Add(dealer);
+            players.Insert(players.Count, dealer);
 
             foreach (PlayingUser player in players)
             {
                 player.SetStatus("Active");
+                playerHands.Remove(player.GetAccount().Username);
+                playerBets[player] = 0;
             }
 
         }
 
         private List<PlayingUser> DetermineWinner()
         {
-            Dictionary<PlayingUser,CardAnalyzer.HandRank> playerScores= new Dictionary<PlayingUser,CardAnalyzer.HandRank>();
+            Dictionary<PlayingUser, CardAnalyzer.HandRank> playerScores = new Dictionary<PlayingUser, CardAnalyzer.HandRank>();
             ca.setCardArray(cards);
             foreach (PlayingUser player in players)
             {
                 if (player.GetStatus() != "Fold")
                 {
                     ca.setHand(player.GetHand());
-                    playerScores.Add(player,ca.analyze());
+                    playerScores.Add(player, ca.analyze());
                 }
             }
 
@@ -193,11 +196,11 @@ namespace Gaming
             }
 
             Dictionary<PlayingUser, CardAnalyzer.HandRank> bestPlayerScores = new Dictionary<PlayingUser, CardAnalyzer.HandRank>();
-            
+
             foreach (PlayingUser player in playerScores.Keys)
             {
                 if (playerScores[player] == minValue)
-                    bestPlayerScores.Add(player,playerScores[player]);
+                    bestPlayerScores.Add(player, playerScores[player]);
             }
 
 
@@ -211,12 +214,12 @@ namespace Gaming
                 }
                 else
                 {
-                    PlayerHand winner = ca.tieBreaker(minValue,winners.First().GetHand(),player.GetHand());
+                    PlayerHand winner = ca.tieBreaker(minValue, winners.First().GetHand(), player.GetHand());
                     if (winner == null)
                     {
                         winners.Add(player);
                     }
-                    else if(winner == player.GetHand())
+                    else if (winner == player.GetHand())
                     {
                         winners.Clear();
                         winners.Add(player);
@@ -234,7 +237,7 @@ namespace Gaming
         private void PushBetMove()
         {
             IDictionary<string, int> playerBetsString = new Dictionary<string, int>();
-            foreach(PlayingUser player in playerBets.Keys)
+            foreach (PlayingUser player in playerBets.Keys)
             {
                 playerBetsString.Add(player.GetAccount().Username, playerBets[player]);
             }
@@ -251,7 +254,8 @@ namespace Gaming
             PushMoveToObservers(new GameStartMove(playerBetsString));
         }
 
-        private void TraversePlayers(int index){
+        private void TraversePlayers(int index)
+        {
             while (!EndOfBettingRound())
             {
                 Console.WriteLine(index);
@@ -260,7 +264,7 @@ namespace Gaming
                 if (currentUser.GetStatus() != "Fold")
                 {
                     int bet = players[index].Bet(minimumBet);
-                    while (bet < minimumBet && bet>=0)
+                    while (bet < minimumBet && bet >= 0)
                     {
                         bet = currentUser.BadBet(bet, minimumBet);
                     }
@@ -302,13 +306,13 @@ namespace Gaming
 
         private bool DidEveryoneFold()
         {
-            int inc=0;
+            int inc = 0;
             foreach (PlayingUser player in playerBets.Keys)
             {
                 if (playerBets[player] != -1)
                     inc++;
             }
-            return (inc==1);
+            return (inc == 1);
         }
 
         private bool EndOfBettingRound()
@@ -324,7 +328,7 @@ namespace Gaming
             List<int> checkDistinctAmounts = playerBets.Values.ToList().Except(new List<int> { -1 }).Distinct().ToList();
             return (checkDistinctAmounts.Count == 1);
         }
-  
+
 
         internal void Message(SpectatingUser spectaitngUser, string v)
         {
@@ -346,7 +350,7 @@ namespace Gaming
             if (players.Count == 0)
                 throw new InvalidOperationException("No players to remove");
 
-            if(!players.Contains(player))
+            if (!players.Contains(player))
                 throw new InvalidOperationException("Player not in game");
 
             player.GetAccount().Credit += player.GetCredit();
@@ -387,10 +391,10 @@ namespace Gaming
             if (!CheckSidePot())
                 return 0;
             else
-                return 1; 
+                return 1;
         }
 
-        private Boolean CheckSidePot() 
+        private Boolean CheckSidePot()
         {
             foreach (PlayingUser pl in players)
             {
@@ -415,7 +419,8 @@ namespace Gaming
             return playersAndHands;
         }
 
-        private void PushMoveToObservers(Move m){
+        private void PushMoveToObservers(Move m)
+        {
             foreach (SpectatingUser spectator in spectators)
                 spectator.PushMove(m);
             foreach (PlayingUser player in players)

@@ -62,3 +62,25 @@ D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\
 D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\obj\Debug\AT.csprojResolveAssemblyReference.cache
 D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\obj\Debug\AT.exe
 D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\obj\Debug\AT.pdb
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\AT.exe.config
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\AT.exe
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\AT.pdb
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\Gaming.dll
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\GamingTests.dll
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\Logger.dll
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\nunit.framework.dll
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\ServiceLayer.exe
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\Services.dll
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\TexasHoldemSystem.exe
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\User.dll
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\Gaming.pdb
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\GamingTests.pdb
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\Logger.pdb
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\ServiceLayer.pdb
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\Services.pdb
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\TexasHoldemSystem.pdb
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\User.pdb
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\nunit.framework.xml
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\AT\obj\Debug\AT.csprojResolveAssemblyReference.cache
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\AT\obj\Debug\AT.exe
+C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\AT\obj\Debug\AT.pdb
