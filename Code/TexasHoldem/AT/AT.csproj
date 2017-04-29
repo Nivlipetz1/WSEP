@@ -2,15 +2,13 @@
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-
     <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
-
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{85BCA738-F7AA-4CB9-B85B-0EA392B70DE8}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AT</RootNamespace>
     <AssemblyName>AT</AssemblyName>
@@ -35,6 +33,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="nunit.framework">
@@ -86,9 +87,9 @@
       <Project>{02b2ae82-1eee-44ad-a748-d79ebee90463}</Project>
       <Name>Services</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TexasHoldem\TexasHoldemSystem.csproj">
+    <ProjectReference Include="..\TexasHoldem\GameSystem.csproj">
       <Project>{c25e63ff-8adc-460d-922b-dc31f600828d}</Project>
-      <Name>TexasHoldemSystem</Name>
+      <Name>GameSystem</Name>
     </ProjectReference>
     <ProjectReference Include="..\User\GameUtilities.csproj">
       <Project>{ea8f8ce0-841a-433a-a6c5-24c4b359a14f}</Project>

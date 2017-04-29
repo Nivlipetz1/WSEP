@@ -5,7 +5,7 @@ using GameUtilities;
 using Gaming;
 using Services;
 
-namespace TexasHoldemSystem
+namespace GameSystem
 {
     public class GameCenter : LeagueAPI , GameCenterInterface
     {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 using Services;
 using GameUtilities;
-using TexasHoldemSystem;
+using GameSystem;
 using System.Text.RegularExpressions;
 
 namespace ServiceLayer
@@ -16,7 +16,7 @@ namespace ServiceLayer
         private SystemAPI system;
         public UserSystem_Service()
         {
-            system=TexasHoldemSystem.TexasHoldemSystem.userSystemFactory.getInstance();
+            system = GameSystem.TexasHoldemSystem.userSystemFactory.getInstance();
         }
 
         public bool editAvatar(Image avatar, UserProfile u)

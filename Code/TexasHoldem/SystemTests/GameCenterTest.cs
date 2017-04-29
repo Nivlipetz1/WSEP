@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using GameUtilities;
 using Gaming;
+using GameSystem;
+using Services;
 
-namespace TexasHoldemSystem
+namespace SystemTests
 {
     public class GameCenterTest
     {
         private GameCenter gameCenter;
-        private TexasHoldemSystem us = TexasHoldemSystem.userSystemFactory.getInstance();
+        private TexasHoldemSystem us = GameSystem.TexasHoldemSystem.userSystemFactory.getInstance();
         [SetUp]
         public void setUp()
         {

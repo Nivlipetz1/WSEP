@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using NUnit.Framework;
-using TexasHoldemSystem;
+using GameSystem;
 using Services;
 using ServiceLayer;
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TexasHoldemSystem;
+using GameSystem;
 using Gaming;
 using NUnit.Framework;
 using GameUtilities;
@@ -15,7 +15,7 @@ namespace AT
     class Join_SpectateGameAT
     {
         GameCenterService gc;
-        TexasHoldemSystem.TexasHoldemSystem us;
+        GameSystem.TexasHoldemSystem us;
         UserProfile userProf;
         GamePreferences prefs;
 
@@ -27,7 +27,7 @@ namespace AT
             gc.createGame(prefs);
             prefs = new GamePreferences(8, 2, 5, 10, 1, 20, 3, false);
             gc.createGame(prefs);
-            us = TexasHoldemSystem.TexasHoldemSystem.userSystemFactory.getInstance();
+            us = GameSystem.TexasHoldemSystem.userSystemFactory.getInstance();
             us.register("abc", "123");
             us.login("abc", "123");
             userProf = us.getUser("abc");

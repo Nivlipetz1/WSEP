@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TexasHoldemSystem;
+using GameSystem;
 using Gaming;
 using GameUtilities;
 using NUnit.Framework;
@@ -16,13 +16,13 @@ namespace AT
     {
         LeagueService gc;
         int minRank = 10;
-        TexasHoldemSystem.TexasHoldemSystem us;
+        GameSystem.TexasHoldemSystem us;
 
         [SetUp]
         public void before()
         {
             gc = new LeagueService();
-            us = TexasHoldemSystem.TexasHoldemSystem.userSystemFactory.getInstance();
+            us = GameSystem.TexasHoldemSystem.userSystemFactory.getInstance();
             us.register("user", "123");
             us.login("user", "123");
         }

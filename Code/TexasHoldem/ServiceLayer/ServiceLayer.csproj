@@ -5,13 +5,14 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{5997B991-D27A-4CF4-9C9D-5119FD0DDB64}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ServiceLayer</RootNamespace>
     <AssemblyName>ServiceLayer</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,6 +32,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -66,9 +70,9 @@
       <Project>{02b2ae82-1eee-44ad-a748-d79ebee90463}</Project>
       <Name>Services</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TexasHoldem\TexasHoldemSystem.csproj">
+    <ProjectReference Include="..\TexasHoldem\GameSystem.csproj">
       <Project>{c25e63ff-8adc-460d-922b-dc31f600828d}</Project>
-      <Name>TexasHoldemSystem</Name>
+      <Name>GameSystem</Name>
     </ProjectReference>
     <ProjectReference Include="..\User\GameUtilities.csproj">
       <Project>{ea8f8ce0-841a-433a-a6c5-24c4b359a14f}</Project>

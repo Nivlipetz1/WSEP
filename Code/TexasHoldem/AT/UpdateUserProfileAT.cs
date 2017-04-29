@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TexasHoldemSystem;
+using GameSystem;
 using NUnit.Framework;
 using GameUtilities;
 using System.Drawing;

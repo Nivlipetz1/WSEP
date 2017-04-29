@@ -100,7 +100,6 @@ namespace Gaming
     {
         Queue<string> inputs;
         string input = "0";
-        bool flag = true;
         public FakeInput(Queue<string> inputs)
         {
             this.inputs = inputs;

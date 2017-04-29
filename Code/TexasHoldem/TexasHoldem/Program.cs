@@ -7,7 +7,7 @@ using System.Threading;
 using Gaming;
 using GameUtilities;
 
-namespace TexasHoldemSystem
+namespace GameSystem
 {
     class Program
     {

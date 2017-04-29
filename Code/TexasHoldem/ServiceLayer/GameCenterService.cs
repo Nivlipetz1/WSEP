@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GameUtilities;
 using Gaming;
-using TexasHoldemSystem;
+using GameSystem;
 
 namespace ServiceLayer
 {
