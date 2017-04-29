@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using GameUtilities;
 using Gaming;
-using TexasHoldemSystem;
+using ServiceLayer;
 
 namespace AT
 {
     [TestFixture]
     class CreateGameAT
     {
-        TexasHoldemSystem.GameCenter gc = new GameCenter();
+        GameCenterService gc = new GameCenterService();
 
         [TestCase]
         public void Valid_createGame()

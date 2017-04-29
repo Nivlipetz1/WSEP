@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using Gaming;
 using GameUtilities;
 
-namespace TexasHoldemSystem
+namespace Services
 {
     public interface GameCenterInterface
     {
-        Game createGame(GamePreferences preferecnces, UserProfile creatingUser, int buyIn);
+        Game createGame(GamePreferences preferecnces);
 
         List<Game> getAllSpectatingGames();
 
@@ -20,7 +20,7 @@ namespace TexasHoldemSystem
 
         List<Game> getAllActiveGamesByGamePreference(GamePreferences preferences);
 
-        bool joinGame(Game game, UserProfile u);
+        bool joinGame(Game game, UserProfile u , int credit);
 
         bool spectateGame(Game game, UserProfile u);
 

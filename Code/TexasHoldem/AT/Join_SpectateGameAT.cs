@@ -7,13 +7,14 @@ using TexasHoldemSystem;
 using Gaming;
 using NUnit.Framework;
 using GameUtilities;
+using ServiceLayer;
 
 namespace AT
 {
     [TestFixture]
     class Join_SpectateGameAT
     {
-        GameCenter gc;
+        GameCenterService gc;
         TexasHoldemSystem.TexasHoldemSystem us;
         UserProfile userProf;
         GamePreferences prefs;
@@ -21,7 +22,7 @@ namespace AT
         [SetUp]
         public void before()
         {
-            gc = new GameCenter();
+            gc = new GameCenterService();
             prefs = new GamePreferences(8, 2, 5, 10, 1, 20, 3, true);
             gc.createGame(prefs);
             prefs = new GamePreferences(8, 2, 5, 10, 1, 20, 3, false);

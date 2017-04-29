@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GameUtilities;
 
-namespace TexasHoldemSystem
+namespace Services
 {
     public interface LeagueAPI
     {
@@ -15,5 +15,7 @@ namespace TexasHoldemSystem
         bool changeLeagueMinimumRank(League league, int newRank);
         League getLeagueByUser(UserProfile user);
         League getLeagueByRank(int Rank);
+        Dictionary<int, League> getLeagues();
+        void updateLeagueToUser(UserProfile user);
     }
 }

@@ -7,20 +7,21 @@ using TexasHoldemSystem;
 using Gaming;
 using GameUtilities;
 using NUnit.Framework;
+using ServiceLayer;
 
 namespace AT
 {
     [TestFixture]
     class LeaguesAT
     {
-        GameCenter gc;
+        LeagueService gc;
         int minRank = 10;
         TexasHoldemSystem.TexasHoldemSystem us;
 
         [SetUp]
         public void before()
         {
-            gc = new GameCenter();
+            gc = new LeagueService();
             us = TexasHoldemSystem.TexasHoldemSystem.userSystemFactory.getInstance();
             us.register("user", "123");
             us.login("user", "123");
