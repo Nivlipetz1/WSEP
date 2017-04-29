@@ -35,7 +35,7 @@ namespace TexasHoldemSystem
 
             return activeGames;
         }
-        
+
         public List<Game> getAllActiveGamesByPotSize(int potSize)
         {
             return games.Where(game => ((Game)game).GetPotSize() == potSize).ToList();
@@ -43,7 +43,7 @@ namespace TexasHoldemSystem
 
         public List<Game> getAllActiveGamesByGamePreference(GamePreferences preferences)
         {
-            return games.Where(game => contained(((Game)game).GetGamePref() , preferences)).ToList();
+            return games.Where(game => contained(((Game)game).GetGamePref(), preferences)).ToList();
         }
 
         private bool contained(GamePreferences gamePreferences, GamePreferences preferences)
@@ -63,7 +63,7 @@ namespace TexasHoldemSystem
             if (preferences.GetTypePolicy() > 0 && preferences.GetTypePolicy() != typePolicy)
                 return false;
 
-            if(preferences.GetBuyInPolicy() > 0 && preferences.GetBuyInPolicy() != buyInPolicy)
+            if (preferences.GetBuyInPolicy() > 0 && preferences.GetBuyInPolicy() != buyInPolicy)
                 return false;
 
             if (preferences.GetChipPolicy() > 0 && preferences.GetChipPolicy() != chipPolicy)
@@ -73,7 +73,7 @@ namespace TexasHoldemSystem
             return true;
         }
 
-        public bool joinGame(Game game, UserProfile u , int credit)
+        public bool joinGame(Game game, UserProfile u, int credit)
         {
             if (credit > u.Credit)
                 return false;
@@ -111,13 +111,13 @@ namespace TexasHoldemSystem
 
         public bool createNewLeague(int minimumRank)
         {
-            foreach (League l in leagues.Values )
+            foreach (League l in leagues.Values)
             {
                 if (l.MinimumRank == minimumRank)
                     return false;
             }
-            League league = new League(minimumRank,"League"+leagues.Count);
-            leagues.Add(minimumRank,league);
+            League league = new League(minimumRank, "League" + leagues.Count);
+            leagues.Add(minimumRank, league);
             return true;
         }
 
@@ -140,7 +140,7 @@ namespace TexasHoldemSystem
         }
         public League getLeagueByUser(UserProfile user)
         {
-            foreach(League league in leagues.Values)
+            foreach (League league in leagues.Values)
             {
                 if (league.isUser(user))
                     return league;
@@ -161,28 +161,18 @@ namespace TexasHoldemSystem
         public void updateLeagueToUser(UserProfile user)
         {
             League currLeague = getLeagueByUser(user);
-<<<<<<< HEAD
-            foreach(League league in leagues.Values)
+            foreach (League league in leagues.Values)
             {
-                if(league.MinimumRank<=user.Credit&&
-                    (currLeague.MinimumRank > user.Credit||league.MinimumRank>currLeague.MinimumRank))
-=======
-            List<UserProfile> freeUsers = new List<UserProfile>();
-            foreach(League league in leagues.Values)
-            {
-                if(league.MinimumRank<user.Credit&&league.MinimumRank>currLeague.MinimumRank)
->>>>>>> origin/MaintainLeagues2-Ohad
+                if (league.MinimumRank <= user.Credit &&
+                    (currLeague.MinimumRank > user.Credit || league.MinimumRank > currLeague.MinimumRank))
                 {
                     currLeague.removeUser(user);
                     league.addUser(user);
                     return;
                 }
             }
-<<<<<<< HEAD
-=======
-            
->>>>>>> origin/MaintainLeagues2-Ohad
         }
+    
 
         public Dictionary<int,League> getLeagues()
         {
