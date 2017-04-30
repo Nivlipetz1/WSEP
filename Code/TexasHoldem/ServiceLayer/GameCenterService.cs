@@ -12,7 +12,8 @@ namespace ServiceLayer
 {
     public class GameCenterService : GameCenterInterface
     {
-        private GameCenterInterface gc = new GameCenter();
+
+        private GameCenterInterface gc = GameCenter.GameCenterFactory.getInstance();
 
         public Game createGame(GamePreferences preferecnces)
         {

@@ -15,7 +15,7 @@ namespace SystemTests
         [TestCase]
         public void CreateNewLeagueTest()
         {
-            GameCenter gc = new GameCenter();
+            GameCenter gc = GameCenter.GameCenterFactory.getInstance(); 
             Dictionary<int,League> le = gc.getLeagues();
             Assert.True(gc.createNewLeague(10));
             Assert.True(le.Keys.Contains(10));
@@ -23,7 +23,7 @@ namespace SystemTests
         [TestCase]
         public void CreateNewLeagueWithSameRankTest()
         {
-            GameCenter gc = new GameCenter();
+            GameCenter gc = GameCenter.GameCenterFactory.getInstance();
             Dictionary<int,League> le = gc.getLeagues();
             Assert.True(gc.createNewLeague(10));
             Assert.False(gc.createNewLeague(10));
@@ -32,7 +32,7 @@ namespace SystemTests
         [TestCase]
         public void addUserToAppropriateLeague()
         {
-            GameCenter gc = new GameCenter();
+            GameCenter gc = GameCenter.GameCenterFactory.getInstance();
             Assert.True(gc.createNewLeague(10));
             League l = gc.getLeagueByRank(10);
             UserProfile u = new UserProfile("ohad", "dali");
@@ -43,7 +43,7 @@ namespace SystemTests
         [TestCase]
         public void addUserToNotAppropriateLeague()
         {
-            GameCenter gc = new GameCenter();
+            GameCenter gc= GameCenter.GameCenterFactory.getInstance();
             Assert.True(gc.createNewLeague(10));
             League l = gc.getLeagueByRank(10);
             UserProfile u = new UserProfile("ohad", "dali");
@@ -54,7 +54,7 @@ namespace SystemTests
         [TestCase]
         public void removeExistedUser()
         {
-            GameCenter gc = new GameCenter();
+            GameCenter gc = GameCenter.GameCenterFactory.getInstance();
             Assert.True(gc.createNewLeague(10));
             League l = gc.getLeagueByRank(10);
             UserProfile u = new UserProfile("ohad", "dali");
@@ -67,7 +67,7 @@ namespace SystemTests
         [TestCase]
         public void removeUnExistedUser()
         {
-            GameCenter gc = new GameCenter();
+            GameCenter gc = GameCenter.GameCenterFactory.getInstance();
             Assert.True(gc.createNewLeague(10));
             League l = gc.getLeagueByRank(10);
             UserProfile u = new UserProfile("ohad", "dali");
@@ -77,7 +77,7 @@ namespace SystemTests
         [TestCase]
         public void changeLeagueMinimumRankTest()
         {
-            GameCenter gc = new GameCenter();
+            GameCenter gc = GameCenter.GameCenterFactory.getInstance();
             Assert.True(gc.createNewLeague(10));
             League l = gc.getLeagueByRank(10);
             UserProfile u = new UserProfile("ohad", "dali");
@@ -91,7 +91,7 @@ namespace SystemTests
         [TestCase]
         public void changeLeagueMinimumRank2Test()
         {
-            GameCenter gc = new GameCenter();
+            GameCenter gc = GameCenter.GameCenterFactory.getInstance();
             Assert.True(gc.createNewLeague(10));
             League l = gc.getLeagueByRank(10);
             UserProfile u = new UserProfile("ohad", "dali");
@@ -105,7 +105,7 @@ namespace SystemTests
         [TestCase]
         public void changeLeagueMinimumRankToExistedLeagueTest()
         {
-            GameCenter gc = new GameCenter();
+            GameCenter gc = GameCenter.GameCenterFactory.getInstance();
             Assert.True(gc.createNewLeague(10));
             Assert.True(gc.createNewLeague(15));
             League l = gc.getLeagueByRank(10);
@@ -114,7 +114,7 @@ namespace SystemTests
         [TestCase]
         public void updateLeaguesTest()
         {
-            GameCenter gc = new GameCenter();
+            GameCenter gc = GameCenter.GameCenterFactory.getInstance();
             gc.createNewLeague(50);
             gc.createNewLeague(30);
             UserProfile u = new UserProfile("Ohad", "Dali");
@@ -128,7 +128,7 @@ namespace SystemTests
         [TestCase]
         public void updateLeaguesWithoutChangeTest()
         {
-            GameCenter gc = new GameCenter();
+            GameCenter gc = GameCenter.GameCenterFactory.getInstance();
             gc.createNewLeague(50);
             gc.createNewLeague(30);
             UserProfile u = new UserProfile("Ohad", "Dali");
@@ -142,7 +142,7 @@ namespace SystemTests
         [TestCase]
         public void setUsersTest()
         {
-            GameCenter gc = new GameCenter();
+            GameCenter gc = GameCenter.GameCenterFactory.getInstance();
             Dictionary<String, UserProfile> user = new Dictionary<string, UserProfile>();
             gc.setUsers(user.Values);
             UserProfile u = new UserProfile("aaa", "bbb");

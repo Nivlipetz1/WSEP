@@ -22,7 +22,7 @@ namespace AT
         {
             usys = new UserSystem_Service();
             gc = new GameCenterService();
-            lc =(LeagueAPI) gc;
+            lc = new LeagueService();
         }
         [TestCase]
         public void Integration()
@@ -37,10 +37,11 @@ namespace AT
             GamePreferences pref = new GamePreferences(8, 2, 5, 10, 1, 2, 3, true);
             Game game1=gc.createGame(pref);
             Assert.AreEqual(game1, gc.getAllActiveGamesByGamePreference(pref)[0]);
-            user1.Credit = 300;
-            user2.Credit = 250;
-            Assert.True(gc.joinGame(game1, user1,100);
-            Assert.True(gc.joinGame(game1, user2, 200));
+            Assert.True(gc.joinGame(game1, user1,100));
+            Assert.False(gc.joinGame(game1, user2, 200));
+            Assert.True(gc.joinGame(game1, user2, 150));
+            Assert.AreEqual(50, user1.Credit);
+            Assert.AreEqual(0, user1.Credit);
         }
     }
 }

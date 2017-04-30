@@ -15,7 +15,18 @@ namespace GameSystem
         private ICollection<UserProfile> Users;
         private UserProfile HighestRankUser=null;
 
-        public GameCenter()
+        public class GameCenterFactory
+        {
+            private static GameCenter instance = null;
+
+            public static GameCenter getInstance()
+            {
+                if (instance == null)
+                    return instance = new GameCenter();
+                return instance;
+            }
+        }
+        private GameCenter()
         {
             leagues.Add(0, new League(0, "default"));
         }

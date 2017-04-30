@@ -33,7 +33,7 @@ namespace GameSystem
         {
             activeUsers = new Dictionary<string, UserProfile>();
             users = new Dictionary<string, UserProfile>();
-            gc = new GameCenter();
+            gc = GameCenter.GameCenterFactory.getInstance();
             gc.setUsers(users.Values);
         }
 
@@ -57,7 +57,12 @@ namespace GameSystem
         public bool register(string userName, string password)
         {
             if (!users.ContainsKey(userName))
-                users.Add(userName, new UserProfile(userName, password));
+            {
+                UserProfile user = new UserProfile(userName, password);
+                user.Credit = 150;
+                users.Add(userName,user);
+                gc.addUserToLeague(user, gc.getLeagueByRank(0));
+            }
             else return false;
 
             evt += users[userName].addNotify;
