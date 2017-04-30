@@ -11,7 +11,7 @@ namespace ServiceLayer
 {
     public class LeagueService : LeagueAPI
     {
-        LeagueAPI league = new GameCenter();
+        LeagueAPI league = GameCenter.GameCenterFactory.getInstance();
 
         public bool addUserToLeague(UserProfile user, League league)
         {

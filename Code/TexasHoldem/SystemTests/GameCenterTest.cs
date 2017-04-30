@@ -18,7 +18,7 @@ namespace SystemTests
         [SetUp]
         public void setUp()
         {
-            gameCenter =  new GameCenter();
+            gameCenter = GameCenter.GameCenterFactory.getInstance();
         }
 
         [TestCase]
