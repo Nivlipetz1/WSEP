@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Logger
 {
-    public class SystemLogger
+    public static class SystemLogger
     {
-        public void Log(string message , string file)
+        public static void Log(string message , string file)
         {
             using (StreamWriter w = File.AppendText(file))
             {
@@ -17,7 +17,7 @@ namespace Logger
             }
         }
 
-        private void Log(string message, TextWriter w)
+        private static void Log(string message, TextWriter w)
         {
             w.Write("\r\nLog Entry : ");
             w.WriteLine("{0} {1}", DateTime.Now.ToLongTimeString(),
@@ -27,7 +27,7 @@ namespace Logger
             w.WriteLine("-------------------------------");
         }
 
-        public string getLogFile(string file)
+        public static string getLogFile(string file)
         {
             using (StreamReader r = File.OpenText(file))
             {
@@ -35,7 +35,7 @@ namespace Logger
             }
         }
 
-        private string readLog(StreamReader r)
+        private static string readLog(StreamReader r)
         {
             string line , data = "";
             while ((line = r.ReadLine()) != null)

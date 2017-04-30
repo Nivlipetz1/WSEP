@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameUtilities;
+using Logger;
 
 namespace Gaming
 {
@@ -22,7 +23,6 @@ namespace Gaming
         private Card[] cards;
         private GameChat chat;
         private bool gameEnded;
-
         public delegate void Update(UserProfile user);
         public event Update evt;
 
@@ -46,6 +46,7 @@ namespace Gaming
         public void StartGame()
         {
 
+            SystemLogger.Log("game started",@"C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\Logs\GameLogs.log");
             if (gamePref.GetMinPlayers() > GetNumberOfPlayers())
                 throw new InvalidOperationException("Can't start game with less than the minimum number of players");
 
