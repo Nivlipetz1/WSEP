@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GameUtilities;
 
 namespace Gaming
 {
@@ -14,7 +13,7 @@ namespace Gaming
         private PlayerHand hand;
         private UserInput userInput;
 
-        public PlayingUser(UserProfile account, int credit, Game game) : base (account,game)
+        public PlayingUser(string name, int credit, Game game) : base (name,game)
         {
             this.credit = credit;
             status = "Active";

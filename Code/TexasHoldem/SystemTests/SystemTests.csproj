@@ -53,17 +53,9 @@
       <Project>{2972ace2-bf33-4f5f-990f-ca94de288cd4}</Project>
       <Name>Gaming</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Services\Services.csproj">
-      <Project>{02b2ae82-1eee-44ad-a748-d79ebee90463}</Project>
-      <Name>Services</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TexasHoldem\GameSystem.csproj">
       <Project>{c25e63ff-8adc-460d-922b-dc31f600828d}</Project>
       <Name>GameSystem</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\User\GameUtilities.csproj">
-      <Project>{ea8f8ce0-841a-433a-a6c5-24c4b359a14f}</Project>
-      <Name>GameUtilities</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

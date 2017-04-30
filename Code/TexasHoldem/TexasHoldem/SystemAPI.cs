@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using Gaming;
 
-namespace Services
+namespace GameSystem
 {
     public interface SystemAPI
     {

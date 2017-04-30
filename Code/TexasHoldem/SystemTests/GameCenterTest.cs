@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using GameUtilities;
 using Gaming;
 using GameSystem;
-using Services;
 
 namespace SystemTests
 {
@@ -18,7 +16,7 @@ namespace SystemTests
         [SetUp]
         public void setUp()
         {
-            gameCenter =  new GameCenter();
+            gameCenter = GameCenter.GameCenterFactory.getInstance();
         }
 
         [TestCase]
@@ -51,9 +49,10 @@ namespace SystemTests
             ohadUser.Credit = 500;
             naorUser.Credit = 500;
             gameCenter.joinGame(game1, ohadUser , 200);
-            gameCenter.joinGame(game2, naorUser, 200);
+            Assert.AreEqual(true, gameCenter.joinGame(game2, naorUser, 200));
             List<Game> games = gameCenter.getAllActiveGamesByPlayerName("naor");
-            Assert.True(games.Count == 1 && games.ElementAt(0) == game2);
+            Assert.AreEqual(games.Count, 1);
+            Assert.True(games.ElementAt(0) == game2);
         }
 
         public void getAllActiveGamesByGamePreferenceTest()

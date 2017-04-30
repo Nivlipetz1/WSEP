@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GameUtilities;
 using Gaming;
 using GameSystem;
 using NUnit.Framework;
@@ -28,8 +27,8 @@ namespace AT
             UserProfile prof2 = new UserProfile("cbc", "123");
             prof1.Credit = 500;
             prof2.Credit = 500;
-            PlayingUser player1 = new PlayingUser(prof1, prof1.Credit, game1);
-            PlayingUser player2 = new PlayingUser(prof2, prof2.Credit, game1);
+            PlayingUser player1 = new PlayingUser(prof1.Username, prof1.Credit, game1);
+            PlayingUser player2 = new PlayingUser(prof2.Username, prof2.Credit, game1);
             game1.addPlayer(player2);
             var ex = Assert.Throws<InvalidOperationException>(() => game1.removePlayer(player1));
             Assert.That(ex.Message.Equals("Player not in game"));
@@ -40,7 +39,7 @@ namespace AT
         {
             UserProfile prof1 = new UserProfile("abc", "123");
             prof1.Credit = 500;
-            PlayingUser player1 = new PlayingUser(prof1, prof1.Credit, game1);
+            PlayingUser player1 = new PlayingUser(prof1.Username, prof1.Credit, game1);
             game1.addPlayer(player1);
             var ex = Assert.Throws<InvalidOperationException>(() => game1.StartGame());
             Assert.That(ex.Message.Equals("Can't start game with less than the minimum number of players"));
@@ -51,7 +50,7 @@ namespace AT
         {
             UserProfile prof = new UserProfile("abc", "123");
             prof.Credit = 500;
-            PlayingUser player = new PlayingUser(prof, prof.Credit, game1);
+            PlayingUser player = new PlayingUser(prof.Username, prof.Credit, game1);
 
             game1.addPlayer(player);
             Assert.IsNotEmpty(game1.GetPlayers());
@@ -64,7 +63,7 @@ namespace AT
         {
             UserProfile prof = new UserProfile("abc", "123");
             prof.Credit = 500;
-            SpectatingUser player = new SpectatingUser(prof, game1);
+            SpectatingUser player = new SpectatingUser(prof.Username, game1);
 
             game1.addSpectator(player);
             Assert.IsNotEmpty(game1.GetSpectators());
@@ -81,9 +80,9 @@ namespace AT
             prof1.Credit = 500;
             prof2.Credit = 500;
             prof3.Credit = 500;
-            PlayingUser player1 = new PlayingUser(prof1, prof1.Credit, game1);
-            PlayingUser player2 = new PlayingUser(prof2, prof2.Credit, game1);
-            PlayingUser player3 = new PlayingUser(prof3, prof3.Credit, game1);
+            PlayingUser player1 = new PlayingUser(prof1.Username, prof1.Credit, game1);
+            PlayingUser player2 = new PlayingUser(prof2.Username, prof2.Credit, game1);
+            PlayingUser player3 = new PlayingUser(prof3.Username, prof3.Credit, game1);
             game1.addPlayer(player1); 
             game1.addPlayer(player2);
             game1.addPlayer(player3);
@@ -106,9 +105,9 @@ namespace AT
             prof1.Credit = 500;
             prof2.Credit = 500;
             prof3.Credit = 500;
-            PlayingUser player1 = new PlayingUser(prof1, prof1.Credit, game1);
-            PlayingUser player2 = new PlayingUser(prof2, prof2.Credit, game1);
-            PlayingUser player3 = new PlayingUser(prof3, prof3.Credit, game1);
+            PlayingUser player1 = new PlayingUser(prof1.Username, prof1.Credit, game1);
+            PlayingUser player2 = new PlayingUser(prof2.Username, prof2.Credit, game1);
+            PlayingUser player3 = new PlayingUser(prof3.Username, prof3.Credit, game1);
             game1.addPlayer(player1);
             game1.addPlayer(player2);
             game1.addPlayer(player3);
@@ -130,9 +129,9 @@ namespace AT
             prof1.Credit = 500;
             prof2.Credit = 500;
             prof3.Credit = 500;
-            PlayingUser player1 = new PlayingUser(prof1, prof1.Credit, game1);
-            PlayingUser player2 = new PlayingUser(prof2, prof2.Credit, game1);
-            PlayingUser player3 = new PlayingUser(prof3, prof3.Credit, game1);
+            PlayingUser player1 = new PlayingUser(prof1.Username, prof1.Credit, game1);
+            PlayingUser player2 = new PlayingUser(prof2.Username, prof2.Credit, game1);
+            PlayingUser player3 = new PlayingUser(prof3.Username, prof3.Credit, game1);
             game1.addPlayer(player1);
             game1.addPlayer(player2);
             game1.addPlayer(player3);
@@ -155,9 +154,9 @@ namespace AT
             prof1.Credit = 500;
             prof2.Credit = 500;
             prof3.Credit = 500;
-            PlayingUser player1 = new PlayingUser(prof1, prof1.Credit, game1);
-            PlayingUser player2 = new PlayingUser(prof2, prof2.Credit, game1);
-            PlayingUser player3 = new PlayingUser(prof3, prof3.Credit, game1);
+            PlayingUser player1 = new PlayingUser(prof1.Username, prof1.Credit, game1);
+            PlayingUser player2 = new PlayingUser(prof2.Username, prof2.Credit, game1);
+            PlayingUser player3 = new PlayingUser(prof3.Username, prof3.Credit, game1);
             game1.addPlayer(player1);
             game1.addPlayer(player2);
             game1.addPlayer(player3);

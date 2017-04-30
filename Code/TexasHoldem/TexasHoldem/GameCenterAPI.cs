@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Gaming;
-using GameUtilities;
 
-namespace Services
+namespace GameSystem
 {
     public interface GameCenterInterface
     {

@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using GameSystem;
 using Gaming;
-using GameUtilities;
 using NUnit.Framework;
 using ServiceLayer;
 
@@ -50,10 +49,11 @@ namespace AT
             gc.createNewLeague(minRank);
             gc.createNewLeague(minRank + 20);
             UserProfile user = us.getUser("user");
+            PlayingUser pl = new PlayingUser(user.Username,1,null);
             user.Credit = minRank;
             gc.addUserToLeague(user, gc.getLeagueByRank(minRank));
             user.Credit = minRank + 10;
-            gc.updateLeagueToUser(user);
+            gc.updateLeagueToUser(pl);
             Assert.AreEqual(gc.getLeagueByRank(minRank), gc.getLeagueByUser(user));
         }
 
@@ -63,10 +63,11 @@ namespace AT
             gc.createNewLeague(minRank);
             gc.createNewLeague(minRank + 20);
             UserProfile user = us.getUser("user");
+            PlayingUser pl = new PlayingUser(user.Username, 1, null);
             user.Credit = minRank;
             gc.addUserToLeague(user, gc.getLeagueByRank(minRank));
             user.Credit = minRank + 30;
-            gc.updateLeagueToUser(user);
+            gc.updateLeagueToUser(pl);
             Assert.AreNotEqual(gc.getLeagueByRank(minRank), gc.getLeagueByUser(user));
         }
 
@@ -78,8 +79,27 @@ namespace AT
             UserProfile user = us.getUser("user");
             user.Credit = minRank + 20;
             Assert.True(gc.addUserToLeague(user, gc.getLeagueByRank(minRank + 10)));
-            user.Credit = minRank;
-            gc.updateLeagueToUser(user);
+            PlayingUser pl = new PlayingUser(user.Username, minRank + 20, null);
+
+            Game g = new Game(new GamePreferences());
+
+            UserProfile Omer = new UserProfile("Omer", "456");
+            gc.addUserToLeague(Omer, gc.getLeagueByRank(minRank + 10));
+
+            us.register(Omer.Username, Omer.Password);
+            PlayingUser OPlayer = new PlayingUser(Omer.Username, 1000, g);
+
+            g.addPlayer(OPlayer);
+            g.addPlayer(pl);
+
+
+            OPlayer.SetFakeUserInput(new Queue<string>(new[] { "5" , "10", "5" }));
+            pl.SetFakeUserInput(new Queue<string>(new[] { "0", "10" , "-1"}));
+
+            g.StartGame();
+            g.removePlayer(pl);
+
+            gc.updateLeagueToUser(pl);
             Assert.AreEqual(gc.getLeagueByRank(minRank), gc.getLeagueByUser(user));
         }
 

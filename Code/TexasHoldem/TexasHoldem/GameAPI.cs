@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Threading;
 using Gaming;
 
-namespace AT
+namespace GameSystem
 {
-    class Program
+    public abstract class GameAPI
     {
-        static void Main(string[] args)
-        {
-        }
+        public abstract void sendMessage();
+        public abstract void receiveMessage();
     }
 }
