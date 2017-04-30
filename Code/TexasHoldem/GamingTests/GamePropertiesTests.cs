@@ -50,7 +50,24 @@ namespace GamingTests
         [TestCase]
         public void MoreThanMaxPlayersJoinGame()
         {
-            Game g = new Game(new GamePreferences());
+
+            Assert.Throws(typeof(InvalidOperationException), delegate()
+            {
+                Game g = new Game(new GamePreferences(2, 2, 1, 2, 1, 1, 1, true));
+                UserProfile Niv = new UserProfile("Niv", "123");
+                UserProfile Omer = new UserProfile("Omer", "456");
+                UserProfile Naor = new UserProfile("Naor", "789");
+                UserProfile Ohad = new UserProfile("Ohad", "8");
+
+                PlayingUser nivPlayer = new PlayingUser(Niv, 1000, g);
+                PlayingUser OPlayer = new PlayingUser(Omer, 1000, g);
+                PlayingUser NPlayer = new PlayingUser(Naor, 1000, g);
+
+                g.addPlayer(nivPlayer);
+                g.addPlayer(OPlayer);
+                g.addPlayer(NPlayer);
+
+            });
 
         }
 
