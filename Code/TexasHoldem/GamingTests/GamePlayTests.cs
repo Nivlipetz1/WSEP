@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using Gaming;
-using GameUtilities;
+using GameSystem;
 
 namespace GamingTests
 {
@@ -24,9 +24,9 @@ namespace GamingTests
             UserProfile Omer = new UserProfile("Omer", "456");
             UserProfile Naor = new UserProfile("Naor", "789");
 
-            PlayingUser nivPlayer = new PlayingUser(Niv, 1000, g);
-            PlayingUser OPlayer = new PlayingUser(Omer, 1000, g);
-            PlayingUser NPlayer = new PlayingUser(Naor, 1000, g);
+            PlayingUser nivPlayer = new PlayingUser(Niv.Username, 1000, g);
+            PlayingUser OPlayer = new PlayingUser(Omer.Username, 1000, g);
+            PlayingUser NPlayer = new PlayingUser(Naor.Username, 1000, g);
 
             g.addPlayer(nivPlayer);
             g.addPlayer(OPlayer);
@@ -51,9 +51,9 @@ namespace GamingTests
             UserProfile Omer = new UserProfile("Omer", "456");
             UserProfile Naor = new UserProfile("Naor", "789");
 
-            PlayingUser nivPlayer = new PlayingUser(Niv, 1000, g);
-            PlayingUser OPlayer = new PlayingUser(Omer, 1000, g);
-            PlayingUser NPlayer = new PlayingUser(Naor, 1000, g);
+            PlayingUser nivPlayer = new PlayingUser(Niv.Username, 1000, g);
+            PlayingUser OPlayer = new PlayingUser(Omer.Username, 1000, g);
+            PlayingUser NPlayer = new PlayingUser(Naor.Username, 1000, g);
 
             g.addPlayer(nivPlayer);
             g.addPlayer(OPlayer);
@@ -88,9 +88,9 @@ namespace GamingTests
             UserProfile Omer = new UserProfile("Omer", "456");
             UserProfile Naor = new UserProfile("Naor", "789");
 
-            PlayingUser nivPlayer = new PlayingUser(Niv, 1000, g);
-            PlayingUser OPlayer = new PlayingUser(Omer, 1000, g);
-            PlayingUser NPlayer = new PlayingUser(Naor, 1000, g);
+            PlayingUser nivPlayer = new PlayingUser(Niv.Username, 1000, g);
+            PlayingUser OPlayer = new PlayingUser(Omer.Username, 1000, g);
+            PlayingUser NPlayer = new PlayingUser(Naor.Username, 1000, g);
 
             g.addPlayer(nivPlayer);
             g.addPlayer(OPlayer);
@@ -115,9 +115,9 @@ namespace GamingTests
             UserProfile Omer = new UserProfile("Omer", "456");
             UserProfile Naor = new UserProfile("Naor", "789");
 
-            PlayingUser nivPlayer = new PlayingUser(Niv, 1000, g);
-            PlayingUser OPlayer = new PlayingUser(Omer, 1000, g);
-            PlayingUser NPlayer = new PlayingUser(Naor, 1000, g);
+            PlayingUser nivPlayer = new PlayingUser(Niv.Username, 1000, g);
+            PlayingUser OPlayer = new PlayingUser(Omer.Username, 1000, g);
+            PlayingUser NPlayer = new PlayingUser(Naor.Username, 1000, g);
 
             g.addPlayer(nivPlayer);
             g.addPlayer(OPlayer);
@@ -142,9 +142,9 @@ namespace GamingTests
             UserProfile Omer = new UserProfile("Omer", "456");
             UserProfile Naor = new UserProfile("Naor", "789");
 
-            PlayingUser nivPlayer = new PlayingUser(Niv, 1000, g);
-            PlayingUser OPlayer = new PlayingUser(Omer, 1000, g);
-            PlayingUser NPlayer = new PlayingUser(Naor, 1000, g);
+            PlayingUser nivPlayer = new PlayingUser(Niv.Username, 1000, g);
+            PlayingUser OPlayer = new PlayingUser(Omer.Username, 1000, g);
+            PlayingUser NPlayer = new PlayingUser(Naor.Username, 1000, g);
 
             g.addPlayer(nivPlayer);
             g.addPlayer(OPlayer);
@@ -168,9 +168,9 @@ namespace GamingTests
             UserProfile Omer = new UserProfile("Omer", "456");
             UserProfile Naor = new UserProfile("Naor", "789");
 
-            PlayingUser nivPlayer = new PlayingUser(Niv, 1000, g);
-            PlayingUser OPlayer = new PlayingUser(Omer, 1000, g);
-            PlayingUser NPlayer = new PlayingUser(Naor, 1000, g);
+            PlayingUser nivPlayer = new PlayingUser(Niv.Username, 1000, g);
+            PlayingUser OPlayer = new PlayingUser(Omer.Username, 1000, g);
+            PlayingUser NPlayer = new PlayingUser(Naor.Username, 1000, g);
 
             g.addPlayer(nivPlayer);
             g.addPlayer(OPlayer);
@@ -202,9 +202,9 @@ namespace GamingTests
             UserProfile Omer = new UserProfile("Omer", "456");
             UserProfile Naor = new UserProfile("Naor", "789");
 
-            PlayingUser nivPlayer = new PlayingUser(Niv, 1000, g);
-            PlayingUser OPlayer = new PlayingUser(Omer, 1000, g);
-            PlayingUser NPlayer = new PlayingUser(Naor, 1000, g);
+            PlayingUser nivPlayer = new PlayingUser(Niv.Username, 1000, g);
+            PlayingUser OPlayer = new PlayingUser(Omer.Username, 1000, g);
+            PlayingUser NPlayer = new PlayingUser(Naor.Username, 1000, g);
 
             g.addPlayer(nivPlayer);
             g.addPlayer(OPlayer);
@@ -229,9 +229,9 @@ namespace GamingTests
             UserProfile Omer = new UserProfile("Omer", "456");
             UserProfile Naor = new UserProfile("Naor", "789");
 
-            PlayingUser nivPlayer = new PlayingUser(Niv, 1000, g);
-            PlayingUser OPlayer = new PlayingUser(Omer, 1000, g);
-            PlayingUser NPlayer = new PlayingUser(Naor, 1000, g);
+            PlayingUser nivPlayer = new PlayingUser(Niv.Username, 1000, g);
+            PlayingUser OPlayer = new PlayingUser(Omer.Username, 1000, g);
+            PlayingUser NPlayer = new PlayingUser(Naor.Username, 1000, g);
 
             g.addPlayer(nivPlayer);
             g.addPlayer(OPlayer);
@@ -260,11 +260,11 @@ namespace GamingTests
 
 
 
-            PlayingUser nivPlayer = new PlayingUser(Niv, 1000, g);
-            PlayingUser OPlayer = new PlayingUser(Omer, 1000, g);
-            PlayingUser NPlayer = new PlayingUser(Naor, 1000, g);
-            PlayingUser KPlayer = new PlayingUser(Koren, 1000, g);
-            PlayingUser OhPlayer = new PlayingUser(Ohad, 1000, g);
+            PlayingUser nivPlayer = new PlayingUser(Niv.Username, 1000, g);
+            PlayingUser OPlayer = new PlayingUser(Omer.Username, 1000, g);
+            PlayingUser NPlayer = new PlayingUser(Naor.Username, 1000, g);
+            PlayingUser KPlayer = new PlayingUser(Koren.Username, 1000, g);
+            PlayingUser OhPlayer = new PlayingUser(Ohad.Username, 1000, g);
 
             g.addPlayer(nivPlayer);
             g.addPlayer(OPlayer);
@@ -296,11 +296,11 @@ namespace GamingTests
             UserProfile Koren = new UserProfile("Koren", "9");
             UserProfile Ohad = new UserProfile("Ohad", "8");
 
-            PlayingUser nivPlayer = new PlayingUser(Niv, 1000, g);
-            PlayingUser OPlayer = new PlayingUser(Omer, 1000, g);
-            PlayingUser NPlayer = new PlayingUser(Naor, 1000, g);
-            PlayingUser KPlayer = new PlayingUser(Koren, 1000, g);
-            PlayingUser OhPlayer = new PlayingUser(Ohad, 1000, g);
+            PlayingUser nivPlayer = new PlayingUser(Niv.Username, 1000, g);
+            PlayingUser OPlayer = new PlayingUser(Omer.Username, 1000, g);
+            PlayingUser NPlayer = new PlayingUser(Naor.Username, 1000, g);
+            PlayingUser KPlayer = new PlayingUser(Koren.Username, 1000, g);
+            PlayingUser OhPlayer = new PlayingUser(Ohad.Username, 1000, g);
 
             g.addPlayer(nivPlayer);
             g.addPlayer(OPlayer);

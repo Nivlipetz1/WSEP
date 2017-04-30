@@ -3,9 +3,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using GameUtilities;
 using GameSystem;
 using System;
+using Gaming;
 
 namespace SystemTests
 {
@@ -15,7 +15,7 @@ namespace SystemTests
         [TestCase]
         public void CreateNewLeagueTest()
         {
-            GameCenter gc = new GameCenter();
+            GameCenter gc = GameCenter.GameCenterFactory.getInstance();
             Dictionary<int,League> le = gc.getLeagues();
             Assert.True(gc.createNewLeague(10));
             Assert.True(le.Keys.Contains(10));
@@ -23,16 +23,16 @@ namespace SystemTests
         [TestCase]
         public void CreateNewLeagueWithSameRankTest()
         {
-            GameCenter gc = new GameCenter();
+            GameCenter gc = GameCenter.GameCenterFactory.getInstance();
             Dictionary<int,League> le = gc.getLeagues();
             Assert.True(gc.createNewLeague(10));
             Assert.False(gc.createNewLeague(10));
-            Assert.True(le.Count==1);
+            Assert.True(le.Count==2);
         }
         [TestCase]
         public void addUserToAppropriateLeague()
         {
-            GameCenter gc = new GameCenter();
+            GameCenter gc = GameCenter.GameCenterFactory.getInstance();
             Assert.True(gc.createNewLeague(10));
             League l = gc.getLeagueByRank(10);
             UserProfile u = new UserProfile("ohad", "dali");
@@ -43,7 +43,7 @@ namespace SystemTests
         [TestCase]
         public void addUserToNotAppropriateLeague()
         {
-            GameCenter gc = new GameCenter();
+            GameCenter gc = GameCenter.GameCenterFactory.getInstance();
             Assert.True(gc.createNewLeague(10));
             League l = gc.getLeagueByRank(10);
             UserProfile u = new UserProfile("ohad", "dali");
@@ -54,7 +54,7 @@ namespace SystemTests
         [TestCase]
         public void removeExistedUser()
         {
-            GameCenter gc = new GameCenter();
+            GameCenter gc = GameCenter.GameCenterFactory.getInstance();
             Assert.True(gc.createNewLeague(10));
             League l = gc.getLeagueByRank(10);
             UserProfile u = new UserProfile("ohad", "dali");
@@ -67,7 +67,7 @@ namespace SystemTests
         [TestCase]
         public void removeUnExistedUser()
         {
-            GameCenter gc = new GameCenter();
+            GameCenter gc = GameCenter.GameCenterFactory.getInstance();
             Assert.True(gc.createNewLeague(10));
             League l = gc.getLeagueByRank(10);
             UserProfile u = new UserProfile("ohad", "dali");
@@ -77,7 +77,7 @@ namespace SystemTests
         [TestCase]
         public void changeLeagueMinimumRankTest()
         {
-            GameCenter gc = new GameCenter();
+            GameCenter gc = GameCenter.GameCenterFactory.getInstance();
             Assert.True(gc.createNewLeague(10));
             League l = gc.getLeagueByRank(10);
             UserProfile u = new UserProfile("ohad", "dali");
@@ -91,7 +91,7 @@ namespace SystemTests
         [TestCase]
         public void changeLeagueMinimumRank2Test()
         {
-            GameCenter gc = new GameCenter();
+            GameCenter gc = GameCenter.GameCenterFactory.getInstance();
             Assert.True(gc.createNewLeague(10));
             League l = gc.getLeagueByRank(10);
             UserProfile u = new UserProfile("ohad", "dali");
@@ -105,7 +105,7 @@ namespace SystemTests
         [TestCase]
         public void changeLeagueMinimumRankToExistedLeagueTest()
         {
-            GameCenter gc = new GameCenter();
+            GameCenter gc = GameCenter.GameCenterFactory.getInstance();
             Assert.True(gc.createNewLeague(10));
             Assert.True(gc.createNewLeague(15));
             League l = gc.getLeagueByRank(10);
@@ -114,35 +114,37 @@ namespace SystemTests
         [TestCase]
         public void updateLeaguesTest()
         {
-            GameCenter gc = new GameCenter();
+            GameCenter gc = GameCenter.GameCenterFactory.getInstance();
             gc.createNewLeague(50);
             gc.createNewLeague(30);
             UserProfile u = new UserProfile("Ohad", "Dali");
+            PlayingUser up = new PlayingUser(u.Username, 5, null);
             u.Credit = 60;
             gc.addUserToLeague(u, gc.getLeagueByRank(50));
             u.Credit = 45;
-            gc.updateLeagueToUser(u);
+            gc.updateLeagueToUser(up);
             Assert.AreEqual(gc.getLeagueByRank(30), gc.getLeagueByUser(u));
             Assert.False(gc.getLeagueByRank(50).isUser(u));
         }
         [TestCase]
         public void updateLeaguesWithoutChangeTest()
         {
-            GameCenter gc = new GameCenter();
+            GameCenter gc = GameCenter.GameCenterFactory.getInstance();
             gc.createNewLeague(50);
             gc.createNewLeague(30);
             UserProfile u = new UserProfile("Ohad", "Dali");
+            PlayingUser up = new PlayingUser(u.Username, 5, null);
             u.Credit = 60;
             gc.addUserToLeague(u, gc.getLeagueByRank(50));
             u.Credit = 50;
-            gc.updateLeagueToUser(u);
+            gc.updateLeagueToUser(up);
             Assert.AreEqual(gc.getLeagueByRank(50), gc.getLeagueByUser(u));
             Assert.True(gc.getLeagueByRank(50).isUser(u));
         }
         [TestCase]
         public void setUsersTest()
         {
-            GameCenter gc = new GameCenter();
+            GameCenter gc = GameCenter.GameCenterFactory.getInstance();
             Dictionary<String, UserProfile> user = new Dictionary<string, UserProfile>();
             gc.setUsers(user.Values);
             UserProfile u = new UserProfile("aaa", "bbb");

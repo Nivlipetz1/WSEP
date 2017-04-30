@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using Gaming;
-using GameUtilities;
+using GameSystem;
+
 
 namespace GamingTests
 {
@@ -22,8 +23,8 @@ namespace GamingTests
             UserProfile Niv = new UserProfile("Niv", "123");
             UserProfile Omer = new UserProfile("Omer", "456");
 
-            PlayingUser nivPlayer = new PlayingUser(Niv, 1000, g);
-            PlayingUser OPlayer = new PlayingUser(Omer, 1000, g);
+            PlayingUser nivPlayer = new PlayingUser(Niv.Username, 1000, g);
+            PlayingUser OPlayer = new PlayingUser(Omer.Username, 1000, g);
 
             g.addPlayer(nivPlayer);
             g.addPlayer(OPlayer);
@@ -34,8 +35,8 @@ namespace GamingTests
             g.StartGame();
 
             IDictionary<string, int> playerBets = new Dictionary<string, int>();
-            playerBets.Add(nivPlayer.GetAccount().Username, 5);
-            playerBets.Add(OPlayer.GetAccount().Username, 10);
+            playerBets.Add(nivPlayer.GetUserName(), 5);
+            playerBets.Add(OPlayer.GetUserName(), 10);
             BetMove bm = new BetMove(playerBets);
             BetMove compareToBetMove = ((BetMove)logger.GetMoves()[2]); //third move in game -> bigblind (first = start game, second = small blind, third=bigblind)
 

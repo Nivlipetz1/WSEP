@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using Gaming;
-using GameUtilities;
+using GameSystem;
 
 namespace Gaming
 {
@@ -26,7 +26,7 @@ namespace Gaming
         {
             Game g = new Game(new GamePreferences());
             UserProfile Niv = new UserProfile("Niv", "123");
-            PlayingUser nivPlayer = new PlayingUser(Niv, 1000, g);
+            PlayingUser nivPlayer = new PlayingUser(Niv.Username, 1000, g);
 
             Assert.IsEmpty(g.GetPlayers());
             g.addPlayer(nivPlayer);
@@ -38,7 +38,7 @@ namespace Gaming
         {
             Game g = new Game(new GamePreferences());
             UserProfile Niv = new UserProfile("Niv", "123");
-            SpectatingUser nivPlayer = new SpectatingUser(Niv, g);
+            SpectatingUser nivPlayer = new SpectatingUser(Niv.Username, g);
 
             Assert.IsEmpty(g.GetSpectators());
             g.addSpectator(nivPlayer);
@@ -50,9 +50,9 @@ namespace Gaming
         {
             Game g = new Game(new GamePreferences());
             UserProfile Niv = new UserProfile("Niv", "123");
-            SpectatingUser nivPlayer = new SpectatingUser(Niv, g);
+            SpectatingUser nivPlayer = new SpectatingUser(Niv.Username, g);
             UserProfile Omer = new UserProfile("Omer", "123");
-            SpectatingUser omerPlayer = new SpectatingUser(Omer, g);
+            SpectatingUser omerPlayer = new SpectatingUser(Omer.Username, g);
             g.addSpectator(nivPlayer);
             g.addSpectator(omerPlayer);
             nivPlayer.SendMessage("hello world!");
@@ -68,7 +68,7 @@ namespace Gaming
             {
                 Game g = new Game(new GamePreferences(8, 2, 5, 10, 1, 2, 3, false));
                 UserProfile Niv = new UserProfile("Niv", "123");
-                SpectatingUser N = new SpectatingUser(Niv, g);
+                SpectatingUser N = new SpectatingUser(Niv.Username, g);
                 Assert.False(g.GetGamePref().AllowSpec());
                 g.addSpectator(N);
             });
@@ -79,7 +79,7 @@ namespace Gaming
         {
             Game g = new Game(new GamePreferences());
             UserProfile Niv = new UserProfile("Niv", "123");
-            PlayingUser nivPlayer = new PlayingUser(Niv, 1000, g);
+            PlayingUser nivPlayer = new PlayingUser(Niv.Username, 1000, g);
 
             g.addPlayer(nivPlayer);
             Assert.IsNotEmpty(g.GetPlayers());
@@ -92,7 +92,7 @@ namespace Gaming
         {
             Game g = new Game(new GamePreferences());
             UserProfile Niv = new UserProfile("Niv", "123");
-            SpectatingUser nivPlayer = new SpectatingUser(Niv, g);
+            SpectatingUser nivPlayer = new SpectatingUser(Niv.Username, g);
 
             g.addSpectator(nivPlayer);
             Assert.IsNotEmpty(g.GetSpectators());

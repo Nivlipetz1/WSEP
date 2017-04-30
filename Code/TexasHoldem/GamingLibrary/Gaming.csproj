@@ -65,10 +65,6 @@
       <Project>{34810670-13d7-4d6c-be96-78c2382a793c}</Project>
       <Name>Logger</Name>
     </ProjectReference>
-    <ProjectReference Include="..\User\GameUtilities.csproj">
-      <Project>{ea8f8ce0-841a-433a-a6c5-24c4b359a14f}</Project>
-      <Name>GameUtilities</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

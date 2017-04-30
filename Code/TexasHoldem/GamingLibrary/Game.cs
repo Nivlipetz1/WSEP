@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GameUtilities;
 using Logger;
 
 namespace Gaming
@@ -23,7 +22,7 @@ namespace Gaming
         private Card[] cards;
         private GameChat chat;
         private bool gameEnded;
-        public delegate void Update(UserProfile user);
+        public delegate void Update(PlayingUser user);
         public event Update evt;
 
         public Game(GamePreferences gp)
@@ -82,7 +81,7 @@ namespace Gaming
             {
                 PlayerHand ph = gameDeck.drawPlayerHand();
                 player.SetHand(ph);
-                playerHands.Add(player.GetAccount().Username, ph);
+                playerHands.Add(player.GetUserName(), ph); //only username
             }
 
 
@@ -173,7 +172,7 @@ namespace Gaming
             foreach (PlayingUser player in players)
             {
                 player.SetStatus("Active");
-                playerHands.Remove(player.GetAccount().Username);
+                playerHands.Remove(player.GetUserName());
                 playerBets[player] = 0;
             }
 
@@ -243,7 +242,7 @@ namespace Gaming
             IDictionary<string, int> playerBetsString = new Dictionary<string, int>();
             foreach (PlayingUser player in playerBets.Keys)
             {
-                playerBetsString.Add(player.GetAccount().Username, playerBets[player]);
+                playerBetsString.Add(player.GetUserName(), playerBets[player]); //username
             }
             PushMoveToObservers(new BetMove(playerBetsString));
         }
@@ -253,7 +252,7 @@ namespace Gaming
             IDictionary<string, int> playerBetsString = new Dictionary<string, int>();
             foreach (PlayingUser player in playerBets.Keys)
             {
-                playerBetsString.Add(player.GetAccount().Username, playerBets[player]);
+                playerBetsString.Add(player.GetUserName(), playerBets[player]);//username
             }
             PushMoveToObservers(new GameStartMove(playerBetsString));
         }
@@ -280,7 +279,7 @@ namespace Gaming
                     else //fold
                     {
                         playerBets[currentUser] = bet;
-                        playerHands.Remove(currentUser.GetAccount().Username);
+                        playerHands.Remove(currentUser.GetUserName());//username
                     }
                     PushBetMove();
                     if (DidEveryoneFold())
@@ -344,7 +343,7 @@ namespace Gaming
             if (players.Count == gamePref.GetMaxPlayers())
                 throw new InvalidOperationException("Maximum number of players reached");
 
-            player.GetAccount().Credit -= player.GetCredit();
+            //player.GetAccount().Credit -= player.GetCredit(); //gamecenter
             players.Add(player);
             playerBets.Add(player, 0);
         }
@@ -357,13 +356,13 @@ namespace Gaming
             if (!players.Contains(player))
                 throw new InvalidOperationException("Player not in game");
 
-            player.GetAccount().Credit += player.GetCredit();
+            //player.GetAccount().Credit += player.GetCredit(); //gamecenter
             players.Remove(player);
             playerBets.Remove(player);
 
             var e = evt;
             if (e != null)
-                evt(player.GetAccount());
+                evt(player);
 
             player = null;
 
@@ -468,7 +467,7 @@ namespace Gaming
             return pot[0];
         }
 
-        public List<UserProfile> GetUserProfiles()
+        /*public List<UserProfile> GetUserProfiles() //dont need
         {
             List<UserProfile> users = new List<UserProfile>();
             foreach (PlayingUser player in players)
@@ -476,7 +475,7 @@ namespace Gaming
                 users.Add(player.GetAccount());
             }
             return users;
-        }
+        }*/
 
         public int GetNumberOfPlayers()
         {

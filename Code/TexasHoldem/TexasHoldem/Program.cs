@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using Gaming;
-using GameUtilities;
+using GameSystem;
 
 namespace GameSystem
 {
@@ -24,11 +24,11 @@ namespace GameSystem
 
 
 
-            PlayingUser nivPlayer = new PlayingUser(Niv, 1000, g);
-            PlayingUser OPlayer = new PlayingUser(Omer, 1000, g);
-            PlayingUser NPlayer = new PlayingUser(Naor, 1000, g);
-            PlayingUser KPlayer = new PlayingUser(Koren, 1000, g);
-            PlayingUser OhPlayer = new PlayingUser(Ohad, 1000, g);
+            PlayingUser nivPlayer = new PlayingUser(Niv.Username, 1000, g);
+            PlayingUser OPlayer = new PlayingUser(Omer.Username, 1000, g);
+            PlayingUser NPlayer = new PlayingUser(Naor.Username, 1000, g);
+            PlayingUser KPlayer = new PlayingUser(Koren.Username, 1000, g);
+            PlayingUser OhPlayer = new PlayingUser(Ohad.Username, 1000, g);
 
             g.addPlayer(nivPlayer);
             g.addPlayer(OPlayer);

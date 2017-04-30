@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using GameSystem;
 using NUnit.Framework;
-using GameUtilities;
 using System.Drawing;
 using ServiceLayer;
 

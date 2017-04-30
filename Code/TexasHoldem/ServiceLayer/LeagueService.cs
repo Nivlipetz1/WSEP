@@ -1,17 +1,16 @@
-﻿using Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameSystem;
-using GameUtilities;
+using Gaming;
 
 namespace ServiceLayer
 {
     public class LeagueService : LeagueAPI
     {
-        LeagueAPI league = new GameCenter();
+        LeagueAPI league = GameCenter.GameCenterFactory.getInstance();
 
         public bool addUserToLeague(UserProfile user, League league)
         {
@@ -48,7 +47,7 @@ namespace ServiceLayer
             return this.league.removeUserFromLeague(user, league);
         }
 
-        public void updateLeagueToUser(UserProfile user)
+        public void updateLeagueToUser(PlayingUser user)
         {
             league.updateLeagueToUser(user);
         }

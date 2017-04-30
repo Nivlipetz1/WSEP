@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using Gaming;
-using GameUtilities;
 
 namespace GamingTests
 {

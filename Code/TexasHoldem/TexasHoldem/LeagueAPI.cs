@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GameSystem;
+using Gaming;
 
-namespace Services
+namespace GameSystem
 {
     public interface LeagueAPI
     {
@@ -16,6 +16,6 @@ namespace Services
         League getLeagueByUser(UserProfile user);
         League getLeagueByRank(int Rank);
         Dictionary<int, League> getLeagues();
-        void updateLeagueToUser(UserProfile user);
+        void updateLeagueToUser(PlayingUser user);
     }
 }

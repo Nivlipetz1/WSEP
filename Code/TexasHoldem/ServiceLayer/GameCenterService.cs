@@ -1,10 +1,8 @@
-﻿using Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GameUtilities;
 using Gaming;
 using GameSystem;
 
@@ -12,7 +10,7 @@ namespace ServiceLayer
 {
     public class GameCenterService : GameCenterInterface
     {
-        private GameCenterInterface gc = new GameCenter();
+        private GameCenterInterface gc = GameCenter.GameCenterFactory.getInstance();
 
         public Game createGame(GamePreferences preferecnces)
         {

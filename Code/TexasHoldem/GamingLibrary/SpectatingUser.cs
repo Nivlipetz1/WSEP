@@ -3,31 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GameUtilities;
 
 namespace Gaming
 {
     public class SpectatingUser
     {
 
-        private UserProfile account;
+        private string userName;
         protected Game game;
         private Card[] cards;
         private IDictionary<string, int> playerBets;
         private IDictionary<string, PlayerHand> playerHands;
         private List<string> messages;
 
-        public SpectatingUser(UserProfile user, Game game)
+        public SpectatingUser(string name, Game game)
         {
-            account = user;
+            userName = name;
             this.game = game;
             messages = new List<string>();
         }
 
 
-        public UserProfile GetAccount()
+        public string GetUserName()
         {
-            return account;
+            return userName;
         }
 
         public void PushMove(Move m)

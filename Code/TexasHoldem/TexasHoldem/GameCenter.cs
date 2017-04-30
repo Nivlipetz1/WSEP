@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GameUtilities;
 using Gaming;
-using Services;
 
 namespace GameSystem
 {
@@ -15,6 +13,24 @@ namespace GameSystem
         private ICollection<UserProfile> Users;
         private UserProfile HighestRankUser=null;
 
+
+
+        public class GameCenterFactory
+        {
+            private static GameCenter instance = null;
+
+            public static GameCenter getInstance()
+            {
+                if (instance == null)
+                    return new GameCenter();
+                return instance;
+            }
+        }
+
+        private GameCenter()
+        {
+            leagues.Add(0, new League(0, "default"));
+        }
 
         public Game createGame(GamePreferences preferecnces)
         {
@@ -35,8 +51,9 @@ namespace GameSystem
             List<Game> activeGames = new List<Game>();
             foreach (Game game in games.Where(game => game.GetGamePref().GetStatus().Equals("active")).ToList())
             {
-                List<UserProfile> players = game.GetUserProfiles();
-                if (players.Where(u => ((UserProfile)u).Username.Equals(playerName)).ToList().Count > 0)
+                List<PlayingUser> players = game.GetPlayers();
+
+                if (players.Where(u => ((PlayingUser)u).GetUserName().Equals(playerName)).ToList().Count > 0)
                     activeGames.Add(game);
             }
 
@@ -89,7 +106,7 @@ namespace GameSystem
             if (game.GetNumberOfPlayers() == game.GetGamePref().GetMaxPlayers())
                 return false;
 
-            PlayingUser playingUser = new PlayingUser(u, credit, game);
+            PlayingUser playingUser = new PlayingUser(u.Username, credit, game);
             game.addPlayer(playingUser);
 
             u.Credit = u.Credit - credit;
@@ -101,7 +118,7 @@ namespace GameSystem
             if (!game.GetGamePref().AllowSpec())
                 return false;
 
-            SpectatingUser spectatingUser = new SpectatingUser(u, game);
+            SpectatingUser spectatingUser = new SpectatingUser(u.Username, game);
             game.addSpectator(spectatingUser);
 
             return true;
@@ -178,8 +195,12 @@ namespace GameSystem
                     HighestRankUser = user;
             }
         }
-        public void updateLeagueToUser(UserProfile user)
+        public void updateLeagueToUser(PlayingUser playingUser)
         {
+
+            UserProfile user = GetUserByName(playingUser.GetUserName());
+            user.Credit += playingUser.GetCredit();
+            
             League currLeague = getLeagueByUser(user);
             if (HighestRankUser==null ||user.Credit > HighestRankUser.Credit)
                 HighestRankUser = user;
@@ -210,6 +231,18 @@ namespace GameSystem
         {
             return leagues;
         }
+        
+        public UserProfile GetUserByName(string username){
+            foreach (UserProfile user in Users)
+            {
+                if (user.Username == username)
+                    return user;
+            }
+
+            return null;
+        }
+
+
 
 
     }
