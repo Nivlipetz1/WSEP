@@ -118,11 +118,15 @@ namespace SystemTests
             gc.createNewLeague(50);
             gc.createNewLeague(30);
             UserProfile u = new UserProfile("Ohad", "Dali");
-            PlayingUser up = new PlayingUser(u.Username, 5, null);
+            List<UserProfile> users = new List<UserProfile>();
+            users.Add(u);
+            gc.setUsers(users);
+            PlayingUser up = new PlayingUser(u.Username, 0, null);
             u.Credit = 60;
             gc.addUserToLeague(u, gc.getLeagueByRank(50));
             u.Credit = 45;
             gc.updateLeagueToUser(up);
+            League l = gc.getLeagueByUser(u);
             Assert.AreEqual(gc.getLeagueByRank(30), gc.getLeagueByUser(u));
             Assert.False(gc.getLeagueByRank(50).isUser(u));
         }
@@ -133,6 +137,9 @@ namespace SystemTests
             gc.createNewLeague(50);
             gc.createNewLeague(30);
             UserProfile u = new UserProfile("Ohad", "Dali");
+            List<UserProfile> users = new List<UserProfile>();
+            users.Add(u);
+            gc.setUsers(users);
             PlayingUser up = new PlayingUser(u.Username, 5, null);
             u.Credit = 60;
             gc.addUserToLeague(u, gc.getLeagueByRank(50));

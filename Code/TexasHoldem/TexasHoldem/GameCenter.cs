@@ -22,13 +22,14 @@ namespace GameSystem
             public static GameCenter getInstance()
             {
                 if (instance == null)
-                    return new GameCenter();
+                    return instance=new GameCenter();
                 return instance;
             }
         }
 
         private GameCenter()
         {
+            Users = new List<UserProfile>();
             leagues.Add(0, new League(0, "default"));
         }
 
@@ -211,7 +212,8 @@ namespace GameSystem
                 {
                     currLeague.removeUser(user);
                     league.addUser(user);
-                    return;
+                    currLeague = league;
+                   // return;
                 }
             }
         }

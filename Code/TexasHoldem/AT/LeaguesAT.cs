@@ -21,7 +21,7 @@ namespace AT
         public void before()
         {
             gc = new LeagueService();
-            us = GameSystem.TexasHoldemSystem.userSystemFactory.getInstance();
+            us = TexasHoldemSystem.userSystemFactory.getInstance();
             us.register("user", "123");
             us.login("user", "123");
         }
@@ -49,7 +49,7 @@ namespace AT
             gc.createNewLeague(minRank);
             gc.createNewLeague(minRank + 20);
             UserProfile user = us.getUser("user");
-            PlayingUser pl = new PlayingUser(user.Username,1,null);
+            PlayingUser pl = new PlayingUser(user.Username,0,null);
             user.Credit = minRank;
             gc.addUserToLeague(user, gc.getLeagueByRank(minRank));
             user.Credit = minRank + 10;
@@ -98,8 +98,10 @@ namespace AT
 
             g.StartGame();
             g.removePlayer(pl);
-
+            user.Credit = 5; //TODO The playing user in not losing in the game.To make him lose money.
+            List<Move> moves = g.GetGameReplay();
             gc.updateLeagueToUser(pl);
+            League l = gc.getLeagueByUser(user);
             Assert.AreEqual(gc.getLeagueByRank(minRank), gc.getLeagueByUser(user));
         }
 

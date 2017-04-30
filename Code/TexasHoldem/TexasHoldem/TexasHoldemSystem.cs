@@ -18,7 +18,7 @@ namespace GameSystem
             public  static TexasHoldemSystem getInstance()
             {
                 if (instance == null)
-                    return new TexasHoldemSystem();
+                    return instance=new TexasHoldemSystem();
                 return instance;
             }
         }
