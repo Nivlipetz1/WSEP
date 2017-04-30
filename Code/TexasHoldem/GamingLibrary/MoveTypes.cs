@@ -34,23 +34,6 @@ namespace Gaming
         }
     }
 
-    public class RevealCardsMove : Move
-    {
-
-        IDictionary<string, PlayerHand> playerHands;
-
-
-        public RevealCardsMove(IDictionary<string, PlayerHand> playerHands)
-        {
-            this.playerHands = playerHands;
-        }
-
-        public override void update(ref IDictionary<string, int> playerBets, ref Card[] cards, ref IDictionary<string, PlayerHand> playerHands)
-        {
-            playerHands = this.playerHands;
-        }
-    }
-
     public class BetMove : Move
     {
         IDictionary<string, int> playerBets;
