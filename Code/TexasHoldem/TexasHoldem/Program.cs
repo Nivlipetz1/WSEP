@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using Gaming;
 using GameUtilities;
+using Logger;
 
 namespace TexasHoldemSystem
 {

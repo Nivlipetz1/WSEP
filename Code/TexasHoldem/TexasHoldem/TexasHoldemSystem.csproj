@@ -63,6 +63,10 @@
       <Project>{2972ace2-bf33-4f5f-990f-ca94de288cd4}</Project>
       <Name>Gaming</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Logger\Logger.csproj">
+      <Project>{34810670-13d7-4d6c-be96-78c2382a793c}</Project>
+      <Name>Logger</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Services\Services.csproj">
       <Project>{02b2ae82-1eee-44ad-a748-d79ebee90463}</Project>
       <Name>Services</Name>

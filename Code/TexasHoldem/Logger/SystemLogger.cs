@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,9 +10,9 @@ namespace Logger
 {
     public class SystemLogger
     {
-        public void Log(string message , string file)
+        public void Log(string message , string fileName)
         {
-            using (StreamWriter w = File.AppendText(file))
+            using (StreamWriter w = File.AppendText(fileName))
             {
                 Log(message, w);
             }
@@ -27,9 +28,9 @@ namespace Logger
             w.WriteLine("-------------------------------");
         }
 
-        public string getLogFile(string file)
+        public string getLogFile(string fileName)
         {
-            using (StreamReader r = File.OpenText(file))
+            using (StreamReader r = File.OpenText(fileName))
             {
                 return readLog(r);
             }
