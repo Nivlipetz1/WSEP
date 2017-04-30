@@ -17,6 +17,8 @@ namespace AT
         GameCenterService gc;
         GameSystem.TexasHoldemSystem us;
         UserProfile userProf;
+        UserProfile userProf2;
+        UserProfile userProf3;
         GamePreferences prefs;
 
         [SetUp]
@@ -31,6 +33,13 @@ namespace AT
             us.register("abc", "123");
             us.login("abc", "123");
             userProf = us.getUser("abc");
+            us.register("abc2", "123");
+            us.login("abc2", "123");
+            userProf2 = us.getUser("abc2");
+            us.register("abc3", "123");
+            us.login("abc3", "123");
+            userProf3 = us.getUser("abc3");
+
         }
 
         [TestCase]
@@ -67,12 +76,17 @@ namespace AT
         public void InValid_joinGame_MaxPlayers()
         {
             userProf.Credit = 50;
-            GamePreferences prefs1 = new GamePreferences(0, 2, 5, 12, 1, 20, 3, false);
+            userProf2.Credit = 50;
+            userProf3.Credit = 50;
+
+            GamePreferences prefs1 = new GamePreferences(2, 2, 5, 12, 1, 20, 3, false);
             gc.createGame(prefs1);
             Game g = gc.getAllActiveGamesByGamePreference(prefs1)[0];
-            int NumberOfPlayersBefore = g.GetNumberOfPlayers();
-            Assert.False(gc.joinGame(g, userProf, 30));
-            Assert.AreEqual(g.GetNumberOfPlayers(), NumberOfPlayersBefore);
+            Assert.True(gc.joinGame(g, userProf, 30));
+            Assert.True(gc.joinGame(g, userProf2, 30));
+            Assert.False(gc.joinGame(g, userProf3, 30));
+
+            Assert.AreEqual(g.GetNumberOfPlayers(), 2);
         }
 
         [TestCase]
