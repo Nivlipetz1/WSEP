@@ -65,7 +65,10 @@ namespace Gaming
             while (!(foldInput.Equals("Yes") || foldInput.Equals("No")));
 
             if (foldInput.Equals("Yes"))
+            {
+                status = "Fold";
                 return -1;
+            }
 
             do
                 input = userInput.GetInput();
@@ -76,9 +79,6 @@ namespace Gaming
             if (credit == 0)
             {
                 status = "AllIn";
-            }
-            else if(betInput==-1){
-                status = "Fold";
             }
 
             if(betInput>0)

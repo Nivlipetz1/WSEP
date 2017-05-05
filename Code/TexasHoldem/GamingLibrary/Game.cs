@@ -257,6 +257,16 @@ namespace Gaming
             PushMoveToObservers(new GameStartMove(playerBetsString));
         }
 
+        private void PushFoldMove()
+        {
+            IDictionary<string, int> playerBetsString = new Dictionary<string, int>();
+            foreach (PlayingUser player in playerBets.Keys)
+            {
+                playerBetsString.Add(player.GetUserName(), playerBets[player]); //username
+            }
+            PushMoveToObservers(new FoldMove(playerBetsString));
+        }
+
         private void TraversePlayers(int index)
         {
             while (!EndOfBettingRound())
@@ -281,7 +291,7 @@ namespace Gaming
                     {
                         playerBets[currentUser] = 0;
                         playerHands.Remove(currentUser.GetUserName());//username
-                        //TODO: PushFoldMove();
+                        PushFoldMove();
                     }
 
                     if (DidEveryoneFold())
@@ -312,9 +322,10 @@ namespace Gaming
         private bool DidEveryoneFold()
         {
             int inc = 0;
+
             foreach (PlayingUser player in playerBets.Keys)
             {
-                if (playerBets[player] != -1)
+                if (!player.GetStatus().Equals("Fold"))
                     inc++;
             }
             return (inc == 1);
