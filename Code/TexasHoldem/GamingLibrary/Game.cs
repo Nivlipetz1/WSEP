@@ -65,7 +65,7 @@ namespace Gaming
             playerBets[smallBlindPlayer] = smallBlindBet;
 
             //send small blind move
-            PushBetMove();
+            PushBetMove(smallBlindPlayer, smallBlindBet);
 
             //request big blind
             PlayingUser bigBlindPlayer = players.ElementAt(1);
@@ -74,7 +74,7 @@ namespace Gaming
             playerBets[bigBlindPlayer] = bigBlindBet;
 
             //send big blind move
-            PushBetMove();
+            PushBetMove(bigBlindPlayer, bigBlindBet);
 
             //draw hands
             foreach (PlayingUser player in players)
@@ -237,14 +237,14 @@ namespace Gaming
             return playerBets.Values.Max();
         }
 
-        private void PushBetMove()
+        private void PushBetMove(PlayingUser better, int amt)
         {
             IDictionary<string, int> playerBetsString = new Dictionary<string, int>();
             foreach (PlayingUser player in playerBets.Keys)
             {
                 playerBetsString.Add(player.GetUserName(), playerBets[player]); //username
             }
-            PushMoveToObservers(new BetMove(playerBetsString));
+            PushMoveToObservers(new BetMove(playerBetsString, better, amt));
         }
 
         private void PushStartGameMove()
@@ -257,14 +257,14 @@ namespace Gaming
             PushMoveToObservers(new GameStartMove(playerBetsString));
         }
 
-        private void PushFoldMove()
+        private void PushFoldMove(PlayingUser pl)
         {
             IDictionary<string, int> playerBetsString = new Dictionary<string, int>();
             foreach (PlayingUser player in playerBets.Keys)
             {
                 playerBetsString.Add(player.GetUserName(), playerBets[player]); //username
             }
-            PushMoveToObservers(new FoldMove(playerBetsString));
+            PushMoveToObservers(new FoldMove(playerBetsString, pl));
         }
 
         private void TraversePlayers(int index)
@@ -285,13 +285,14 @@ namespace Gaming
                     {
                         playerBets[currentUser] += bet;
                         bettingRound += bet;
-                        PushBetMove();
+                        PushBetMove(currentUser, bet);
                     }
                     else //fold
                     {
                         playerBets[currentUser] = 0;
                         playerHands.Remove(currentUser.GetUserName());//username
-                        PushFoldMove();
+                        currentUser.SetStatus("Fold");
+                        PushFoldMove(currentUser);
                     }
 
                     if (DidEveryoneFold())

@@ -37,7 +37,7 @@ namespace GamingTests
             IDictionary<string, int> playerBets = new Dictionary<string, int>();
             playerBets.Add(nivPlayer.GetUserName(), 5);
             playerBets.Add(OPlayer.GetUserName(), 10);
-            BetMove bm = new BetMove(playerBets);
+            BetMove bm = new BetMove(playerBets, OPlayer, 10);
             BetMove compareToBetMove = ((BetMove)logger.GetMoves()[2]); //third move in game -> bigblind (first = start game, second = small blind, third=bigblind)
 
 

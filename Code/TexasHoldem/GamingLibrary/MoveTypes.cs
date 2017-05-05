@@ -37,10 +37,15 @@ namespace Gaming
     public class BetMove : Move
     {
         IDictionary<string, int> playerBets;
+        PlayingUser bettingPlayer;
+        int betAmount;
 
-        public BetMove(IDictionary<string, int> playerBets)
+        public BetMove(IDictionary<string, int> playerBets, PlayingUser better, int amt)
         {
             this.playerBets = playerBets;
+            bettingPlayer = better;
+            //bettingPlayer.SetStatus("Talked");
+            betAmount = amt;
         }
 
         public override void update(ref IDictionary<string, int> playerBets, ref Card[] cards, ref IDictionary<string, PlayerHand> playerHands)
@@ -57,10 +62,13 @@ namespace Gaming
     public class FoldMove : Move
     {
         IDictionary<string, int> playerBets;
+        PlayingUser foldingPlayer;
 
-        public FoldMove(IDictionary<string, int> playerBets)
+        public FoldMove(IDictionary<string, int> playerBets, PlayingUser folder)
         {
             this.playerBets = playerBets;
+            foldingPlayer = folder;
+            //foldingPlayer.SetStatus("Fold");
         }
 
         public override void update(ref IDictionary<string, int> playerBets, ref Card[] cards, ref IDictionary<string, PlayerHand> playerHands)
