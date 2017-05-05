@@ -32,9 +32,9 @@ namespace GamingTests
             g.addPlayer(OPlayer);
             g.addPlayer(NPlayer);
 
-            nivPlayer.SetFakeUserInput(new Queue<string>(new[] { "-1" }));
+            nivPlayer.SetFakeUserInput(new Queue<string>(new[] { "Fold" }));
             OPlayer.SetFakeUserInput(new Queue<string>(new[] { "20" }));
-            NPlayer.SetFakeUserInput(new Queue<string>(new[] { "-1" }));
+            NPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "Fold" }));
 
             g.StartGame();
 
@@ -96,8 +96,8 @@ namespace GamingTests
             g.addPlayer(OPlayer);
             g.addPlayer(NPlayer);
 
-            nivPlayer.SetFakeUserInput(new Queue<string>(new[] { "5", "0", "-1" }));
-            OPlayer.SetFakeUserInput(new Queue<string>(new[] { "0", "0", "-1" }));
+            nivPlayer.SetFakeUserInput(new Queue<string>(new[] { "5", "0", "Fold" }));
+            OPlayer.SetFakeUserInput(new Queue<string>(new[] { "0", "0", "Fold" }));
             NPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100" }));
 
             g.StartGame();
