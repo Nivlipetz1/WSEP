@@ -275,13 +275,15 @@ namespace Gaming
                     {
                         playerBets[currentUser] += bet;
                         bettingRound += bet;
+                        PushBetMove();
                     }
                     else //fold
                     {
-                        playerBets[currentUser] = bet;
+                        playerBets[currentUser] = 0;
                         playerHands.Remove(currentUser.GetUserName());//username
+                        //TODO: PushFoldMove();
                     }
-                    PushBetMove();
+
                     if (DidEveryoneFold())
                     {
                         pot[0] += bettingRound;

@@ -59,6 +59,14 @@ namespace Gaming
         {
             string input;
             int betInput;
+            string foldInput;
+            do
+                foldInput = userInput.GetInput();
+            while (!(foldInput.Equals("Yes") || foldInput.Equals("No")));
+
+            if (foldInput.Equals("Yes"))
+                return -1;
+
             do
                 input = userInput.GetInput();
             while (!Int32.TryParse(input, out betInput));
