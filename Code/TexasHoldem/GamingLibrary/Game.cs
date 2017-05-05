@@ -333,16 +333,30 @@ namespace Gaming
 
         private bool EndOfBettingRound()
         {
+            int numOfFoldPlayers=0;
+            int numOfTalkedPlayers=0;
             foreach (PlayingUser player in players)
             {
                 if (player.GetStatus() == "Active")
                 {
                     return false;
                 }
+                else if (player.GetStatus() == "Talked")
+                {
+                    numOfTalkedPlayers++;
+                }
+                else if (player.GetStatus() == "Fold")
+                {
+                    numOfFoldPlayers++;
+                }
             }
 
-            List<int> checkDistinctAmounts = playerBets.Values.ToList().Except(new List<int> { -1 }).Distinct().ToList();
-            return (checkDistinctAmounts.Count == 1);
+           /* if (numOfTalkedPlayers + numOfFoldPlayers == GetNumberOfPlayers())
+                return true;
+            
+            return false;*/
+           List<int> checkDistinctAmounts = playerBets.Values.ToList().Except(new List<int> { 0 }).Distinct().ToList();
+           return (checkDistinctAmounts.Count == 1);
         }
 
 
