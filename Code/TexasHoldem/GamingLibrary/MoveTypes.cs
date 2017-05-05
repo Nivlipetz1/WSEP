@@ -54,6 +54,27 @@ namespace Gaming
         }
     }
 
+    public class FoldMove : Move
+    {
+        IDictionary<string, int> playerBets;
+
+        public FoldMove(IDictionary<string, int> playerBets)
+        {
+            this.playerBets = playerBets;
+        }
+
+        public override void update(ref IDictionary<string, int> playerBets, ref Card[] cards, ref IDictionary<string, PlayerHand> playerHands)
+        {
+            playerBets = this.playerBets;
+        }
+
+        public IDictionary<string, int> GetPlayerBets()
+        {
+            return playerBets;
+        }
+    }
+
+
     public class EndGameMove : Move
     {
         IDictionary<string, PlayerHand> playerHands;
