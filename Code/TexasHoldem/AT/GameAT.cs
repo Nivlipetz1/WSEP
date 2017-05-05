@@ -88,8 +88,8 @@ namespace AT
             game1.addPlayer(player3);
             
 
-            player1.SetFakeUserInput(new Queue<string>(new[] { "5", "-1", "0" }));
-            player2.SetFakeUserInput(new Queue<string>(new[] { "0", "-1", "0", "0" }));
+            player1.SetFakeUserInput(new Queue<string>(new[] { "5", "Fold" }));
+            player2.SetFakeUserInput(new Queue<string>(new[] { "0", "Fold" }));
             player3.SetFakeUserInput(new Queue<string>(new[] { "10", "100", "0" }));
             game1.StartGame();
 
@@ -113,8 +113,8 @@ namespace AT
             game1.addPlayer(player3);
 
             player1.SetFakeUserInput(new Queue<string>(new[] { "5", "200", "100" }));
-            player2.SetFakeUserInput(new Queue<string>(new[] { "0", "200", "-1", "-1" }));
-            player3.SetFakeUserInput(new Queue<string>(new[] { "10", "200", "-1","-1" }));
+            player2.SetFakeUserInput(new Queue<string>(new[] { "0", "200", "Fold"}));
+            player3.SetFakeUserInput(new Queue<string>(new[] { "10", "200", "Fold"}));
             game1.StartGame();
 
             Assert.AreEqual(920, player1.GetCredit());
@@ -137,8 +137,8 @@ namespace AT
             game1.addPlayer(player3);
 
             player1.SetFakeUserInput(new Queue<string>(new[] { "5", "200", "100" }));
-            player2.SetFakeUserInput(new Queue<string>(new[] { "0", "200", "-1", "-1" }));
-            player3.SetFakeUserInput(new Queue<string>(new[] { "10", "200", "-1", "-1" }));
+            player2.SetFakeUserInput(new Queue<string>(new[] { "0", "200", "Fold" }));
+            player3.SetFakeUserInput(new Queue<string>(new[] { "10", "200", "Fold" }));
             game1.StartGame();
 
             int num_of_moves = game1.GetLogger().GetMoves().Count;
@@ -162,8 +162,8 @@ namespace AT
             game1.addPlayer(player3);
 
             player1.SetFakeUserInput(new Queue<string>(new[] { "5", "200", "100" }));
-            player2.SetFakeUserInput(new Queue<string>(new[] { "0", "200", "-1", "-1" }));
-            player3.SetFakeUserInput(new Queue<string>(new[] { "10", "200", "-1", "-1" }));
+            player2.SetFakeUserInput(new Queue<string>(new[] { "0", "200", "Fold"}));
+            player3.SetFakeUserInput(new Queue<string>(new[] { "10", "200", "Fold" }));
             game1.StartGame();
 
             int pot = game1.GetPotSize();
