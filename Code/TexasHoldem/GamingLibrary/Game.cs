@@ -65,7 +65,7 @@ namespace Gaming
             playerBets[smallBlindPlayer] = smallBlindBet;
 
             //send small blind move
-            PushBetMove();
+            PushBetMove(smallBlindPlayer, smallBlindBet);
 
             //request big blind
             PlayingUser bigBlindPlayer = players.ElementAt(1);
@@ -74,7 +74,7 @@ namespace Gaming
             playerBets[bigBlindPlayer] = bigBlindBet;
 
             //send big blind move
-            PushBetMove();
+            PushBetMove(bigBlindPlayer, bigBlindBet);
 
             //draw hands
             foreach (PlayingUser player in players)
@@ -237,14 +237,14 @@ namespace Gaming
             return playerBets.Values.Max();
         }
 
-        private void PushBetMove()
+        private void PushBetMove(PlayingUser better, int amt)
         {
             IDictionary<string, int> playerBetsString = new Dictionary<string, int>();
             foreach (PlayingUser player in playerBets.Keys)
             {
                 playerBetsString.Add(player.GetUserName(), playerBets[player]); //username
             }
-            PushMoveToObservers(new BetMove(playerBetsString));
+            PushMoveToObservers(new BetMove(playerBetsString, better, amt));
         }
 
         private void PushStartGameMove()
@@ -255,6 +255,16 @@ namespace Gaming
                 playerBetsString.Add(player.GetUserName(), playerBets[player]);//username
             }
             PushMoveToObservers(new GameStartMove(playerBetsString));
+        }
+
+        private void PushFoldMove(PlayingUser pl)
+        {
+            IDictionary<string, int> playerBetsString = new Dictionary<string, int>();
+            foreach (PlayingUser player in playerBets.Keys)
+            {
+                playerBetsString.Add(player.GetUserName(), playerBets[player]); //username
+            }
+            PushMoveToObservers(new FoldMove(playerBetsString, pl));
         }
 
         private void TraversePlayers(int index)
@@ -275,13 +285,16 @@ namespace Gaming
                     {
                         playerBets[currentUser] += bet;
                         bettingRound += bet;
+                        PushBetMove(currentUser, bet);
                     }
                     else //fold
                     {
-                        playerBets[currentUser] = bet;
+                        playerBets[currentUser] = 0;
                         playerHands.Remove(currentUser.GetUserName());//username
+                        currentUser.SetStatus("Fold");
+                        PushFoldMove(currentUser);
                     }
-                    PushBetMove();
+
                     if (DidEveryoneFold())
                     {
                         pot[0] += bettingRound;
@@ -310,9 +323,10 @@ namespace Gaming
         private bool DidEveryoneFold()
         {
             int inc = 0;
+
             foreach (PlayingUser player in playerBets.Keys)
             {
-                if (playerBets[player] != -1)
+                if (!player.GetStatus().Equals("Fold"))
                     inc++;
             }
             return (inc == 1);
@@ -320,16 +334,30 @@ namespace Gaming
 
         private bool EndOfBettingRound()
         {
+            int numOfFoldPlayers=0;
+            int numOfTalkedPlayers=0;
             foreach (PlayingUser player in players)
             {
                 if (player.GetStatus() == "Active")
                 {
                     return false;
                 }
+                else if (player.GetStatus() == "Talked")
+                {
+                    numOfTalkedPlayers++;
+                }
+                else if (player.GetStatus() == "Fold")
+                {
+                    numOfFoldPlayers++;
+                }
             }
 
-            List<int> checkDistinctAmounts = playerBets.Values.ToList().Except(new List<int> { -1 }).Distinct().ToList();
-            return (checkDistinctAmounts.Count == 1);
+           /* if (numOfTalkedPlayers + numOfFoldPlayers == GetNumberOfPlayers())
+                return true;
+            
+            return false;*/
+           List<int> checkDistinctAmounts = playerBets.Values.ToList().Except(new List<int> { 0 }).Distinct().ToList();
+           return (checkDistinctAmounts.Count == 1);
         }
 
 

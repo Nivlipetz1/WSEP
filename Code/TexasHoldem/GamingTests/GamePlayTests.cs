@@ -32,13 +32,13 @@ namespace GamingTests
             g.addPlayer(OPlayer);
             g.addPlayer(NPlayer);
 
-            nivPlayer.SetFakeUserInput(new Queue<string>(new[] { "-1" }));
+            nivPlayer.SetFakeUserInput(new Queue<string>(new[] { "Fold" }));
             OPlayer.SetFakeUserInput(new Queue<string>(new[] { "20" }));
-            NPlayer.SetFakeUserInput(new Queue<string>(new[] { "-1" }));
+            NPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "Fold" }));
 
             g.StartGame();
 
-            Assert.AreEqual(1005, OPlayer.GetCredit());
+            Assert.AreEqual(1015, OPlayer.GetCredit());
         }
 
         [TestCase]
@@ -96,8 +96,8 @@ namespace GamingTests
             g.addPlayer(OPlayer);
             g.addPlayer(NPlayer);
 
-            nivPlayer.SetFakeUserInput(new Queue<string>(new[] { "5", "0", "-1" }));
-            OPlayer.SetFakeUserInput(new Queue<string>(new[] { "0", "0", "-1" }));
+            nivPlayer.SetFakeUserInput(new Queue<string>(new[] { "5", "0", "Fold" }));
+            OPlayer.SetFakeUserInput(new Queue<string>(new[] { "0", "0", "Fold" }));
             NPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100" }));
 
             g.StartGame();
@@ -123,9 +123,9 @@ namespace GamingTests
             g.addPlayer(OPlayer);
             g.addPlayer(NPlayer);
 
-            nivPlayer.SetFakeUserInput(new Queue<string>(new[] { "5", "0", "-1" }));
+            nivPlayer.SetFakeUserInput(new Queue<string>(new[] { "5", "0", "Fold" }));
             OPlayer.SetFakeUserInput(new Queue<string>(new[] { "0", "0", "100", "100" }));
-            NPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100", "-1" }));
+            NPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100", "Fold" }));
 
             g.StartGame();
 
@@ -150,9 +150,9 @@ namespace GamingTests
             g.addPlayer(OPlayer);
             g.addPlayer(NPlayer);
 
-            nivPlayer.SetFakeUserInput(new Queue<string>(new[] { "5", "0", "100", "100", "0", "-1" }));
+            nivPlayer.SetFakeUserInput(new Queue<string>(new[] { "5", "0", "100", "100", "0", "Fold" }));
             OPlayer.SetFakeUserInput(new Queue<string>(new[] { "0", "0", "100", "100", "200" }));
-            NPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100", "-1" }));
+            NPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100", "Fold" }));
 
             g.StartGame();
 
@@ -210,8 +210,8 @@ namespace GamingTests
             g.addPlayer(OPlayer);
             g.addPlayer(NPlayer);
 
-            nivPlayer.SetFakeUserInput(new Queue<string>(new[] { "5", "0", "-1" }));
-            OPlayer.SetFakeUserInput(new Queue<string>(new[] { "0", "0", "100", "100", "0", "50", "-1" }));
+            nivPlayer.SetFakeUserInput(new Queue<string>(new[] { "5", "0", "Fold" }));
+            OPlayer.SetFakeUserInput(new Queue<string>(new[] { "0", "0", "100", "100", "0", "50", "Fold" }));
             NPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100", "100", "100" }));
 
             g.StartGame();
@@ -237,8 +237,8 @@ namespace GamingTests
             g.addPlayer(OPlayer);
             g.addPlayer(NPlayer);
 
-            nivPlayer.SetFakeUserInput(new Queue<string>(new[] { "5", "0", "-1" }));
-            OPlayer.SetFakeUserInput(new Queue<string>(new[] { "0", "0", "100", "100", "0", "50", "-1" }));
+            nivPlayer.SetFakeUserInput(new Queue<string>(new[] { "5", "0", "Fold" }));
+            OPlayer.SetFakeUserInput(new Queue<string>(new[] { "0", "0", "100", "100", "0", "50", "Fold" }));
             NPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100", "100", "100" }));
 
             g.StartGame();
@@ -273,14 +273,14 @@ namespace GamingTests
             g.addPlayer(OhPlayer);
 
             nivPlayer.SetFakeUserInput(new Queue<string>(new[] { "5", "0", "100" }));
-            OPlayer.SetFakeUserInput(new Queue<string>(new[] { "0", "0", "100", "100", "0", "50", "-1" }));
+            OPlayer.SetFakeUserInput(new Queue<string>(new[] { "0", "0", "100", "100", "0", "50", "Fold" }));
             NPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100", "100", "100" }));
             KPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100", "100", "100" }));
             OhPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100", "100", "100" }));
 
             g.StartGame();
 
-            Assert.AreEqual(logger.GetMoves().Count, 29);
+            Assert.AreEqual(29, logger.GetMoves().Count);
         }
 
 
@@ -309,7 +309,7 @@ namespace GamingTests
             g.addPlayer(OhPlayer);
 
             nivPlayer.SetFakeUserInput(new Queue<string>(new[] { "5", "0", "100" }));
-            OPlayer.SetFakeUserInput(new Queue<string>(new[] { "0", "0", "100", "100", "0", "50", "-1" }));
+            OPlayer.SetFakeUserInput(new Queue<string>(new[] { "0", "0", "100", "100", "0", "50", "Fold" }));
             NPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100", "100", "100" }));
             KPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100", "100", "100" }));
             OhPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100", "100", "100" }));
@@ -318,11 +318,11 @@ namespace GamingTests
 
             nivPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100", "100", "100" }));
             OPlayer.SetFakeUserInput(new Queue<string>(new[] { "5", "0", "100" }));
-            NPlayer.SetFakeUserInput(new Queue<string>(new[] { "0", "0", "100", "100", "0", "50", "-1" }));
+            NPlayer.SetFakeUserInput(new Queue<string>(new[] { "0", "0", "100", "100", "0", "50", "Fold" }));
             KPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100", "100", "100" }));
             OhPlayer.SetFakeUserInput(new Queue<string>(new[] { "10", "100", "100", "100" }));
             g.StartGame();
-            Assert.AreEqual(logger.GetMoves().Count, (29 * 2));
+            Assert.AreEqual( (29 * 2), logger.GetMoves().Count);
 
         }
 
