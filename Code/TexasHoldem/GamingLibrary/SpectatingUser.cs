@@ -16,6 +16,7 @@ namespace Gaming
         private IDictionary<string, PlayerHand> playerHands;
         private List<string> messages;
 
+
         public SpectatingUser(string name, Game game)
         {
             userName = name;
@@ -41,7 +42,12 @@ namespace Gaming
 
         public void SendMessage(string m)
         {
-            game.GetChat().SendMessage(m);
+            game.GetChat().SendMessage(m,this);
+        }
+
+        public void PushPrivateMessage(string message, string sender)
+        {
+            throw new NotImplementedException();
         }
 
         public List<string> GetMessages()

@@ -14,15 +14,30 @@ namespace Gaming
             this.g = g;
         }
 
-        public void SendMessage(string message)
+        public void PrivateMessage(string message,string sender,SpectatingUser reciever)
         {
-            foreach(SpectatingUser su in g.GetSpectators())
+            reciever.PushPrivateMessage(message, sender);
+        }
+
+        public void SendMessage(string message,SpectatingUser sender)
+        {
+            if (sender is PlayingUser)
             {
-                su.PushMessage(message);
+                foreach (SpectatingUser su in g.GetSpectators())
+                {
+                    su.PushMessage(message);
+                }
+                foreach (SpectatingUser su in g.GetPlayers())
+                {
+                    su.PushMessage(message);
+                }
             }
-            foreach (SpectatingUser su in g.GetPlayers())
+            else
             {
-                su.PushMessage(message);
+                foreach (SpectatingUser su in g.GetSpectators())
+                {
+                    su.PushMessage(message);
+                }
             }
         }
 
