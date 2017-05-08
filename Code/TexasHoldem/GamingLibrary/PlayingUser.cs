@@ -12,17 +12,46 @@ namespace Gaming
         private string status;
         private PlayerHand hand;
         private UserInput userInput;
+        private CardAnalyzer.HandRank bestHand;
+        private int roundsWon;
+        private int roundsLost;
+        private int biggestPotWon;
 
         public PlayingUser(string name, int credit, Game game) : base (name,game)
         {
             this.credit = credit;
             status = "Active";
+            roundsWon = 0;
+            roundsLost = 0;
+            biggestPotWon = 0;
+            bestHand = CardAnalyzer.HandRank.HighCard;
         }
 
         public void SetFakeUserInput(Queue<string> inputs)
         {
             userInput = new FakeInput(inputs);
         }
+
+        public int GetRoundsWon()
+        {
+            return roundsWon;
+        }
+
+        public int GetRoundsLost()
+        {
+            return roundsLost;
+        }
+
+        public CardAnalyzer.HandRank GetBestHand()
+        {
+            return bestHand;
+        }
+
+        public int GetMostWon()
+        {
+            return biggestPotWon;
+        }
+
 
         public int GetCredit()
         {
