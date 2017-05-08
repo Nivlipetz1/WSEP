@@ -57,8 +57,20 @@
     <Compile Include="EditProfile.xaml.cs">
       <DependentUpon>EditProfile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Game.xaml.cs">
+      <DependentUpon>Game.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GameCenter.xaml.cs">
       <DependentUpon>GameCenter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GameChat.xaml.cs">
+      <DependentUpon>GameChat.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GameFrame.xaml.cs">
+      <DependentUpon>GameFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GamePM.xaml.cs">
+      <DependentUpon>GamePM.xaml</DependentUpon>
     </Compile>
     <Compile Include="Status.xaml.cs">
       <DependentUpon>Status.xaml</DependentUpon>
@@ -70,7 +82,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Game.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GameCenter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GameChat.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GameFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GamePM.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -159,6 +187,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\background4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\gamebackground.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
