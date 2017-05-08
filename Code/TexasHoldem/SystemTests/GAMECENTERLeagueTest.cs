@@ -148,19 +148,5 @@ namespace SystemTests
             Assert.AreEqual(gc.getLeagueByRank(50), gc.getLeagueByUser(u));
             Assert.True(gc.getLeagueByRank(50).isUser(u));
         }
-        [TestCase]
-        public void setUsersTest()
-        {
-            GameCenter gc = GameCenter.GameCenterFactory.getInstance();
-            Dictionary<String, UserProfile> user = new Dictionary<string, UserProfile>();
-            gc.setUsers(user.Values);
-            UserProfile u = new UserProfile("aaa", "bbb");
-            Assert.AreEqual(null, gc.getHighestRankUser());
-            u.Credit = 40;
-            user.Add("aaa", u);
-            gc.updateState();
-            Assert.AreEqual(u, gc.getHighestRankUser());
-            
-        }
     }
 }

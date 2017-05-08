@@ -11,9 +11,6 @@ namespace GameSystem
 
         Dictionary<int, League> leagues = new Dictionary<int, League>();
         private ICollection<UserProfile> Users;
-        private UserProfile HighestRankUser=null;
-
-
 
         public class GameCenterFactory
         {
@@ -30,7 +27,6 @@ namespace GameSystem
         private GameCenter()
         {
             Users = new List<UserProfile>();
-            leagues.Add(0, new League(0, "default"));
         }
 
         public Game createGame(GamePreferences preferecnces)
@@ -188,14 +184,6 @@ namespace GameSystem
             }
         }
  
-        public void updateState()
-        {
-            foreach (UserProfile user in Users)
-            {
-                if (HighestRankUser == null || HighestRankUser.Credit < user.Credit)
-                    HighestRankUser = user;
-            }
-        }
         public void updateLeagueToUser(PlayingUser playingUser)
         {
 
@@ -203,8 +191,6 @@ namespace GameSystem
             user.Credit += playingUser.GetCredit();
             
             League currLeague = getLeagueByUser(user);
-            if (HighestRankUser==null ||user.Credit > HighestRankUser.Credit)
-                HighestRankUser = user;
             foreach (League league in leagues.Values)
             {
                 if (league.MinimumRank <= user.Credit &&
@@ -217,15 +203,10 @@ namespace GameSystem
                 }
             }
         }
-        public UserProfile getHighestRankUser()
-        {
-            return HighestRankUser;
-        }
 
         public void setUsers(ICollection<UserProfile> Users)
         {
             this.Users = Users;
-            updateState();
         }
 
 
