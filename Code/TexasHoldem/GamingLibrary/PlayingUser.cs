@@ -42,6 +42,16 @@ namespace Gaming
             return roundsLost;
         }
 
+        public void SetRoundsLost(int timesLost)
+        {
+            roundsLost = timesLost;
+        }
+
+        public void SetBestHand(CardAnalyzer.HandRank hr)
+        {
+            bestHand = hr;
+        }
+
         public CardAnalyzer.HandRank GetBestHand()
         {
             return bestHand;
@@ -126,6 +136,12 @@ namespace Gaming
 
         internal void ReceiveWinnings(int amount)
         {
+            if (amount > biggestPotWon)
+            {
+                biggestPotWon = amount;
+            }
+
+            roundsWon++;
             credit+=amount;
         }
     }

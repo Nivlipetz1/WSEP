@@ -141,20 +141,35 @@ namespace Gaming
 
             PushMoveToObservers(new EndGameMove(playerHands));
             List<PlayingUser> winners = DetermineWinner();
+
             foreach (PlayingUser player in winners)
             {
                 player.ReceiveWinnings(pot[0] / winners.Count);
             }
 
+            foreach (PlayingUser player in players)
+            {
+                if (!winners.Contains(player)){
+                    player.SetRoundsLost(player.GetRoundsLost() + 1);
+                }
+            }
+
             ResetGame();
 
         }
+
         private void GiveWinnings()
         {
             foreach (PlayingUser player in players)
             {
                 if (player.GetStatus() != "Fold")
+                {
                     player.ReceiveWinnings(pot[0]);
+                }
+                else
+                {
+                    player.SetRoundsLost(player.GetRoundsLost() + 1);
+                }
             }
         }
 
@@ -188,6 +203,10 @@ namespace Gaming
                 {
                     ca.setHand(player.GetHand());
                     playerScores.Add(player, ca.analyze());
+                    if (playerScores[player]>player.GetBestHand())
+                    {
+                        player.SetBestHand(playerScores[player]);
+                    }
                 }
             }
 
