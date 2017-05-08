@@ -54,12 +54,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="EditProfile.xaml.cs">
+      <DependentUpon>EditProfile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GameCenter.xaml.cs">
+      <DependentUpon>GameCenter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Status.xaml.cs">
       <DependentUpon>Status.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserMainPage.xaml.cs">
       <DependentUpon>UserMainPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="EditProfile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GameCenter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -130,6 +144,21 @@
     <Resource Include="Images\Buttons\Pressed\gamecenter.png" />
     <Resource Include="Images\Buttons\Regular\editprofile.png" />
     <Resource Include="Images\Buttons\Regular\gamecenter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\background3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buttons\Over\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buttons\Pressed\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buttons\Regular\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\background4.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

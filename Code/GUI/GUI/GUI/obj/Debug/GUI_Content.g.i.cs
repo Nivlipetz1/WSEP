@@ -8,11 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/buttons/over/editprofile.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/buttons/over/gamecenter.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/buttons/pressed/editprofile.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/buttons/pressed/gamecenter.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/buttons/regular/editprofile.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/buttons/regular/gamecenter.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/background3.jpg")]
 
 

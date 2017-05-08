@@ -24,5 +24,24 @@ namespace GUI
         {
             InitializeComponent();
         }
+
+        private void EditProfile_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new EditProfile());
+        }
+
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult rs = MessageBox.Show("Are you sure you want to logout?", "Logout", MessageBoxButton.YesNo, MessageBoxImage.Information, MessageBoxResult.No);
+            if (rs == MessageBoxResult.Yes)
+            {
+                NavigationService.GoBack();
+            }
+        }
+
+        private void GameCenter_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new GameCenter());
+        }
     }
 }

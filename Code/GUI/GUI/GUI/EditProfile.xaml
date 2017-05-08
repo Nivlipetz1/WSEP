@@ -1,0 +1,25 @@
+﻿<Page x:Class="GUI.EditProfile"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GUI"
+      mc:Ignorable="d" 
+      d:DesignHeight="569" d:DesignWidth="825"
+      Title="EditProfile">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="./Images/background3.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
+        <Label Content="Edit Profile:" FontSize="40" Foreground="WhiteSmoke" HorizontalAlignment="Left" Margin="128,68,0,0" VerticalAlignment="Top"/>
+        <Label Content="Username" Foreground="WhiteSmoke" HorizontalAlignment="Left" Margin="84,158,0,0" VerticalAlignment="Top"/>
+        <Label Content="Email" Foreground="WhiteSmoke" HorizontalAlignment="Left" Margin="84,205,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="179,162,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="179,207,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Save" HorizontalAlignment="Left" Margin="321,278,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Name="cancelBtn" Click="cancelBtn_Click" Content="Cancel" HorizontalAlignment="Left" Margin="225,278,0,0" VerticalAlignment="Top" Width="75"/>
+
+    </Grid>
+    
+</Page>
