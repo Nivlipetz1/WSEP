@@ -23,6 +23,8 @@ namespace GUI
         public GamePM()
         {
             InitializeComponent();
+            users.Items.Add("Rick");
+            users.Items.Add("Morty");
         }
     }
 }

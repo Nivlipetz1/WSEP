@@ -48,6 +48,12 @@ namespace GUI
             MoveCard(FlopCard3, 70, 40);
             MoveCard(RiverCard, 0, 40);
             MoveCard(TurnCard, -70, 40);
+            MoveCard(UserCard1, 0,220);
+            MoveCard(UserCard2, 30, 220);
+            BetAmount.Visibility = Visibility.Visible;
+            Bet_Button.Visibility = Visibility.Visible;
+            Fold_Button.Visibility = Visibility.Visible;
+
 
         }
         private void MoveCard(Image card, int x, int y)

@@ -33,6 +33,11 @@
         <Image Name="FlopCard3" Visibility="Hidden" Height="70" Source="./Images/Cards/Sq.png" Canvas.Left="241" Canvas.Top="152"/>
         <Image Name="RiverCard" Visibility="Hidden" Height="70" Source="./Images/Cards/Sj.png" Canvas.Left="241" Canvas.Top="152"/>
         <Image Name="TurnCard" Visibility="Hidden" Height="70" Source="./Images/Cards/S10.png" Canvas.Left="241" Canvas.Top="152"/>
+        <Image Name="UserCard1" Visibility="Hidden" Height="70" Source="./Images/Cards/S1.png" Canvas.Left="241" Canvas.Top="152"/>
+        <Image Name="UserCard2" Visibility="Hidden" Height="70" Source="./Images/Cards/S1.png" Canvas.Left="241" Canvas.Top="152"/>
+        <TextBox Name="BetAmount" Visibility="Hidden" Height="20" Canvas.Left="18" TextWrapping="Wrap" Text="" Canvas.Top="467" Width="65"/>
+        <Button Name="Bet_Button" Visibility="Hidden" Content="Bet" Canvas.Left="99" Canvas.Top="465" Width="75"/>
+        <Button Name="Fold_Button" Visibility="Hidden" Content="Fold" Canvas.Left="99" Canvas.Top="494" Width="75"/>
     </Canvas>
 </Page>
 
