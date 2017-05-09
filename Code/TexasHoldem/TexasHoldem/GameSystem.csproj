@@ -54,6 +54,7 @@
     <Compile Include="Notification.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Statistics.cs" />
     <Compile Include="SystemAPI.cs" />
     <Compile Include="TexasHoldemSystem.cs" />
     <Compile Include="UserProfile.cs" />

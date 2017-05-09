@@ -23,7 +23,8 @@ namespace SystemTests
         public void createGameTest()
         {
             GamePreferences preferecnces = new GamePreferences(8, 2, 10, 20, 1, 20, 6, true);
-            Assert.True((gameCenter.createGame(preferecnces) != null));
+            UserProfile ohadUser = new UserProfile("ohad", "213");
+            Assert.True((gameCenter.createGame(preferecnces, ohadUser) != null));
         }
 
         [TestCase]
@@ -31,8 +32,10 @@ namespace SystemTests
         {
             GamePreferences preferecncesAllowSpec = new GamePreferences(8, 2, 10, 20, 1, 20, 6, true);
             GamePreferences preferecncesNotAllowSpec = new GamePreferences(8, 2, 10, 20, 1, 20, 6, false);
-            Game gameAllowSpec = gameCenter.createGame(preferecncesAllowSpec);
-            Game gameNotAllowSpec = gameCenter.createGame(preferecncesNotAllowSpec);
+            UserProfile ohadUser = new UserProfile("ohad", "213");
+            UserProfile naorUser = new UserProfile("naor", "465");
+            Game gameAllowSpec = gameCenter.createGame(preferecncesAllowSpec, ohadUser);
+            Game gameNotAllowSpec = gameCenter.createGame(preferecncesNotAllowSpec, naorUser);
             bool correctOutput = gameCenter.getAllSpectatingGames().Contains(gameAllowSpec) && !gameCenter.getAllSpectatingGames().Contains(gameNotAllowSpec);
             Assert.True(correctOutput);
         }
@@ -42,15 +45,15 @@ namespace SystemTests
         {
             GamePreferences preferecnces1 = new GamePreferences(8, 2, 10, 20, 1, 20, 6, true);
             GamePreferences preferecnces2 = new GamePreferences(8, 2, 10, 20, 1, 20, 6, true);
-            Game game1 = gameCenter.createGame(preferecnces1);
-            Game game2 = gameCenter.createGame(preferecnces2);
             UserProfile ohadUser = new UserProfile("ohad", "213");
             UserProfile naorUser = new UserProfile("naor", "465");
+            Game game1 = gameCenter.createGame(preferecnces1, ohadUser);
+            Game game2 = gameCenter.createGame(preferecnces2, naorUser);
             ohadUser.Credit = 500;
             naorUser.Credit = 500;
             gameCenter.joinGame(game1, ohadUser , 200);
             Assert.AreEqual(true, gameCenter.joinGame(game2, naorUser, 200));
-            List<Game> games = gameCenter.getAllActiveGamesByPlayerName("naor");
+            List<Game> games = gameCenter.getActiveGames("playername","naor", ohadUser);
             Assert.AreEqual(games.Count, 1);
             Assert.True(games.ElementAt(0) == game2);
         }
@@ -60,9 +63,10 @@ namespace SystemTests
             GamePreferences preferecnces1 = new GamePreferences(8, 2, 10, 20, 1, 20, 6, true);
             GamePreferences preferecnces2 = new GamePreferences(8, 2, 10, 20, 1, 20, 6, true);
             GamePreferences preferecnces3 = new GamePreferences(8, 2, 10, 20, -1, -1, -1, false);
-            Game game1 = gameCenter.createGame(preferecnces1);
-            Game game2 = gameCenter.createGame(preferecnces2);
-            List<Game> games = gameCenter.getAllActiveGamesByGamePreference(preferecnces3);
+            UserProfile ohadUser = new UserProfile("ohad", "213");
+            Game game1 = gameCenter.createGame(preferecnces1, ohadUser);
+            Game game2 = gameCenter.createGame(preferecnces2, ohadUser);
+            List<Game> games = gameCenter.getActiveGames("gamepreference" , preferecnces3 , ohadUser);
             Assert.True(games.Count == 2 && games.Contains(game1) && games.Contains(game2));
         }
 
@@ -70,8 +74,8 @@ namespace SystemTests
         public void joinGameTest()
         {
             GamePreferences preferecnces = new GamePreferences(2, 2, 10, 20, 1, 20, 6, true);
-            Game game = gameCenter.createGame(preferecnces);
             UserProfile ohadUser = new UserProfile("ohad", "213");
+            Game game = gameCenter.createGame(preferecnces, ohadUser);
             ohadUser.Credit = 10;
             Assert.False(gameCenter.joinGame(game, ohadUser, 200));
             ohadUser.Credit = 500;
@@ -91,10 +95,11 @@ namespace SystemTests
         [TestCase]
         public void spectateGameTest()
         {
+            UserProfile naorUser = new UserProfile("naor", "213");
             GamePreferences preferecnces1 = new GamePreferences(2, 2, 10, 20, 1, 20, 6, true);
-            Game game1 = gameCenter.createGame(preferecnces1);
+            Game game1 = gameCenter.createGame(preferecnces1, naorUser);
             GamePreferences preferecnces2 = new GamePreferences(2, 2, 10, 20, 1, 20, 6, false);
-            Game game2 = gameCenter.createGame(preferecnces2);
+            Game game2 = gameCenter.createGame(preferecnces2, naorUser);
             UserProfile ohadUser = new UserProfile("ohad", "213");
 
             Assert.True(gameCenter.spectateGame(game1, ohadUser));

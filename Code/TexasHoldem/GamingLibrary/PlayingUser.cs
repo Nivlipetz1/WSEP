@@ -12,6 +12,10 @@ namespace Gaming
         private string status;
         private PlayerHand hand;
         private UserInput userInput;
+        private int winnings;
+        private int losses;
+        private int biggestWin;
+        private CardAnalyzer.HandRank highestHand;
 
         public PlayingUser(string name, int credit, Game game) : base (name,game)
         {
@@ -99,6 +103,58 @@ namespace Gaming
         {
             credit+=amount;
         }
+
+        public int Winnings
+        {
+            get
+            {
+                return winnings;
+            }
+
+            set
+            {
+                winnings = value;
+            }
+        }
+
+        public int Losses
+        {
+            get
+            {
+                return losses;
+            }
+
+            set
+            {
+                losses = value;
+            }
+        }
+
+        public int BiggestWin
+        {
+            get
+            {
+                return biggestWin;
+            }
+
+            set
+            {
+                biggestWin = value;
+            }
+        }
+
+        public CardAnalyzer.HandRank HighestHand
+        {
+            get
+            {
+                return HighestHand;
+            }
+
+            set
+            {
+                HighestHand = value;
+            }
+        }
     }
 
     class FakeInput : UserInput
@@ -118,4 +174,5 @@ namespace Gaming
             return input;
         }
     }
+
 }

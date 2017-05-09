@@ -29,13 +29,37 @@ namespace GameSystem
             Users = new List<UserProfile>();
         }
 
-        public Game createGame(GamePreferences preferecnces)
+        public Game createGame(GamePreferences preferecnces , UserProfile user)
         {
             Game game = new Game(preferecnces);
             games.Add(game);
-
+            user.League.getGames().Add(game);
             game.evt += updateLeagueToUser;
             return game;
+        }
+
+        delegate List<Game> activeGame(object param , List<Game> games);
+        public List<Game> getActiveGames(String criterion , object param , UserProfile user)
+        {
+            activeGame func;
+            List<Game> gamesInLeague = games.Where(game => user.League.getGames().Contains(game)).ToList();
+            switch (criterion)
+            {
+                case "playerName":
+                    func = getAllActiveGamesByPlayerName;
+                    break;
+                case "potsize":
+                    func = getAllActiveGamesByPotSize;
+                    break;
+                case "gamepreference":
+                    func = getAllActiveGamesByGamePreference;
+                    break;
+
+                default:
+                    return gamesInLeague;
+            }
+
+            return func(param, gamesInLeague);
         }
 
         public List<Game> getAllSpectatingGames()
@@ -43,7 +67,7 @@ namespace GameSystem
             return games.Where(game => game.GetGamePref().AllowSpec()).ToList();
         }
 
-        public List<Game> getAllActiveGamesByPlayerName(String playerName)
+        private List<Game> getAllActiveGamesByPlayerName(object playerName , List<Game> games)
         {
             List<Game> activeGames = new List<Game>();
             foreach (Game game in games.Where(game => game.GetGamePref().GetStatus().Equals("active")).ToList())
@@ -57,14 +81,14 @@ namespace GameSystem
             return activeGames;
         }
 
-        public List<Game> getAllActiveGamesByPotSize(int potSize)
+        private List<Game> getAllActiveGamesByPotSize(object potSize , List<Game> games)
         {
-            return games.Where(game => ((Game)game).GetPotSize() == potSize).ToList();
+            return games.Where(game => game.GetPotSize() == (int)potSize).ToList();
         }
 
-        public List<Game> getAllActiveGamesByGamePreference(GamePreferences preferences)
+        private List<Game> getAllActiveGamesByGamePreference(object preferences , List<Game> games)
         {
-            return games.Where(game => contained(((Game)game).GetGamePref(), preferences)).ToList();
+            return games.Where(game => contained(game.GetGamePref(), (GamePreferences)preferences)).ToList();
         }
 
         private bool contained(GamePreferences gamePreferences, GamePreferences preferences)
@@ -183,26 +207,34 @@ namespace GameSystem
                 throw new InvalidOperationException("No league with Rank" + Rank);
             }
         }
- 
+
         public void updateLeagueToUser(PlayingUser playingUser)
         {
-
             UserProfile user = GetUserByName(playingUser.GetUserName());
             user.Credit += playingUser.GetCredit();
-            
-            League currLeague = getLeagueByUser(user);
+            user.updateStatistics(playingUser);
+
+            if (user.UserStat.Winnings + user.UserStat.Losses < 10)
+                return;
+            League currLeague = user.League;
             foreach (League league in leagues.Values)
             {
-                if (league.MinimumRank <= user.Credit &&
-                    (currLeague.MinimumRank > user.Credit || league.MinimumRank > currLeague.MinimumRank))
+                if (league.MinimumRank <= user.Credit && league.MinimumRank + 1000 > user.Credit)
                 {
                     currLeague.removeUser(user);
                     league.addUser(user);
-                    currLeague = league;
-                   // return;
+                    user.League = league;
+                    return;
                 }
             }
+
+            createNewLeague((user.Credit / 1000) * 1000);
+            currLeague.removeUser(user);
+            League l = getLeagueByRank((user.Credit / 1000) * 1000);
+            l.addUser(user);
+            user.League = l;
         }
+
 
         public void setUsers(ICollection<UserProfile> Users)
         {
