@@ -191,5 +191,16 @@
   <ItemGroup>
     <Resource Include="Images\gamebackground.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Cards\back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Cards\S1.png" />
+    <Resource Include="Images\Cards\S10.png" />
+    <Resource Include="Images\Cards\Sj.png" />
+    <Resource Include="Images\Cards\Sk.png" />
+    <Resource Include="Images\Cards\Sq.png" />
+    <Content Include="Sounds\cardPlace1.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -15,7 +15,7 @@
             <RowDefinition Height="87*"/>
         </Grid.RowDefinitions>
         <Label Content="Chat" FontWeight="ExtraBold" HorizontalAlignment="Center" Foreground="AntiqueWhite"/>
-        <TextBox Name="messages" IsReadOnly="True"  VerticalScrollBarVisibility="Visible"  HorizontalAlignment="Left" Height="222" Margin="0,5,-1,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="201"/>
+        <TextBox Name="messages" IsReadOnly="True"  VerticalScrollBarVisibility="Visible"  HorizontalAlignment="Left" Height="222" Margin="0,5,-1,0" Grid.Row="1" TextWrapping="Wrap" AcceptsReturn="True" Text="" VerticalAlignment="Top" Width="201"/>
         <TextBox Name="message" HorizontalAlignment="Left" Height="23" Margin="1,237,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="157"/>
         <Button Click="SendMessageToChat_Click" IsDefault="True" Name="SendMessageToChat" Content="Send" HorizontalAlignment="Left" Margin="162,239,0,0" Grid.Row="1" VerticalAlignment="Top" Width="35"/>
     </Grid>

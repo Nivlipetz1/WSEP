@@ -12,7 +12,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="./Images/background.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
-        <TextBox Name="username" HorizontalAlignment="Left" Height="21" Margin="345,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="username"  HorizontalAlignment="Left" Height="21" Margin="345,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <PasswordBox Name="password" Width="120" HorizontalAlignment="Left" Height="21" Margin="347,115,0,0" VerticalAlignment="Top"/>
         <Button IsDefault="True" Click="Login_Click" Content="Login" HorizontalAlignment="Left" Margin="348,144,0,0" VerticalAlignment="Top" Width="75"/>
 

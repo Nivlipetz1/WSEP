@@ -28,6 +28,11 @@ namespace GUI
         private void SendMessageToChat_Click(object sender, RoutedEventArgs e)
         {
             messages.AppendText(message.Text+"\n");
+            message.Text = "";
+            messages.Focus();
+            messages.CaretIndex = messages.Text.Length;
+            messages.ScrollToEnd();
+            message.Focus();
         }
     }
 }

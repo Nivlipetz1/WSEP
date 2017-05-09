@@ -25,6 +25,7 @@ namespace GUI
         {
             this.main = main;
             InitializeComponent();
+            username.Focus();
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)
