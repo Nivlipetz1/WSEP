@@ -144,59 +144,7 @@ namespace Gaming
             roundsWon++;
             credit+=amount;
         }
-
-        public int Winnings
-        {
-            get
-            {
-                return winnings;
-            }
-
-            set
-            {
-                winnings = value;
-            }
-        }
-
-        public int Losses
-        {
-            get
-            {
-                return losses;
-            }
-
-            set
-            {
-                losses = value;
-            }
-        }
-
-        public int BiggestWin
-        {
-            get
-            {
-                return biggestWin;
-            }
-
-            set
-            {
-                biggestWin = value;
-            }
-        }
-
-        public CardAnalyzer.HandRank HighestHand
-        {
-            get
-            {
-                return HighestHand;
-            }
-
-            set
-            {
-                HighestHand = value;
-            }
-        }
-    }
+   }
 
     class FakeInput : UserInput
     {
