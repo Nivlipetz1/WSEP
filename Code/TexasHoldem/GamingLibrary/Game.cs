@@ -203,7 +203,7 @@ namespace Gaming
                 {
                     ca.setHand(player.GetHand());
                     playerScores.Add(player, ca.analyze());
-                    if (playerScores[player]>player.GetBestHand())
+                    if (playerScores[player]< player.GetBestHand())
                     {
                         player.SetBestHand(playerScores[player]);
                     }
