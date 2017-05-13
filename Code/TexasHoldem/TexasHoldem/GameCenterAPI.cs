@@ -9,15 +9,11 @@ namespace GameSystem
 {
     public interface GameCenterInterface
     {
-        Game createGame(GamePreferences preferecnces);
+        Game createGame(GamePreferences preferecnces, UserProfile user);
 
         List<Game> getAllSpectatingGames();
 
-        List<Game> getAllActiveGamesByPlayerName(String playerName);
-
-        List<Game> getAllActiveGamesByPotSize(int potSize);
-
-        List<Game> getAllActiveGamesByGamePreference(GamePreferences preferences);
+        List<Game> getActiveGames(String criterion, object param, UserProfile user);
 
         bool joinGame(Game game, UserProfile u , int credit);
 

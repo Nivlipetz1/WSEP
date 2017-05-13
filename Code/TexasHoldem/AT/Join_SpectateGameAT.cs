@@ -25,9 +25,10 @@ namespace AT
         {
             gc = new GameCenterService();
             prefs = new GamePreferences(8, 2, 5, 10, 1, 20, 3, true);
-            gc.createGame(prefs);
+            UserProfile ohadUser = new UserProfile("ohad", "213");
+            gc.createGame(prefs, ohadUser);
             prefs = new GamePreferences(8, 2, 5, 10, 1, 20, 3, false);
-            gc.createGame(prefs);
+            gc.createGame(prefs, ohadUser);
             us = GameSystem.TexasHoldemSystem.userSystemFactory.getInstance();
             us.register("abc", "123");
             us.login("abc", "123");
@@ -45,7 +46,7 @@ namespace AT
         public void Valid_joinGame()
         {
             userProf.Credit = 50;
-            Game g = gc.getAllActiveGamesByGamePreference(prefs)[0];
+            Game g = gc.getActiveGames("preferences",prefs, userProf3)[0];
             int NumberOfPlayersBefore = g.GetNumberOfPlayers();
             Assert.True(gc.joinGame(g, userProf, 30));
             Assert.AreEqual(g.GetNumberOfPlayers(), NumberOfPlayersBefore + 1);
@@ -55,7 +56,7 @@ namespace AT
         public void InValid_joinGame_Buyin()
         {
             userProf.Credit = 50;
-            Game g = gc.getAllActiveGamesByGamePreference(prefs)[0];
+            Game g = gc.getActiveGames("preferences", prefs, userProf3)[0];
             int NumberOfPlayersBefore = g.GetNumberOfPlayers();
             Assert.False(gc.joinGame(g, userProf, 10));
             Assert.AreEqual(g.GetNumberOfPlayers(), NumberOfPlayersBefore);
@@ -65,7 +66,7 @@ namespace AT
         public void InValid_joinGame_Credit()
         {
             userProf.Credit = 50;
-            Game g = gc.getAllActiveGamesByGamePreference(prefs)[0];
+            Game g = gc.getActiveGames("preferences", prefs, userProf3)[0];
             int NumberOfPlayersBefore = g.GetNumberOfPlayers();
             Assert.False(gc.joinGame(g, userProf, 60));
             Assert.AreEqual(g.GetNumberOfPlayers(), NumberOfPlayersBefore);
@@ -79,8 +80,8 @@ namespace AT
             userProf3.Credit = 50;
 
             GamePreferences prefs1 = new GamePreferences(2, 2, 5, 12, 1, 20, 3, false);
-            gc.createGame(prefs1);
-            Game g = gc.getAllActiveGamesByGamePreference(prefs1)[0];
+            gc.createGame(prefs1, userProf3);
+            Game g = gc.getActiveGames("preferences", prefs1, userProf3)[0];
             Assert.True(gc.joinGame(g, userProf, 30));
             Assert.True(gc.joinGame(g, userProf2, 30));
             Assert.False(gc.joinGame(g, userProf3, 30));
@@ -109,12 +110,12 @@ namespace AT
         public void valid_gameListByName()
         {
             userProf.Credit = 50;
-            Game g = gc.getAllActiveGamesByGamePreference(prefs)[0];
+            Game g = gc.getActiveGames("preferences", prefs, userProf3)[0]; ;
             gc.joinGame(g, userProf, 30);
 
-            List<Game> games = gc.getAllActiveGamesByPlayerName("abc");
+            List<Game> games = gc.getActiveGames("playername","abc", userProf3);
             Assert.AreEqual(1,games.Count);
-            //Assert.True(games[0].GetUserProfiles().Contains(userProf));
+            //Assert.True(games[0].GetUserProfiles().Contains(userProf));s
         }
     }
 }

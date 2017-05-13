@@ -12,24 +12,14 @@ namespace ServiceLayer
     {
         private GameCenterInterface gc = GameCenter.GameCenterFactory.getInstance();
 
-        public Game createGame(GamePreferences preferecnces)
+        public Game createGame(GamePreferences preferecnces, UserProfile user)
         {
-            return gc.createGame(preferecnces);
+            return gc.createGame(preferecnces, user);
         }
 
-        public List<Game> getAllActiveGamesByGamePreference(GamePreferences preferences)
+        public List<Game> getActiveGames(string criterion, object param, UserProfile user)
         {
-            return gc.getAllActiveGamesByGamePreference(preferences);
-        }
-
-        public List<Game> getAllActiveGamesByPlayerName(string playerName)
-        {
-            return gc.getAllActiveGamesByPlayerName(playerName);
-        }
-
-        public List<Game> getAllActiveGamesByPotSize(int potSize)
-        {
-            return gc.getAllActiveGamesByPotSize(potSize);
+            return gc.getActiveGames(criterion, param, user);
         }
 
         public List<List<Move>> getAllReplayesOfInActiveGames()

@@ -12,11 +12,13 @@ namespace GameSystem
         int minimumRank;
         string name; 
         HashSet<UserProfile> users;
+        List<Game> games;
         public League(int minimumRank,string name)
         {
             this.name = name;
             this.minimumRank = minimumRank;
             users = new HashSet<UserProfile>();
+            games = new List<Game>();
         }
         public int MinimumRank
         {
@@ -60,5 +62,9 @@ namespace GameSystem
             return users.Contains(user);
         }
 
+        public List<Game> getGames()
+        {
+            return games;
+        }
     }
 }

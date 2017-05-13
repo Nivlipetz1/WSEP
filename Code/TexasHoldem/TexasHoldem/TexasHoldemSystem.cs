@@ -57,6 +57,7 @@ namespace GameSystem
             if (!users.ContainsKey(userName))
             {
                 UserProfile user = new UserProfile(userName, password);
+                user.Credit = 200;
                 users.Add(userName, user);
                 gc.addUserToLeague(user, gc.getLeagueByRank(0));
                 gc.setUsers(users.Values);
