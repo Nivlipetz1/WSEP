@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using Gaming;
 using ServiceLayer;
+using GameSystem;
 
 namespace AT
 {
@@ -18,8 +19,9 @@ namespace AT
         public void Valid_createGame()
         {
             GamePreferences prefs = new GamePreferences(8, 2, 5, 10, 1, 2, 3, true);
-            gc.createGame(prefs);
-            Assert.AreEqual(gc.getAllActiveGamesByGamePreference(prefs).Count(), 1);
+            UserProfile ohadUser = new UserProfile("ohad", "213");
+            gc.createGame(prefs, ohadUser);
+            Assert.AreEqual(gc.getActiveGames("preferences" , prefs , ohadUser).Count(), 1);
         }
 
         [TestCase]
