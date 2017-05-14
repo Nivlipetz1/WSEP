@@ -49,9 +49,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameCenterService.cs" />
-    <Compile Include="LeagueService.cs" />
+    <Compile Include="GameService.cs" />
+    <Compile Include="Models\ClientGame.cs" />
+    <Compile Include="Models\ClientUserProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserSystem_Service.cs" />
+    <Compile Include="SystemService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
