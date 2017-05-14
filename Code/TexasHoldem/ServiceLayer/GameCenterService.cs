@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Gaming;
 using GameSystem;
+using ServiceLayer.Models;
 
 namespace ServiceLayer
 {
@@ -12,14 +13,14 @@ namespace ServiceLayer
     {
         private GameCenterInterface gc = GameCenter.GameCenterFactory.getInstance();
 
-        public Game createGame(GamePreferences preferecnces, UserProfile user)
+        public ClientGame createGame(GamePreferences preferecnces, UserProfile user)
         {
-            return gc.createGame(preferecnces, user);
+            return new ClientGame(gc.createGame(preferecnces, user));
         }
 
-        public List<Game> getActiveGames(string criterion, object param, UserProfile user)
+        public List<ClientGame> getActiveGames(string criterion, object param, UserProfile user)
         {
-            return gc.getActiveGames(criterion, param, user);
+            return gc.getActiveGames(criterion, param, user).Select(game => new ClientGame(game)).ToList();
         }
 
         public List<List<Move>> getAllReplayesOfInActiveGames()
@@ -27,19 +28,23 @@ namespace ServiceLayer
             return gc.getAllReplayesOfInActiveGames();
         }
 
-        public List<Game> getAllSpectatingGames()
+        public List<ClientGame> getAllSpectatingGames()
         {
-            return gc.getAllSpectatingGames();
+            return gc.getAllSpectatingGames().Select(game => new ClientGame(game)).ToList();
         }
 
-        public bool joinGame(Game game, UserProfile u, int credit)
+        public List<string> joinGame(int gameID, UserProfile u, int credit)
         {
-            return gc.joinGame(game, u, credit);
+            Game g = gc.getGameByID(gameID);
+            gc.joinGame(g, u, credit);
+            return g.GetPlayers().ConvertAll(x => (SpectatingUser)x).Union(g.GetSpectators()).Select(player1 => player1.GetUserName()).ToList();
         }
 
-        public bool spectateGame(Game game, UserProfile u)
+        public List<string> spectateGame(int gameID, UserProfile u)
         {
-            return gc.spectateGame(game, u);
+            Game g = gc.getGameByID(gameID);
+            gc.spectateGame(g, u);
+            return g.GetPlayers().ConvertAll(x => (SpectatingUser)x).Union(g.GetSpectators()).Select(player1 => player1.GetUserName()).ToList();
         }
     }
 }

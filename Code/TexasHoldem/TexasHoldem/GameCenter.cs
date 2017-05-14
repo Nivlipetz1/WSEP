@@ -38,6 +38,12 @@ namespace GameSystem
             return game;
         }
 
+        public Game getGameByID(int gameID)
+        {
+            List<Game> gamesID = games.Where(game => game.getGameID() == gameID).ToList();
+            return gamesID.Count == 1 ? gamesID[0] : null;
+        }
+
         delegate List<Game> activeGame(object param , List<Game> games);
         public List<Game> getActiveGames(String criterion , object param , UserProfile user)
         {

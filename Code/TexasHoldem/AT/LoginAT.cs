@@ -16,7 +16,7 @@ namespace AT
         [SetUp]
         public void before()
         {
-            us = new UserSystem_Service();
+            us = new SystemService();
             us.register("abc", "123");
         }
 

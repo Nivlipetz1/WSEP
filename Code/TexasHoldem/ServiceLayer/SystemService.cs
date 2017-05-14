@@ -6,30 +6,34 @@ using System.Threading.Tasks;
 using System.Drawing;
 using GameSystem;
 using System.Text.RegularExpressions;
+using ServiceLayer.Models;
 
 namespace ServiceLayer
 {
-    public class UserSystem_Service : SystemAPI
+    public class SystemService : SystemAPI
     {
         private SystemAPI system;
-        public UserSystem_Service()
+        public SystemService()
         {
             system = GameSystem.TexasHoldemSystem.userSystemFactory.getInstance();
         }
 
-        public bool editAvatar(Image avatar, UserProfile u)
+        public bool editAvatar(byte[] avatar, ClientUserProfile u)
         {
-            return system.editAvatar(avatar, u);
+            using (var ms = new System.IO.MemoryStream(avatar))
+            {
+                return system.editAvatar(Image.FromStream(ms), system.getUser(u.Username));
+            }
         }
 
-        public bool editPassword(string password, UserProfile u)
+        public bool editPassword(string password, ClientUserProfile u)
         {
             if (string.IsNullOrWhiteSpace(password))
                 return false;
-            return system.editPassword(password, u);
+            return system.editPassword(password, system.getUser(u.Username));
         }
 
-        public bool editUserName(string userName, UserProfile u)
+        public bool editUserName(string userName, ClientUserProfile u)
         {
             if(string.IsNullOrWhiteSpace(userName))
                 return false;
@@ -41,17 +45,12 @@ namespace ServiceLayer
             r = new Regex("^[0-9]*$");
             if (r.IsMatch(""+userName[0]))
                 return false;
-            return system.editUserName(userName, u);
+            return system.editUserName(userName, system.getUser(u.Username));
         }
 
-        public UserProfile getUser(string username)
+        public ClientUserProfile getUser(string username)
         {
-            return system.getUser(username);
-        }
-
-        public UserProfile getUser(string username, string password)
-        {
-            return system.getUser(username, password);
+            return new ClientUserProfile(system.getUser(username));
         }
 
         public bool isConnected(string username)
@@ -66,9 +65,9 @@ namespace ServiceLayer
             return system.login(userName, password);
         }
 
-        public bool logout(UserProfile u)
+        public bool logout(ClientUserProfile u)
         {
-            return system.logout(u);
+            return system.logout(system.getUser(u.Username));
         }
 
         public bool register(string userName, string password)

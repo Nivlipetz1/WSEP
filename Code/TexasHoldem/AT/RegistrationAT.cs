@@ -21,7 +21,7 @@ namespace AT
         [SetUp]
         public void before()
         {
-            us = new UserSystem_Service();
+            us = new SystemService();
         }
 
         [TestCase]

@@ -11,7 +11,7 @@ namespace Gaming
         private int credit;
         private string status;
         private PlayerHand hand;
-        private UserInput userInput;
+        private UserInputAPI userInput;
         private CardAnalyzer.HandRank bestHand;
         private int roundsWon;
         private int roundsLost;
@@ -30,6 +30,11 @@ namespace Gaming
         public void SetFakeUserInput(Queue<string> inputs)
         {
             userInput = new FakeInput(inputs);
+        }
+
+        public void setInput(string input)
+        {
+            userInput.setInput(input);
         }
 
         public int GetRoundsWon()
@@ -146,7 +151,7 @@ namespace Gaming
         }
    }
 
-    class FakeInput : UserInput
+    class FakeInput : UserInputAPI
     {
         Queue<string> inputs;
         string input = "0";
