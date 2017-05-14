@@ -84,6 +84,10 @@
     <Compile Include="GamePM.xaml.cs">
       <DependentUpon>GamePM.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClientGame.cs" />
+    <Compile Include="Models\ClientUserProfile.cs" />
+    <Compile Include="Models\GamePreferences.cs" />
+    <Compile Include="Models\Move.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -217,8 +221,6 @@
     <None Include="Resources\cardsdealt2.wav" />
     <Content Include="Sounds\cardPlace1.wav" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
