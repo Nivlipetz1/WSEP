@@ -5,14 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using GameSystem;
 using Gaming;
+using ServiceLayer.Models;
 
 namespace ServiceLayer
 {
-    class GameService : GameAPI
+    public class GameService
     {
         GameCenter gc = GameCenter.GameCenterFactory.getInstance();
 
-        public List<string> bet(UserProfile user, int gameID, string minimumBet)
+        public List<string> bet(ClientUserProfile user, int gameID, string minimumBet)
         {
             Game game = gc.getGameByID(gameID);
             PlayingUser player = game.GetPlayers().Where(pu => pu.GetUserName().Equals(user.Username)).First();
@@ -20,7 +21,7 @@ namespace ServiceLayer
             return game.GetPlayers().ConvertAll(x => (SpectatingUser)x).Union(game.GetSpectators()).Select(player1 => player1.GetUserName()).ToList();
         }
 
-        public List<string> removePlayer(UserProfile user, int gameID)
+        public List<string> removePlayer(ClientUserProfile user, int gameID)
         {
             Game game = gc.getGameByID(gameID);
             PlayingUser player = game.GetPlayers().Where(pu => pu.GetUserName().Equals(user.Username)).First();
@@ -28,7 +29,7 @@ namespace ServiceLayer
             return game.GetPlayers().ConvertAll(x => (SpectatingUser)x).Union(game.GetSpectators()).Select(player1 => player1.GetUserName()).ToList();
         }
 
-        public List<string> removeSpectator(UserProfile user, int gameID)
+        public List<string> removeSpectator(ClientUserProfile user, int gameID)
         {
             Game game = gc.getGameByID(gameID);
             SpectatingUser spec = game.GetSpectators().Where(sp => sp.GetUserName().Equals(user.Username)).First();
@@ -36,7 +37,7 @@ namespace ServiceLayer
             return game.GetPlayers().ConvertAll(x => (SpectatingUser)x).Union(game.GetSpectators()).Select(player => player.GetUserName()).ToList();
         }
 
-        public List<string> postMessage(UserProfile user, string message, int gameID)
+        public List<string> postMessage(ClientUserProfile user, string message, int gameID)
         {
             Game game = gc.getGameByID(gameID);
             SpectatingUser spec = game.GetSpectators().Where(sp => sp.GetUserName().Equals(user.Username)).First();
@@ -46,7 +47,7 @@ namespace ServiceLayer
             return usernames;
         }
 
-        public List<string> postWhisperMessage(UserProfile from, UserProfile to, string message, int gameID)
+        public List<string> postWhisperMessage(ClientUserProfile from, ClientUserProfile to, string message, int gameID)
         {
             Game game = gc.getGameByID(gameID);
             SpectatingUser fromSpec = game.GetSpectators().Where(sp => sp.GetUserName().Equals(from.Username)).First();
@@ -58,7 +59,7 @@ namespace ServiceLayer
 
         }
 
-        private List<PlayingUser> GetPlayers(UserProfile user, int gameID)
+        private List<PlayingUser> GetPlayers(ClientUserProfile user, int gameID)
         {
             return gc.getGameByID(gameID).GetPlayers();
         }

@@ -7,7 +7,8 @@ using GameSystem;
 using NUnit.Framework;
 using System.Drawing;
 using ServiceLayer;
-
+using ServiceLayer.Models;
+using System.IO;
 
 namespace AT
 {
@@ -26,22 +27,22 @@ namespace AT
         public void successEditUsername()
         {
             us.login("abc", "123");
-            UserProfile user = us.getUser("abc", "123");
+            ClientUserProfile user = us.getUser("abc");
             Assert.True(us.editUserName("aaaaa", user));
         }
 
         [TestCase]
         public void badEditUsername_Loggedout()
         {
-            UserProfile user = us.getUser("abc", "123");
+            ClientUserProfile user = us.getUser("abc");
             Assert.False(us.editUserName("aaaaa", user));
         }
 
         [TestCase]
         public void badEditUsername_Loggedin()
         {
-            us.login("abc", "123"); 
-            UserProfile user = us.getUser("abc", "123");
+            us.login("abc", "123");
+            ClientUserProfile user = us.getUser("abc");
             Assert.False(us.editUserName("", user));
             Assert.False(us.editUserName("   ", user));
         }
@@ -50,7 +51,7 @@ namespace AT
         public void successEditPassword()
         {
             us.login("abc", "123");
-            UserProfile user = us.getUser("abc", "123");
+            ClientUserProfile user = us.getUser("abc");
             us.editPassword("124", user);
             us.logout(user);
             Assert.True(us.login("abc", "124"));
@@ -60,7 +61,7 @@ namespace AT
         public void badEditPassword()
         {
             us.login("abc", "123");
-            UserProfile user = us.getUser("abc", "123");
+            ClientUserProfile user = us.getUser("abc");
             Assert.False(us.editPassword("", user));
             Assert.False(us.editPassword("    ", user));
         }
@@ -70,9 +71,12 @@ namespace AT
         {
             
             Image avatar = new Bitmap("C:\\Users\\pc\\Desktop\\capture.png");
+            MemoryStream ms = new MemoryStream();
+            avatar.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
+
             us.login("abc", "123");
-            UserProfile user = us.getUser("abc", "123");
-            Assert.True(us.editAvatar(avatar, user));
+            ClientUserProfile user = us.getUser("abc");
+            Assert.True(us.editAvatar(ms.ToArray(), user));
             Assert.AreEqual(user.Avatar, avatar);
         }
     }

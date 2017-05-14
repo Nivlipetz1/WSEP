@@ -167,6 +167,11 @@ namespace Gaming
             }
             return input;
         }
+
+        public void setInput(string minimumBet)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

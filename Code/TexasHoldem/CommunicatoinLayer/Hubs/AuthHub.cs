@@ -8,6 +8,7 @@ using ServiceLayer;
 using CommunicatoinLayer.Managers;
 using System.Threading.Tasks;
 using System.Drawing;
+using ServiceLayer.Models;
 
 namespace CommunicatoinLayer.Hubs
 {
@@ -16,7 +17,7 @@ namespace CommunicatoinLayer.Hubs
 
         public async Task<bool> login(string userName, string password)
         {
-            SystemAPI userService = new UserSystem_Service();
+            SystemService userService = new SystemService();
             if (userService.login(userName, password))
             {
                 AuthManager.Instance.Login(userName, password, Context.ConnectionId);
@@ -29,19 +30,19 @@ namespace CommunicatoinLayer.Hubs
 
         public bool register(string userName, string password)
         {
-            SystemAPI userService = new UserSystem_Service();
+            SystemService userService = new SystemService();
             return userService.register(userName, password);
         }
 
-        public bool editAvatar(Image avatar, UserProfile u)
+        public bool editAvatar(byte []  avatar, ClientUserProfile u)
         {
-            SystemAPI userService = new UserSystem_Service();
+            SystemService userService = new SystemService();
             return userService.editAvatar(avatar, u);
         }
 
-        public bool logout(UserProfile u)
+        public bool logout(ClientUserProfile u)
         {
-            SystemAPI userService = new UserSystem_Service();
+            SystemService userService = new SystemService();
             if (userService.logout(u))
             {
                 AuthManager.Instance.Logout(u.Username, Context.ConnectionId);
@@ -52,15 +53,15 @@ namespace CommunicatoinLayer.Hubs
             return false;
         }
 
-        public bool editPassword(string password, UserProfile u)
+        public bool editPassword(string password, ClientUserProfile u)
         {
-            SystemAPI userService = new UserSystem_Service();
+            SystemService userService = new SystemService();
             return userService.editPassword(password, u);
         }
 
-        public bool editUserName(string userName, UserProfile u)
+        public bool editUserName(string userName, ClientUserProfile u)
         {
-            SystemAPI userService = new UserSystem_Service();
+            SystemService userService = new SystemService();
             return userService.editUserName(userName, u);
         }
 

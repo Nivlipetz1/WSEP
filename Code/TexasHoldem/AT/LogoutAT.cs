@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using ServiceLayer;
 using GameSystem;
-
+using ServiceLayer.Models;
 
 namespace AT
 {
     class LogoutAT
     {
-        private SystemAPI us;
+        private SystemService us;
 
         [SetUp]
         public void before()
         {
-            us =new SystemService();
+            us = new SystemService();
             us.register("abc", "123");
         }
 
@@ -25,7 +25,7 @@ namespace AT
         public void Logout_Loggedin()
         {
             Assert.True(us.login("abc", "123"));
-            UserProfile prof = us.getUser("abc");
+            ClientUserProfile prof = us.getUser("abc");
             Assert.True(us.logout(prof));
             Assert.False(us.logout(prof));
         }
@@ -33,7 +33,7 @@ namespace AT
         [TestCase]
         public void Logout_NotLoggedin()
         {
-            UserProfile prof = us.getUser("abc");
+            ClientUserProfile prof = us.getUser("abc");
             Assert.False(us.logout(prof));
         }
     }

@@ -13,14 +13,14 @@ namespace AT
     [TestFixture]
     class LeaguesAT
     {
-        LeagueService gc;
+        LeagueAPI gc;
         int minRank = 10;
         GameSystem.TexasHoldemSystem us;
 
         [SetUp]
         public void before()
         {
-            gc = new LeagueService();
+            gc = GameCenter.GameCenterFactory.getInstance();
             us = TexasHoldemSystem.userSystemFactory.getInstance();
             us.register("user", "123");
             us.login("user", "123");

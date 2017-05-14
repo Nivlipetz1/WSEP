@@ -10,7 +10,7 @@ using ServiceLayer.Models;
 
 namespace ServiceLayer
 {
-    public class SystemService : SystemAPI
+    public class SystemService
     {
         private SystemAPI system;
         public SystemService()

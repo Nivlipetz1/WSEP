@@ -4,60 +4,68 @@ using System.Linq;
 using System.Web;
 using Microsoft.AspNet.SignalR;
 using ServiceLayer;
-using Gaming;
 using GameSystem;
 using CommunicatoinLayer.Managers;
 using System.Threading.Tasks;
+using ServiceLayer.Models;
+using Gaming;
 
 namespace CommunicatoinLayer.Hubs
 {
     public class GameCenterHub : Hub
     {
-        public Game createGame(GamePreferences preferecnces , UserProfile user)
+        public ClientGame createGame(GamePreferences preferecnces , ClientUserProfile user)
         {
-            GameCenterInterface gc = new GameCenterService();
+            GameCenterService gc = new GameCenterService();
             return gc.createGame(preferecnces , user);
         }
 
-        List<Game> getActiveGames(string criterion, object param, UserProfile user)
+        List<ClientGame> getActiveGames(string criterion, object param, ClientUserProfile user)
         {
-            GameCenterInterface gc = new GameCenterService();
+            GameCenterService gc = new GameCenterService();
             return gc.getActiveGames(criterion , param , user);
         }
 
         public List<List<Move>> getAllReplayesOfInActiveGames()
         {
-            GameCenterInterface gc = new GameCenterService();
+            GameCenterService gc = new GameCenterService();
             return gc.getAllReplayesOfInActiveGames();
         }
 
-        public List<Game> getAllSpectatingGames()
+        public List<ClientGame> getAllSpectatingGames()
         {
-            GameCenterInterface gc = new GameCenterService();
+            GameCenterService gc = new GameCenterService();
             return gc.getAllSpectatingGames();
         }
 
-        public async Task<bool> joinGame(Game game, UserProfile u, int credit)
+        public async Task<bool> joinGame(ClientGame game, ClientUserProfile u, int credit)
         {
-            GameCenterInterface gc = new GameCenterService();
-            if (gc.joinGame(game, u, credit))
+            GameCenterService gc = new GameCenterService();
+            List<string> usersToSend = new List<string>();
+            if ((usersToSend = gc.joinGame(game.getID(), u, credit)) != null)
             {
-                int gameId = 0; //TODO :  game.getGameId();
+                int gameId = game.getID();
                 GameCenterManager.Instance.joinGame(u.Username, gameId);
                 await Groups.Add(Context.ConnectionId, "game " + gameId);
+                Clients.Clients(usersToSend.Select(user => AuthManager.Instance.GetConnectionIdByName(user)).ToList()).joinGame(game.getID(), u);
                 return true;
             }
 
             return false;
         }
 
-        public async Task<bool> spectateGame(Game game, UserProfile u)
+        public async Task<bool> spectateGame(ClientGame game, ClientUserProfile u)
         {
-            GameCenterInterface gc = new GameCenterService();
-            int gameId = 0; // TODO : game.getGameId();
+            GameCenterService gc = new GameCenterService();
+            int gameId = game.getID();
             GameCenterManager.Instance.spectateGame(u.Username, gameId);
             await Groups.Add(Context.ConnectionId, "game " + gameId);
-            return gc.spectateGame(game, u);
+            List<string> usersToSend = new List<string>();
+
+            if((usersToSend = gc.spectateGame(game.getID(), u)) != null)
+                Clients.Clients(usersToSend.Select(user => AuthManager.Instance.GetConnectionIdByName(user)).ToList()).spectateGame(game.getID(), u);
+
+            return false;
         }
 
     }

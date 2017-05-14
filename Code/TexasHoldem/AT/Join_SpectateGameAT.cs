@@ -13,7 +13,7 @@ namespace AT
     [TestFixture]
     class Join_SpectateGameAT
     {
-        GameCenterService gc;
+        GameCenter gc;
         GameSystem.TexasHoldemSystem us;
         UserProfile userProf;
         UserProfile userProf2;
@@ -23,7 +23,7 @@ namespace AT
         [SetUp]
         public void before()
         {
-            gc = new GameCenterService();
+            gc = GameCenter.GameCenterFactory.getInstance();
             prefs = new GamePreferences(8, 2, 5, 10, 1, 20, 3, true);
             UserProfile ohadUser = new UserProfile("ohad", "213");
             gc.createGame(prefs, ohadUser);

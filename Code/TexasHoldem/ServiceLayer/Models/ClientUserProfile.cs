@@ -8,7 +8,7 @@ using GameSystem;
 
 namespace ServiceLayer.Models
 {
-    class ClientUserProfile
+    public class ClientUserProfile
     {
         private string username;
         private Image avatar;

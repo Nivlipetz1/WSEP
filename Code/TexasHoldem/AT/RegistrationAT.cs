@@ -16,7 +16,7 @@ namespace AT
     public class RegistrationAT
     {
        
-        private SystemAPI us;
+        private SystemService us;
 
         [SetUp]
         public void before()

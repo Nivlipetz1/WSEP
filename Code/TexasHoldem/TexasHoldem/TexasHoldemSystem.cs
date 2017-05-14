@@ -10,7 +10,6 @@ namespace GameSystem
 {
     public class TexasHoldemSystem : SystemAPI
     {
-        public delegate void Notify(string message);
         public class userSystemFactory
         {
             private static TexasHoldemSystem instance = null;
@@ -24,7 +23,6 @@ namespace GameSystem
         }
         private Dictionary<String, UserProfile> activeUsers;
         private Dictionary<String, UserProfile> users;
-        public static event Notify evt;
         private GameCenter gc;
 
         private TexasHoldemSystem()

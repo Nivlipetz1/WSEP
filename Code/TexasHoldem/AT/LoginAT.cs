@@ -11,7 +11,7 @@ namespace AT
 {
     class LoginAT
     {
-        private SystemAPI us;
+        private SystemService us;
 
         [SetUp]
         public void before()
