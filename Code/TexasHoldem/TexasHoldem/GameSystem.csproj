@@ -52,6 +52,7 @@
     <Compile Include="League.cs" />
     <Compile Include="LeagueAPI.cs" />
     <Compile Include="Notification.cs" />
+    <Compile Include="NotificationService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Statistics.cs" />

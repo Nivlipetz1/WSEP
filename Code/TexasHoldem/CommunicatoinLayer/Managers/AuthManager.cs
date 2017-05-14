@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using CommunicatoinLayer.Hubs;
+using GameSystem;
 
 namespace CommunicatoinLayer.Managers
 {
@@ -22,6 +23,9 @@ namespace CommunicatoinLayer.Managers
             _usersByConnectionId = new ConcurrentDictionary<string, string>();
 
             Clients = connectionManager.GetHubContext<AuthHub>().Clients;
+
+            NotificationService.notifyAllUsesrEvt += notifyAllUsers;
+            NotificationService.notifyUserEvt += notifyUser;
         }
 
         private IHubConnectionContext<dynamic> Clients { set; get; }
@@ -33,6 +37,16 @@ namespace CommunicatoinLayer.Managers
             //on login success
             _usersByName[name] = connectionId;
             _usersByConnectionId[connectionId] = name;
+        }
+
+        private void notifyUser(string userName, string message)
+        {
+            Clients.Client(GetConnectionIdByName(userName)).notify(message);
+        }
+
+        private void notifyAllUsers(string message)
+        {
+            Clients.All.notify(message);
         }
 
         public void Logout(string name, string connectionId)

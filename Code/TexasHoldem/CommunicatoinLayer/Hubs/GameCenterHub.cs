@@ -19,7 +19,7 @@ namespace CommunicatoinLayer.Hubs
             return gc.createGame(preferecnces , user);
         }
 
-        List<Game> getActiveGames(String criterion, object param, UserProfile user)
+        List<Game> getActiveGames(string criterion, object param, UserProfile user)
         {
             GameCenterInterface gc = new GameCenterService();
             return gc.getActiveGames(criterion , param , user);

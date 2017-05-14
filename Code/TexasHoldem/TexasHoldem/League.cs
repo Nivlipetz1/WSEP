@@ -31,7 +31,7 @@ namespace GameSystem
             if (users.Contains(user))
                 return false;
             users.Add(user);
-            user.addNotify("You Added to League " + name + " with rank " + minimumRank+" !");
+            TexasHoldemSystem.userSystemFactory.getInstance().notify(user.Username, "You Added to League " + name + " with rank " + minimumRank + " !");
             return true;
         }
 
