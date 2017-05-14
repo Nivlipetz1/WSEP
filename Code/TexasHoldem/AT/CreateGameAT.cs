@@ -7,6 +7,7 @@ using NUnit.Framework;
 using Gaming;
 using ServiceLayer;
 using GameSystem;
+using ServiceLayer.Models;
 
 namespace AT
 {
@@ -19,7 +20,7 @@ namespace AT
         public void Valid_createGame()
         {
             GamePreferences prefs = new GamePreferences(8, 2, 5, 10, 1, 2, 3, true);
-            UserProfile ohadUser = new UserProfile("ohad", "213");
+            ClientUserProfile ohadUser = new ClientUserProfile (new UserProfile("ohad", "213"));
             gc.createGame(prefs, ohadUser);
             Assert.AreEqual(gc.getActiveGames("preferences" , prefs , ohadUser).Count(), 1);
         }

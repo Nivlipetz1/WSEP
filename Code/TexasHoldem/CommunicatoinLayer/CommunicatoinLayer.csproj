@@ -148,7 +148,7 @@
   <ItemGroup>
     <Compile Include="Hubs\AuthHub.cs" />
     <Compile Include="Hubs\GameCenterHub.cs" />
-    <Compile Include="Hubs\LeagueHub.cs" />
+    <Compile Include="Hubs\GameHub.cs" />
     <Compile Include="Managers\AuthManager.cs" />
     <Compile Include="Managers\GameCenterManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

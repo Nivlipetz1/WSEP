@@ -8,7 +8,7 @@ using Gaming;
 
 namespace ServiceLayer.Models
 {
-    class ClientGame
+    public class ClientGame
     {
         private GameSystem.TexasHoldemSystem system = GameSystem.TexasHoldemSystem.userSystemFactory.getInstance();
         private int id;
