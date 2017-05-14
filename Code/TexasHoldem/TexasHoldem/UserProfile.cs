@@ -15,7 +15,6 @@ namespace GameSystem
         private Image avatar;
         private int credit;
         private League league;
-        private List<Notification> notifications = new List<Notification>();
         private Statistics userStat;
 
         public string Username
@@ -80,12 +79,6 @@ namespace GameSystem
             this.Password = password;
             this.Avatar = avatar;
             userStat = new Statistics();
-        }
-
-        public void addNotify(String message)
-        {
-            Notification notification = new Notification(message);
-            notifications.Add(notification);
         }
 
         public void setUserLeague(League league)

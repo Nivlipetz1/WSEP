@@ -64,7 +64,6 @@ namespace GameSystem
             }
             else return false;
 
-            evt += users[userName].addNotify;
             return true;
         }
 
@@ -119,11 +118,14 @@ namespace GameSystem
             return activeUsers.ContainsKey(username);
         }
 
-        public void notifyAllUsers(String message)
+        public void notifyAllUsers(string message)
         {
-            var e = evt;
-            if (e != null)
-                e(message);
+            NotificationService.Instance.notifyAllUser(message);
+        }
+
+        public void notify(string userName , string message)
+        {
+            NotificationService.Instance.notifyUser(userName , message);
         }
     }
 }

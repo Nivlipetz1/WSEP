@@ -9,7 +9,7 @@ namespace GameSystem
 {
     public interface GameCenterInterface
     {
-        Game createGame(GamePreferences preferecnces, UserProfile user);
+        Game createGame(GamePreferences preferecnces , UserProfile user);
 
         List<Game> getAllSpectatingGames();
 
