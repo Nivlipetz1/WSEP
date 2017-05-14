@@ -57,13 +57,15 @@ namespace CommunicatoinLayer.Hubs
         public async Task<bool> spectateGame(ClientGame game, ClientUserProfile u)
         {
             GameCenterService gc = new GameCenterService();
-            int gameId = game.getID();
-            GameCenterManager.Instance.spectateGame(u.Username, gameId);
-            await Groups.Add(Context.ConnectionId, "game " + gameId);
             List<string> usersToSend = new List<string>();
-
             if((usersToSend = gc.spectateGame(game.getID(), u)) != null)
+            {
+                int gameId = game.getID();
+                GameCenterManager.Instance.spectateGame(u.Username, gameId);
+                await Groups.Add(Context.ConnectionId, "game " + gameId);
                 Clients.Clients(usersToSend.Select(user => AuthManager.Instance.GetConnectionIdByName(user)).ToList()).spectateGame(game.getID(), u);
+                return true;
+            }
 
             return false;
         }
