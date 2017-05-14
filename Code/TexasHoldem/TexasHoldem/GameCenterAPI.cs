@@ -20,5 +20,7 @@ namespace GameSystem
         bool spectateGame(Game game, UserProfile u);
 
         List<List<Move>> getAllReplayesOfInActiveGames();
+
+        Game getGameByID(int gameID);
     }
 }

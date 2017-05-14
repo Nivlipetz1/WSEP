@@ -14,11 +14,11 @@ namespace AT
     class UpdateUserProfileAT
     {
        
-        private UserSystem_Service us;
+        private SystemService us;
         [SetUp]
         public void before()
         {
-            us = new UserSystem_Service();
+            us = new SystemService();
             us.register("abc", "123");
         }
 

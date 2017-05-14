@@ -9,6 +9,7 @@ namespace Gaming
 {
     public class Game
     {
+        private int id;
         private Deck gameDeck;
         private List<PlayingUser> players; //these will be of type playingUsers
         private List<SpectatingUser> spectators; //these will be of type spectators
@@ -172,7 +173,6 @@ namespace Gaming
                 }
             }
         }
-
 
         private void ResetGame()
         {
@@ -338,7 +338,6 @@ namespace Gaming
             }
         }
 
-
         private bool DidEveryoneFold()
         {
             int inc = 0;
@@ -379,10 +378,32 @@ namespace Gaming
            return (checkDistinctAmounts.Count == 1);
         }
 
-
         internal void Message(SpectatingUser spectaitngUser, string v)
         {
             throw new NotImplementedException();
+        }
+
+        public List<SpectatingUser> postMessage(SpectatingUser user, string message)
+        {
+            //chat.SendMessage(message);
+            if (players.Contains(user))
+                return (List<SpectatingUser>)players.Union(spectators);
+            else
+                return spectators;
+        }
+
+        public List<SpectatingUser> postMessage(SpectatingUser from, SpectatingUser to, string message)
+        {
+            //chat.SendMessage(message);
+            if (players.Contains(from))
+                return new List<SpectatingUser> {from, to};
+            else
+            {
+                if (spectators.Contains(to))
+                    return new List<SpectatingUser> { from, to };
+                else
+                    return null;
+            }
         }
 
         public void addPlayer(PlayingUser player)
@@ -434,8 +455,6 @@ namespace Gaming
             spectators.Remove(spec);
             spec = null;
         }
-
-
 
         /**
          * 
@@ -504,6 +523,16 @@ namespace Gaming
             return cards;
         }
 
+        public int[] getPot()
+        {
+            return pot;
+        }
+
+        public Deck getDeck()
+        {
+            return gameDeck;
+        }
+
         public GamePreferences GetGamePref()
         {
             return gamePref;
@@ -514,6 +543,10 @@ namespace Gaming
             return pot[0];
         }
 
+        public IDictionary<PlayingUser, int> getplayerBets()
+        {
+            return playerBets;
+        }
         /*public List<UserProfile> GetUserProfiles() //dont need
         {
             List<UserProfile> users = new List<UserProfile>();
@@ -537,6 +570,11 @@ namespace Gaming
         public void InactivateGame()
         {
             gamePref.SetStatus("inactive");
+        }
+
+        public int getGameID()
+        {
+            return id;
         }
     }
 }
