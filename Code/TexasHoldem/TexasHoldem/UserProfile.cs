@@ -95,10 +95,10 @@ namespace GameSystem
 
         public void updateStatistics(PlayingUser user)
         {
-            userStat.Winnings += user.Winnings;
-            userStat.Losses += user.Losses;
-            userStat.BiggestWin = (userStat.BiggestWin > user.BiggestWin) ? userStat.BiggestWin : user.BiggestWin;
-            userStat.HighestHand = (userStat.HighestHand < user.HighestHand) ? userStat.HighestHand : user.HighestHand;
+            userStat.Winnings += user.GetRoundsWon();
+            userStat.Losses += user.GetRoundsLost();
+            userStat.BiggestWin = (userStat.BiggestWin > user.GetMostWon()) ? userStat.BiggestWin : user.GetMostWon();
+            userStat.HighestHand = (userStat.HighestHand < user.GetBestHand()) ? userStat.HighestHand : user.GetBestHand();
             userStat.BiggestWallet = (Credit > userStat.BiggestWallet) ? Credit : userStat.BiggestWallet;
         }
     }
