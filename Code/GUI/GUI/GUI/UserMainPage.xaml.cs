@@ -20,9 +20,11 @@ namespace GUI
     /// </summary>
     public partial class UserMainPage : Page
     {
-        public UserMainPage()
+        MainWindow main;
+        public UserMainPage(MainWindow main)
         {
             InitializeComponent();
+            this.main = main;
         }
 
         private void EditProfile_Click(object sender, RoutedEventArgs e)
@@ -35,7 +37,8 @@ namespace GUI
             MessageBoxResult rs = MessageBox.Show("Are you sure you want to logout?", "Logout", MessageBoxButton.YesNo, MessageBoxImage.Information, MessageBoxResult.No);
             if (rs == MessageBoxResult.Yes)
             {
-                NavigationService.GoBack();
+                main.statusFrame.Content = null;
+                NavigationService.Navigate(new Login(main));
             }
         }
 

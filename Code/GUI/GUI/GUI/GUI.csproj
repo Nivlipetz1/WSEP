@@ -72,6 +72,11 @@
     <Compile Include="GamePM.xaml.cs">
       <DependentUpon>GamePM.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Status.xaml.cs">
       <DependentUpon>Status.xaml</DependentUpon>
     </Compile>
@@ -134,11 +139,6 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -200,6 +200,8 @@
     <Resource Include="Images\Cards\Sj.png" />
     <Resource Include="Images\Cards\Sk.png" />
     <Resource Include="Images\Cards\Sq.png" />
+    <None Include="Resources\cardsdealt.wav" />
+    <None Include="Resources\cardsdealt2.wav" />
     <Content Include="Sounds\cardPlace1.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

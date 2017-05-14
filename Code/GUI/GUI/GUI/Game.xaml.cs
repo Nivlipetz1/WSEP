@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,6 +22,7 @@ namespace GUI
     /// </summary>
     public partial class Game : Page
     {
+        public static SoundPlayer snd = new SoundPlayer(Properties.Resources.cardsdealt1);
         public Game()
         {
             InitializeComponent();
@@ -29,6 +31,8 @@ namespace GUI
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             startgameBtn.Visibility = Visibility.Hidden;
+
+            snd.Play();
             MoveCard(Card1, 55, -150);
             MoveCard(Card2, 70, -150);
             MoveCard(Card3, -130, -150);
@@ -58,11 +62,12 @@ namespace GUI
         }
         private void MoveCard(Image card, int x, int y)
         {
+            
             card.Visibility = Visibility.Visible;
             TranslateTransform trans = new TranslateTransform();
             card.RenderTransform = trans;
-            DoubleAnimation anim1 = new DoubleAnimation(0, x, TimeSpan.FromSeconds(1));
-            DoubleAnimation anim2 = new DoubleAnimation(0, y, TimeSpan.FromSeconds(1));
+            DoubleAnimation anim1 = new DoubleAnimation(0, x, TimeSpan.FromSeconds(5));
+            DoubleAnimation anim2 = new DoubleAnimation(0, y, TimeSpan.FromSeconds(5));
             trans.BeginAnimation(TranslateTransform.XProperty, anim1);
             trans.BeginAnimation(TranslateTransform.YProperty, anim2);
         }

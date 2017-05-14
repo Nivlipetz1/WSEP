@@ -33,11 +33,11 @@ namespace GUI
             if (!username.Text.Equals(""))
             {
                 main.statusFrame.NavigationService.Navigate(new Status(username.Text));
-                main.mainFrame.NavigationService.Navigate(new UserMainPage());
+                main.mainFrame.NavigationService.Navigate(new UserMainPage(main));
             }
             else
             {
-                MessageBox.Show("Bad Input", "WARNING", MessageBoxButton.OK,MessageBoxImage.Error);
+                MessageBox.Show("Bad Input", "    WARNING    ", MessageBoxButton.OK,MessageBoxImage.Error);
             }
         }
     }
