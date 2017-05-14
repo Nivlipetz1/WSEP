@@ -12,21 +12,56 @@ namespace Gaming
         private string status;
         private PlayerHand hand;
         private UserInput userInput;
-        private int winnings;
-        private int losses;
-        private int biggestWin;
-        private CardAnalyzer.HandRank highestHand;
+        private CardAnalyzer.HandRank bestHand;
+        private int roundsWon;
+        private int roundsLost;
+        private int biggestPotWon;
 
         public PlayingUser(string name, int credit, Game game) : base (name,game)
         {
             this.credit = credit;
             status = "Active";
+            roundsWon = 0;
+            roundsLost = 0;
+            biggestPotWon = 0;
+            bestHand = CardAnalyzer.HandRank.HighCard;
         }
 
         public void SetFakeUserInput(Queue<string> inputs)
         {
             userInput = new FakeInput(inputs);
         }
+
+        public int GetRoundsWon()
+        {
+            return roundsWon;
+        }
+
+        public int GetRoundsLost()
+        {
+            return roundsLost;
+        }
+
+        public void SetRoundsLost(int timesLost)
+        {
+            roundsLost = timesLost;
+        }
+
+        public void SetBestHand(CardAnalyzer.HandRank hr)
+        {
+            bestHand = hr;
+        }
+
+        public CardAnalyzer.HandRank GetBestHand()
+        {
+            return bestHand;
+        }
+
+        public int GetMostWon()
+        {
+            return biggestPotWon;
+        }
+
 
         public int GetCredit()
         {
@@ -101,61 +136,15 @@ namespace Gaming
 
         internal void ReceiveWinnings(int amount)
         {
+            if (amount > biggestPotWon)
+            {
+                biggestPotWon = amount;
+            }
+
+            roundsWon++;
             credit+=amount;
         }
-
-        public int Winnings
-        {
-            get
-            {
-                return winnings;
-            }
-
-            set
-            {
-                winnings = value;
-            }
-        }
-
-        public int Losses
-        {
-            get
-            {
-                return losses;
-            }
-
-            set
-            {
-                losses = value;
-            }
-        }
-
-        public int BiggestWin
-        {
-            get
-            {
-                return biggestWin;
-            }
-
-            set
-            {
-                biggestWin = value;
-            }
-        }
-
-        public CardAnalyzer.HandRank HighestHand
-        {
-            get
-            {
-                return HighestHand;
-            }
-
-            set
-            {
-                HighestHand = value;
-            }
-        }
-    }
+   }
 
     class FakeInput : UserInput
     {
