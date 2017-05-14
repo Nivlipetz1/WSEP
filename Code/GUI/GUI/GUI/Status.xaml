@@ -12,6 +12,8 @@
     <Grid>
         <Label Name="username" Content="Label" Foreground="WhiteSmoke" HorizontalAlignment="Left" Margin="5,4,0,0" VerticalAlignment="Top"/>
         <Label Name="credit" Content="Label" Foreground="WhiteSmoke" HorizontalAlignment="Right" Margin="0,4,5,0" VerticalAlignment="Top"/>
+        <Label Content="Active Games:" Foreground="WhiteSmoke" HorizontalAlignment="Center" Margin="-100,0,0,0" VerticalAlignment="Top"/>
+        <ComboBox HorizontalAlignment="Center" Margin="100,4,0,0" Text="Games" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Page>
