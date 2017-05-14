@@ -10,7 +10,6 @@ namespace GUI.Communication
     public class Server
     {
         private static Lazy<Server> LazyInstance = new Lazy<Server>(() => new Server(), true);
-        IHubProxy authHubProxy , gameCenterProxy , gameProxy;
         private Server()
         {
 
