@@ -16,18 +16,18 @@ using System.Windows.Shapes;
 namespace GUI
 {
     /// <summary>
-    /// Interaction logic for GameCenter.xaml
+    /// Interaction logic for CreateGame.xaml
     /// </summary>
-    public partial class GameCenter : Page
+    public partial class CreateGame : Page
     {
-        public GameCenter()
+        public CreateGame()
         {
             InitializeComponent();
         }
 
-        private void CreateGame_Click(object sender, RoutedEventArgs e)
+        private void New_Game_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new CreateGame());
+            NavigationService.Navigate(new GameFrame());
         }
     }
 }
