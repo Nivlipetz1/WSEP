@@ -7,7 +7,7 @@ using ServiceLayer.Models;
 
 namespace ServiceLayer.Interfaces
 {
-    interface GameServiceInterface
+      public interface GameServiceInterface
     {
          List<string> bet(ClientUserProfile user, int gameID, string minimumBet);    
            

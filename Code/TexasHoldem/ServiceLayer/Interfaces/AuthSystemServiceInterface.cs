@@ -7,7 +7,7 @@ using ServiceLayer.Models;
 
 namespace ServiceLayer.Interfaces
 {
-    interface AuthSystemServiceInterface
+    public interface AuthSystemServiceInterface
     {
          bool editAvatar(byte[] avatar, ClientUserProfile u);
 
@@ -23,7 +23,7 @@ namespace ServiceLayer.Interfaces
 
          bool logout(ClientUserProfile u);
 
-        bool register(string userName, string password);
+         bool register(string userName, string password);
         
     }
 }
