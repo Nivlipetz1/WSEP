@@ -19,6 +19,8 @@
         <TextBox HorizontalAlignment="Left" Height="23" Margin="179,207,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Button Content="Save" HorizontalAlignment="Left" Margin="321,278,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Name="cancelBtn" Click="cancelBtn_Click" Content="Cancel" HorizontalAlignment="Left" Margin="225,278,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label Content="Avatar" Foreground="WhiteSmoke" HorizontalAlignment="Left" Margin="333,162,0,0" VerticalAlignment="Top"/>
+        <Button Content="Choose Picture" HorizontalAlignment="Left" Height="26" Margin="396,162,0,0" VerticalAlignment="Top" Width="104" Click="Button_Click"/>
 
     </Grid>
     
