@@ -22,5 +22,9 @@ namespace GameSystem
         List<List<Move>> getAllReplayesOfInActiveGames();
 
         Game getGameByID(int gameID);
+
+        bool unknownUserEditLeague(UserProfile user, League league);
+
+        League getLeagueByID(int id);
     }
 }

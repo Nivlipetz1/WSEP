@@ -8,7 +8,6 @@ namespace Gaming
 {
     public class GamePreferences
     {
-        private int gameID;
         private int maxPlayers;
         private int minPlayers;
         private int smallBlind;
