@@ -27,13 +27,14 @@ namespace GameSystem
         private GameCenter()
         {
             Users = new List<UserProfile>();
+            leagues.Add(0, new League(0, "League 0"));
         }
 
         public Game createGame(GamePreferences preferecnces , UserProfile user)
         {
             Game game = new Game(preferecnces);
             games.Add(game);
-            user.League.getGames().Add(game);
+            user.League.addGame(game);
             game.evt += updateLeagueToUser;
             return game;
         }
@@ -164,7 +165,7 @@ namespace GameSystem
         {
             foreach (League l in leagues.Values)
             {
-                if (l.MinimumRank == minimumRank)
+                if (l.MinimumRank <= minimumRank && minimumRank < l.MinimumRank + 1000)
                     return false;
             }
             League league = new League(minimumRank, "League" + leagues.Count);
@@ -172,28 +173,11 @@ namespace GameSystem
             return true;
         }
 
-        public bool addUserToLeague(UserProfile user, League league)
-        {
-            if (user.Credit < league.MinimumRank)
-                return false;
-            foreach(League lea in leagues.Values)
-            {
-                if (lea.removeUser(user))
-                    break;
-            }
-            return league.addUser(user);
-        }
         public bool removeUserFromLeague(UserProfile user, League league)
         {
             return league.removeUser(user);
         }
-        public bool changeLeagueMinimumRank(League league, int newRank)
-        {
-            if (leagues.Keys.Contains(newRank))
-                return false;
-            league.update(newRank);
-            return true;
-        }
+
         public League getLeagueByUser(UserProfile user)
         {
             foreach (League league in leagues.Values)
@@ -210,7 +194,7 @@ namespace GameSystem
             }
             catch
             {
-                throw new InvalidOperationException("No league with Rank" + Rank);
+                return null;
             }
         }
 
@@ -263,8 +247,20 @@ namespace GameSystem
             return null;
         }
 
+        public bool unknownUserEditLeague(UserProfile user, League league)
+        {
+            if (user.UserStat.Losses + user.UserStat.Winnings >= 10)
+                return false;
+            league.addUser(user);
+            user.League = league;
+            return true;
+        }
 
-
-
+        public League getLeagueByID(int id)
+        {
+            if(leagues.ContainsKey(id))
+                return leagues[id];
+            return null;
+        }
     }
 }
