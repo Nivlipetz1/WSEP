@@ -13,9 +13,9 @@
             <ImageBrush ImageSource="./Images/background4.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
         <Label Background="Black" OpacityMask="Black" Opacity="50" Foreground="WhiteSmoke" FontSize="35" FontWeight="Bold" FontStretch="Medium" Content="Game Center" HorizontalAlignment="Left" Margin="296,66,0,0" VerticalAlignment="Top"/>
-        <Button Content="Search for Games" HorizontalAlignment="Left" Margin="71,158,0,0" VerticalAlignment="Top" Width="104" Height="33"/>
+        <Button Content="Search for Games" HorizontalAlignment="Left" Margin="71,158,0,0" VerticalAlignment="Top" Width="104" Height="33" Click="Search_games_click"/>
         <Button Click="CreateGame_Click" Content="Create Game" HorizontalAlignment="Left" Margin="71,206,0,0" VerticalAlignment="Top" Width="104" Height="33"/>
-        <Button Content="Replay Games" HorizontalAlignment="Left" Margin="71,250,0,0" VerticalAlignment="Top" Width="104" Height="33"/>
+        <Button Content="Replay Games" HorizontalAlignment="Left" Margin="71,250,0,0" VerticalAlignment="Top" Width="104" Height="33" Click="Replay_games_click"/>
 
     </Grid>
 </Page>

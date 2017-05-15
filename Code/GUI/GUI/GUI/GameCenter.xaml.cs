@@ -29,5 +29,15 @@ namespace GUI
         {
             NavigationService.Navigate(new CreateGame());
         }
+
+        private void Search_games_click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new SearchGames());
+        }
+
+        private void Replay_games_click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ReplayGames());
+        }
     }
 }
