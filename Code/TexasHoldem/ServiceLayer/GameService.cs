@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using GameSystem;
 using Gaming;
 using ServiceLayer.Models;
+using ServiceLayer.Interfaces;
 
 namespace ServiceLayer
 {
-    public class GameService
+    public class GameService : GameServiceInterface
     {
         GameCenter gc = GameCenter.GameCenterFactory.getInstance();
 
