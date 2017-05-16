@@ -24,5 +24,10 @@ namespace GUI
         {
             InitializeComponent();
         }
+
+        private void goBack_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
     }
 }

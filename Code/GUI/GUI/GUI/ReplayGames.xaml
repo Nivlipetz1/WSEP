@@ -12,5 +12,7 @@
             <ImageBrush ImageSource="./Images/background2.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
         <Label Background="Black" OpacityMask="Black" Opacity="50" Foreground="WhiteSmoke" FontSize="35" FontWeight="Bold" FontStretch="Medium" Content="Replay Inactive Games:" HorizontalAlignment="Left" Margin="224,10,0,0" VerticalAlignment="Top"/>
+        <Button Name="goBack" Content="Go Back" Click="goBack_Click" HorizontalAlignment="Left" Margin="16,361.667,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
+
     </Grid>
 </Page>
