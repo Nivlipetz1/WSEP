@@ -58,28 +58,28 @@ namespace GUI.Communication
             return res.Result;
         }
 
-        public bool logout(ClientUserProfile user)
+        public bool logout(string user)
         {
             Task<bool> res = authHubProxy.Invoke<bool>("logout" , user);
             res.Wait();
             return res.Result;
         }
 
-        public bool editAvatar(byte [] avatar , ClientUserProfile user)
+        public bool editAvatar(byte [] avatar , string user)
         {
             Task<bool> res = authHubProxy.Invoke<bool>("editAvatar", avatar, user);
             res.Wait();
             return res.Result;
         }
 
-        public bool editPassword(string password , ClientUserProfile user)
+        public bool editPassword(string password , string user)
         {
             Task<bool> res = authHubProxy.Invoke<bool>("editPassword", password , user);
             res.Wait();
             return res.Result;
         }
 
-        public bool editUserName(string newUserName, ClientUserProfile user)
+        public bool editUserName(string newUserName, string user)
         {
             Task<bool> res = authHubProxy.Invoke<bool>("editUserName", newUserName, user);
             res.Wait();
