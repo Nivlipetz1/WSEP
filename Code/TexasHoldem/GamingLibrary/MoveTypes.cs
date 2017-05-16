@@ -37,13 +37,13 @@ namespace Gaming
     public class BetMove : Move
     {
         IDictionary<string, int> playerBets;
-        PlayingUser bettingPlayer;
+        string bettingPlayer;
         int betAmount;
 
         public BetMove(IDictionary<string, int> playerBets, PlayingUser better, int amt)
         {
             this.playerBets = playerBets;
-            bettingPlayer = better;
+            bettingPlayer = better.GetUserName();
             //bettingPlayer.SetStatus("Talked");
             betAmount = amt;
         }
@@ -62,12 +62,12 @@ namespace Gaming
     public class FoldMove : Move
     {
         IDictionary<string, int> playerBets;
-        PlayingUser foldingPlayer;
+        string foldingPlayer;
 
         public FoldMove(IDictionary<string, int> playerBets, PlayingUser folder)
         {
             this.playerBets = playerBets;
-            foldingPlayer = folder;
+            foldingPlayer = folder.GetUserName();
             //foldingPlayer.SetStatus("Fold");
         }
 
