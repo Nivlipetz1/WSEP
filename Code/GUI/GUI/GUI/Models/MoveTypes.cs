@@ -9,6 +9,10 @@ namespace GUI.Models
     public class NewCardMove : Move
     {
         Card[] cards;
+        public Card[] Cards
+        {
+            get { return Cards; }
+        }
     }
     public class GameStartMove : Move
     {
@@ -36,6 +40,10 @@ namespace GUI.Models
     public class EndGameMove : Move
     {
         IDictionary<string, PlayerHand> playerHands;
+        public IDictionary<string, PlayerHand> GetPlayerHands()
+        {
+            return playerHands;
+        }
         IDictionary<string, CardAnalyzer.HandRank> handRanks;
     }
 }

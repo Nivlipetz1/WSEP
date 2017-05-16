@@ -30,6 +30,23 @@ namespace GUI.Models
 
         }
 
+        public string toImage()
+        {
+            switch(suit)
+            {
+                case Suit.CLUB:
+                    return "C" + value+".png";
+                case Suit.SPADE:
+                    return "S" + value + ".png";
+                case Suit.HEART:
+                    return "H" + value + ".png";
+                case Suit.DIAMOND:
+                    return "D" + value + ".png";
+                default:
+                    return "";
+            }
+        }
+
         public int getValue()
         {
             return value;
