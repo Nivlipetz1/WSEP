@@ -64,7 +64,8 @@ namespace GUI
         {
             startgameBtn.Visibility = Visibility.Hidden;
 
-            StartGame(new Models.GameStartMove());
+            StartGame(null);
+            PushGameStartMove(new Models.GameStartMove());
             snd.Play();
             MoveCard(Card1, 55, -150);
             MoveCard(Card2, 70, -150);
@@ -97,6 +98,19 @@ namespace GUI
             bet2.setAmt(200);
             PushBetMove(bet2);
 
+            Models.NewCardMove nm = new Models.NewCardMove();
+            Models.Card c1 = new Models.Card(10, Models.Card.Suit.SPADE);
+            Models.Card c2 = new Models.Card(10, Models.Card.Suit.SPADE);
+            Models.Card c3 = new Models.Card(1, Models.Card.Suit.SPADE);
+            Models.Card[] cArray = {c1, c2, c3}; 
+            
+            nm.Cards = cArray;
+            NewCardMove(nm);
+
+            Models.FoldMove fm = new Models.FoldMove();
+            fm.SetFoldPlayer("naor");
+            PushFoldMove(fm);
+
         }
 
         public void EndGameMove(Models.EndGameMove move)
@@ -111,8 +125,8 @@ namespace GUI
                     Models.PlayerHand hand = hands[prof.Username];
                     Image card1 = playersCards.ElementAt(cardIndex);
                     Image card2 = playersCards.ElementAt(cardIndex + 1);
-                    FlopCard1.Source = new BitmapImage(new Uri(@"./Images/Cards/" + hand.getFirst().toImage()));
-                    FlopCard1.Source = new BitmapImage(new Uri(@"./Images/Cards/" + hand.getSecond().toImage()));
+                    FlopCard1.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.getFirst().toImage(), UriKind.Relative));
+                    FlopCard1.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.getSecond().toImage(), UriKind.Relative));
                     cardIndex += 2;
                 }
             }
@@ -124,9 +138,9 @@ namespace GUI
             switch (revealCard)
             {
                 case 0:
-                    FlopCard1.Source = new BitmapImage(new Uri(@"./Images/Cards/" + cards[0].toImage()));
-                    FlopCard2.Source = new BitmapImage(new Uri(@"./Images/Cards/" + cards[1].toImage()));
-                    FlopCard3.Source = new BitmapImage(new Uri(@"./Images/Cards/" + cards[2].toImage()));
+                    FlopCard1.Source = new BitmapImage(new Uri(@"Images\Cards\" + cards[0].toImage(), UriKind.Relative));
+                    FlopCard2.Source = new BitmapImage(new Uri(@"Images\Cards\" + cards[1].toImage(), UriKind.Relative));
+                    FlopCard3.Source = new BitmapImage(new Uri(@"Images\Cards\" + cards[2].toImage(), UriKind.Relative));
                     FlopCard1.Visibility = Visibility.Visible;
                     FlopCard2.Visibility = Visibility.Visible;
                     FlopCard3.Visibility = Visibility.Visible;
@@ -139,14 +153,14 @@ namespace GUI
                     revealCard++;
                     break;
                 case 1:
-                    TurnCard.Source = new BitmapImage(new Uri(@"./Images/Cards/" + cards[0].toImage()));
+                    TurnCard.Source = new BitmapImage(new Uri(@"Images\Cards\" + cards[3].toImage(), UriKind.Relative));
                     TurnCard.Visibility = Visibility.Visible;
                     snd2.Play();
                     MoveCard(RiverCard, 0, 40);
                     revealCard++;
                     break;
                 case 2:
-                    RiverCard.Source = new BitmapImage(new Uri(@"./Images/Cards/" + cards[0].toImage()));
+                    RiverCard.Source = new BitmapImage(new Uri(@"Images\Cards\" + cards[4].toImage(), UriKind.Relative));
                     RiverCard.Visibility = Visibility.Visible;
                     snd2.Play();
                     MoveCard(TurnCard, -70, 40);
@@ -193,9 +207,6 @@ namespace GUI
                 {
                     Label lbl = playerLabels.ElementAt(index);
                     lbl.Content = prof.Username + " $" + bet;
-                    lbl.Visibility = Visibility.Visible;
-                    playersCards.ElementAt(cardIndex).Visibility = Visibility.Visible;
-                    playersCards.ElementAt(cardIndex + 1).Visibility = Visibility.Visible;
                     break;
                 }
 
@@ -204,6 +215,28 @@ namespace GUI
             }
         }
 
+
+        public void PushFoldMove(Models.FoldMove move)
+        {
+            Models.ClientGame game = gameFrame.getGame();
+            int index = 0;
+            int cardIndex = 0;
+
+            foreach (Models.ClientUserProfile prof in game.Players)
+            {
+                if (prof.Username.Equals(move.GetFoldingPlayer()))
+                {
+                    Label lbl = playerLabels.ElementAt(index);
+                    lbl.Visibility = Visibility.Hidden;
+                    playersCards.ElementAt(cardIndex).Visibility = Visibility.Hidden;
+                    playersCards.ElementAt(cardIndex + 1).Visibility = Visibility.Hidden;
+                    break;
+                }
+
+                index++;
+                cardIndex += 2;
+            }
+        }
 
         public void PushGameStartMove(Models.GameStartMove move)
         {

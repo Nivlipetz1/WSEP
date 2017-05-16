@@ -11,7 +11,8 @@ namespace GUI.Models
         Card[] cards;
         public Card[] Cards
         {
-            get { return Cards; }
+            get { return cards; }
+            set { cards = value; }
         }
     }
     public class GameStartMove : Move
@@ -63,6 +64,15 @@ namespace GUI.Models
         public IDictionary<string, int> GetPlayerBets()
         {
             return playerBets;
+        }
+
+        public string GetFoldingPlayer()
+        {
+            return foldingPlayer;
+        }
+
+        public void SetFoldPlayer(string name) {
+            foldingPlayer = name;
         }
     }
 
