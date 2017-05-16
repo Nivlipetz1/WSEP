@@ -28,14 +28,14 @@ namespace AT
         {
             us.login("abc", "123");
             ClientUserProfile user = us.getUser("abc");
-            Assert.True(us.editUserName("aaaaa", user));
+            Assert.True(us.editUserName("aaaaa", user.Username));
         }
 
         [TestCase]
         public void badEditUsername_Loggedout()
         {
             ClientUserProfile user = us.getUser("abc");
-            Assert.False(us.editUserName("aaaaa", user));
+            Assert.False(us.editUserName("aaaaa", user.Username));
         }
 
         [TestCase]
@@ -43,8 +43,8 @@ namespace AT
         {
             us.login("abc", "123");
             ClientUserProfile user = us.getUser("abc");
-            Assert.False(us.editUserName("", user));
-            Assert.False(us.editUserName("   ", user));
+            Assert.False(us.editUserName("", user.Username));
+            Assert.False(us.editUserName("   ", user.Username));
         }
 
         [TestCase]
@@ -52,8 +52,8 @@ namespace AT
         {
             us.login("abc", "123");
             ClientUserProfile user = us.getUser("abc");
-            us.editPassword("124", user);
-            us.logout(user);
+            us.editPassword("124", user.Username);
+            us.logout(user.Username);
             Assert.True(us.login("abc", "124"));
         }
 
@@ -62,8 +62,8 @@ namespace AT
         {
             us.login("abc", "123");
             ClientUserProfile user = us.getUser("abc");
-            Assert.False(us.editPassword("", user));
-            Assert.False(us.editPassword("    ", user));
+            Assert.False(us.editPassword("", user.Username));
+            Assert.False(us.editPassword("    ", user.Username));
         }
 
         [TestCase]
@@ -76,7 +76,7 @@ namespace AT
 
             us.login("abc", "123");
             ClientUserProfile user = us.getUser("abc");
-            Assert.True(us.editAvatar(ms.ToArray(), user));
+            Assert.True(us.editAvatar(ms.ToArray(), user.Username));
             Assert.AreEqual(user.Avatar, avatar);
         }
     }

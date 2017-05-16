@@ -31,15 +31,15 @@ namespace AT
         {
             Assert.True(us.login("abc", "123"));
             ClientUserProfile prof = us.getUser("abc");
-            Assert.True(us.logout(prof));
-            Assert.False(us.logout(prof));
+            Assert.True(us.logout(prof.Username));
+            Assert.False(us.logout(prof.Username));
         }
 
         [TestCase]
         public void Logout_NotLoggedin()
         {
             ClientUserProfile prof = us.getUser("abc");
-            Assert.False(us.logout(prof));
+            Assert.False(us.logout(prof.Username));
         }
     }
 }

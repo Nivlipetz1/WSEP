@@ -57,7 +57,8 @@ namespace GameSystem
                 UserProfile user = new UserProfile(userName, password);
                 user.Credit = 200;
                 users.Add(userName, user);
-                gc.addUserToLeague(user, gc.getLeagueByRank(0));
+                user.League = gc.getLeagueByRank(0);
+                user.League.addUser(user);
                 gc.setUsers(users.Values);
             }
             else return false;
@@ -118,12 +119,18 @@ namespace GameSystem
 
         public void notifyAllUsers(string message)
         {
-            NotificationService.Instance.notifyAllUser(message);
+            NotificationService.Instance.notifyAllUsers(message);
         }
 
         public void notify(string userName , string message)
         {
             NotificationService.Instance.notifyUser(userName , message);
+        }
+
+        public void clearUsers()
+        {
+            users.Clear();
+            activeUsers.Clear();
         }
     }
 }

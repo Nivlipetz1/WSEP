@@ -12,6 +12,7 @@ namespace Gaming
         private int id;
         private Deck gameDeck;
         private List<PlayingUser> players; //these will be of type playingUsers
+        private List<PlayingUser> waitingList; //these will be of type playingUsers
         private List<SpectatingUser> spectators; //these will be of type spectators
         private int[] pot; // pot[0] = main pot ||| pot[1] = sidepot
         private int bettingRound;
@@ -30,6 +31,7 @@ namespace Gaming
         {
             gameDeck = new Deck();
             players = new List<PlayingUser>();
+            waitingList = new List<PlayingUser>();
             spectators = new List<SpectatingUser>();
             pot = new int[2];
             ca = new CardAnalyzer();
@@ -43,10 +45,31 @@ namespace Gaming
             return chat;
         }
 
+        public void setID(int id)
+        {
+            this.id = id;
+        }
+
+        public List<PlayingUser> GetWaitingList()
+        {
+            return waitingList;
+        }
+
         public void StartGame()
         {
+            gamePref.SetStatus("active");
+
+            while (waitingList.Count > 0)
+            {
+                foreach (PlayingUser player in waitingList)
+                {
+                    players.Add(player);
+                    playerBets.Add(player, 0);
+                    waitingList.Remove(player);
+                }
+            }
             
-            SystemLogger.Log("game started",@"C:\Users\matan\Desktop\bgu\year 3\2\סדנא\WSEP\Code\TexasHoldem\Logs\GameLogs.log");
+            //SystemLogger.Log("game started","GameLogs.log");
             if (gamePref.GetMinPlayers() > GetNumberOfPlayers())
                 throw new InvalidOperationException("Can't start game with less than the minimum number of players");
 
@@ -186,7 +209,7 @@ namespace Gaming
 
             foreach (PlayingUser player in players)
             {
-                player.SetStatus("Active");
+                player.SetStatus("active");
                 playerHands.Remove(player.GetUserName());
                 playerBets[player] = 0;
             }
@@ -408,12 +431,24 @@ namespace Gaming
 
         public void addPlayer(PlayingUser player)
         {
-            if (players.Count == gamePref.GetMaxPlayers())
+            if ((players.Count + waitingList.Count) == gamePref.GetMaxPlayers())
                 throw new InvalidOperationException("Maximum number of players reached");
+
+            if (gamePref.GetStatus().Equals("active"))
+            {
+                waitingList.Add(player);
+                return;
+            }
 
             //player.GetAccount().Credit -= player.GetCredit(); //gamecenter
             players.Add(player);
             playerBets.Add(player, 0);
+        }
+
+        public void removeWaitingPlayer(PlayingUser player)
+        {
+            if(waitingList.Contains(player))
+                waitingList.Remove(player);
         }
 
         public void removePlayer(PlayingUser player)
