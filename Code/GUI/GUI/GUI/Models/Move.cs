@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GUI.Models
 {
-    public class Move
+    public abstract class Move
     {
     }
 }
