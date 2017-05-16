@@ -20,13 +20,30 @@ namespace GUI
     /// </summary>
     public partial class CreateGame : Page
     {
-        public CreateGame()
+        private string username;
+        public CreateGame(string username)
         {
+            this.username = username;
             InitializeComponent();
         }
 
         private void New_Game_Click(object sender, RoutedEventArgs e)
         {
+
+            int maxP = Int32.Parse(Max_Players.Text);
+            int minP = Int32.Parse(Min_Players.Text);
+            int sB = Int32.Parse(Small_Blind.Text);
+            int bB = Int32.Parse(Big_Blind.Text);
+            int cP = Int32.Parse(Chip_Policy.Text);
+            int bIP = Int32.Parse(Buy_In_Policy.Text);
+            int tP = 0;
+            bool aS = Allow_Spec.IsChecked.Value;
+            Models.GamePreferences pref = new Models.GamePreferences(maxP, minP, sB, bB, tP, bIP, cP, aS);
+
+            //Communication.GameCenterFunctions.Instance.createGame(pref, username);
+
+
+            ///FOR DEBUG
             Models.ClientGame game = new Models.ClientGame();
             List<Models.ClientUserProfile> players = new List<Models.ClientUserProfile>();
             Models.ClientUserProfile niv = new Models.ClientUserProfile();
