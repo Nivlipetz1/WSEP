@@ -16,22 +16,23 @@ using System.Windows.Shapes;
 namespace GUI
 {
     /// <summary>
-    /// Interaction logic for ReplayGames.xaml
+    /// Interaction logic for ReplayGamePlayback.xaml
     /// </summary>
-    public partial class ReplayGames : Page
+    public partial class ReplayGamePlayback : Page
     {
-        public ReplayGames()
+        public ReplayGamePlayback()
         {
             InitializeComponent();
         }
-        private void goBack_Click(object sender, RoutedEventArgs e)
+
+        private void Start_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.GoBack();
+            Start.Visibility = Visibility.Hidden;
         }
 
-        private void play_Click(object sender, RoutedEventArgs e)
+        private void Back_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new ReplayGamePlayback());
+            NavigationService.GoBack();
         }
     }
 }

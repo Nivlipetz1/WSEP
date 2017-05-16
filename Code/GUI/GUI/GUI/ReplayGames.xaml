@@ -13,6 +13,9 @@
         </Grid.Background>
         <Label Background="Black" OpacityMask="Black" Opacity="50" Foreground="WhiteSmoke" FontSize="35" FontWeight="Bold" FontStretch="Medium" Content="Replay Inactive Games:" HorizontalAlignment="Left" Margin="224,10,0,0" VerticalAlignment="Top"/>
         <Button Name="goBack" Content="Go Back" Click="goBack_Click" HorizontalAlignment="Left" Margin="16,361.667,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
+        <DataGrid HorizontalAlignment="Left" Margin="63,105,0,0" VerticalAlignment="Top" Height="224" Width="224"/>
+        <Button Name="play" Content="Play Replay" HorizontalAlignment="Left" Margin="343,203,0,0" VerticalAlignment="Top" Width="75" Click="play_Click"/>
+        <Label Background="Black" OpacityMask="Black" Opacity="50" Foreground="WhiteSmoke" FontSize="18" FontWeight="Bold" FontStretch="Medium" Content="Select Game:" HorizontalAlignment="Left" Margin="63,66,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Page>

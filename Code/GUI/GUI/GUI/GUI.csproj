@@ -97,6 +97,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ReplayGamePlayback.xaml.cs">
+      <DependentUpon>ReplayGamePlayback.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ReplayGames.xaml.cs">
       <DependentUpon>ReplayGames.xaml</DependentUpon>
     </Compile>
@@ -156,6 +159,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ReplayGamePlayback.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ReplayGames.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
