@@ -5,18 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using ServiceLayer;
+using ServiceLayer.Interfaces;
+using AT.Stubs;
 using GameSystem;
 
 namespace AT
 {
     class LoginAT
     {
-        private SystemService us;
+      //  private SystemService us;
+        private AuthSystemServiceInterface us;
 
         [SetUp]
         public void before()
         {
-            us = new SystemService();
+
+            if (SystemService.testable)
+                us = new SystemService();
+            else
+                us = new SystemStub();
             us.register("abc", "123");
         }
 

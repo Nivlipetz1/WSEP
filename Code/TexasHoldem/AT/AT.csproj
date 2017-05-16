@@ -60,6 +60,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistrationAT.cs" />
+    <Compile Include="Stubs\GameCenterStub.cs" />
+    <Compile Include="Stubs\GameServiceStub.cs" />
+    <Compile Include="Stubs\SystemStub.cs" />
     <Compile Include="UpdateUserProfileAT.cs" />
   </ItemGroup>
   <ItemGroup>

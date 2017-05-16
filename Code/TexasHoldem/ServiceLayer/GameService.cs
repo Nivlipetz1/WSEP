@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using GameSystem;
 using Gaming;
 using ServiceLayer.Models;
+using ServiceLayer.Interfaces;
 
 namespace ServiceLayer
 {
-    public class GameService
+    public class GameService : GameServiceInterface
     {
+        public static bool testable = true;
         GameCenter gc = GameCenter.GameCenterFactory.getInstance();
 
         public bool bet(string user, int gameID, string minimumBet)
