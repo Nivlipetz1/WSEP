@@ -61,7 +61,8 @@ namespace GUI
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             startgameBtn.Visibility = Visibility.Hidden;
-            StartGame(null);
+
+            StartGame(new Models.GameStartMove());
             snd.Play();
             MoveCard(Card1, 55, -150);
             MoveCard(Card2, 70, -150);
@@ -85,7 +86,14 @@ namespace GUI
             MoveCard(UserCard1, 0,220);
             MoveCard(UserCard2, 30, 220);
 
-
+            Models.BetMove bet = new Models.BetMove();
+            bet.setPlayer("niv");
+            bet.setAmt(100);
+            PushBetMove(bet);
+            Models.BetMove bet2 = new Models.BetMove();
+            bet2.setPlayer("omer");
+            bet2.setAmt(200);
+            PushBetMove(bet2);
 
         }
 
@@ -114,10 +122,36 @@ namespace GUI
             Fold_Button.Visibility = Visibility.Visible;
         }
 
-        /*public void PushBetMove(Models.BetMove move)
+        public void PushBetMove(Models.BetMove move)
         {
-            move.GetPlayerBets[];
-        }*/
+            Models.ClientGame game = gameFrame.getGame();
+            int bet = move.GetAmount();
+            int index = 0;
+            int cardIndex = 0;
+
+            foreach (Models.ClientUserProfile prof in game.Players)
+            {
+                if (prof.Username.Equals(move.GetBettingPlayer()))
+                {
+                    Label lbl = playerLabels.ElementAt(index);
+                    lbl.Content = prof.Username + " $" + bet;
+                    lbl.Visibility = Visibility.Visible;
+                    playersCards.ElementAt(cardIndex).Visibility = Visibility.Visible;
+                    playersCards.ElementAt(cardIndex + 1).Visibility = Visibility.Visible;
+                    break;
+                }
+
+                index++;
+                cardIndex += 2;
+            }
+        }
+
+
+        public void PushGameStartMove(Models.GameStartMove move)
+        {
+            MessageBox.Show("Game Started!");
+        }
+
 
 
         private void MoveCard(Image card, int x, int y)

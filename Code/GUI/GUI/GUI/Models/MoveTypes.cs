@@ -12,14 +12,44 @@ namespace GUI.Models
     }
     public class GameStartMove : Move
     {
-        IDictionary<string, int> playerBets;
+        private IDictionary<string, int> playerBets;
+
+        public IDictionary<string, int> GetPlayerBets()
+        {
+            return playerBets;
+        }
     }
 
     public class BetMove : Move
     {
-        IDictionary<string, int> playerBets { get; }
-        string bettingPlayer { get; }
-        int betAmount { get;}
+        IDictionary<string, int> playerBets;
+        string bettingPlayer;
+        int betAmount;
+
+        public IDictionary<string, int> GetPlayerBets()
+        {
+            return playerBets;
+        }
+
+        public string GetBettingPlayer()
+        {
+            return bettingPlayer;
+        }
+
+        public int GetAmount()
+        {
+            return betAmount;
+        }
+
+        public void setPlayer(string name)
+        {
+            bettingPlayer = name;
+        }
+
+        public void setAmt(int amt)
+        {
+            betAmount = amt;
+        }
     }
 
     public class FoldMove : Move
