@@ -11,8 +11,6 @@ namespace Logger
     {
         public static void Log(string message , string file)
         {
-            //@TODO
-           // file = @"C: \Users\pc\Desktop\WSEPLogger.txt";
             using (StreamWriter w = File.AppendText(file))
             {
                 Log(message, w);
