@@ -93,7 +93,7 @@
     <Compile Include="Models\Move.cs" />
     <Compile Include="Models\MoveTypes.cs" />
     <Compile Include="Models\PlayerHand.cs" />
-    <Compile Include="Models\PlayingUser.cs" />
+    <Compile Include="Models\Statistics.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
