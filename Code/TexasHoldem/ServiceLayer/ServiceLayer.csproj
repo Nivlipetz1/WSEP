@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="GameCenterService.cs" />
     <Compile Include="GameService.cs" />
+    <Compile Include="ImageConverter.cs" />
     <Compile Include="Models\ClientGame.cs" />
     <Compile Include="Models\ClientUserProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
