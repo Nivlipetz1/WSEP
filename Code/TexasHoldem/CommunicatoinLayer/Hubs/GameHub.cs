@@ -11,13 +11,13 @@ namespace CommunicatoinLayer.Hubs
 {
     public class GameHub : Hub
     {
-        public bool bet(ClientUserProfile user, int gameID, string minimumBet)
+        public bool bet(string user, int gameID, string minimumBet)
         {
             GameService gs = new GameService();
             return gs.bet(user, gameID, minimumBet);
         }
 
-        public bool removePlayer(ClientUserProfile user, int gameID)
+        public bool removePlayer(string user, int gameID)
         {
             GameService gs = new GameService();
             List<string> usersToSend = gs.removePlayer(user, gameID);
@@ -25,7 +25,7 @@ namespace CommunicatoinLayer.Hubs
             return true;
         }
 
-        public bool removeSpectator(ClientUserProfile user, int gameID)
+        public bool removeSpectator(string user, int gameID)
         {
             GameService gs = new GameService();
             List<string> usersToSend = gs.removeSpectator(user, gameID);
@@ -33,20 +33,20 @@ namespace CommunicatoinLayer.Hubs
             return true;
         }
 
-        public bool postMessage(ClientUserProfile user, string message, int gameID)
+        public bool postMessage(string user, string message, int gameID)
         {
             GameService gs = new GameService();
             List<string> usersToSend = gs.postMessage(user, message , gameID);
-            usersToSend.Remove(user.Username);
+            usersToSend.Remove(user);
             Clients.Clients(usersToSend.Select(u => AuthManager.Instance.GetConnectionIdByName(u)).ToList()).postMessage(user, message , gameID);
             return true;
         }
 
-        public bool postWhisperMessage(ClientUserProfile from, ClientUserProfile to, string message, int gameID)
+        public bool postWhisperMessage(string from, string to, string message, int gameID)
         {
             GameService gs = new GameService();
             List<string> usersToSend = gs.postWhisperMessage(from , to , message, gameID);
-            usersToSend.Remove(from.Username);
+            usersToSend.Remove(from);
             Clients.Clients(usersToSend.Select(u => AuthManager.Instance.GetConnectionIdByName(u)).ToList()).postMessage(from, message, gameID);
             return true;
         }

@@ -18,31 +18,31 @@ namespace ServiceLayer
             system = GameSystem.TexasHoldemSystem.userSystemFactory.getInstance();
         }
 
-        public bool editAvatar(byte[] avatar, ClientUserProfile u)
+        public bool editAvatar(byte[] avatar, string userName)
         {
-            return system.editAvatar(ImageConverter.byteArrayToImage(avatar), system.getUser(u.Username));
+            return system.editAvatar(ImageConverter.byteArrayToImage(avatar), system.getUser(userName));
         }
 
-        public bool editPassword(string password, ClientUserProfile u)
+        public bool editPassword(string password, string userName)
         {
             if (string.IsNullOrWhiteSpace(password))
                 return false;
-            return system.editPassword(password, system.getUser(u.Username));
+            return system.editPassword(password, system.getUser(userName));
         }
 
-        public bool editUserName(string userName, ClientUserProfile u)
+        public bool editUserName(string newUserName, string userName)
         {
-            if(string.IsNullOrWhiteSpace(userName))
+            if(string.IsNullOrWhiteSpace(newUserName))
                 return false;
             Regex r = new Regex("^[a-zA-Z0-9]*$");
-            if (!r.IsMatch(userName))
+            if (!r.IsMatch(newUserName))
             {
                 return false;
             }
             r = new Regex("^[0-9]*$");
-            if (r.IsMatch(""+userName[0]))
+            if (r.IsMatch(""+ newUserName[0]))
                 return false;
-            return system.editUserName(userName, system.getUser(u.Username));
+            return system.editUserName(newUserName, system.getUser(userName));
         }
 
         public ClientUserProfile getUser(string username)
@@ -65,9 +65,9 @@ namespace ServiceLayer
             return system.login(userName, password);
         }
 
-        public bool logout(ClientUserProfile u)
+        public bool logout(string userName)
         {
-            return system.logout(system.getUser(u.Username));
+            return system.logout(system.getUser(userName));
         }
 
         public bool register(string userName, string password)
