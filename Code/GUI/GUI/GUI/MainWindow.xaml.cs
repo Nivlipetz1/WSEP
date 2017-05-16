@@ -20,10 +20,13 @@ namespace GUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<GameFrame> list;
         public MainWindow()
         {
+            Communication.Server.Instance.connect();
             InitializeComponent();
             mainFrame.NavigationService.Navigate(new Login(this));
+            list = new List<GameFrame>();
         }
     }
 }
