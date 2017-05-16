@@ -118,7 +118,7 @@ namespace GameSystem
 
         public void notifyAllUsers(string message)
         {
-            NotificationService.Instance.notifyAllUser(message);
+            NotificationService.Instance.notifyAllUsers(message);
         }
 
         public void notify(string userName , string message)

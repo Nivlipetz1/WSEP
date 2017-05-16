@@ -14,9 +14,7 @@ namespace CommunicatoinLayer.Hubs
         public bool bet(ClientUserProfile user, int gameID, string minimumBet)
         {
             GameService gs = new GameService();
-            List<string> usersToSend = gs.bet(user, gameID, minimumBet);
-            Clients.Clients(usersToSend.Select(u => AuthManager.Instance.GetConnectionIdByName(u)).ToList()).bet(user , gameID, minimumBet);
-            return true;
+            return gs.bet(user, gameID, minimumBet);
         }
 
         public bool removePlayer(ClientUserProfile user, int gameID)
