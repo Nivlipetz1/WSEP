@@ -22,6 +22,20 @@ namespace Gaming
     {
 
         [TestCase]
+        public void AddPlayerToGameWaitingList()
+        {
+            Game g = new Game(new GamePreferences());
+            UserProfile Niv = new UserProfile("Niv", "123");
+            PlayingUser nivPlayer = new PlayingUser(Niv.Username, 1000, g);
+
+            g.GetGamePref().SetStatus("active");
+            Assert.IsEmpty(g.GetPlayers());
+            g.addPlayer(nivPlayer);
+            Assert.False(g.GetPlayers().Contains(nivPlayer));
+            Assert.True(g.GetWaitingList().Contains(nivPlayer));
+        }
+        
+        [TestCase]
         public void AddPlayerToGame()
         {
             Game g = new Game(new GamePreferences());

@@ -95,6 +95,7 @@ namespace Gaming
 
         public int GetBlind(int amount)
         {
+            status = "Active";
             credit -= amount;
             return amount;
         }

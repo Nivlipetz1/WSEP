@@ -31,6 +31,7 @@ namespace Gaming
         {
             gameDeck = new Deck();
             players = new List<PlayingUser>();
+            waitingList = new List<PlayingUser>();
             spectators = new List<SpectatingUser>();
             pot = new int[2];
             ca = new CardAnalyzer();
@@ -56,6 +57,7 @@ namespace Gaming
 
         public void StartGame()
         {
+            gamePref.SetStatus("active");
 
             while (waitingList.Count > 0)
             {
@@ -207,7 +209,7 @@ namespace Gaming
 
             foreach (PlayingUser player in players)
             {
-                player.SetStatus("Active");
+                player.SetStatus("active");
                 playerHands.Remove(player.GetUserName());
                 playerBets[player] = 0;
             }
@@ -432,7 +434,7 @@ namespace Gaming
             if ((players.Count + waitingList.Count) == gamePref.GetMaxPlayers())
                 throw new InvalidOperationException("Maximum number of players reached");
 
-            if (gamePref.GetStatus().Equals("Active"))
+            if (gamePref.GetStatus().Equals("active"))
             {
                 waitingList.Add(player);
                 return;
