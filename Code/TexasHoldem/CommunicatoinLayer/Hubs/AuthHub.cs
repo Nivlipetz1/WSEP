@@ -34,6 +34,12 @@ namespace CommunicatoinLayer.Hubs
             return userService.register(userName, password);
         }
 
+        public ClientUserProfile getClientUser(string userName)
+        {
+            SystemService userService = new SystemService();
+            return userService.getUser(userName);
+        }
+
         public bool editAvatar(byte []  avatar, ClientUserProfile u)
         {
             SystemService userService = new SystemService();

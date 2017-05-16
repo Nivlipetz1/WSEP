@@ -50,7 +50,10 @@ namespace ServiceLayer
 
         public ClientUserProfile getUser(string username)
         {
-            return new ClientUserProfile(system.getUser(username));
+            if(system.isConnected(username))
+                return new ClientUserProfile(system.getUser(username));
+
+            return null;
         }
 
         public bool isConnected(string username)
