@@ -21,8 +21,8 @@ namespace AT
         {
             GamePreferences prefs = new GamePreferences(8, 2, 5, 10, 1, 2, 3, true);
             ClientUserProfile ohadUser = new ClientUserProfile (new UserProfile("ohad", "213"));
-            gc.createGame(prefs, ohadUser);
-            Assert.AreEqual(gc.getActiveGames("preferences" , prefs , ohadUser).Count(), 1);
+            gc.createGame(prefs, ohadUser.Username);
+            Assert.AreEqual(gc.getActiveGames("preferences" , prefs , ohadUser.Username).Count(), 1);
         }
 
         [TestCase]

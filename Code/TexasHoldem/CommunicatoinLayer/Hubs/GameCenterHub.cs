@@ -14,16 +14,16 @@ namespace CommunicatoinLayer.Hubs
 {
     public class GameCenterHub : Hub
     {
-        public ClientGame createGame(GamePreferences preferecnces , ClientUserProfile user)
+        public ClientGame createGame(GamePreferences preferecnces , string userName)
         {
             GameCenterService gc = new GameCenterService();
-            return gc.createGame(preferecnces , user);
+            return gc.createGame(preferecnces , userName);
         }
 
-        List<ClientGame> getActiveGames(string criterion, object param, ClientUserProfile user)
+        List<ClientGame> getActiveGames(string criterion, object param, string userName)
         {
             GameCenterService gc = new GameCenterService();
-            return gc.getActiveGames(criterion , param , user);
+            return gc.getActiveGames(criterion , param , userName);
         }
 
         public List<List<Move>> getAllReplayesOfInActiveGames()
@@ -38,42 +38,42 @@ namespace CommunicatoinLayer.Hubs
             return gc.getAllSpectatingGames();
         }
 
-        public async Task<bool> joinGame(ClientGame game, ClientUserProfile u, int credit)
+        public async Task<bool> joinGame(ClientGame game, string userName, int credit)
         {
             GameCenterService gc = new GameCenterService();
             List<string> usersToSend = new List<string>();
-            if ((usersToSend = gc.joinGame(game.getID(), u, credit)) != null)
+            if ((usersToSend = gc.joinGame(game.getID(), userName, credit)) != null)
             {
                 int gameId = game.getID();
-                GameCenterManager.Instance.joinGame(u.Username, gameId);
+                GameCenterManager.Instance.joinGame(userName, gameId);
                 await Groups.Add(Context.ConnectionId, "game " + gameId);
-                Clients.Clients(usersToSend.Select(user => AuthManager.Instance.GetConnectionIdByName(user)).ToList()).joinGame(game.getID(), u);
+                Clients.Clients(usersToSend.Select(user => AuthManager.Instance.GetConnectionIdByName(user)).ToList()).joinGame(game.getID(), userName);
                 return true;
             }
 
             return false;
         }
 
-        public async Task<bool> spectateGame(ClientGame game, ClientUserProfile u)
+        public async Task<bool> spectateGame(ClientGame game, string userName)
         {
             GameCenterService gc = new GameCenterService();
             List<string> usersToSend = new List<string>();
-            if((usersToSend = gc.spectateGame(game.getID(), u)) != null)
+            if((usersToSend = gc.spectateGame(game.getID(), userName)) != null)
             {
                 int gameId = game.getID();
-                GameCenterManager.Instance.spectateGame(u.Username, gameId);
+                GameCenterManager.Instance.spectateGame(userName, gameId);
                 await Groups.Add(Context.ConnectionId, "game " + gameId);
-                Clients.Clients(usersToSend.Select(user => AuthManager.Instance.GetConnectionIdByName(user)).ToList()).spectateGame(game.getID(), u);
+                Clients.Clients(usersToSend.Select(user => AuthManager.Instance.GetConnectionIdByName(user)).ToList()).spectateGame(game.getID(), userName);
                 return true;
             }
 
             return false;
         }
 
-        public bool unknownUserEditLeague(ClientUserProfile user, int minimumLeagueRank)
+        public bool unknownUserEditLeague(string userName, int minimumLeagueRank)
         {
             GameCenterService gc = new GameCenterService();
-            return gc.unknownUserEditLeague(user, minimumLeagueRank);
+            return gc.unknownUserEditLeague(userName, minimumLeagueRank);
         }
 
     }
