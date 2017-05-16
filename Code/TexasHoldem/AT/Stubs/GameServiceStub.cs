@@ -12,27 +12,27 @@ namespace AT.Stubs
     {
         public List<string> bet(ClientUserProfile user, int gameID, string minimumBet)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         public List<string> postMessage(ClientUserProfile user, string message, int gameID)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         public List<string> postWhisperMessage(ClientUserProfile from, ClientUserProfile to, string message, int gameID)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         public List<string> removePlayer(ClientUserProfile user, int gameID)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         public List<string> removeSpectator(ClientUserProfile user, int gameID)
         {
-            throw new NotImplementedException();
+            return null;
         }
     }
 }
