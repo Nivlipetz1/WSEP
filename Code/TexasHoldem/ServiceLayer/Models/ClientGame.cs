@@ -10,32 +10,111 @@ namespace ServiceLayer.Models
 {
     public class ClientGame
     {
-        private GameSystem.TexasHoldemSystem system = GameSystem.TexasHoldemSystem.userSystemFactory.getInstance();
         private int id;
         private Deck gameDeck;
-        private List<UserProfile> players;
-        private List<UserProfile> spectators;
+        private List<ClientUserProfile> players;
+        private List<ClientUserProfile> spectators;
         private int[] pot;
         private GamePreferences gamePref;
-        private IDictionary<UserProfile, int> playerBets = new Dictionary<UserProfile, int>();
+        private IDictionary<ClientUserProfile, int> playerBets = new Dictionary<ClientUserProfile, int>();
 
         public ClientGame(Game game)
         {
+            GameSystem.TexasHoldemSystem system = GameSystem.TexasHoldemSystem.userSystemFactory.getInstance();
             id = game.getGameID();
             gamePref = game.GetGamePref();
             pot = game.getPot();
             gameDeck = game.getDeck();
 
-            players = game.GetPlayers().Select(pl => system.getUser(pl.GetUserName())).ToList();
-            spectators = game.GetSpectators().Select(pl => system.getUser(pl.GetUserName())).ToList();
+            players = game.GetPlayers().Select(pl => new ClientUserProfile(system.getUser(pl.GetUserName()))).ToList();
+            spectators = game.GetSpectators().Select(pl => new ClientUserProfile(system.getUser(pl.GetUserName()))).ToList();
 
-            foreach (KeyValuePair<PlayingUser,int> p in game.getplayerBets())
-                playerBets.Add(new KeyValuePair<UserProfile, int>(system.getUser(p.Key.GetUserName()), p.Value));
+            foreach (KeyValuePair<PlayingUser, int> p in game.getplayerBets())
+                playerBets.Add(new KeyValuePair<ClientUserProfile, int>(new ClientUserProfile(system.getUser(p.Key.GetUserName())), p.Value));
         }
 
         public int getID()
         {
             return id;
         }
+
+        public Deck GameDeck
+        {
+            get
+            {
+                return gameDeck;
+            }
+
+            set
+            {
+                gameDeck = value;
+            }
+        }
+
+        public List<ClientUserProfile> Players
+        {
+            get
+            {
+                return players;
+            }
+
+            set
+            {
+                players = value;
+            }
+        }
+
+        public List<ClientUserProfile> Spectators
+        {
+            get
+            {
+                return spectators;
+            }
+
+            set
+            {
+                spectators = value;
+            }
+        }
+
+        public int[] Pot
+        {
+            get
+            {
+                return pot;
+            }
+
+            set
+            {
+                pot = value;
+            }
+        }
+
+        public GamePreferences GamePref
+        {
+            get
+            {
+                return gamePref;
+            }
+
+            set
+            {
+                gamePref = value;
+            }
+        }
+
+        public IDictionary<ClientUserProfile, int> PlayerBets
+        {
+            get
+            {
+                return playerBets;
+            }
+
+            set
+            {
+                playerBets = value;
+            }
+        }
+
     }
 }

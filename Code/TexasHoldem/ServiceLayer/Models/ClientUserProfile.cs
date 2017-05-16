@@ -11,17 +11,17 @@ namespace ServiceLayer.Models
     public class ClientUserProfile
     {
         private string username;
-        private Image avatar;
+        private byte [] avatar;
         private int credit;
-        private League league;
+        private int leagueId;
         private Statistics userStat;
 
         public ClientUserProfile(UserProfile userProfile)
         {
             username = userProfile.Username;
-            avatar = userProfile.Avatar;
+            avatar = ImageConverter.imageToByteArray(userProfile.Avatar);
             credit = userProfile.Credit;
-            league = userProfile.League;
+            leagueId = userProfile.League.MinimumRank;
             userStat = userProfile.UserStat;
         }
 
@@ -30,7 +30,7 @@ namespace ServiceLayer.Models
             get{ return username;}
         }
 
-        public Image Avatar
+        public byte [] Avatar
         {
             get {return avatar;}
         }
@@ -40,9 +40,9 @@ namespace ServiceLayer.Models
             get { return credit; }
         }
 
-        public League League
+        public int League
         {
-            get { return league; }
+            get { return leagueId; }
 
         }
 

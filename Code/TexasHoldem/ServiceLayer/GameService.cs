@@ -13,12 +13,12 @@ namespace ServiceLayer
     {
         GameCenter gc = GameCenter.GameCenterFactory.getInstance();
 
-        public List<string> bet(ClientUserProfile user, int gameID, string minimumBet)
+        public bool bet(ClientUserProfile user, int gameID, string minimumBet)
         {
             Game game = gc.getGameByID(gameID);
             PlayingUser player = game.GetPlayers().Where(pu => pu.GetUserName().Equals(user.Username)).First();
             player.setInput(minimumBet);
-            return game.GetPlayers().ConvertAll(x => (SpectatingUser)x).Union(game.GetSpectators()).Select(player1 => player1.GetUserName()).ToList();
+            return true;
         }
 
         public List<string> removePlayer(ClientUserProfile user, int gameID)

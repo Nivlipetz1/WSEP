@@ -20,10 +20,7 @@ namespace ServiceLayer
 
         public bool editAvatar(byte[] avatar, ClientUserProfile u)
         {
-            using (var ms = new System.IO.MemoryStream(avatar))
-            {
-                return system.editAvatar(Image.FromStream(ms), system.getUser(u.Username));
-            }
+            return system.editAvatar(ImageConverter.byteArrayToImage(avatar), system.getUser(u.Username));
         }
 
         public bool editPassword(string password, ClientUserProfile u)
@@ -50,7 +47,10 @@ namespace ServiceLayer
 
         public ClientUserProfile getUser(string username)
         {
-            return new ClientUserProfile(system.getUser(username));
+            if(system.isConnected(username))
+                return new ClientUserProfile(system.getUser(username));
+
+            return null;
         }
 
         public bool isConnected(string username)
