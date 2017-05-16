@@ -12,42 +12,42 @@ namespace AT.Stubs
     {
         public bool editAvatar(byte[] avatar, ClientUserProfile u)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public bool editPassword(string password, ClientUserProfile u)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public bool editUserName(string userName, ClientUserProfile u)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public ClientUserProfile getUser(string username)
         {
-            throw new NotImplementedException();
+            return new ClientUserProfile(new GameSystem.UserProfile(username, "password"));
         }
 
         public bool isConnected(string username)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public bool login(string userName, string password)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public bool logout(ClientUserProfile u)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public bool register(string userName, string password)
         {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }

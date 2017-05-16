@@ -12,6 +12,7 @@ namespace ServiceLayer
 {
     public class GameService : GameServiceInterface
     {
+        public static bool testable = true;
         GameCenter gc = GameCenter.GameCenterFactory.getInstance();
 
         public List<string> bet(ClientUserProfile user, int gameID, string minimumBet)

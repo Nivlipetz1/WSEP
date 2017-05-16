@@ -11,6 +11,7 @@ namespace AT.Stubs
 {
     class GameCenterStub : GCServiceInterface
     {
+        
         public ClientGame createGame(GamePreferences preferecnces, ClientUserProfile user)
         {
             throw new NotImplementedException();

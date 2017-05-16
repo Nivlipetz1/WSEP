@@ -12,6 +12,7 @@ namespace ServiceLayer
 {
     public class GameCenterService : GCServiceInterface
     {
+        public static bool testable = true;
         private GameCenterInterface gc = GameCenter.GameCenterFactory.getInstance();
         private TexasHoldemSystem system = TexasHoldemSystem.userSystemFactory.getInstance();
 
