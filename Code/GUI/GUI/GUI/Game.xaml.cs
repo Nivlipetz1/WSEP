@@ -25,8 +25,10 @@ namespace GUI
         private GameFrame gameFrame;
         private List<Label> playerLabels;
         private List<Image> playersCards;
+        private int revealCard = 0;
 
         public static SoundPlayer snd = new SoundPlayer(Properties.Resources.cardsdealt1);
+        public static SoundPlayer snd2 = new SoundPlayer(Properties.Resources.cardsdealt2);
         public Game(GameFrame gameFrame)
         {
             InitializeComponent();
@@ -95,6 +97,62 @@ namespace GUI
             bet2.setAmt(200);
             PushBetMove(bet2);
 
+        }
+
+        public void EndGameMove(Models.EndGameMove move)
+        {
+            IDictionary<string, Models.PlayerHand> hands = move.GetPlayerHands();
+            Models.ClientGame game = gameFrame.getGame();
+            int cardIndex = 0;
+            foreach (Models.ClientUserProfile prof in game.Players)
+            {
+                if (hands.ContainsKey(prof.Username))
+                {
+                    Models.PlayerHand hand = hands[prof.Username];
+                    Image card1 = playersCards.ElementAt(cardIndex);
+                    Image card2 = playersCards.ElementAt(cardIndex + 1);
+                    FlopCard1.Source = new BitmapImage(new Uri(@"./Images/Cards/" + hand.getFirst().toImage()));
+                    FlopCard1.Source = new BitmapImage(new Uri(@"./Images/Cards/" + hand.getSecond().toImage()));
+                    cardIndex += 2;
+                }
+            }
+        }
+
+        public void NewCardMove(Models.NewCardMove move)
+        {
+            Models.Card[] cards = move.Cards;
+            switch (revealCard)
+            {
+                case 0:
+                    FlopCard1.Source = new BitmapImage(new Uri(@"./Images/Cards/" + cards[0].toImage()));
+                    FlopCard2.Source = new BitmapImage(new Uri(@"./Images/Cards/" + cards[1].toImage()));
+                    FlopCard3.Source = new BitmapImage(new Uri(@"./Images/Cards/" + cards[2].toImage()));
+                    FlopCard1.Visibility = Visibility.Visible;
+                    FlopCard2.Visibility = Visibility.Visible;
+                    FlopCard3.Visibility = Visibility.Visible;
+                    snd2.Play();
+                    snd2.Play();
+                    snd2.Play();
+                    MoveCard(FlopCard1, 210, 40);
+                    MoveCard(FlopCard2, 140, 40);
+                    MoveCard(FlopCard3, 70, 40);
+                    revealCard++;
+                    break;
+                case 1:
+                    TurnCard.Source = new BitmapImage(new Uri(@"./Images/Cards/" + cards[0].toImage()));
+                    TurnCard.Visibility = Visibility.Visible;
+                    snd2.Play();
+                    MoveCard(RiverCard, 0, 40);
+                    revealCard++;
+                    break;
+                case 2:
+                    RiverCard.Source = new BitmapImage(new Uri(@"./Images/Cards/" + cards[0].toImage()));
+                    RiverCard.Visibility = Visibility.Visible;
+                    snd2.Play();
+                    MoveCard(TurnCard, -70, 40);
+                    revealCard++;
+                    break;
+            }
         }
 
         private void StartGame(Models.GameStartMove move)
