@@ -32,7 +32,7 @@ namespace GUI.Communication
 
         public void initOnFunctions()
         {
-            gameHubProxy.On<ClientUserProfile, int , string>("bet", (user , gameID , minimumBet) =>
+            gameHubProxy.On<Move , int>("pushMove", (move , gameID) =>
             {
             });
 
@@ -45,6 +45,10 @@ namespace GUI.Communication
             });
 
             gameHubProxy.On<ClientUserProfile, string , int>("postMessage", (user, message , gameID) =>
+            {
+            });
+
+            gameHubProxy.On<List<string>, int>("pushWinners", (winners, gameID) =>
             {
             });
         }

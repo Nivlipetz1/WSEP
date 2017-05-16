@@ -88,10 +88,16 @@
     <Compile Include="GamePM.xaml.cs">
       <DependentUpon>GamePM.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Card.cs" />
+    <Compile Include="Models\CardAnalyzer.cs" />
     <Compile Include="Models\ClientGame.cs" />
     <Compile Include="Models\ClientUserProfile.cs" />
+    <Compile Include="Models\Deck.cs" />
     <Compile Include="Models\GamePreferences.cs" />
     <Compile Include="Models\Move.cs" />
+    <Compile Include="Models\MoveTypes.cs" />
+    <Compile Include="Models\PlayerHand.cs" />
+    <Compile Include="Models\Statistics.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

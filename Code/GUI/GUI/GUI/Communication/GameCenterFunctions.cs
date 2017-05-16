@@ -82,5 +82,12 @@ namespace GUI.Communication
             res.Wait();
             return res.Result;
         }
+
+        public bool unknownUserEditLeague(ClientUserProfile user, int minimumLeagueRank)
+        {
+            Task<bool> res = gameCenterHubProxy.Invoke<bool>("unknownUserEditLeague", user, minimumLeagueRank);
+            res.Wait();
+            return res.Result;
+        }
     }
 }

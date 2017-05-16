@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace GUI.Models
 {
-    public abstract class Move
+    public class Deck
     {
+        private List<Card> cards;
+
+        public List<Card> getCards()
+        {
+            return cards;
+        }
     }
 }
