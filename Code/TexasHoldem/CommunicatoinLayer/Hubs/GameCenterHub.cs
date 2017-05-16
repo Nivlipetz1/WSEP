@@ -70,5 +70,11 @@ namespace CommunicatoinLayer.Hubs
             return false;
         }
 
+        public bool unknownUserEditLeague(ClientUserProfile user, int minimumLeagueRank)
+        {
+            GameCenterService gc = new GameCenterService();
+            return gc.unknownUserEditLeague(user, minimumLeagueRank);
+        }
+
     }
 }

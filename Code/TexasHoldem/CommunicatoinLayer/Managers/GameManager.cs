@@ -22,6 +22,7 @@ namespace CommunicatoinLayer.Managers
         {
             Clients = connectionManager.GetHubContext<GameHub>().Clients;
             NotificationService.pushMoveEvt += pushMove;
+            NotificationService.pushWinnersEvt += pushWinners;
         }
 
         public static GameManager Instance
@@ -29,10 +30,17 @@ namespace CommunicatoinLayer.Managers
             get { return LazyInstance.Value; }
         }
 
-        public void pushMove(List<string> userNames, Move move, int gameId)
+        private void pushMove(List<string> userNames, Move move, int gameId)
         {
             List<string> connectionIds = userNames.Select(user => AuthManager.Instance.GetConnectionIdByName(user)).ToList();
             Clients.Clients(connectionIds).pushMove(move, gameId);
+        }
+
+
+        private void pushWinners(List<string> userNames, List<string> winners, int gameId)
+        {
+            List<string> connectionIds = userNames.Select(user => AuthManager.Instance.GetConnectionIdByName(user)).ToList();
+            Clients.Clients(connectionIds).pushWinners(winners, gameId);
         }
     }
 }

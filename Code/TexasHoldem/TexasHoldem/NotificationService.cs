@@ -10,6 +10,7 @@ namespace GameSystem
     public class NotificationService
     {
         private static Lazy<NotificationService> LazyInstance = new Lazy<NotificationService>(() => new NotificationService(), true);
+
         public delegate void NotifyUser(string userName, string message);
         public static event NotifyUser notifyUserEvt;
 
@@ -18,6 +19,9 @@ namespace GameSystem
 
         public delegate void PushMove(List<string> userNames, Move move, int gameId);
         public static event PushMove pushMoveEvt;
+
+        public delegate void PushWinners(List<string> userNames, List<string> winners, int gameId);
+        public static event PushWinners pushWinnersEvt;
 
         private NotificationService()
         {
@@ -47,6 +51,13 @@ namespace GameSystem
             var e = pushMoveEvt;
             if (e != null)
                 e(userNames, move , gameId);
+        }
+
+        public void pushWinners(List<string> userNames, List<string> winners, int gameId)
+        {
+            var e = pushWinnersEvt;
+            if (e != null)
+                e(userNames, winners , gameId);
         }
     }
 }
