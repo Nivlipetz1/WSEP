@@ -51,6 +51,13 @@ namespace GUI.Communication
             return res.Result;
         }
 
+        public ClientUserProfile getClientUser(string userName)
+        {
+            Task<ClientUserProfile> res = authHubProxy.Invoke<ClientUserProfile>("getClientUser", userName);
+            res.Wait();
+            return res.Result;
+        }
+
         public bool logout(ClientUserProfile user)
         {
             Task<bool> res = authHubProxy.Invoke<bool>("logout" , user);
