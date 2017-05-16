@@ -14,9 +14,11 @@ namespace GUI.Models
         private int leagueId;
         private Statistics userStat;
 
+
         public string Username
         {
             get { return username; }
+            set { username = value; }
         }
 
         public byte [] Avatar

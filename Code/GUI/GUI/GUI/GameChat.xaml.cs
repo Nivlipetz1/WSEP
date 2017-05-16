@@ -20,19 +20,27 @@ namespace GUI
     /// </summary>
     public partial class GameChat : Page
     {
-        public GameChat()
+        private GameFrame gameFrame;
+        public GameChat(GameFrame gf)
         {
+            gameFrame = gf;
             InitializeComponent();
         }
 
         private void SendMessageToChat_Click(object sender, RoutedEventArgs e)
         {
-            messages.AppendText(message.Text+"\n");
+
+           /*if(Communication.GameFunctions.Instance.postMessage())
             message.Text = "";
+            message.Focus();*/
+        }
+
+        public void PushMessage(string sender, string message)
+        {
+            messages.AppendText(sender+ ": " +message + "\n");
             messages.Focus();
             messages.CaretIndex = messages.Text.Length;
             messages.ScrollToEnd();
-            message.Focus();
         }
     }
 }

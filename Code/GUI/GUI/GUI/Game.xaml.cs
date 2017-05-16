@@ -22,16 +22,46 @@ namespace GUI
     /// </summary>
     public partial class Game : Page
     {
+        private GameFrame gameFrame;
+        private List<Label> playerLabels;
+        private List<Image> playersCards;
+
         public static SoundPlayer snd = new SoundPlayer(Properties.Resources.cardsdealt1);
-        public Game()
+        public Game(GameFrame gameFrame)
         {
             InitializeComponent();
+
+            this.gameFrame = gameFrame;
+            playerLabels = new List<Label>();
+            playersCards = new List<Image>();
+            playerLabels.Add(player3);
+            playerLabels.Add(player4);
+            playerLabels.Add(player5);
+            playerLabels.Add(player7);
+            playerLabels.Add(player6);
+            playerLabels.Add(player1);
+            playerLabels.Add(player2);
+            playersCards.Add(Card1);
+            playersCards.Add(Card2);
+            playersCards.Add(Card3);
+            playersCards.Add(Card4);
+            playersCards.Add(Card5);
+            playersCards.Add(Card6);
+            playersCards.Add(Card7);
+            playersCards.Add(Card8);
+            playersCards.Add(Card9);
+            playersCards.Add(Card10);
+            playersCards.Add(Card11);
+            playersCards.Add(Card12);
+            playersCards.Add(Card13);
+            playersCards.Add(Card14);
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             startgameBtn.Visibility = Visibility.Hidden;
-
+            StartGame(null);
             snd.Play();
             MoveCard(Card1, 55, -150);
             MoveCard(Card2, 70, -150);
@@ -47,23 +77,53 @@ namespace GUI
             MoveCard(Card12, -205, 170);
             MoveCard(Card13, -190, 20);
             MoveCard(Card14, -205, 20);
-            MoveCard(FlopCard1, 210, 40);
-            MoveCard(FlopCard2, 140, 40);
-            MoveCard(FlopCard3, 70, 40);
-            MoveCard(RiverCard, 0, 40);
-            MoveCard(TurnCard, -70, 40);
+//            MoveCard(FlopCard1, 210, 40);
+//            MoveCard(FlopCard2, 140, 40);
+//            MoveCard(FlopCard3, 70, 40);
+//            MoveCard(RiverCard, 0, 40);
+//            MoveCard(TurnCard, -70, 40);
             MoveCard(UserCard1, 0,220);
             MoveCard(UserCard2, 30, 220);
-            BetAmount.Visibility = Visibility.Visible;
-            Bet_Button.Visibility = Visibility.Visible;
-            Fold_Button.Visibility = Visibility.Visible;
+
 
 
         }
+
+        private void StartGame(Models.GameStartMove move)
+        {
+            betted.Content = "$0";
+            betted.Visibility = Visibility.Visible;
+            Models.ClientGame game = gameFrame.getGame();
+            int index = 0;
+            int cardIndex = 0;
+            foreach(Models.ClientUserProfile prof in game.Players)
+            {
+                Label lbl = playerLabels.ElementAt(index);
+                int bet = 0;
+                lbl.Content = prof.Username + " $"+bet;
+                lbl.Visibility = Visibility.Visible;
+                playersCards.ElementAt(cardIndex).Visibility = Visibility.Visible;
+                playersCards.ElementAt(cardIndex+1).Visibility = Visibility.Visible;
+                index++;
+                cardIndex += 2;
+            }
+            UserCard1.Visibility = Visibility.Visible;
+            UserCard2.Visibility = Visibility.Visible;
+            BetAmount.Visibility = Visibility.Visible;
+            Bet_Button.Visibility = Visibility.Visible;
+            Fold_Button.Visibility = Visibility.Visible;
+        }
+
+        /*public void PushBetMove(Models.BetMove move)
+        {
+            move.GetPlayerBets[];
+        }*/
+
+
         private void MoveCard(Image card, int x, int y)
         {
             
-            card.Visibility = Visibility.Visible;
+            //card.Visibility = Visibility.Visible;
             TranslateTransform trans = new TranslateTransform();
             card.RenderTransform = trans;
             DoubleAnimation anim1 = new DoubleAnimation(0, x, TimeSpan.FromSeconds(5));

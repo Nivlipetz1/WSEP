@@ -20,12 +20,19 @@ namespace GUI
     /// </summary>
     public partial class GameFrame : Page
     {
-        public GameFrame()
+        private Models.ClientGame game;
+        public GameFrame(Models.ClientGame game)
         {
+            this.game = game;
             InitializeComponent();
-            gameFrame.NavigationService.Navigate(new Game());
-            chatFrame.NavigationService.Navigate(new GameChat());
-            pmFrame.NavigationService.Navigate(new GamePM());
+            gameFrame.NavigationService.Navigate(new Game(this));
+            chatFrame.NavigationService.Navigate(new GameChat(this));
+            pmFrame.NavigationService.Navigate(new GamePM(this));
+        }
+
+        public Models.ClientGame getGame()
+        {
+            return game;
         }
     }
 }

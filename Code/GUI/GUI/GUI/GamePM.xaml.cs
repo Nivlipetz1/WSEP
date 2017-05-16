@@ -20,11 +20,68 @@ namespace GUI
     /// </summary>
     public partial class GamePM : Page
     {
-        public GamePM()
+        private GameFrame gameFrame;
+        private IDictionary<string, string> messageList;
+        public GamePM(GameFrame gf)
         {
+            gameFrame = gf;
             InitializeComponent();
-            users.Items.Add("Rick");
-            users.Items.Add("Morty");
+            Models.ClientGame game = gameFrame.getGame();
+            messageList = new Dictionary<string,string>();
+            foreach(Models.ClientUserProfile prof in game.Players)
+            {
+                users.Items.Add(prof.Username);
+                messageList.Add(prof.Username,"");
+            }
+           /* foreach (Models.ClientUserProfile prof in game.Spectators)
+            {
+                users.Items.Add(prof.Username);
+                messageList.Add(prof.Username, "");
+            }*/
+        }
+
+        public void AddPlayer(Models.ClientUserProfile prof)
+        {
+            users.Items.Add(prof.Username);
+            messageList.Add(prof.Username, "");
+        }
+
+        public void RemovePlayer(Models.ClientUserProfile prof)
+        {
+            users.Items.Remove(prof.Username);
+            messageList.Remove(prof.Username);
+        }
+
+        private void SendMessage_Click(object sender, RoutedEventArgs e)
+        {
+            if (!message.Text.Equals(""))
+            {
+                /*if(Communication.GameFunctions.Instance.postWhisperMessage()){
+                
+
+
+                messages.AppendText(message.Text + "\n");
+                messageList[users.Text] += message.Text + "\n";
+                message.Text = "";
+                messages.Focus();
+                messages.CaretIndex = messages.Text.Length;
+                messages.ScrollToEnd();
+                message.Focus();
+                }*/
+            }
+        }
+
+        private void users_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+                messages.Text = messageList[users.SelectedValue.ToString()];
+                messages.CaretIndex = messages.Text.Length;
+                messages.ScrollToEnd();
+        }
+
+        public void PushMessage(string sender, string message)
+        {
+            messageList[sender] += message + "\n";
+            MessageBox.Show("New Personal Message From: "+sender, "Got New Message!", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

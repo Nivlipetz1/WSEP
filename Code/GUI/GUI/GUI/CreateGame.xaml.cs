@@ -27,7 +27,30 @@ namespace GUI
 
         private void New_Game_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new GameFrame());
+            Models.ClientGame game = new Models.ClientGame();
+            List<Models.ClientUserProfile> players = new List<Models.ClientUserProfile>();
+            Models.ClientUserProfile niv = new Models.ClientUserProfile();
+            niv.Username = "niv";
+            Models.ClientUserProfile omer = new Models.ClientUserProfile();
+            omer.Username = "omer";
+            Models.ClientUserProfile naor = new Models.ClientUserProfile();
+            naor.Username = "naor";
+            Models.ClientUserProfile rick = new Models.ClientUserProfile();
+            rick.Username = "Rick Sanchez";
+            Models.ClientUserProfile rick2 = new Models.ClientUserProfile();
+            rick2.Username = "Motry";
+            Models.ClientUserProfile rick3 = new Models.ClientUserProfile();
+            rick3.Username = "AAA";
+
+
+            players.Add(niv);
+            players.Add(omer);
+            players.Add(naor);
+            players.Add(rick);
+            players.Add(rick2);
+            players.Add(rick3);
+            game.Players = players;
+            NavigationService.Navigate(new GameFrame(game));
         }
     }
 }
