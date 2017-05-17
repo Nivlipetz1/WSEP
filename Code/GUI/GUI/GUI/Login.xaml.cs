@@ -33,14 +33,14 @@ namespace GUI
             if (!username.Text.Equals(""))
             {
                 
-                main.mainFrame.NavigationService.Navigate(new UserMainPage(main));
-                main.statusFrame.NavigationService.Navigate(new Status(main));
-                /*if (Communication.AuthFunctions.Instance.login(username.Text, password.Password)) {
-                    main.statusFrame.NavigationService.Navigate(new Status(username.Text));
+                //main.mainFrame.NavigationService.Navigate(new UserMainPage(main));
+                //main.statusFrame.NavigationService.Navigate(new Status(main));
+                if (Communication.AuthFunctions.Instance.login(username.Text, password.Password)) {
+                    main.statusFrame.NavigationService.Navigate(new Status(main));
                     main.mainFrame.NavigationService.Navigate(new UserMainPage(main));
                 }
                 else
-                    MessageBox.Show("Bad Input", "    WARNING    ", MessageBoxButton.OK, MessageBoxImage.Error);*/
+                    MessageBox.Show("Bad Input", "    WARNING    ", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {

@@ -105,7 +105,7 @@ namespace GUI
             Models.Card[] cArray = {c1, c2, c3}; 
             
             nm.Cards = cArray;
-            NewCardMove(nm);
+            //NewCardMove(nm);
 
             Models.FoldMove fm = new Models.FoldMove();
             fm.SetFoldPlayer("naor");

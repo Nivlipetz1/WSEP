@@ -23,7 +23,7 @@ namespace GUI.Communication
         {
             try
             {
-                var hubConnection = new HubConnection("http://localhost:52231/");
+                var hubConnection = new HubConnection("http://192.168.31.173:51509");
                 IHubProxy authHubProxy = hubConnection.CreateHubProxy("AuthHub"); 
                 IHubProxy gameCenterProxy = hubConnection.CreateHubProxy("GameCenterHub");
                 IHubProxy gameProxy = hubConnection.CreateHubProxy("GameHub");

@@ -24,8 +24,12 @@ namespace GUI
         Models.ClientUserProfile prof;
         public MainWindow()
         {
-            Communication.Server.Instance.connect();
+            
             InitializeComponent();
+            if (!Communication.Server.Instance.connect())
+            {
+                MessageBox.Show("not connected");
+            }
             mainFrame.NavigationService.Navigate(new Login(this));
             list = new List<GameFrame>();
             prof = new Models.ClientUserProfile();
