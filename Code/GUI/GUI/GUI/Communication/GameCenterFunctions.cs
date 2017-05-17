@@ -41,16 +41,16 @@ namespace GUI.Communication
             });
         }
 
-        public ClientGame createGame(GamePreferences preferecnces, string user)
+        public ClientGame createGame(GamePreferences preferecnces)
         {
-            Task<ClientGame> res = gameCenterHubProxy.Invoke<ClientGame>("createGame", preferecnces, user);
+            Task<ClientGame> res = gameCenterHubProxy.Invoke<ClientGame>("createGame", preferecnces);
             res.Wait();
             return res.Result;
         }
 
-        public List<ClientGame> getActiveGames(string criterion, object param, string user)
+        public List<ClientGame> getActiveGames(string criterion, object param)
         {
-            Task<List<ClientGame>> res = gameCenterHubProxy.Invoke<List<ClientGame>>("getActiveGames", criterion, param , user);
+            Task<List<ClientGame>> res = gameCenterHubProxy.Invoke<List<ClientGame>>("getActiveGames", criterion, param);
             res.Wait();
             return res.Result;
         }
@@ -69,23 +69,23 @@ namespace GUI.Communication
             return res.Result;
         }
 
-        public bool joinGame(ClientGame game, string u, int credit)
+        public bool joinGame(ClientGame game, int credit)
         {
-            Task<bool> res = gameCenterHubProxy.Invoke<bool>("joinGame", game, u , credit);
+            Task<bool> res = gameCenterHubProxy.Invoke<bool>("joinGame", game , credit);
             res.Wait();
             return res.Result;
         }
 
-        public bool spectateGame(ClientGame game, string u)
+        public bool spectateGame(ClientGame game)
         {
-            Task<bool> res = gameCenterHubProxy.Invoke<bool>("spectateGame", game, u);
+            Task<bool> res = gameCenterHubProxy.Invoke<bool>("spectateGame", game);
             res.Wait();
             return res.Result;
         }
 
-        public bool unknownUserEditLeague(string user, int minimumLeagueRank)
+        public bool unknownUserEditLeague(int minimumLeagueRank)
         {
-            Task<bool> res = gameCenterHubProxy.Invoke<bool>("unknownUserEditLeague", user, minimumLeagueRank);
+            Task<bool> res = gameCenterHubProxy.Invoke<bool>("unknownUserEditLeague", minimumLeagueRank);
             res.Wait();
             return res.Result;
         }
