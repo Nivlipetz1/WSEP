@@ -69,16 +69,16 @@ namespace GUI.Communication
             return res.Result;
         }
 
-        public bool joinGame(ClientGame game, int credit)
+        public ClientGame joinGame(int gameId, int credit)
         {
-            Task<bool> res = gameCenterHubProxy.Invoke<bool>("joinGame", game , credit);
+            Task<ClientGame> res = gameCenterHubProxy.Invoke<ClientGame>("joinGame", gameId, credit);
             res.Wait();
             return res.Result;
         }
 
-        public bool spectateGame(ClientGame game)
+        public bool spectateGame(int gameId)
         {
-            Task<bool> res = gameCenterHubProxy.Invoke<bool>("spectateGame", game);
+            Task<bool> res = gameCenterHubProxy.Invoke<bool>("spectateGame", gameId);
             res.Wait();
             return res.Result;
         }
