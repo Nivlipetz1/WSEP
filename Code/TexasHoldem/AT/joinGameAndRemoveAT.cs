@@ -49,9 +49,9 @@ namespace AT
             pref = new GamePreferences(8, 2, 5, 10, 1, 2, 3, true);
             ClientGame game = gc.createGame(pref, username);
             Assert.AreEqual(0, game.Players.Count);
-            gc.joinGame(game.getID(), username, 50);
-            Assert.AreEqual(1, game.Players.Count);
-            Assert.True(game.Players.Contains(us.getUser(username)));
+            List<String> users= gc.joinGame(game.getID(), username, 50);
+            Assert.AreEqual(1, users.Count);
+            Assert.True(users.Contains(us.getUser(username).Username));
         }
 
         [Test]
@@ -59,10 +59,10 @@ namespace AT
         {
             ClientGame game = gc.createGame(pref, username);
             Assert.AreEqual(0, game.Players.Count);
-            gc.joinGame(game.getID(), username, 50);
+            List<String> users = gc.joinGame(game.getID(), username, 50);
             gc.joinGame(game.getID(), username, 60);
-            Assert.AreEqual(1, game.Players.Count);
-            Assert.True(game.Players.Contains(us.getUser(username)));
+            Assert.AreEqual(1, users.Count);
+            Assert.True(users.Contains(us.getUser(username).Username));
         }
         [Test]
         public void joinToWrongGame()

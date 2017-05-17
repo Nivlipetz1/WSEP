@@ -39,7 +39,7 @@ namespace ServiceLayer
         public List<string> joinGame(int gameID, string userName, int credit)
         {
             Game g = gc.getGameByID(gameID);
-            if (!gc.joinGame(g, system.getUser(userName), credit))
+            if (g == null || !gc.joinGame(g, system.getUser(userName), credit))
                 return null;
             return g.GetPlayers().ConvertAll(x => (SpectatingUser)x).Union(g.GetSpectators()).Select(player1 => player1.GetUserName()).ToList();
         }

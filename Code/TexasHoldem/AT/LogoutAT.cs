@@ -44,8 +44,8 @@ namespace AT
         [TestCase]
         public void Logout_NotLoggedin()
         {
-            ClientUserProfile prof = us.getUser("abc");
-            Assert.False(us.logout(prof.Username));
+           // ClientUserProfile prof = us.getUser("abc");
+            Assert.False(us.logout("abc"));
         }
     }
 }
