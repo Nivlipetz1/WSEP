@@ -8,6 +8,8 @@ using NUnit.Framework;
 using System.Drawing;
 using ServiceLayer;
 using ServiceLayer.Models;
+using ServiceLayer.Interfaces;
+using AT.Stubs;
 using System.IO;
 
 namespace AT
@@ -15,11 +17,15 @@ namespace AT
     class UpdateUserProfileAT
     {
        
-        private SystemService us;
+        private AuthSystemServiceInterface us;
         [SetUp]
         public void before()
         {
-            us = new SystemService();
+            if (SystemService.testable)
+                us = new SystemService();
+            else
+                us = new SystemStub();
+
             us.register("abc", "123");
         }
 
@@ -29,13 +35,15 @@ namespace AT
             us.login("abc", "123");
             ClientUserProfile user = us.getUser("abc");
             Assert.True(us.editUserName("aaaaa", user.Username));
+            
         }
 
         [TestCase]
         public void badEditUsername_Loggedout()
         {
-            ClientUserProfile user = us.getUser("abc");
-            Assert.False(us.editUserName("aaaaa", user.Username));
+            us.logout("abc");
+            //ClientUserProfile user = us.getUser("abc");
+            Assert.False(us.editUserName("aaaaa", "abc"));
         }
 
         [TestCase]
@@ -70,14 +78,15 @@ namespace AT
         public void editAvatar()
         {
             
-            Image avatar = new Bitmap("C:\\Users\\pc\\Desktop\\capture.png");
-            MemoryStream ms = new MemoryStream();
-            avatar.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
+            Image avatar = new Bitmap(@"C:\Users\pc\Desktop\Capture.PNG");
+            byte[] avatarBytes = ServiceLayer.ImageConverter.imageToByteArray(avatar);
 
             us.login("abc", "123");
             ClientUserProfile user = us.getUser("abc");
-            Assert.True(us.editAvatar(ms.ToArray(), user.Username));
-            Assert.AreEqual(user.Avatar, avatar);
+            Assert.True(us.editAvatar(avatarBytes, user.Username));
+            byte[] arr = ServiceLayer.ImageConverter.imageToByteArray(TexasHoldemSystem.userSystemFactory.getInstance().getUser(user.Username).Avatar);
+            Image a2 = ServiceLayer.ImageConverter.byteArrayToImage(arr);
+            Assert.AreEqual(avatarBytes, arr);
         }
     }
 }

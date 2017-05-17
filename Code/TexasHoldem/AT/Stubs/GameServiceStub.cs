@@ -10,27 +10,27 @@ namespace AT.Stubs
 {
     class GameServiceStub : GameServiceInterface
     {
-        public List<string> bet(ClientUserProfile user, int gameID, string minimumBet)
+        public bool bet(string user, int gameID, string minimumBet)
+        {
+            return true;
+        }
+
+        public List<string> postMessage(string user, string message, int gameID)
         {
             return null;
         }
 
-        public List<string> postMessage(ClientUserProfile user, string message, int gameID)
+        public List<string> postWhisperMessage(string from, string to, string message, int gameID)
         {
             return null;
         }
 
-        public List<string> postWhisperMessage(ClientUserProfile from, ClientUserProfile to, string message, int gameID)
+        public List<string> removePlayer(string user, int gameID)
         {
             return null;
         }
 
-        public List<string> removePlayer(ClientUserProfile user, int gameID)
-        {
-            return null;
-        }
-
-        public List<string> removeSpectator(ClientUserProfile user, int gameID)
+        public List<string> removeSpectator(string user, int gameID)
         {
             return null;
         }

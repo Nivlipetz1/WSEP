@@ -11,15 +11,15 @@ namespace ServiceLayer.Interfaces
 {
     public interface GCServiceInterface
     {
-        ClientGame createGame(GamePreferences preferecnces, ClientUserProfile  user);
+        ClientGame createGame(GamePreferences preferecnces, String  user);
 
         List<ClientGame> getAllSpectatingGames();
 
-        List<ClientGame> getActiveGames(String criterion, object param, ClientUserProfile user);
+        List<ClientGame> getActiveGames(String criterion, object param, String user);
 
-        List<String> joinGame(int gameID, ClientUserProfile u, int credit);
+        List<String> joinGame(int gameID, String u, int credit);
 
-        List<string> spectateGame(int gameID, ClientUserProfile u);
+        List<string> spectateGame(int gameID, String u);
 
         List<List<Move>> getAllReplayesOfInActiveGames();
     }

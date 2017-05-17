@@ -7,29 +7,38 @@ using GameSystem;
 using Gaming;
 using NUnit.Framework;
 using ServiceLayer;
+using ServiceLayer.Models;
+using ServiceLayer.Interfaces;
+using AT.Stubs;
 
 namespace AT
 {
     [TestFixture]
     class Join_SpectateGameAT
     {
-        GameCenter gc;
-        GameSystem.TexasHoldemSystem us;
         UserProfile userProf;
         UserProfile userProf2;
         UserProfile userProf3;
         GamePreferences prefs;
+        TexasHoldemSystem us;
+        GCServiceInterface gc;
 
         [SetUp]
         public void before()
         {
-            gc = GameCenter.GameCenterFactory.getInstance();
+            //  gc = GameCenter.GameCenterFactory.getInstance();
+            if (GameCenterService.testable)
+                gc = new GameCenterService();
+            else
+                gc = new GameCenterStub();
+            //systemService = new SystemService();
             prefs = new GamePreferences(8, 2, 5, 10, 1, 20, 3, true);
             UserProfile ohadUser = new UserProfile("ohad", "213");
-            gc.createGame(prefs, ohadUser);
+            gc.createGame(prefs, ohadUser.Username);
             prefs = new GamePreferences(8, 2, 5, 10, 1, 20, 3, false);
-            gc.createGame(prefs, ohadUser);
-            us = GameSystem.TexasHoldemSystem.userSystemFactory.getInstance();
+            gc.createGame(prefs, ohadUser.Username);
+              us = GameSystem.TexasHoldemSystem.userSystemFactory.getInstance();
+            //us = new SystemService();
             us.register("abc", "123");
             us.login("abc", "123");
             userProf = us.getUser("abc");
@@ -46,30 +55,31 @@ namespace AT
         public void Valid_joinGame()
         {
             userProf.Credit = 50;
-            Game g = gc.getActiveGames("preferences",prefs, userProf3)[0];
-            int NumberOfPlayersBefore = g.GetNumberOfPlayers();
-            Assert.True(gc.joinGame(g, userProf, 30));
-            Assert.AreEqual(g.GetNumberOfPlayers(), NumberOfPlayersBefore + 1);
+            ClientGame g = gc.getActiveGames("preferences",prefs, userProf3.Username)[0];
+            
+            int NumberOfPlayersBefore = g.Players.Count;
+            Assert.NotNull(gc.joinGame(g.getID(), userProf.Username, 30));
+            Assert.AreEqual(g.Players.Count, NumberOfPlayersBefore + 1);
         }
 
         [TestCase]
         public void InValid_joinGame_Buyin()
         {
             userProf.Credit = 50;
-            Game g = gc.getActiveGames("preferences", prefs, userProf3)[0];
-            int NumberOfPlayersBefore = g.GetNumberOfPlayers();
-            Assert.False(gc.joinGame(g, userProf, 10));
-            Assert.AreEqual(g.GetNumberOfPlayers(), NumberOfPlayersBefore);
+            ClientGame g = gc.getActiveGames("preferences", prefs, userProf3.Username)[0];
+            int NumberOfPlayersBefore = g.Players.Count;
+            Assert.Null(gc.joinGame(g.getID(), userProf.Username, 10));
+            Assert.AreEqual(g.Players.Count, NumberOfPlayersBefore);
         }
 
         [TestCase]
         public void InValid_joinGame_Credit()
         {
             userProf.Credit = 50;
-            Game g = gc.getActiveGames("preferences", prefs, userProf3)[0];
-            int NumberOfPlayersBefore = g.GetNumberOfPlayers();
-            Assert.False(gc.joinGame(g, userProf, 60));
-            Assert.AreEqual(g.GetNumberOfPlayers(), NumberOfPlayersBefore);
+            ClientGame g = gc.getActiveGames("preferences", prefs, userProf3.Username)[0];
+            int NumberOfPlayersBefore = g.Players.Count;
+            Assert.Null(gc.joinGame(g.getID(), userProf.Username, 60));
+            Assert.AreEqual(g.Players.Count, NumberOfPlayersBefore);
         }
 
         [TestCase]
@@ -78,42 +88,44 @@ namespace AT
             userProf.Credit = 50;
             userProf2.Credit = 50;
             userProf3.Credit = 50;
+            GamePreferences prefs1; 
+            Assert.Fail("Maximum number of players must be greater then minimum players",
+               prefs1 = new GamePreferences(2, 2, 5, 12, 1, 20, 3, false));
+            
+            gc.createGame(prefs1, userProf3.Username);
+            ClientGame g = gc.getActiveGames("preferences", prefs1, userProf3.Username)[0];
+            Assert.NotNull(gc.joinGame(g.getID(), userProf.Username, 30));
+            Assert.NotNull(gc.joinGame(g.getID(), userProf2.Username, 30));
+            Assert.Null(gc.joinGame(g.getID(), userProf3.Username, 30));
 
-            GamePreferences prefs1 = new GamePreferences(2, 2, 5, 12, 1, 20, 3, false);
-            gc.createGame(prefs1, userProf3);
-            Game g = gc.getActiveGames("preferences", prefs1, userProf3)[0];
-            Assert.True(gc.joinGame(g, userProf, 30));
-            Assert.True(gc.joinGame(g, userProf2, 30));
-            Assert.False(gc.joinGame(g, userProf3, 30));
-
-            Assert.AreEqual(g.GetNumberOfPlayers(), 2);
+            Assert.AreEqual(g.Players.Count, 2);
         }
 
         [TestCase]
         public void valid_spectateGame()
         {
-            Game g = gc.getAllSpectatingGames()[0];
-            int NumberOfPlayersBefore = g.GetSpectators().Count;
-            Assert.True(gc.spectateGame(g, userProf));
-            Assert.AreEqual(g.GetSpectators().Count, NumberOfPlayersBefore + 1);
+            ClientGame g = gc.getAllSpectatingGames()[0];
+            int NumberOfPlayersBefore = g.Spectators.Count;
+            Assert.NotNull(gc.spectateGame(g.getID(), userProf.Username));
+            Assert.AreEqual(g.Spectators.Count, NumberOfPlayersBefore + 1);
         }
 
         [TestCase]
         public void valid_spectateGamesList()
         {
-            List<Game> games = gc.getAllSpectatingGames();
-            foreach (Game g in games)
-                Assert.True(g.GetGamePref().AllowSpec());
+            List<ClientGame> games = gc.getAllSpectatingGames();
+            foreach (ClientGame g in games)
+                Assert.True(g.GamePref.AllowSpec());
         }
 
         [TestCase]
         public void valid_gameListByName()
         {
             userProf.Credit = 50;
-            Game g = gc.getActiveGames("preferences", prefs, userProf3)[0]; ;
-            gc.joinGame(g, userProf, 30);
+            ClientGame g = gc.getActiveGames("preferences", prefs, userProf3.Username)[0]; ;
+            gc.joinGame(g.getID(), userProf.Username, 30);
 
-            List<Game> games = gc.getActiveGames("playername","abc", userProf3);
+            List<ClientGame> games = gc.getActiveGames("playername","abc", userProf3.Username);
             Assert.AreEqual(1,games.Count);
             //Assert.True(games[0].GetUserProfiles().Contains(userProf));s
         }

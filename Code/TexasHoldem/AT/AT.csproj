@@ -54,7 +54,6 @@
     <Compile Include="CreateGameAT.cs" />
     <Compile Include="GameAT.cs" />
     <Compile Include="Join_SpectateGameAT.cs" />
-    <Compile Include="LeaguesAT.cs" />
     <Compile Include="LoginAT.cs" />
     <Compile Include="LogoutAT.cs" />
     <Compile Include="Program.cs" />

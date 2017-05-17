@@ -19,7 +19,9 @@ namespace ServiceLayer.Models
         public ClientUserProfile(UserProfile userProfile)
         {
             username = userProfile.Username;
-            avatar = ImageConverter.imageToByteArray(userProfile.Avatar);
+            avatar = null;
+            if(userProfile.Avatar != null)
+                avatar = ImageConverter.imageToByteArray(userProfile.Avatar);
             credit = userProfile.Credit;
             leagueId = userProfile.League.MinimumRank;
             userStat = userProfile.UserStat;

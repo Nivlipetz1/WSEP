@@ -8,6 +8,8 @@ using NUnit.Framework;
 using GameSystem;
 using ServiceLayer;
 using Gaming;
+using ServiceLayer.Interfaces;
+using AT.Stubs;
 
 namespace AT
 {
@@ -15,13 +17,16 @@ namespace AT
 
     public class RegistrationAT
     {
-       
-        private SystemService us;
+
+        private AuthSystemServiceInterface us;
 
         [SetUp]
         public void before()
         {
-            us = new SystemService();
+            if (SystemService.testable)
+                us = new SystemService();
+            else
+                us = new SystemStub();
         }
 
         [TestCase]

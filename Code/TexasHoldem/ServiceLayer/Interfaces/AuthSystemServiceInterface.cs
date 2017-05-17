@@ -9,11 +9,11 @@ namespace ServiceLayer.Interfaces
 {
     public interface AuthSystemServiceInterface
     {
-         bool editAvatar(byte[] avatar, ClientUserProfile u);
+         bool editAvatar(byte[] avatar, String u);
 
-         bool editPassword(string password, ClientUserProfile u);
+         bool editPassword(string password, String u);
          
-         bool editUserName(string userName, ClientUserProfile u);
+         bool editUserName(string userName, String u);
 
          ClientUserProfile getUser(string username);
 
@@ -21,7 +21,7 @@ namespace ServiceLayer.Interfaces
 
          bool login(string userName, string password);
 
-         bool logout(ClientUserProfile u);
+         bool logout(string u);
 
          bool register(string userName, string password);
         

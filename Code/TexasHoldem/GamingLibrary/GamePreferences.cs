@@ -30,7 +30,7 @@ namespace Gaming
             if (minP < 2)
                 throw new InvalidOperationException("Minimum number of players must be atleast 2");
             if (minP> maxP)
-                throw new InvalidOperationException("Minimum number of players must be greater then maximum players");
+                throw new InvalidOperationException("Maximum number of players must be greater then minimum players");
 
             maxPlayers = maxP;
             minPlayers = minP;

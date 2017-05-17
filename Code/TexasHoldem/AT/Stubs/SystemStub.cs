@@ -10,17 +10,17 @@ namespace AT.Stubs
 {
     class SystemStub : AuthSystemServiceInterface
     {
-        public bool editAvatar(byte[] avatar, ClientUserProfile u)
+        public bool editAvatar(byte[] avatar, string u)
         {
             return true;
         }
 
-        public bool editPassword(string password, ClientUserProfile u)
+        public bool editPassword(string password, string u)
         {
             return true;
         }
 
-        public bool editUserName(string userName, ClientUserProfile u)
+        public bool editUserName(string userName, string u)
         {
             return true;
         }
@@ -40,7 +40,7 @@ namespace AT.Stubs
             return true;
         }
 
-        public bool logout(ClientUserProfile u)
+        public bool logout(string u)
         {
             return true;
         }
