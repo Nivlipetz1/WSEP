@@ -26,6 +26,7 @@ namespace GUI
         private List<Label> playerLabels;
         private List<Image> playersCards;
         private int revealCard = 0;
+        private int minimumBet = 0;
 
         public static SoundPlayer snd = new SoundPlayer(Properties.Resources.cardsdealt1);
         public static SoundPlayer snd2 = new SoundPlayer(Properties.Resources.cardsdealt2);
@@ -238,6 +239,26 @@ namespace GUI
             }
         }
 
+        private void HideBetElements()
+        {
+            BetAmount.Visibility = Visibility.Hidden;
+            Bet_Button.Visibility = Visibility.Hidden;
+            Fold_Button.Visibility = Visibility.Hidden;
+        }
+
+        private void ShowBetElements()
+        {
+            BetAmount.Visibility = Visibility.Visible;
+            Bet_Button.Visibility = Visibility.Visible;
+            Fold_Button.Visibility = Visibility.Visible;
+        }
+
+        public void MyTurn(int minimumBet)
+        {
+            this.minimumBet = minimumBet;
+            ShowBetElements();
+        }
+
         public void PushGameStartMove(Models.GameStartMove move)
         {
             MessageBox.Show("Game Started!","Information",MessageBoxButton.OK,MessageBoxImage.Information);
@@ -272,10 +293,18 @@ namespace GUI
 
         private void Bet_Button_Click(object sender, RoutedEventArgs e)
         {
-            int gameID = gameFrame.getGame().GamePref.GameID;
-            if (Communication.GameFunctions.Instance.bet(gameID, BetAmount.Text))
+            if (Int32.Parse(BetAmount.Text) >= minimumBet)
             {
-                MessageBox.Show("Bet Accepted", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                int gameID = gameFrame.getGame().GamePref.GameID;
+                if (Communication.GameFunctions.Instance.bet(gameID, BetAmount.Text))
+                {
+                    HideBetElements();
+                    MessageBox.Show("Bet Accepted", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Minimum bet is "+minimumBet+"! please try again.", "Too Low!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -284,6 +313,7 @@ namespace GUI
             int gameID = gameFrame.getGame().GamePref.GameID;
             if (Communication.GameFunctions.Instance.bet(gameID, "Fold"))
             {
+                HideBetElements();
                 MessageBox.Show("You have folded", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
