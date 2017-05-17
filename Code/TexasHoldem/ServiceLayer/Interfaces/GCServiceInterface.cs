@@ -17,7 +17,7 @@ namespace ServiceLayer.Interfaces
 
         List<ClientGame> getActiveGames(String criterion, object param, String user);
 
-        List<String> joinGame(int gameID, String u, int credit);
+        List<String> joinGame(int gameID, String u, int credit , out ClientGame game);
 
         List<string> spectateGame(int gameID, String u);
 
