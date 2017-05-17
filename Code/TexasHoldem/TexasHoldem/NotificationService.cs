@@ -23,6 +23,9 @@ namespace GameSystem
         public delegate void PushWinners(List<string> userNames, List<string> winners, int gameId);
         public static event PushWinners pushWinnersEvt;
 
+        public delegate void YourTurn(string userName , int minimumBet);
+        public static event YourTurn pushYourTurnEvt;
+
         private NotificationService()
         {
 
@@ -58,6 +61,13 @@ namespace GameSystem
             var e = pushWinnersEvt;
             if (e != null)
                 e(userNames, winners , gameId);
+        }
+
+        public void pushYourTurn(string userName , int minimumBet)
+        {
+            var e = pushYourTurnEvt;
+            if (e != null)
+                e(userName,minimumBet);
         }
     }
 }

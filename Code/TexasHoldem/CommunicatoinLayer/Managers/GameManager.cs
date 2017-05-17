@@ -23,6 +23,7 @@ namespace CommunicatoinLayer.Managers
             Clients = connectionManager.GetHubContext<GameHub>().Clients;
             NotificationService.pushMoveEvt += pushMove;
             NotificationService.pushWinnersEvt += pushWinners;
+            NotificationService.pushYourTurnEvt += pushYourTurn;
         }
 
         public static GameManager Instance
@@ -41,6 +42,12 @@ namespace CommunicatoinLayer.Managers
         {
             List<string> connectionIds = userNames.Select(user => AuthManager.Instance.GetConnectionIdByName(user)).ToList();
             Clients.Clients(connectionIds).pushWinners(winners, gameId);
+        }
+
+        private void pushYourTurn(string userName , int minimumBet)
+        {
+            string connectionId = AuthManager.Instance.GetConnectionIdByName(userName);
+            Clients.Client(connectionId).yourTurn(minimumBet);
         }
     }
 }
