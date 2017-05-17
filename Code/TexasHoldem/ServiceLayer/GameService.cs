@@ -26,7 +26,7 @@ namespace ServiceLayer
         public List<string> removePlayer(string user, int gameID)
         {
             Game game = gc.getGameByID(gameID);
-            PlayingUser player = game.GetPlayers().Where(pu => pu.GetUserName().Equals(user)).First();
+            PlayingUser player = game.GetPlayers().Where(pu => pu.GetUserName().Equals(user)).First(); //@ToDO: Add try and Catch. This Line throws InValidOperation when there are no players in the game.
             game.removePlayer(player);
             return game.GetPlayers().ConvertAll(x => (SpectatingUser)x).Union(game.GetSpectators()).Select(player1 => player1.GetUserName()).ToList();
         }

@@ -28,6 +28,12 @@ namespace AT
             else
                 us = new SystemStub();
         }
+        [TearDown]
+        public void after()
+        {
+            GameCenter.GameCenterFactory.clean();
+            TexasHoldemSystem.userSystemFactory.clean();
+        }
 
         [TestCase]
         public void successRegister()

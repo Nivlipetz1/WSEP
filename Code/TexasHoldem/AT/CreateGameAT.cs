@@ -30,6 +30,12 @@ namespace AT
             GameCenter.GameCenterFactory.getInstance().createNewLeague(0);
             us.register("ohad", "213");
         }
+        [TearDown]
+        public void after()
+        {
+            GameCenter.GameCenterFactory.clean();
+            TexasHoldemSystem.userSystemFactory.clean();
+        }
         [TestCase]
         public void Valid_createGame()
         {
@@ -38,6 +44,7 @@ namespace AT
             us.login("ohad","213");
             gc.createGame(prefs, "ohad");
             Assert.AreEqual(gc.getActiveGames("preferences" , prefs , "ohad").Count(), 1);
+            us.logout("ohad");
         }
 
         [TestCase]

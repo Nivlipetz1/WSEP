@@ -26,11 +26,18 @@ namespace AT
                 us = new SystemStub();
             us.register("abc", "123");
         }
+        [TearDown]
+        public void after()
+        {
+            GameCenter.GameCenterFactory.clean();
+            TexasHoldemSystem.userSystemFactory.clean();
+        }
 
         [TestCase]
         public void Success_LoginTest()
         {
             Assert.True(us.login("abc", "123"));
+            us.logout("abc");
         }
 
         [TestCase]
@@ -58,6 +65,7 @@ namespace AT
         {
             us.login("abc", "123");
             Assert.False(us.login("abc", "123"));
+            us.logout("abc");
         }
     }
 }

@@ -20,6 +20,10 @@ namespace GameSystem
                     return instance=new TexasHoldemSystem();
                 return instance;
             }
+            public static void clean()
+            {
+                instance = null; ;
+            }
         }
         private Dictionary<String, UserProfile> activeUsers;
         private Dictionary<String, UserProfile> users;

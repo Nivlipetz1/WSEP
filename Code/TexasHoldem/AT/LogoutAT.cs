@@ -25,6 +25,12 @@ namespace AT
                 us = new SystemStub();
             us.register("abc", "123");
         }
+        [TearDown]
+        public void after()
+        {
+            GameCenter.GameCenterFactory.clean();
+            TexasHoldemSystem.userSystemFactory.clean();
+        }
 
         [TestCase]
         public void Logout_Loggedin()
