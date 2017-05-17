@@ -56,9 +56,8 @@ namespace GUI
         {
             if (!message.Text.Equals(""))
             {
-                /*if(Communication.GameFunctions.Instance.postWhisperMessage()){
-                
-
+                int gameID = gameFrame.getGame().GamePref.GameID;
+                if(Communication.GameFunctions.Instance.postWhisperMessage(users.SelectedValue.ToString(),message.Text,gameID)){
 
                 messages.AppendText(message.Text + "\n");
                 messageList[users.Text] += message.Text + "\n";
@@ -67,17 +66,7 @@ namespace GUI
                 messages.CaretIndex = messages.Text.Length;
                 messages.ScrollToEnd();
                 message.Focus();
-                }*/
-                messages.AppendText("me: " + message.Text + "\n");
-                messageList[users.Text] += "me: "+ message.Text + "\n";
-                message.Text = "";
-                messages.Focus();
-                messages.CaretIndex = messages.Text.Length;
-                messages.ScrollToEnd();
-                message.Focus();
-                PushMessage("omer", "yo sup");
-                PushMessage("omer", "asdasdsaaaaaaa");
-                PushMessage("niv", "dssdas");
+                }
             }
         }
 

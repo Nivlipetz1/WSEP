@@ -40,8 +40,17 @@ namespace GUI
             bool aS = Allow_Spec.IsChecked.Value;
             Models.GamePreferences pref = new Models.GamePreferences(maxP, minP, sB, bB, tP, bIP, cP, aS);
 */
-            //Communication.GameCenterFunctions.Instance.createGame(pref, username);
-
+            Models.ClientGame newGame =  Communication.GameCenterFunctions.Instance.createGame(pref);
+            if (newGame==null)
+            {
+                MessageBox.Show("Something went wrong!", "Oh Oh!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                MessageBox.Show("New game created successfuly!", "New Game Created!", MessageBoxButton.OK, MessageBoxImage.Information);
+                NavigationService.GoBack();
+                }
+            }
 
             ///FOR DEBUG
             Models.ClientGame game = new Models.ClientGame();

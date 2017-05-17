@@ -29,10 +29,15 @@ namespace GUI
 
         private void SendMessageToChat_Click(object sender, RoutedEventArgs e)
         {
-
-           /*if(Communication.GameFunctions.Instance.postMessage())
-            message.Text = "";
-            message.Focus();*/
+            if (!message.Text.Equals(""))
+            {
+                int gameID = gameFrame.getGame().GamePref.GameID;
+                if (Communication.GameFunctions.Instance.postMessage(message.Text, gameID))
+                {
+                    message.Text = "";
+                    message.Focus();
+                }
+            }
         }
 
         public void PushMessage(string sender, string message)

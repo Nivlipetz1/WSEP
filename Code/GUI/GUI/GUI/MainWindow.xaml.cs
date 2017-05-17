@@ -21,7 +21,7 @@ namespace GUI
     public partial class MainWindow : Window
     {
         private bool loggedIn = false;
-        public List<GameFrame> list;
+
         Models.ClientUserProfile prof;
         public MainWindow()
         {
@@ -30,14 +30,17 @@ namespace GUI
             {
                 MessageBox.Show("Not Connected");
             }
-            
-            mainFrame.NavigationService.Navigate(new Login(this));
-            list = new List<GameFrame>();
-            prof = new Models.ClientUserProfile();
+            else
+            {
+
+                mainFrame.NavigationService.Navigate(new Login(this));
+                
+                prof = new Models.ClientUserProfile();
+            }
         }
-        public void setProfile(string username)
+        public void setProfile()
         {
-            prof = Communication.AuthFunctions.Instance.getClientUser(username);
+            prof = Communication.AuthFunctions.Instance.getClientUser();
         }
         public void RefreshProfile()
         {

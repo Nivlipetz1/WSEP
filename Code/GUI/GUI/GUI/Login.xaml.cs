@@ -37,10 +37,13 @@ namespace GUI
                 //main.statusFrame.NavigationService.Navigate(new Status(main));
                 if (Communication.AuthFunctions.Instance.login(username.Text, password.Password))
                 {
-                    main.setProfile(username.Text);
+                    main.setProfile();
                     main.setLoggedIn(true);
-                    main.statusFrame.NavigationService.Navigate(new Status(main));
-                    main.mainFrame.NavigationService.Navigate(new UserMainPage(main));
+                    Status status = new Status(main, null);
+                    UserMainPage umP = new UserMainPage(main, status);
+                    status.umPage = umP;
+                    main.statusFrame.NavigationService.Navigate(status);
+                    main.mainFrame.NavigationService.Navigate(umP);
                 }
                 else
                 {

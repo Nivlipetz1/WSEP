@@ -21,13 +21,26 @@ namespace GUI
     public partial class Status : Page
     {
         MainWindow main;
-        public Status(MainWindow main)
+        public UserMainPage umPage { get; set; }
+        public Status(MainWindow main, UserMainPage umPage)
         {
             this.main = main;
             Models.ClientUserProfile prof = main.getProfile();
             InitializeComponent();
             this.credit.Content = "Credit: $"+prof.Credit;
             this.username.Content = "Hello " + prof.Username;
+        }
+
+        public void RefreshGameList()
+        {
+            GameList.Items.Clear();
+            foreach (GameFrame gf in umPage.gameList)
+                GameList.Items.Add(gf);
+        }
+
+        private void GameList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            main.mainFrame.NavigationService.Navigate(GameList.SelectedItem);
         }
     }
 }

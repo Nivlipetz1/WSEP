@@ -21,10 +21,14 @@ namespace GUI
     public partial class UserMainPage : Page
     {
         MainWindow main;
-        public UserMainPage(MainWindow main)
+        Status statusFrame;
+        public List<GameFrame> gameList { get; set; }
+        public UserMainPage(MainWindow main, Status statusFrame)
         {
             InitializeComponent();
+            gameList = new List<GameFrame>();
             this.main = main;
+            this.statusFrame = statusFrame;
         }
 
         private void EditProfile_Click(object sender, RoutedEventArgs e)
@@ -45,6 +49,11 @@ namespace GUI
         private void GameCenter_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new GameCenter(main));
+        }
+
+        public void AddGame(GameFrame gf)
+        {
+            gameList.Add(gf);
         }
     }
 }

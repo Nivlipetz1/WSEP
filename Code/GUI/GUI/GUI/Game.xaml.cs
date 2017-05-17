@@ -259,10 +259,32 @@ namespace GUI
 
         private void Quit_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult rs = MessageBox.Show("Are you sure you want to logout?", "Logout", MessageBoxButton.YesNo, MessageBoxImage.Information, MessageBoxResult.No);
+            MessageBoxResult rs = MessageBox.Show("Are you sure you want to quit?", "Quit", MessageBoxButton.YesNo, MessageBoxImage.Information, MessageBoxResult.No);
             if (rs == MessageBoxResult.Yes)
             {
-                NavigationService.GoBack();
+                int gameID = gameFrame.getGame().GamePref.GameID;
+                if (Communication.GameFunctions.Instance.removePlayer(gameID))
+                    NavigationService.GoBack();
+                else
+                    MessageBox.Show("Something went wrong", "Information", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void Bet_Button_Click(object sender, RoutedEventArgs e)
+        {
+            int gameID = gameFrame.getGame().GamePref.GameID;
+            if (Communication.GameFunctions.Instance.bet(gameID, BetAmount.Text))
+            {
+                MessageBox.Show("Bet Accepted", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private void Fold_Button_Click(object sender, RoutedEventArgs e)
+        {
+            int gameID = gameFrame.getGame().GamePref.GameID;
+            if (Communication.GameFunctions.Instance.bet(gameID, "Fold"))
+            {
+                MessageBox.Show("You have folded", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }

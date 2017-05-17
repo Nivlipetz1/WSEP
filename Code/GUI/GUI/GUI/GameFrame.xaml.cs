@@ -35,6 +35,12 @@ namespace GUI
         public Models.ClientGame getGame()
         {
             return game;
+            
+        }
+
+        public override string ToString()
+        {
+            return "Game "+game.GamePref.GameID;
         }
     }
 }
