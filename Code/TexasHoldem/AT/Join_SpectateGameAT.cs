@@ -42,7 +42,7 @@ namespace AT
             //us = new SystemService();
             us.register("abc", "123");
             us.login("abc", "123");
-         
+ 
             us.register("abc2", "123");
             us.login("abc2", "123");
        
@@ -64,8 +64,9 @@ namespace AT
         {
             ClientGame g = gc.getAllSpectatingGames()[0];
             int NumberOfPlayersBefore = g.Spectators.Count;
-            Assert.NotNull(gc.spectateGame(g.getID(), "abc"));
-            Assert.AreEqual(NumberOfPlayersBefore + 1, g.Spectators.Count);
+            List<string> spec = null;
+            Assert.NotNull(spec=gc.spectateGame(g.getID(), "abc"));
+            Assert.AreEqual(NumberOfPlayersBefore + 1, spec.Count);
         }
 
         [TestCase]
@@ -79,11 +80,11 @@ namespace AT
         [TestCase]
         public void valid_gameListByName()
         {
-            userProf.Credit = 50;
-            ClientGame g = gc.getActiveGames("preferences", prefs, userProf3.Username)[0]; ;
-            gc.joinGame(g.getID(), userProf.Username, 30);
-
-            List<ClientGame> games = gc.getActiveGames("playername","abc", userProf3.Username);
+          
+            ClientGame g = gc.getActiveGames("preferences", prefs, "abc")[0]; ;
+            Assert.NotNull(gc.joinGame(g.getID(), "ohad", 30));
+            
+            List<ClientGame> games = gc.getActiveGames("playerName", "ohad","abc");
             Assert.AreEqual(1,games.Count);
             //Assert.True(games[0].GetUserProfiles().Contains(userProf));s
         }
