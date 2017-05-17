@@ -24,6 +24,7 @@ namespace CommunicatoinLayer.Managers
             NotificationService.pushMoveEvt += pushMove;
             NotificationService.pushWinnersEvt += pushWinners;
             NotificationService.pushYourTurnEvt += pushYourTurn;
+            NotificationService.setHandEvt += setHand;
         }
 
         public static GameManager Instance
@@ -44,10 +45,16 @@ namespace CommunicatoinLayer.Managers
             Clients.Clients(connectionIds).pushWinners(winners, gameId);
         }
 
-        private void pushYourTurn(string userName , int minimumBet)
+        private void pushYourTurn(string userName , int minimumBet , int gameId)
         {
             string connectionId = AuthManager.Instance.GetConnectionIdByName(userName);
-            Clients.Client(connectionId).yourTurn(minimumBet);
+            Clients.Client(connectionId).yourTurn(minimumBet , gameId);
+        }
+
+        private void setHand(string userName, PlayerHand playerHand , int gameId)
+        {
+            string connectionId = AuthManager.Instance.GetConnectionIdByName(userName);
+            Clients.Client(connectionId).yourTurn(playerHand, gameId);
         }
     }
 }
