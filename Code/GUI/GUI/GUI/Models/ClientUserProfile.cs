@@ -24,22 +24,25 @@ namespace GUI.Models
         public byte [] Avatar
         {
             get { return avatar; }
+            set { avatar = value; }
         }
 
         public int Credit
         {
             get { return credit; }
+            set { credit = value; }
         }
 
         public int LeagueId
         {
             get { return leagueId; }
-
+            set { leagueId = value; }
         }
 
         public Statistics UserStat
         {
             get { return userStat; }
+            set { userStat = value; }
         }
     }
 }
