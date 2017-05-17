@@ -20,19 +20,24 @@ namespace GUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        private bool loggedIn = false;
         public List<GameFrame> list;
         Models.ClientUserProfile prof;
         public MainWindow()
         {
-            Communication.Server.Instance.connect();
             InitializeComponent();
+            if (!(Communication.Server.Instance.connect()))
+            {
+                MessageBox.Show("Not Connected");
+            }
+            
             mainFrame.NavigationService.Navigate(new Login(this));
             list = new List<GameFrame>();
             prof = new Models.ClientUserProfile();
         }
         public void setProfile(string username)
         {
-            prof = Communication.AuthFunctions.Instance.getClientUser(prof.Username);
+            prof = Communication.AuthFunctions.Instance.getClientUser(username);
         }
         public void RefreshProfile()
         {
@@ -42,6 +47,25 @@ namespace GUI
         public Models.ClientUserProfile getProfile()
         {
             return prof;
+        }
+
+        public bool getLoggedIn()
+        {
+            return loggedIn;
+        }
+
+        public void setLoggedIn(bool set)
+        {
+            loggedIn = set;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (loggedIn)
+            {
+                Communication.AuthFunctions.Instance.logout(prof.Username);
+            }
+            loggedIn = false;
         }
     }
 }

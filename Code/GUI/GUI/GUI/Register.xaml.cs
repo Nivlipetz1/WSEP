@@ -33,8 +33,7 @@ namespace GUI
         private void RegButton_Click(object sender, RoutedEventArgs e)
         {
 
-            //if (Communication.AuthFunctions.Instance.register(Username.Text, Password.Password))
-            if(true)
+            if (Communication.AuthFunctions.Instance.register(Username.Text, Password.Password))
             {
                 MessageBox.Show("You can now login with you credentials.", "Registration Successful!", MessageBoxButton.OK, MessageBoxImage.Information);
                 NavigationService.GoBack();
