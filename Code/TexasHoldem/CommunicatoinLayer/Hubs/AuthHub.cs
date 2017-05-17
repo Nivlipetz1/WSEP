@@ -34,20 +34,23 @@ namespace CommunicatoinLayer.Hubs
             return userService.register(userName, password);
         }
 
-        public ClientUserProfile getClientUser(string userName)
+        public ClientUserProfile getClientUser()
         {
+            string userName = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             SystemService userService = new SystemService();
             return userService.getUser(userName);
         }
 
-        public bool editAvatar(byte []  avatar, string userName)
+        public bool editAvatar(byte []  avatar)
         {
+            string userName = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             SystemService userService = new SystemService();
             return userService.editAvatar(avatar, userName);
         }
 
-        public bool logout(string userName)
+        public bool logout()
         {
+            string userName = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             SystemService userService = new SystemService();
             if (userService.logout(userName))
             {
@@ -59,14 +62,16 @@ namespace CommunicatoinLayer.Hubs
             return false;
         }
 
-        public bool editPassword(string password, string userName)
+        public bool editPassword(string password)
         {
+            string userName = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             SystemService userService = new SystemService();
             return userService.editPassword(password, userName);
         }
 
-        public bool editUserName(string newUserName, string userName)
+        public bool editUserName(string newUserName)
         {
+            string userName = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             SystemService userService = new SystemService();
             return userService.editUserName(newUserName, userName);
         }
