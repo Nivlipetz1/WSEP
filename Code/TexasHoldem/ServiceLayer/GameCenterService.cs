@@ -46,7 +46,7 @@ namespace ServiceLayer
 
         public List<string> spectateGame(int gameID, string userName)
         {
-            Game g = gc.getGameByID(gameID);
+            Game g = gc.getGameByID(gameID); //ToDo add try and catch here. throws execption when there are no games.
             if (!gc.spectateGame(g, system.getUser(userName)))
                 return null;
             return g.GetPlayers().ConvertAll(x => (SpectatingUser)x).Union(g.GetSpectators()).Select(player1 => player1.GetUserName()).ToList();

@@ -22,6 +22,10 @@ namespace GameSystem
                     return instance=new GameCenter();
                 return instance;
             }
+            public static void clean()
+            {
+                instance = null;
+            }
         }
 
         private GameCenter()

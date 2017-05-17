@@ -12,12 +12,12 @@ namespace AT.Stubs
     class GameCenterStub : GCServiceInterface
     {
         
-        public ClientGame createGame(GamePreferences preferecnces, ClientUserProfile user)
+        public ClientGame createGame(GamePreferences preferecnces, string user)
         {
             return new ClientGame(new Game(preferecnces));
         }
 
-        public List<ClientGame> getActiveGames(string criterion, object param, ClientUserProfile user)
+        public List<ClientGame> getActiveGames(string criterion, object param, string user)
         {
             return null;
         }
@@ -32,12 +32,12 @@ namespace AT.Stubs
             return null;
         }
 
-        public List<string> joinGame(int gameID, ClientUserProfile u, int credit)
+        public List<string> joinGame(int gameID, string u, int credit)
         {
             return null;
         }
 
-        public List<string> spectateGame(int gameID, ClientUserProfile u)
+        public List<string> spectateGame(int gameID, string u)
         {
             return null;
         }
