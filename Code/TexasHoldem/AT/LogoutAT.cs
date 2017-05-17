@@ -7,18 +7,29 @@ using NUnit.Framework;
 using ServiceLayer;
 using GameSystem;
 using ServiceLayer.Models;
+using ServiceLayer.Interfaces;
+using AT.Stubs;
 
 namespace AT
 {
     class LogoutAT
     {
-        private SystemService us;
+        private AuthSystemServiceInterface us;
 
         [SetUp]
         public void before()
         {
-            us = new SystemService();
+            if (SystemService.testable)
+                us = new SystemService();
+            else
+                us = new SystemStub();
             us.register("abc", "123");
+        }
+        [TearDown]
+        public void after()
+        {
+            GameCenter.GameCenterFactory.clean();
+            TexasHoldemSystem.userSystemFactory.clean();
         }
 
         [TestCase]

@@ -60,9 +60,11 @@ namespace SystemTests
             
             gameCenter.joinGame(game1, user1, 200);
             Assert.AreEqual(true, gameCenter.joinGame(game2, user2, 200));
-
+            game1.GetGamePref().SetStatus("active");
+            game2.GetGamePref().SetStatus("active");
             List<Game> games = gameCenter.getActiveGames("playerName", "user2", user1);
             Assert.AreEqual(games.Count, 1);
+            
             Assert.AreEqual(games.ElementAt(0), game2);
         }
 

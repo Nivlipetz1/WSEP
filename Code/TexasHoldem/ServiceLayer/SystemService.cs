@@ -7,11 +7,13 @@ using System.Drawing;
 using GameSystem;
 using System.Text.RegularExpressions;
 using ServiceLayer.Models;
+using ServiceLayer.Interfaces;
 
 namespace ServiceLayer
 {
-    public class SystemService
+    public class SystemService : AuthSystemServiceInterface
     {
+        public static bool testable=true;
         private SystemAPI system;
         public SystemService()
         {
