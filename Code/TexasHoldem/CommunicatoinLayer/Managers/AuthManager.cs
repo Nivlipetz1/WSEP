@@ -35,6 +35,9 @@ namespace CommunicatoinLayer.Managers
             // login 
 
             //on login success
+            if (_usersByName.ContainsKey(name))
+                Logout(name, GetConnectionIdByName(name));
+
             _usersByName[name] = connectionId;
             _usersByConnectionId[connectionId] = name;
         }

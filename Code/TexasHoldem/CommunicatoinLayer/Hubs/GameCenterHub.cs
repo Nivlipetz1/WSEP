@@ -14,14 +14,16 @@ namespace CommunicatoinLayer.Hubs
 {
     public class GameCenterHub : Hub
     {
-        public ClientGame createGame(GamePreferences preferecnces , string userName)
+        public ClientGame createGame(GamePreferences preferecnces)
         {
+            string userName = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             GameCenterService gc = new GameCenterService();
             return gc.createGame(preferecnces , userName);
         }
 
-        List<ClientGame> getActiveGames(string criterion, object param, string userName)
+        List<ClientGame> getActiveGames(string criterion, object param)
         {
+            string userName = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             GameCenterService gc = new GameCenterService();
             return gc.getActiveGames(criterion , param , userName);
         }
@@ -38,8 +40,9 @@ namespace CommunicatoinLayer.Hubs
             return gc.getAllSpectatingGames();
         }
 
-        public async Task<bool> joinGame(ClientGame game, string userName, int credit)
+        public async Task<bool> joinGame(ClientGame game, int credit)
         {
+            string userName = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             GameCenterService gc = new GameCenterService();
             List<string> usersToSend = new List<string>();
             if ((usersToSend = gc.joinGame(game.getID(), userName, credit)) != null)
@@ -54,8 +57,9 @@ namespace CommunicatoinLayer.Hubs
             return false;
         }
 
-        public async Task<bool> spectateGame(ClientGame game, string userName)
+        public async Task<bool> spectateGame(ClientGame game)
         {
+            string userName = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             GameCenterService gc = new GameCenterService();
             List<string> usersToSend = new List<string>();
             if((usersToSend = gc.spectateGame(game.getID(), userName)) != null)
@@ -70,8 +74,9 @@ namespace CommunicatoinLayer.Hubs
             return false;
         }
 
-        public bool unknownUserEditLeague(string userName, int minimumLeagueRank)
+        public bool unknownUserEditLeague(int minimumLeagueRank)
         {
+            string userName = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             GameCenterService gc = new GameCenterService();
             return gc.unknownUserEditLeague(userName, minimumLeagueRank);
         }

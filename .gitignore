@@ -7,3 +7,4 @@
 *.txt
 *.sqlite
 *.cache
+*.tmp
