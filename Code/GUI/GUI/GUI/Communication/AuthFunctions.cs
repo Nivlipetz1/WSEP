@@ -51,9 +51,9 @@ namespace GUI.Communication
             return res.Result;
         }
 
-        public ClientUserProfile getClientUser(string userName)
+        public ClientUserProfile getClientUser()
         {
-            Task<ClientUserProfile> res = authHubProxy.Invoke<ClientUserProfile>("getClientUser", userName);
+            Task<ClientUserProfile> res = authHubProxy.Invoke<ClientUserProfile>("getClientUser");
             res.Wait();
             return res.Result;
         }
@@ -65,23 +65,23 @@ namespace GUI.Communication
             return res.Result;
         }
 
-        public bool editAvatar(byte [] avatar , string user)
+        public bool editAvatar(byte [] avatar)
         {
-            Task<bool> res = authHubProxy.Invoke<bool>("editAvatar", avatar, user);
+            Task<bool> res = authHubProxy.Invoke<bool>("editAvatar", avatar);
             res.Wait();
             return res.Result;
         }
 
-        public bool editPassword(string password , string user)
+        public bool editPassword(string password)
         {
-            Task<bool> res = authHubProxy.Invoke<bool>("editPassword", password , user);
+            Task<bool> res = authHubProxy.Invoke<bool>("editPassword", password);
             res.Wait();
             return res.Result;
         }
 
-        public bool editUserName(string newUserName, string user)
+        public bool editUserName(string newUserName)
         {
-            Task<bool> res = authHubProxy.Invoke<bool>("editUserName", newUserName, user);
+            Task<bool> res = authHubProxy.Invoke<bool>("editUserName", newUserName);
             res.Wait();
             return res.Result;
         }
