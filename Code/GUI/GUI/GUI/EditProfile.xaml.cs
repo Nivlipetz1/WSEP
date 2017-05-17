@@ -21,8 +21,10 @@ namespace GUI
     /// </summary>
     public partial class EditProfile : Page
     {
-        public EditProfile()
+        MainWindow main;
+        public EditProfile(MainWindow main)
         {
+            this.main = main;
             InitializeComponent();
         }
 

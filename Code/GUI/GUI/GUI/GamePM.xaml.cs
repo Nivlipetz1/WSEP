@@ -68,6 +68,16 @@ namespace GUI
                 messages.ScrollToEnd();
                 message.Focus();
                 }*/
+                messages.AppendText("me: " + message.Text + "\n");
+                messageList[users.Text] += "me: "+ message.Text + "\n";
+                message.Text = "";
+                messages.Focus();
+                messages.CaretIndex = messages.Text.Length;
+                messages.ScrollToEnd();
+                message.Focus();
+                PushMessage("omer", "yo sup");
+                PushMessage("omer", "asdasdsaaaaaaa");
+                PushMessage("niv", "dssdas");
             }
         }
 
@@ -80,8 +90,14 @@ namespace GUI
 
         public void PushMessage(string sender, string message)
         {
-            messageList[sender] += message + "\n";
+            messageList[sender] += sender+ ": "+message + "\n";
             MessageBox.Show("New Personal Message From: "+sender, "Got New Message!", MessageBoxButton.OK, MessageBoxImage.Information);
+            if (users.SelectedValue.ToString().Equals(sender))
+            {
+                messages.Text = messageList[users.SelectedValue.ToString()];
+                messages.CaretIndex = messages.Text.Length;
+                messages.ScrollToEnd();
+            }
         }
     }
 }

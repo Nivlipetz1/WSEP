@@ -240,7 +240,7 @@ namespace GUI
 
         public void PushGameStartMove(Models.GameStartMove move)
         {
-            MessageBox.Show("Game Started!");
+            MessageBox.Show("Game Started!","Information",MessageBoxButton.OK,MessageBoxImage.Information);
         }
 
 
@@ -255,6 +255,15 @@ namespace GUI
             DoubleAnimation anim2 = new DoubleAnimation(0, y, TimeSpan.FromSeconds(5));
             trans.BeginAnimation(TranslateTransform.XProperty, anim1);
             trans.BeginAnimation(TranslateTransform.YProperty, anim2);
+        }
+
+        private void Quit_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult rs = MessageBox.Show("Are you sure you want to logout?", "Logout", MessageBoxButton.YesNo, MessageBoxImage.Information, MessageBoxResult.No);
+            if (rs == MessageBoxResult.Yes)
+            {
+                NavigationService.GoBack();
+            }
         }
     }
 }

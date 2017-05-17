@@ -29,7 +29,7 @@ namespace GUI
 
         private void EditProfile_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new EditProfile());
+            NavigationService.Navigate(new EditProfile(main));
         }
 
         private void Logout_Click(object sender, RoutedEventArgs e)
@@ -44,7 +44,7 @@ namespace GUI
 
         private void GameCenter_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new GameCenter());
+            NavigationService.Navigate(new GameCenter(main));
         }
     }
 }

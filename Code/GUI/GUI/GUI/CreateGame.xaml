@@ -35,6 +35,7 @@
         <TextBox Name="Chip_Policy" HorizontalAlignment="Left" Height="31" Margin="504,233,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="136" />
         <TextBox x:Name="Buy_In_Policy" HorizontalAlignment="Left" Height="31" Margin="505,290,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="136"/>
         <Button Name="New_Game"  Content="Create Game" HorizontalAlignment="Left" Margin="357,450,0,0" VerticalAlignment="Top" Width="159" Height="34" Click="New_Game_Click"/>
+        <Button x:Name="GoBack"  Content="Go Back" HorizontalAlignment="Left" Margin="185,450,0,0" VerticalAlignment="Top" Width="159" Height="34" Click="GoBack_Click"/>
 
     </Grid>
 </Page>

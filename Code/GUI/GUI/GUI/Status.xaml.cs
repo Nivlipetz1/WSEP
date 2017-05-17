@@ -20,11 +20,14 @@ namespace GUI
     /// </summary>
     public partial class Status : Page
     {
-        public Status(string username)
+        MainWindow main;
+        public Status(MainWindow main)
         {
+            this.main = main;
+            Models.ClientUserProfile prof = main.getProfile();
             InitializeComponent();
-            this.credit.Content = "Credit: 200.00$";
-            this.username.Content = "Hello " + username;
+            this.credit.Content = "Credit: $"+prof.Credit;
+            this.username.Content = "Hello " + prof.Username;
         }
     }
 }

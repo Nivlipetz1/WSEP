@@ -20,13 +20,28 @@ namespace GUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<GameFrame> list;
+        public List<GameFrame> list;
+        Models.ClientUserProfile prof;
         public MainWindow()
         {
             Communication.Server.Instance.connect();
             InitializeComponent();
             mainFrame.NavigationService.Navigate(new Login(this));
             list = new List<GameFrame>();
+            prof = new Models.ClientUserProfile();
+        }
+        public void setProfile(string username)
+        {
+            prof = Communication.AuthFunctions.Instance.getClientUser(prof.Username);
+        }
+        public void RefreshProfile()
+        {
+            prof =  Communication.AuthFunctions.Instance.getClientUser(prof.Username);
+        }
+
+        public Models.ClientUserProfile getProfile()
+        {
+            return prof;
         }
     }
 }

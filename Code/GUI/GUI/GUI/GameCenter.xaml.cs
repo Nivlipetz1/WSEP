@@ -20,14 +20,16 @@ namespace GUI
     /// </summary>
     public partial class GameCenter : Page
     {
-        public GameCenter()
+        MainWindow main;
+        public GameCenter(MainWindow main)
         {
+            this.main = main;
             InitializeComponent();
         }
 
         private void CreateGame_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new CreateGame());
+            NavigationService.Navigate(new CreateGame(main));
         }
 
         private void Search_games_click(object sender, RoutedEventArgs e)

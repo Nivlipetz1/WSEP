@@ -84,7 +84,6 @@
     <Compile Include="GameFrame.xaml.cs">
       <DependentUpon>GameFrame.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GameGuiFunctions.cs" />
     <Compile Include="GamePM.xaml.cs">
       <DependentUpon>GamePM.xaml</DependentUpon>
     </Compile>
@@ -102,6 +101,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Register.xaml.cs">
+      <DependentUpon>Register.xaml</DependentUpon>
     </Compile>
     <Compile Include="ReplayGamePlayback.xaml.cs">
       <DependentUpon>ReplayGamePlayback.xaml</DependentUpon>
@@ -165,6 +167,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Register.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ReplayGamePlayback.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -247,13 +253,59 @@
     <Resource Include="Images\Cards\back.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Cards\S1.png" />
-    <Resource Include="Images\Cards\S10.png" />
-    <Resource Include="Images\Cards\Sj.png" />
-    <Resource Include="Images\Cards\Sk.png" />
-    <Resource Include="Images\Cards\Sq.png" />
     <None Include="Resources\cardsdealt.wav" />
     <None Include="Resources\cardsdealt2.wav" />
+    <Resource Include="Images\Cards\C1.png" />
+    <Resource Include="Images\Cards\C10.png" />
+    <Resource Include="Images\Cards\C11.png" />
+    <Resource Include="Images\Cards\C12.png" />
+    <Resource Include="Images\Cards\C13.png" />
+    <Resource Include="Images\Cards\C2.png" />
+    <Resource Include="Images\Cards\C3.png" />
+    <Resource Include="Images\Cards\C4.png" />
+    <Resource Include="Images\Cards\C5.png" />
+    <Resource Include="Images\Cards\C6.png" />
+    <Resource Include="Images\Cards\C7.png" />
+    <Resource Include="Images\Cards\C8.png" />
+    <Resource Include="Images\Cards\C9.png" />
+    <Resource Include="Images\Cards\D1.png" />
+    <Resource Include="Images\Cards\D10.png" />
+    <Resource Include="Images\Cards\D11.png" />
+    <Resource Include="Images\Cards\D12.png" />
+    <Resource Include="Images\Cards\D13.png" />
+    <Resource Include="Images\Cards\D2.png" />
+    <Resource Include="Images\Cards\D3.png" />
+    <Resource Include="Images\Cards\D4.png" />
+    <Resource Include="Images\Cards\D5.png" />
+    <Resource Include="Images\Cards\D6.png" />
+    <Resource Include="Images\Cards\D7.png" />
+    <Resource Include="Images\Cards\D8.png" />
+    <Resource Include="Images\Cards\D9.png" />
+    <Resource Include="Images\Cards\H1.png" />
+    <Resource Include="Images\Cards\H11.png" />
+    <Resource Include="Images\Cards\H12.png" />
+    <Resource Include="Images\Cards\H13.png" />
+    <Resource Include="Images\Cards\H2.png" />
+    <Resource Include="Images\Cards\H3.png" />
+    <Resource Include="Images\Cards\H4.png" />
+    <Resource Include="Images\Cards\H5.png" />
+    <Resource Include="Images\Cards\H6.png" />
+    <Resource Include="Images\Cards\H7.png" />
+    <Resource Include="Images\Cards\H8.png" />
+    <Resource Include="Images\Cards\H9.png" />
+    <Resource Include="Images\Cards\S1.png" />
+    <Resource Include="Images\Cards\S10.png" />
+    <Resource Include="Images\Cards\S11.png" />
+    <Resource Include="Images\Cards\S12.png" />
+    <Resource Include="Images\Cards\S13.png" />
+    <Resource Include="Images\Cards\S2.png" />
+    <Resource Include="Images\Cards\S3.png" />
+    <Resource Include="Images\Cards\S4.png" />
+    <Resource Include="Images\Cards\S5.png" />
+    <Resource Include="Images\Cards\S6.png" />
+    <Resource Include="Images\Cards\S7.png" />
+    <Resource Include="Images\Cards\S8.png" />
+    <Resource Include="Images\Cards\S9.png" />
     <Content Include="Sounds\cardPlace1.wav" />
   </ItemGroup>
   <ItemGroup />

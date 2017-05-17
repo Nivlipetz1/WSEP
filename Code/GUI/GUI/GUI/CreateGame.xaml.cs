@@ -20,16 +20,16 @@ namespace GUI
     /// </summary>
     public partial class CreateGame : Page
     {
-        private string username;
-        public CreateGame(string username)
+        MainWindow main;
+        public CreateGame(MainWindow main)
         {
-            this.username = username;
+            this.main = main;
             InitializeComponent();
         }
 
         private void New_Game_Click(object sender, RoutedEventArgs e)
         {
-
+/*
             int maxP = Int32.Parse(Max_Players.Text);
             int minP = Int32.Parse(Min_Players.Text);
             int sB = Int32.Parse(Small_Blind.Text);
@@ -39,7 +39,7 @@ namespace GUI
             int tP = 0;
             bool aS = Allow_Spec.IsChecked.Value;
             Models.GamePreferences pref = new Models.GamePreferences(maxP, minP, sB, bB, tP, bIP, cP, aS);
-
+*/
             //Communication.GameCenterFunctions.Instance.createGame(pref, username);
 
 
@@ -67,7 +67,12 @@ namespace GUI
             players.Add(rick2);
             players.Add(rick3);
             game.Players = players;
-            NavigationService.Navigate(new GameFrame(game));
+            NavigationService.Navigate(new GameFrame(main,game));
+        }
+
+        private void GoBack_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
         }
     }
 }

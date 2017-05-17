@@ -21,8 +21,10 @@ namespace GUI
     public partial class GameFrame : Page
     {
         private Models.ClientGame game;
-        public GameFrame(Models.ClientGame game)
+        MainWindow main;
+        public GameFrame(MainWindow main, Models.ClientGame game)
         {
+            this.main = main;
             this.game = game;
             InitializeComponent();
             gameFrame.NavigationService.Navigate(new Game(this));
