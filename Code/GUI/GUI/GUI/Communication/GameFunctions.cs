@@ -51,6 +51,14 @@ namespace GUI.Communication
             gameHubProxy.On<List<string>, int>("pushWinners", (winners, gameID) =>
             {
             });
+
+            gameHubProxy.On<int,int>("yourTurn", (minimumBet , gameId) =>
+            {
+            });
+
+            gameHubProxy.On<PlayerHand, int>("setHand", (playerHand, gameId) =>
+            {
+            });
         }
 
         public bool bet(int gameID, string minimumBet)
