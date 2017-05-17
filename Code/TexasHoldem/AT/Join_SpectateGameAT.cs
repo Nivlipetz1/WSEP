@@ -13,6 +13,7 @@ using AT.Stubs;
 
 namespace AT
 {
+ 
     [TestFixture]
     class Join_SpectateGameAT
     {
@@ -22,7 +23,7 @@ namespace AT
         GamePreferences prefs;
         SystemService us;
         GCServiceInterface gc;
-
+        ClientGame retGame;
         [SetUp]
         public void before()
         {
@@ -82,7 +83,7 @@ namespace AT
         {
           
             ClientGame g = gc.getActiveGames("preferences", prefs, "abc")[0]; ;
-            Assert.NotNull(gc.joinGame(g.getID(), "ohad", 30));
+            Assert.NotNull(gc.joinGame(g.getID(), "ohad", 30, out retGame));
             
             List<ClientGame> games = gc.getActiveGames("playerName", "ohad","abc");
             Assert.AreEqual(1,games.Count);
