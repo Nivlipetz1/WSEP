@@ -40,34 +40,33 @@ namespace CommunicatoinLayer.Hubs
             return gc.getAllSpectatingGames();
         }
 
-        public async Task<bool> joinGame(ClientGame game, int credit)
+        public async Task<ClientGame> joinGame(int gameId, int credit)
         {
             string userName = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             GameCenterService gc = new GameCenterService();
             List<string> usersToSend = new List<string>();
-            if ((usersToSend = gc.joinGame(game.getID(), userName, credit)) != null)
+            ClientGame game;
+            if ((usersToSend = gc.joinGame(gameId, userName, credit , out game)) != null)
             {
-                int gameId = game.getID();
                 GameCenterManager.Instance.joinGame(userName, gameId);
                 await Groups.Add(Context.ConnectionId, "game " + gameId);
-                Clients.Clients(usersToSend.Select(user => AuthManager.Instance.GetConnectionIdByName(user)).ToList()).joinGame(game.getID(), userName);
-                return true;
+                Clients.Clients(usersToSend.Select(user => AuthManager.Instance.GetConnectionIdByName(user)).ToList()).joinGame(gameId, userName);
+                return game;
             }
 
-            return false;
+            return null;
         }
 
-        public async Task<bool> spectateGame(ClientGame game)
+        public async Task<bool> spectateGame(int gameId)
         {
             string userName = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             GameCenterService gc = new GameCenterService();
             List<string> usersToSend = new List<string>();
-            if((usersToSend = gc.spectateGame(game.getID(), userName)) != null)
+            if((usersToSend = gc.spectateGame(gameId, userName)) != null)
             {
-                int gameId = game.getID();
                 GameCenterManager.Instance.spectateGame(userName, gameId);
                 await Groups.Add(Context.ConnectionId, "game " + gameId);
-                Clients.Clients(usersToSend.Select(user => AuthManager.Instance.GetConnectionIdByName(user)).ToList()).spectateGame(game.getID(), userName);
+                Clients.Clients(usersToSend.Select(user => AuthManager.Instance.GetConnectionIdByName(user)).ToList()).spectateGame(gameId, userName);
                 return true;
             }
 
