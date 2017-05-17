@@ -52,7 +52,11 @@ namespace GUI.Communication
             {
             });
 
-            gameHubProxy.On<int>("yourTurn", (minimumBet) =>
+            gameHubProxy.On<int,int>("yourTurn", (minimumBet , gameId) =>
+            {
+            });
+
+            gameHubProxy.On<PlayerHand, int>("setHand", (playerHand, gameId) =>
             {
             });
         }
