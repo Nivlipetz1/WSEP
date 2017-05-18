@@ -13,6 +13,8 @@ namespace CommunicatoinLayer.Hubs
     {
         public bool bet(int gameID, string minimumBet)
         {
+            if (!AuthManager.Instance.containsConnection(Context.ConnectionId))
+                return false;
             string user = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             GameService gs = new GameService();
             return gs.bet(user, gameID, minimumBet);
@@ -20,6 +22,8 @@ namespace CommunicatoinLayer.Hubs
 
         public bool removePlayer(int gameID)
         {
+            if (!AuthManager.Instance.containsConnection(Context.ConnectionId))
+                return false;
             string user = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             GameService gs = new GameService();
             List<string> usersToSend = gs.removePlayer(user, gameID);
@@ -29,6 +33,8 @@ namespace CommunicatoinLayer.Hubs
 
         public bool removeSpectator(int gameID)
         {
+            if (!AuthManager.Instance.containsConnection(Context.ConnectionId))
+                return false;
             string user = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             GameService gs = new GameService();
             List<string> usersToSend = gs.removeSpectator(user, gameID);
@@ -38,6 +44,8 @@ namespace CommunicatoinLayer.Hubs
 
         public bool postMessage(string message, int gameID)
         {
+            if (!AuthManager.Instance.containsConnection(Context.ConnectionId))
+                return false;
             string user = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             GameService gs = new GameService();
             List<string> usersToSend = gs.postMessage(user, message , gameID);
@@ -48,6 +56,8 @@ namespace CommunicatoinLayer.Hubs
 
         public bool postWhisperMessage(string to, string message, int gameID)
         {
+            if (!AuthManager.Instance.containsConnection(Context.ConnectionId))
+                return false;
             string from = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             GameService gs = new GameService();
             List<string> usersToSend = gs.postWhisperMessage(from , to , message, gameID);

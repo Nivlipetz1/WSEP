@@ -16,6 +16,8 @@ namespace CommunicatoinLayer.Hubs
     {
         public ClientGame createGame(GamePreferences preferecnces)
         {
+            if (!AuthManager.Instance.containsConnection(Context.ConnectionId))
+                return null;
             string userName = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             GameCenterService gc = new GameCenterService();
             return gc.createGame(preferecnces , userName);
@@ -23,6 +25,8 @@ namespace CommunicatoinLayer.Hubs
 
         List<ClientGame> getActiveGames(string criterion, object param)
         {
+            if (!AuthManager.Instance.containsConnection(Context.ConnectionId))
+                return null;
             string userName = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             GameCenterService gc = new GameCenterService();
             return gc.getActiveGames(criterion , param , userName);
@@ -42,6 +46,8 @@ namespace CommunicatoinLayer.Hubs
 
         public async Task<ClientGame> joinGame(int gameId, int credit)
         {
+            if (!AuthManager.Instance.containsConnection(Context.ConnectionId))
+                return null;
             string userName = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             GameCenterService gc = new GameCenterService();
             List<string> usersToSend = new List<string>();
@@ -58,6 +64,8 @@ namespace CommunicatoinLayer.Hubs
 
         public async Task<bool> spectateGame(int gameId)
         {
+            if (!AuthManager.Instance.containsConnection(Context.ConnectionId))
+                return false;
             string userName = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             GameCenterService gc = new GameCenterService();
             List<string> usersToSend = new List<string>();
@@ -74,6 +82,8 @@ namespace CommunicatoinLayer.Hubs
 
         public bool unknownUserEditLeague(int minimumLeagueRank)
         {
+            if (!AuthManager.Instance.containsConnection(Context.ConnectionId))
+                return false;
             string userName = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             GameCenterService gc = new GameCenterService();
             return gc.unknownUserEditLeague(userName, minimumLeagueRank);
