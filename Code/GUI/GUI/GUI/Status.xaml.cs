@@ -25,16 +25,13 @@ namespace GUI
         {
             InitializeComponent();
             this.manager = manager;
-            Models.ClientUserProfile prof = manager.GetProfile();
-            this.credit.Content = "Credit: $"+prof.Credit;
-            this.username.Content = "Hello " + prof.Username;
         }
 
         public void RefreshGameList()
         {
             GameList.Items.Clear();
             foreach (GameFrame gf in manager.GetGameFrameList())
-                GameList.Items.Add(gf);
+                GameList.Items.Add(gf.ToString());
         }
 
         public void RefreshStatus()
