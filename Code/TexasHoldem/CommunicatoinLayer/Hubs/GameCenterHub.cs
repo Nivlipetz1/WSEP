@@ -45,13 +45,12 @@ namespace CommunicatoinLayer.Hubs
             string userName = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             GameCenterService gc = new GameCenterService();
             List<string> usersToSend = new List<string>();
-            ClientGame game;
-            if ((usersToSend = gc.joinGame(gameId, userName, credit , out game)) != null)
+            if ((usersToSend = gc.joinGame(gameId, userName, credit)) != null)
             {
                 GameCenterManager.Instance.joinGame(userName, gameId);
                 await Groups.Add(Context.ConnectionId, "game " + gameId);
                 Clients.Clients(usersToSend.Select(user => AuthManager.Instance.GetConnectionIdByName(user)).ToList()).joinGame(gameId, userName);
-                return game;
+                return gc.getGameById(gameId);
             }
 
             return null;
@@ -78,6 +77,12 @@ namespace CommunicatoinLayer.Hubs
             string userName = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             GameCenterService gc = new GameCenterService();
             return gc.unknownUserEditLeague(userName, minimumLeagueRank);
+        }
+
+        public ClientGame getGame(int gameId)
+        {
+            GameCenterService gc = new GameCenterService();
+            return gc.getGameById(gameId);
         }
 
     }
