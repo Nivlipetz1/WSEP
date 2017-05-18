@@ -18,6 +18,12 @@ namespace GUI.Models
         private int chipPolicy;
         private Boolean allowSpectators;
         private string status;
+
+        //typePolicy:
+        const int LIMIT = 1;
+        const int NO_LIMIT = 2;
+        const int POT_LIMIT = 3;
+
         public GamePreferences(int maxP, int minP, int sB, int bB, int tP, int bIP, int cP, Boolean aS)
         {
             if (maxP > 8)

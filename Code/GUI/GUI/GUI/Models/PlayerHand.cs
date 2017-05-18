@@ -18,14 +18,30 @@ namespace GUI.Models
             this.second = second;
         }
 
-        public Card getFirst()
+        public Card First
         {
-            return first;
+            get
+            {
+                return first;
+            }
+
+            set
+            {
+                first = value;
+            }
         }
 
-        public Card getSecond()
+        public Card Second
         {
-            return second;
+            get
+            {
+                return second;
+            }
+
+            set
+            {
+                second = value;
+            }
         }
 
         public string toString()

@@ -10,9 +10,17 @@ namespace GUI.Models
     {
         private List<Card> cards;
 
-        public List<Card> getCards()
+        public List<Card> Cards
         {
-            return cards;
+            get
+            {
+                return cards;
+            }
+
+            set
+            {
+                cards = value;
+            }
         }
     }
 }

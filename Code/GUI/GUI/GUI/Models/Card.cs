@@ -15,30 +15,46 @@ namespace GUI.Models
             SPADE,
             HEART
         }
-        private Suit suit;
+        private Suit suitCard;
         private int value;
+
 
         public Card(int value, Suit suit)
         {
             this.value = value;
-            this.suit = suit;
+            this.suitCard = suit;
         }
 
-        public Suit getSuit()
+        public Suit SuitCard
         {
-            return this.suit;
+            get
+            {
+                return suitCard;
+            }
 
+            set
+            {
+                suitCard = value;
+            }
         }
 
-        public int getValue()
+        public int Value
         {
-            return value;
+            get
+            {
+                return value;
+            }
 
+            set
+            {
+                this.value = value;
+            }
         }
+
 
         public string toString()
         {
-            return "Card{" + "suit=" + suit + ", value=" + value + '}';
+            return "Card{" + "suit=" + suitCard + ", value=" + value + '}';
         }
 
         public bool equals(object o)
@@ -58,7 +74,7 @@ namespace GUI.Models
             {
                 return false;
             }
-            return suit == card.suit;
+            return suitCard == card.suitCard;
         }
     }
 }
