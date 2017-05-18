@@ -14,10 +14,12 @@ namespace GUI
         Models.ClientUserProfile profile = null;
         Status status;
         private MainWindow mainWindow;
+        Status statusWindow;
 
-        public GUIManager(MainWindow mainWindow)
+        public GUIManager(MainWindow mainWindow,Status statusWindow)
         {
             this.mainWindow = mainWindow;
+            this.status = statusWindow;
         }
 
         public List<GameFrame> gameList { get; set; }
@@ -156,6 +158,7 @@ namespace GUI
         public void RefreshProfile()
         {
             profile = Communication.AuthFunctions.Instance.getClientUser();
+            statusWindow.RefreshStatus();
         }
 
         internal void Login(string username,string password)
