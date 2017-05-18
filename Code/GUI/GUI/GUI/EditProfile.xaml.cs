@@ -22,8 +22,10 @@ namespace GUI
     public partial class EditProfile : Page
     {
         MainWindow main;
-        public EditProfile(MainWindow main)
+        UserMainPage umP;
+        public EditProfile(MainWindow main, UserMainPage umP)
         {
+            this.umP = umP;
             this.main = main;
             InitializeComponent();
         }
@@ -45,6 +47,33 @@ namespace GUI
                 //inserted correct avatar file
             }
 
+        }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            bool changed = false;
+            if (!Password.Text.Equals(""))
+            {
+                if (Communication.AuthFunctions.Instance.editPassword(Password.Text))
+                {
+                    MessageBox.Show("Password Changed!");
+                    changed = true;
+                }
+            }
+            if (!Username.Text.Equals(""))
+            {
+                if (Communication.AuthFunctions.Instance.editPassword(Password.Text))
+                {
+                    MessageBox.Show("Username Changed!");
+                    changed = true;
+                }
+            }
+            if (changed)
+            {
+                main.RefreshProfile();
+                umP.statusFrame.RefreshStatus();
+                NavigationService.GoBack();
+            }
         }
     }
 }

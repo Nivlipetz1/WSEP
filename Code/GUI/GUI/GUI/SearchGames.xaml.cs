@@ -20,8 +20,14 @@ namespace GUI
     /// </summary>
     public partial class SearchGames : Page
     {
-        public SearchGames()
+        UserMainPage umP;
+        MainWindow main;
+        GameCenter gCenter;
+        public SearchGames(MainWindow main,UserMainPage umP, GameCenter gCenter)
         {
+            this.gCenter = gCenter;
+            this.main = main;
+            this.umP = umP;
             InitializeComponent();
         }
 
@@ -58,12 +64,25 @@ namespace GUI
         {
             
             GameDataGrid gdg = (GameDataGrid)Display_game_results.SelectedItem;
-            InputDialog inputDialog = new InputDialog("Please enter your name:", "John Doe");
+            InputDialog inputDialog = new InputDialog("How much credit would you like to use?", "0");
             int credit = 0;
             if (inputDialog.ShowDialog() == true)
                  credit = Int32.Parse(inputDialog.Answer);
             //Join game function
-            //Communication.GameCenterFunctions.Instance.joinGame(gdg.ID, credit);
+            Models.ClientGame game =  Communication.GameCenterFunctions.Instance.joinGame(gdg.ID, credit);
+            if (game != null)
+            {
+                main.RefreshProfile();
+                umP.statusFrame.RefreshStatus();
+                GameFrame gameFrame = new GameFrame(main, game,gCenter);
+                umP.AddGame(gameFrame);
+                NavigationService.Navigate(gameFrame);
+            }
+            else
+            {
+                MessageBox.Show("something went wrong:(");
+            }
+            
         }
 
         private void spectateBtn_Click(object sender, RoutedEventArgs e)

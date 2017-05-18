@@ -38,6 +38,13 @@ namespace GUI
                 GameList.Items.Add(gf);
         }
 
+        public void RefreshStatus()
+        {
+            Models.ClientUserProfile prof = main.getProfile();
+            this.credit.Content = "Credit: $" + prof.Credit;
+            this.username.Content = "Hello " + prof.Username;
+        }
+
         private void GameList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             main.mainFrame.NavigationService.Navigate(GameList.SelectedItem);

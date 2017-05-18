@@ -29,7 +29,7 @@ namespace GUI
 
         private void New_Game_Click(object sender, RoutedEventArgs e)
         {
-/*
+
             int maxP = Int32.Parse(Max_Players.Text);
             int minP = Int32.Parse(Min_Players.Text);
             int sB = Int32.Parse(Small_Blind.Text);
@@ -39,7 +39,7 @@ namespace GUI
             int tP = 0;
             bool aS = Allow_Spec.IsChecked.Value;
             Models.GamePreferences pref = new Models.GamePreferences(maxP, minP, sB, bB, tP, bIP, cP, aS);
-*/
+
             Models.ClientGame newGame =  Communication.GameCenterFunctions.Instance.createGame(pref);
             if (newGame==null)
             {
@@ -49,9 +49,9 @@ namespace GUI
             {
                 MessageBox.Show("New game created successfuly!", "New Game Created!", MessageBoxButton.OK, MessageBoxImage.Information);
                 NavigationService.GoBack();
-                }
-            }
 
+            }
+/*
             ///FOR DEBUG
             Models.ClientGame game = new Models.ClientGame();
             List<Models.ClientUserProfile> players = new List<Models.ClientUserProfile>();
@@ -77,6 +77,7 @@ namespace GUI
             players.Add(rick3);
             game.Players = players;
             NavigationService.Navigate(new GameFrame(main,game));
+            */
         }
 
         private void GoBack_Click(object sender, RoutedEventArgs e)

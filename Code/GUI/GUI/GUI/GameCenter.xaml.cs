@@ -21,8 +21,10 @@ namespace GUI
     public partial class GameCenter : Page
     {
         MainWindow main;
-        public GameCenter(MainWindow main)
+        UserMainPage umP;
+        public GameCenter(MainWindow main, UserMainPage umP)
         {
+            this.umP = umP;
             this.main = main;
             InitializeComponent();
         }
@@ -34,7 +36,7 @@ namespace GUI
 
         private void Search_games_click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new SearchGames());
+            NavigationService.Navigate(new SearchGames(main,umP,this));
         }
 
         private void Replay_games_click(object sender, RoutedEventArgs e)

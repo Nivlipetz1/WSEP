@@ -21,7 +21,7 @@ namespace GUI
     public partial class UserMainPage : Page
     {
         MainWindow main;
-        Status statusFrame;
+        public Status statusFrame { get; set; }
         public List<GameFrame> gameList { get; set; }
         public UserMainPage(MainWindow main, Status statusFrame)
         {
@@ -33,7 +33,7 @@ namespace GUI
 
         private void EditProfile_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new EditProfile(main));
+            NavigationService.Navigate(new EditProfile(main,this));
         }
 
         private void Logout_Click(object sender, RoutedEventArgs e)
@@ -48,12 +48,22 @@ namespace GUI
 
         private void GameCenter_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new GameCenter(main));
+            NavigationService.Navigate(new GameCenter(main,this));
         }
 
         public void AddGame(GameFrame gf)
         {
             gameList.Add(gf);
+            statusFrame.RefreshGameList();
+        }
+
+        public void RemoveGame(GameFrame gf)
+        {
+            if (gameList.Contains(gf))
+            {
+                gameList.Remove(gf);
+                statusFrame.RefreshGameList();
+            }
         }
     }
 }

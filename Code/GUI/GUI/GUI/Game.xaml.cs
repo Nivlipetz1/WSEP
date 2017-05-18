@@ -23,6 +23,7 @@ namespace GUI
     public partial class Game : Page
     {
         private GameFrame gameFrame;
+        private GameCenter gCenter;
         private List<Label> playerLabels;
         private List<Image> playersCards;
         private int revealCard = 0;
@@ -30,10 +31,10 @@ namespace GUI
 
         public static SoundPlayer snd = new SoundPlayer(Properties.Resources.cardsdealt1);
         public static SoundPlayer snd2 = new SoundPlayer(Properties.Resources.cardsdealt2);
-        public Game(GameFrame gameFrame)
+        public Game(GameFrame gameFrame,GameCenter gCenter)
         {
             InitializeComponent();
-
+            this.gCenter = gCenter;
             this.gameFrame = gameFrame;
             playerLabels = new List<Label>();
             playersCards = new List<Image>();
@@ -65,7 +66,6 @@ namespace GUI
         {
             startgameBtn.Visibility = Visibility.Hidden;
 
-            StartGame(null);
             PushGameStartMove(new Models.GameStartMove());
             snd.Play();
             MoveCard(Card1, 55, -150);
@@ -170,10 +170,10 @@ namespace GUI
             }
         }
 
-        private void StartGame(Models.GameStartMove move)
+
+
+        private void DealCards(Models.PlayerHand hand)
         {
-            betted.Content = "$0";
-            betted.Visibility = Visibility.Visible;
             Models.ClientGame game = gameFrame.getGame();
             int index = 0;
             int cardIndex = 0;
@@ -188,11 +188,10 @@ namespace GUI
                 index++;
                 cardIndex += 2;
             }
+            UserCard1.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.getFirst().toImage(), UriKind.Relative));
+            UserCard2.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.getSecond().toImage(), UriKind.Relative));
             UserCard1.Visibility = Visibility.Visible;
             UserCard2.Visibility = Visibility.Visible;
-            BetAmount.Visibility = Visibility.Visible;
-            Bet_Button.Visibility = Visibility.Visible;
-            Fold_Button.Visibility = Visibility.Visible;
         }
 
         public void PushBetMove(Models.BetMove move)
@@ -262,6 +261,8 @@ namespace GUI
         public void PushGameStartMove(Models.GameStartMove move)
         {
             MessageBox.Show("Game Started!","Information",MessageBoxButton.OK,MessageBoxImage.Information);
+            betted.Content = "$0";
+            betted.Visibility = Visibility.Visible;
         }
 
 
@@ -316,6 +317,11 @@ namespace GUI
                 HideBetElements();
                 MessageBox.Show("You have folded", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             }
+        }
+
+        private void BackToGC_Click(object sender, RoutedEventArgs e)
+        {
+            gameFrame.NavigationService.Navigate(gCenter);
         }
     }
 }

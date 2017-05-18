@@ -26,9 +26,18 @@ namespace GUI
         public MainWindow()
         {
             InitializeComponent();
+        TRY_AGAIN:
             if (!(Communication.Server.Instance.connect()))
             {
-                MessageBox.Show("Not Connected");
+                MessageBoxResult rs = MessageBox.Show("Could not connect.\nClick Yes to try again or No to quit", "No Connection", MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.No);
+                if (rs == MessageBoxResult.Yes)
+                {
+                    goto TRY_AGAIN;
+                }
+                else
+                {
+                    Close();
+                }
             }
             else
             {
@@ -44,7 +53,7 @@ namespace GUI
         }
         public void RefreshProfile()
         {
-            prof =  Communication.AuthFunctions.Instance.getClientUser(prof.Username);
+            prof =  Communication.AuthFunctions.Instance.getClientUser();
         }
 
         public Models.ClientUserProfile getProfile()

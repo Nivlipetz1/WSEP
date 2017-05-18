@@ -48,6 +48,7 @@
         <Label Name="credit" Visibility="Hidden" Content="Label" Canvas.Left="290" Canvas.Top="482"/>
         <Label Name="betted" Visibility="Hidden" Content="Label" Canvas.Left="290" Canvas.Top="460"/>
         <Button Name="Quit" Click="Quit_Click" Content="Quit" Canvas.Left="529" Canvas.Top="493" Width="75"/>
+        <Button x:Name="BackToGC" Click="BackToGC_Click"  Content="Back To Game Center" Canvas.Left="529" Canvas.Top="463" Width="75"/>
     </Canvas>
 </Page>
 
