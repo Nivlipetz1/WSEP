@@ -50,7 +50,7 @@ namespace AT
             ClientGame game = gc.createGame(pref, username);
             Assert.AreEqual(0, game.Players.Count);
 
-            List<String> users= gc.joinGame(game.getID(), username, 50,out retGame);
+            List<String> users= gc.joinGame(game.getID(), username, 50 );
             Assert.AreEqual(1, users.Count);
             Assert.True(users.Contains(us.getUser(username).Username));
         }
@@ -60,21 +60,21 @@ namespace AT
         {
             ClientGame game = gc.createGame(pref, username);
             Assert.AreEqual(0, game.Players.Count);
-            List<String> users = gc.joinGame(game.getID(), username, 50, out retGame);
-            gc.joinGame(game.getID(), username, 60,out retGame);
+            List<String> users = gc.joinGame(game.getID(), username, 50 );
+            gc.joinGame(game.getID(), username, 60 );
             Assert.AreEqual(1, users.Count);
             Assert.True(users.Contains(us.getUser(username).Username));
         }
         [Test]
         public void joinToWrongGame()
         {
-            Assert.Null(gc.joinGame(999, username, 100,out retGame));
+            Assert.Null(gc.joinGame(999, username, 100 ));
         }
         public void joinToGameAndWithTooMuchMoney()
         {
             pref = new GamePreferences(8, 2, 5, 10, 1, 2, 3, true);
             ClientGame game = gc.createGame(pref, username);
-            Assert.Null(gc.joinGame(game.getID(), username, 999, out retGame));
+            Assert.Null(gc.joinGame(game.getID(), username, 999 ));
             game.Players.Remove(us.getUser(username));
         }
 
@@ -85,10 +85,10 @@ namespace AT
             us.register("a1", "1");
             us.register("a2", "1");
             us.register("a3", "1");
-            Assert.NotNull(gc.joinGame(game.getID(), "a1", 100, out retGame));
-            Assert.NotNull(gc.joinGame(game.getID(), "a2", 100, out retGame));
-            Assert.NotNull(gc.joinGame(game.getID(), "a3", 100, out retGame));
-            Assert.Null(gc.joinGame(game.getID(), username, 50, out retGame));
+            Assert.NotNull(gc.joinGame(game.getID(), "a1", 100 ));
+            Assert.NotNull(gc.joinGame(game.getID(), "a2", 100 ));
+            Assert.NotNull(gc.joinGame(game.getID(), "a3", 100 ));
+            Assert.Null(gc.joinGame(game.getID(), username, 50 ));
             game.Players.Remove(us.getUser(username));
         }
         [Test]
@@ -96,7 +96,7 @@ namespace AT
         {
             pref = new GamePreferences(8, 2, 5, 10, 1, 2, 3, true);
             ClientGame game = gc.createGame(pref, username);
-            gc.joinGame(game.getID(), username, 3, out retGame);
+            gc.joinGame(game.getID(), username, 3 );
             Assert.NotNull(gameService.removePlayer(username, game.getID()));
             Assert.False(game.Players.Contains(us.getUser(username)));
         }
@@ -106,7 +106,7 @@ namespace AT
         {
             pref = new GamePreferences(8, 2, 5, 10, 1, 2, 3, true);
             ClientGame game = gc.createGame(pref, username);
-            gc.joinGame(game.getID(), username, 100, out retGame);
+            gc.joinGame(game.getID(), username, 100 );
             Assert.Throws(typeof(InvalidOperationException), delegate
             {
                 gameService.removePlayer("Moshe", game.getID());
