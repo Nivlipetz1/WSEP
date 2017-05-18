@@ -9,7 +9,7 @@ using GUI.Models;
 
 namespace GUI
 {
-    public class GUIManager
+    public class GUIManager : ServerToClientFunctions
     {
         Models.ClientUserProfile profile = null;
         Status status;
@@ -20,6 +20,7 @@ namespace GUI
         {
             this.mainWindow = mainWindow;
             this.status = statusWindow;
+            gameList = new List<GameFrame>();
         }
 
         public List<GameFrame> gameList { get; set; }
