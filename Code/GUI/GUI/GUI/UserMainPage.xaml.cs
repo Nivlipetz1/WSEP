@@ -65,5 +65,51 @@ namespace GUI
                 statusFrame.RefreshGameList();
             }
         }
+
+        private GameFrame findGame(int gameID)
+        {
+            GameFrame wantedFrame = null;
+            foreach (GameFrame gf in gameList)
+            {
+                if (gf.getGame().GamePref.GameID == gameID)
+                {
+                    wantedFrame = gf;
+                }
+            }
+            return wantedFrame;
+        }
+
+        public void NotifyTurn(int minimumBet,int gameID)
+        {
+            GameFrame wantedFrame = findGame(gameID);
+            wantedFrame.gameWindow.MyTurn(minimumBet);
+        }
+
+        public void PushHand(Models.PlayerHand hand, int gameID)
+        {
+            GameFrame wantedFrame = findGame(gameID);
+            wantedFrame.gameWindow.DealCards(hand);
+        }
+
+        public void PushMoveToGame(Models.Move move, int gameID)
+        {
+            GameFrame wantedFrame = findGame(gameID);
+            if (move is Models.BetMove)
+            {
+                wantedFrame.gameWindow.PushBetMove((Models.BetMove)move);
+            }
+            else if (move is Models.FoldMove)
+            {
+                wantedFrame.gameWindow.PushFoldMove((Models.FoldMove)move);
+            }
+            else if (move is Models.GameStartMove)
+            {
+                wantedFrame.gameWindow.PushGameStartMove((Models.GameStartMove)move);
+            }
+            else if (move is Models.NewCardMove)
+            {
+                wantedFrame.gameWindow.NewCardMove((Models.NewCardMove)move);
+            }
+        }
     }
 }

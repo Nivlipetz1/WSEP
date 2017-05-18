@@ -23,13 +23,15 @@ namespace GUI
         private Models.ClientGame game;
         MainWindow main;
         GameCenter gCenter;
+        public Game gameWindow { get; set; }
         public GameFrame(MainWindow main, Models.ClientGame game, GameCenter gCenter)
         {
             this.gCenter = gCenter;
             this.main = main;
             this.game = game;
             InitializeComponent();
-            gameFrame.NavigationService.Navigate(new Game(this,gCenter));
+            gameWindow = new Game(this, gCenter);
+            gameFrame.NavigationService.Navigate(gameWindow);
             chatFrame.NavigationService.Navigate(new GameChat(this));
             pmFrame.NavigationService.Navigate(new GamePM(this));
         }

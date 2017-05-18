@@ -172,7 +172,7 @@ namespace GUI
 
 
 
-        private void DealCards(Models.PlayerHand hand)
+        public void DealCards(Models.PlayerHand hand)
         {
             Models.ClientGame game = gameFrame.getGame();
             int index = 0;
