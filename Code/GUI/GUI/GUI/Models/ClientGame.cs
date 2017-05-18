@@ -94,9 +94,17 @@ namespace GUI.Models
             }
         }
 
-        public int getID()
+        public int Id
         {
-            return id;
+            get
+            {
+                return id;
+            }
+
+            set
+            {
+                id = value;
+            }
         }
     }
 }

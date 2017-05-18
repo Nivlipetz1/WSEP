@@ -89,5 +89,12 @@ namespace GUI.Communication
             res.Wait();
             return res.Result;
         }
+
+        public ClientGame getGame(int gameId)
+        {
+            Task<ClientGame> res = gameCenterHubProxy.Invoke<ClientGame>("getGame", gameId);
+            res.Wait();
+            return res.Result;
+        }
     }
 }
