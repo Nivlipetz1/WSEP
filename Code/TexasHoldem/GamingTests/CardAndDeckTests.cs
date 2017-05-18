@@ -39,14 +39,14 @@ namespace GamingTests
         public void CreateDeckWithCorrectCards()
         {
             Deck d = new Deck();
-            List<Card>cards = d.getCards();
+            List<Card>cards = d.Cards;
             Card cardAtIndex9 = new Card(10,Card.Suit.CLUB);
             Card cardAtIndex51 = new Card(13,Card.Suit.HEART); //last card
 
-            Assert.AreEqual(cards.ElementAt(9).getSuit(), cardAtIndex9.getSuit());
-            Assert.AreEqual(cards.ElementAt(9).getValue(), cardAtIndex9.getValue());
-            Assert.AreEqual(cards.ElementAt(51).getSuit(), cardAtIndex51.getSuit());
-            Assert.AreEqual(cards.ElementAt(51).getValue(), cardAtIndex51.getValue());
+            Assert.AreEqual(cards.ElementAt(9).SuitCard, cardAtIndex9.SuitCard);
+            Assert.AreEqual(cards.ElementAt(9).Value, cardAtIndex9.Value);
+            Assert.AreEqual(cards.ElementAt(51).Value, cardAtIndex51.SuitCard);
+            Assert.AreEqual(cards.ElementAt(51).Value, cardAtIndex51.Value);
 
         }
 
@@ -54,13 +54,13 @@ namespace GamingTests
         public void ShuffleCards()
         {
             Deck d = new Deck();
-            Assert.AreEqual(d.getCards().Count, 52);
-            Card cardIndex24= d.getCards().ElementAt(24);
-            Card cardIndex34 = d.getCards().ElementAt(34);
+            Assert.AreEqual(d.Cards.Count, 52);
+            Card cardIndex24= d.Cards.ElementAt(24);
+            Card cardIndex34 = d.Cards.ElementAt(34);
             d.Shuffle();
-            Assert.AreEqual(d.getCards().Count, 52);
-            Card cardAfterShuffleIndex24 = d.getCards().ElementAt(24);
-            Card cardAfterShuffleIndex34 = d.getCards().ElementAt(34);
+            Assert.AreEqual(d.Cards.Count, 52);
+            Card cardAfterShuffleIndex24 = d.Cards.ElementAt(24);
+            Card cardAfterShuffleIndex34 = d.Cards.ElementAt(34);
             Assert.False(cardIndex24.equals(cardAfterShuffleIndex24) && cardIndex34.equals(cardAfterShuffleIndex34));
         }
 
@@ -69,12 +69,12 @@ namespace GamingTests
         {
             Deck d = new Deck();
             PlayerHand ph = d.drawPlayerHand();
-            Assert.False(d.getCards().Contains(ph.getFirst()));
-            Assert.False(d.getCards().Contains(ph.getSecond()));
-            Assert.AreNotEqual(ph.getFirst(), ph.getSecond());
-            Assert.True(d.getCards().Count == 50);
+            Assert.False(d.Cards.Contains(ph.First));
+            Assert.False(d.Cards.Contains(ph.Second));
+            Assert.AreNotEqual(ph.First, ph.Second);
+            Assert.True(d.Cards.Count == 50);
             d.drawPlayerHand();
-            Assert.True(d.getCards().Count == 48);
+            Assert.True(d.Cards.Count == 48);
         }
 
         [TestCase]
@@ -83,9 +83,9 @@ namespace GamingTests
             Deck d = new Deck();
             Card[] flop = d.drawFlop();
             Assert.True(flop.Count() == 3);
-            Assert.True(d.getCards().Count == 49);
+            Assert.True(d.Cards.Count == 49);
             for (int i = 0; i < 3; i++)
-                Assert.False(d.getCards().Contains(flop[i]));
+                Assert.False(d.Cards.Contains(flop[i]));
         }
 
         [TestCase]
@@ -94,9 +94,9 @@ namespace GamingTests
             Deck d = new Deck();
             Card[] flop = d.drawFlop();
             Card river = d.DrawTableCard();
-            Assert.True(d.getCards().Count == 48);
+            Assert.True(d.Cards.Count == 48);
             Assert.False(flop.Contains(river));
-            Assert.False(d.getCards().Contains(river));
+            Assert.False(d.Cards.Contains(river));
         }
 
         [TestCase]
@@ -106,10 +106,10 @@ namespace GamingTests
             Card[] flop = d.drawFlop();
             Card river = d.DrawTableCard();
             Card turn = d.DrawTableCard();
-            Assert.True(d.getCards().Count == 47);
+            Assert.True(d.Cards.Count == 47);
             Assert.False(flop.Contains(turn));
             Assert.AreNotEqual(river, turn);
-            Assert.False(d.getCards().Contains(turn));
+            Assert.False(d.Cards.Contains(turn));
         }
     }
 }
