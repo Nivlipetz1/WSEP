@@ -30,27 +30,32 @@ namespace ServiceLayer.Models
         public string Username
         {
             get{ return username;}
+            set { username = value; }
         }
 
         public byte [] Avatar
         {
             get {return avatar;}
+            set { avatar = value; }
         }
 
         public int Credit
         {
             get { return credit; }
+            set { credit = value; }
         }
 
         public int League
         {
             get { return leagueId; }
+            set { leagueId = value; }
 
         }
 
         public Statistics UserStat
         {
             get { return userStat; }
+            set { userStat = value; }
         }      
     }
 }
