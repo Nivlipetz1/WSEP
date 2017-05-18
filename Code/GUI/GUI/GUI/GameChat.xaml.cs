@@ -31,7 +31,7 @@ namespace GUI
         {
             if (!message.Text.Equals(""))
             {
-                int gameID = gameFrame.getGame().GamePref.GameID;
+                int gameID = gameFrame.getGame().GamePref.gameID;
                 if (Communication.GameFunctions.Instance.postMessage(message.Text, gameID))
                 {
                     message.Text = "";

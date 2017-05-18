@@ -56,7 +56,7 @@ namespace GUI
         {
             if (!message.Text.Equals(""))
             {
-                int gameID = gameFrame.getGame().GamePref.GameID;
+                int gameID = gameFrame.getGame().GamePref.gameID;
                 if(Communication.GameFunctions.Instance.postWhisperMessage(users.SelectedValue.ToString(),message.Text,gameID)){
 
                 messages.AppendText(message.Text + "\n");

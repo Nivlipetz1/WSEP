@@ -126,8 +126,8 @@ namespace GUI
                     Models.PlayerHand hand = hands[prof.Username];
                     Image card1 = playersCards.ElementAt(cardIndex);
                     Image card2 = playersCards.ElementAt(cardIndex + 1);
-                    FlopCard1.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.getFirst().toImage(), UriKind.Relative));
-                    FlopCard1.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.getSecond().toImage(), UriKind.Relative));
+                    FlopCard1.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.First.toImage(), UriKind.Relative));
+                    FlopCard1.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.Second.toImage(), UriKind.Relative));
                     cardIndex += 2;
                 }
             }
@@ -188,8 +188,8 @@ namespace GUI
                 index++;
                 cardIndex += 2;
             }
-            UserCard1.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.getFirst().toImage(), UriKind.Relative));
-            UserCard2.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.getSecond().toImage(), UriKind.Relative));
+            UserCard1.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.First.toImage(), UriKind.Relative));
+            UserCard2.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.Second.toImage(), UriKind.Relative));
             UserCard1.Visibility = Visibility.Visible;
             UserCard2.Visibility = Visibility.Visible;
         }
@@ -284,7 +284,7 @@ namespace GUI
             MessageBoxResult rs = MessageBox.Show("Are you sure you want to quit?", "Quit", MessageBoxButton.YesNo, MessageBoxImage.Information, MessageBoxResult.No);
             if (rs == MessageBoxResult.Yes)
             {
-                int gameID = gameFrame.getGame().GamePref.GameID;
+                int gameID = gameFrame.getGame().GamePref.gameID;
                 if (Communication.GameFunctions.Instance.removePlayer(gameID))
                     NavigationService.GoBack();
                 else
@@ -296,7 +296,7 @@ namespace GUI
         {
             if (Int32.Parse(BetAmount.Text) >= minimumBet)
             {
-                int gameID = gameFrame.getGame().GamePref.GameID;
+                int gameID = gameFrame.getGame().GamePref.gameID;
                 if (Communication.GameFunctions.Instance.bet(gameID, BetAmount.Text))
                 {
                     HideBetElements();
@@ -311,7 +311,7 @@ namespace GUI
 
         private void Fold_Button_Click(object sender, RoutedEventArgs e)
         {
-            int gameID = gameFrame.getGame().GamePref.GameID;
+            int gameID = gameFrame.getGame().GamePref.gameID;
             if (Communication.GameFunctions.Instance.bet(gameID, "Fold"))
             {
                 HideBetElements();

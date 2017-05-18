@@ -8,13 +8,13 @@ namespace GUI.Models
 {
     public class ClientGame
     {
-        private int id;
-        private Deck gameDeck;
-        private List<ClientUserProfile> players;
-        private List<ClientUserProfile> spectators;
-        private int[] pot;
-        private GamePreferences gamePref;
-        private IDictionary<ClientUserProfile, int> playerBets = new Dictionary<ClientUserProfile, int>();
+        public int id { get; set; }
+        public Deck gameDeck { get; set; }
+        public List<ClientUserProfile> players { get; set; }
+        public List<ClientUserProfile> spectators { get; set; }
+        public int[] pot { get; set; }
+        public GamePreferences gamePref { get; set; }
+        public IDictionary<ClientUserProfile, int> playerBets { get; set; }
 
         public Deck GameDeck
         {

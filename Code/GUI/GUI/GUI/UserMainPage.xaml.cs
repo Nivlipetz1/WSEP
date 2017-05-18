@@ -71,7 +71,7 @@ namespace GUI
             GameFrame wantedFrame = null;
             foreach (GameFrame gf in gameList)
             {
-                if (gf.getGame().GamePref.GameID == gameID)
+                if (gf.getGame().GamePref.gameID == gameID)
                 {
                     wantedFrame = gf;
                 }

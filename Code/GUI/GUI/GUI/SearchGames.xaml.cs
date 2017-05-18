@@ -47,7 +47,7 @@ namespace GUI
             foreach(Models.ClientGame game in gameList)
             {
                 Models.GamePreferences prefs = game.GamePref;
-                GameDataGrid gdg = new GameDataGrid { ID = prefs.GameID,
+                GameDataGrid gdg = new GameDataGrid { ID = prefs.gameID,
                                                       PlayersInGame = game.Players.Count,
                                                       MaxPlayers = prefs.MaxPlayers,
                                                       BigBlind = prefs.BigBlind,

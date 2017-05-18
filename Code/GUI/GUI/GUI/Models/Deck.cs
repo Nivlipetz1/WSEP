@@ -8,7 +8,7 @@ namespace GUI.Models
 {
     public class Deck
     {
-        private List<Card> cards;
+        public List<Card> cards { get; set; }
 
         public List<Card> Cards
         {

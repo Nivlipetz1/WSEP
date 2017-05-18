@@ -44,7 +44,7 @@ namespace GUI
 
         public override string ToString()
         {
-            return "Game "+game.GamePref.GameID;
+            return "Game "+game.GamePref.gameID;
         }
     }
 }

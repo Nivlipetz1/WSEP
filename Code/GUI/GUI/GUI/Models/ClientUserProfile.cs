@@ -8,11 +8,11 @@ namespace GUI.Models
 {
     public class ClientUserProfile
     {
-        private string username;
-        private byte [] avatar;
-        private int credit;
-        private int leagueId;
-        private Statistics userStat;
+        public string username { get; set; }
+        public byte [] avatar { get; set; }
+        public int credit { get; set; }
+        public int leagueId { get; set; }
+        public Statistics userStat { get; set; }
 
 
         public string Username
