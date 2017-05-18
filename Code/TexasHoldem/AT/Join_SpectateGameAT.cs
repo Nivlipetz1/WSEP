@@ -23,7 +23,6 @@ namespace AT
         GamePreferences prefs;
         SystemService us;
         GCServiceInterface gc;
-        ClientGame retGame;
         [SetUp]
         public void before()
         {
