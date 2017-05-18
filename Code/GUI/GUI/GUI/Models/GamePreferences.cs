@@ -8,7 +8,6 @@ namespace GUI.Models
 {
     public class GamePreferences
     {
-        private int gameID;
         private int maxPlayers;
         private int minPlayers;
         private int smallBlind;
@@ -42,19 +41,6 @@ namespace GUI.Models
             chipPolicy = cP;
             allowSpectators = aS;
             status = "active";
-        }
-
-        public int GameID
-        {
-            get
-            {
-                return gameID;
-            }
-
-            set
-            {
-                gameID = value;
-            }
         }
 
         public int MaxPlayers
