@@ -286,8 +286,8 @@ namespace GUI
                     Models.PlayerHand hand = hands[prof.Username];
                     Image card1 = playersCards.ElementAt(cardIndex);
                     Image card2 = playersCards.ElementAt(cardIndex + 1);
-                    FlopCard1.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.First.toImage(), UriKind.Relative));
-                    FlopCard1.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.Second.toImage(), UriKind.Relative));
+                    card1.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.First.toImage(), UriKind.Relative));
+                    card2.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.Second.toImage(), UriKind.Relative));
                     cardIndex += 2;
                 }
             }
