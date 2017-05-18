@@ -17,10 +17,12 @@ namespace ServiceLayer.Interfaces
 
         List<ClientGame> getActiveGames(String criterion, object param, String user);
 
-        List<String> joinGame(int gameID, String u, int credit , out ClientGame game);
+        List<String> joinGame(int gameID, String u, int credit);
 
         List<string> spectateGame(int gameID, String u);
 
         List<List<Move>> getAllReplayesOfInActiveGames();
+
+        ClientGame getGameById(int gameId);
     }
 }

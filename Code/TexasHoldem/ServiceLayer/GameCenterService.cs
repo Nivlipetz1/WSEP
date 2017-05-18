@@ -36,10 +36,9 @@ namespace ServiceLayer
             return gc.getAllSpectatingGames().Select(game => new ClientGame(game)).ToList();
         }
 
-        public List<string> joinGame(int gameID, string userName, int credit , out ClientGame game)
+        public List<string> joinGame(int gameID, string userName, int credit)
         {
             Game g = gc.getGameByID(gameID);
-            game = new ClientGame(g);
             if (g == null ||!gc.joinGame(g , system.getUser(userName), credit))
                 return null;
             return g.GetPlayers().ConvertAll(x => (SpectatingUser)x).Union(g.GetSpectators()).Select(player1 => player1.GetUserName()).ToList();
@@ -56,6 +55,11 @@ namespace ServiceLayer
         public bool unknownUserEditLeague(string userName, int minimumLeagueRank)
         {
             return gc.unknownUserEditLeague(system.getUser(userName), gc.getLeagueByID(minimumLeagueRank));
+        }
+
+        public ClientGame getGameById(int gameId)
+        {
+            return new ClientGame(gc.getGameByID(gameId));
         }
     }
 }
