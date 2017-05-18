@@ -83,7 +83,7 @@ namespace AT
         {
           
             ClientGame g = gc.getActiveGames("preferences", prefs, "abc")[0]; ;
-            Assert.NotNull(gc.joinGame(g.getID(), "ohad", 30, out retGame));
+            Assert.NotNull(gc.joinGame(g.getID(), "ohad", 30));
             
             List<ClientGame> games = gc.getActiveGames("playerName", "ohad","abc");
             Assert.AreEqual(1,games.Count);
