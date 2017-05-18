@@ -79,5 +79,10 @@ namespace GUI
             }
             loggedIn = false;
         }
+
+        public void notify(string message)
+        {
+            MessageBox.Show("System Message:\nmessage");
+        }
     }
 }
