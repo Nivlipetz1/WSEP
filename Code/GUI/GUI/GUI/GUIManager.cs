@@ -16,10 +16,10 @@ namespace GUI
         private MainWindow mainWindow;
         Status statusWindow;
 
-        public GUIManager(MainWindow mainWindow,Status statusWindow)
+        public GUIManager(MainWindow mainWindow)
         {
             this.mainWindow = mainWindow;
-            this.status = statusWindow;
+            this.status = new Status(this);
             gameList = new List<GameFrame>();
         }
 
@@ -169,7 +169,7 @@ namespace GUI
             if (Communication.AuthFunctions.Instance.login(username, password))
             {
                 RefreshProfile();
-                Status status = new Status(this);
+                Status status = statusWindow;
                 UserMainPage umP = new UserMainPage(this);
                 mainWindow.statusFrame.NavigationService.Navigate(status);
                 mainWindow.mainFrame.NavigationService.Navigate(umP);
@@ -289,6 +289,11 @@ namespace GUI
         internal void GoToGameCenter()
         {
             mainWindow.mainFrame.NavigationService.Navigate(new GameCenter(this));
+        }
+
+        private Status GetStatusFrame()
+        {
+            return status;
         }
     }
 }
