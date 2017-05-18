@@ -42,7 +42,7 @@ namespace GUI
 
         internal void ConnectToServer()
         {
-            TRY_AGAIN:
+        TRY_AGAIN:
             if (!(Communication.Server.Instance.connect()))
             {
                 MessageBoxResult rs = MessageBox.Show("Could not connect.\nClick Yes to try again or No to quit", "No Connection", MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.No);
@@ -162,7 +162,7 @@ namespace GUI
             statusWindow.RefreshStatus();
         }
 
-        internal void Login(string username,string password)
+        internal void Login(string username, string password)
         {
             //main.mainFrame.NavigationService.Navigate(new UserMainPage(main));
             //main.statusFrame.NavigationService.Navigate(new Status(main));
@@ -196,13 +196,13 @@ namespace GUI
             wantedFrame.GameWindow.MyTurn(minimumBet);
         }
 
-        internal void JoinGame(int gameID,int credit)
+        internal void JoinGame(int gameID, int credit)
         {
             Models.ClientGame game = Communication.GameCenterFunctions.Instance.joinGame(gameID, credit);
             if (game != null)
             {
                 RefreshProfile();
-                GameFrame gameFrame = new GameFrame(this,game);
+                GameFrame gameFrame = new GameFrame(this, game);
                 AddGameFrame(gameFrame);
                 NavigateToGameFrame(gameFrame);
             }

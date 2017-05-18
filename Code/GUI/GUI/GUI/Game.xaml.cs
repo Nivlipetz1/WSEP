@@ -81,12 +81,12 @@ namespace GUI
             MoveCard(Card12, -205, 170);
             MoveCard(Card13, -190, 20);
             MoveCard(Card14, -205, 20);
-//            MoveCard(FlopCard1, 210, 40);
-//            MoveCard(FlopCard2, 140, 40);
-//            MoveCard(FlopCard3, 70, 40);
-//            MoveCard(RiverCard, 0, 40);
-//            MoveCard(TurnCard, -70, 40);
-            MoveCard(UserCard1, 0,220);
+            //            MoveCard(FlopCard1, 210, 40);
+            //            MoveCard(FlopCard2, 140, 40);
+            //            MoveCard(FlopCard3, 70, 40);
+            //            MoveCard(RiverCard, 0, 40);
+            //            MoveCard(TurnCard, -70, 40);
+            MoveCard(UserCard1, 0, 220);
             MoveCard(UserCard2, 30, 220);
 
             Models.BetMove bet = new Models.BetMove();
@@ -102,8 +102,8 @@ namespace GUI
             Models.Card c1 = new Models.Card(10, Models.Card.Suit.SPADE);
             Models.Card c2 = new Models.Card(10, Models.Card.Suit.SPADE);
             Models.Card c3 = new Models.Card(1, Models.Card.Suit.SPADE);
-            Models.Card[] cArray = {c1, c2, c3}; 
-            
+            Models.Card[] cArray = { c1, c2, c3 };
+
             nm.Cards = cArray;
             //NewCardMove(nm);
 
@@ -111,24 +111,6 @@ namespace GUI
             fm.SetFoldPlayer("naor");
             PushFoldMove(fm);
 
-        }
-
-        public void EndGameMove(Models.EndGameMove move)
-        {
-            IDictionary<string, Models.PlayerHand> hands = move.GetPlayerHands();
-            int cardIndex = 0;
-            foreach (Models.ClientUserProfile prof in manager.GetPlayers(gameID))
-            {
-                if (hands.ContainsKey(prof.Username))
-                {
-                    Models.PlayerHand hand = hands[prof.Username];
-                    Image card1 = playersCards.ElementAt(cardIndex);
-                    Image card2 = playersCards.ElementAt(cardIndex + 1);
-                    FlopCard1.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.First.toImage(), UriKind.Relative));
-                    FlopCard1.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.Second.toImage(), UriKind.Relative));
-                    cardIndex += 2;
-                }
-            }
         }
 
         public void NewCardMove(Models.NewCardMove move)
@@ -174,14 +156,14 @@ namespace GUI
         {
             int index = 0;
             int cardIndex = 0;
-            foreach(Models.ClientUserProfile prof in manager.GetPlayers(gameID))
+            foreach (Models.ClientUserProfile prof in RemoveSelfFromPlayersList(manager.GetPlayers(gameID)))
             {
                 Label lbl = playerLabels.ElementAt(index);
                 int bet = 0;
-                lbl.Content = prof.Username + " $"+bet;
+                lbl.Content = prof.Username + " $" + bet;
                 lbl.Visibility = Visibility.Visible;
                 playersCards.ElementAt(cardIndex).Visibility = Visibility.Visible;
-                playersCards.ElementAt(cardIndex+1).Visibility = Visibility.Visible;
+                playersCards.ElementAt(cardIndex + 1).Visibility = Visibility.Visible;
                 index++;
                 cardIndex += 2;
             }
@@ -197,7 +179,7 @@ namespace GUI
             int index = 0;
             int cardIndex = 0;
 
-            foreach (Models.ClientUserProfile prof in manager.GetPlayers(gameID))
+            foreach (Models.ClientUserProfile prof in RemoveSelfFromPlayersList(manager.GetPlayers(gameID)))
             {
                 if (prof.Username.Equals(move.GetBettingPlayer()))
                 {
@@ -217,7 +199,7 @@ namespace GUI
             int index = 0;
             int cardIndex = 0;
 
-            foreach (Models.ClientUserProfile prof in manager.GetPlayers(gameID))
+            foreach (Models.ClientUserProfile prof in RemoveSelfFromPlayersList(manager.GetPlayers(gameID)))
             {
                 if (prof.Username.Equals(move.GetFoldingPlayer()))
                 {
@@ -255,16 +237,66 @@ namespace GUI
 
         public void PushGameStartMove(Models.GameStartMove move)
         {
-            MessageBox.Show("Game Started!","Information",MessageBoxButton.OK,MessageBoxImage.Information);
+            MessageBox.Show("Game Started!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             betted.Content = "$0";
             betted.Visibility = Visibility.Visible;
         }
 
 
+        //didn't check this..
+        public void PushEndGameMove(Models.EndGameMove move)
+        {
+            int index = 0;
+            int cardIndex = 0;
+
+            foreach (string username in move.GetPlayerHands().Keys)
+            {
+                //check self in the winners usernames
+                if (!(username.Equals(manager.GetProfile().Username)))
+                {
+                    Label lbl = playerLabels.ElementAt(index);
+                    int dollarIndex = lbl.Content.ToString().IndexOf('$') - 1; //-1 in order to get rid of "space" before dollar sign
+                    int size = lbl.Content.ToString().Length - (lbl.Content.ToString().Length - dollarIndex);
+                    string lblPlayerName = lbl.Content.ToString().Substring(0, size);
+
+                    if (username.Equals(lblPlayerName))
+                    {
+                        Models.PlayerHand hand = move.GetPlayerHands()[username];
+                        lbl.Content = lbl.Content.ToString() + " with hand: " + hand.toString();
+                        //FLIP THE CARDS:
+                        //playersCards[cardIndex]= new BitmapImage(new Uri(@"Images\Cards\" + hand.First.toImage(), UriKind.Relative));
+                        //playersCards[cardIndex+1] = new BitmapImage(new Uri(@"Images\Cards\" + hand.Second.toImage(), UriKind.Relative));
+                    }
+                }
+
+                index++;
+                cardIndex += 2;
+            }
+
+        }
+
+        public void EndGameMove(Models.EndGameMove move)
+        {
+            IDictionary<string, Models.PlayerHand> hands = move.GetPlayerHands();
+            int cardIndex = 0;
+            foreach (Models.ClientUserProfile prof in RemoveSelfFromPlayersList(manager.GetPlayers(gameID)))
+            {
+                if (hands.ContainsKey(prof.Username))
+                {
+                    Models.PlayerHand hand = hands[prof.Username];
+                    Image card1 = playersCards.ElementAt(cardIndex);
+                    Image card2 = playersCards.ElementAt(cardIndex + 1);
+                    FlopCard1.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.First.toImage(), UriKind.Relative));
+                    FlopCard1.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.Second.toImage(), UriKind.Relative));
+                    cardIndex += 2;
+                }
+            }
+        }
+
 
         private void MoveCard(Image card, int x, int y)
         {
-            
+
             //card.Visibility = Visibility.Visible;
             TranslateTransform trans = new TranslateTransform();
             card.RenderTransform = trans;
@@ -281,7 +313,7 @@ namespace GUI
 
         private void Bet_Button_Click(object sender, RoutedEventArgs e)
         {
-            manager.Bet(gameID, Int32.Parse(BetAmount.Text),minimumBet,this);
+            manager.Bet(gameID, Int32.Parse(BetAmount.Text), minimumBet, this);
         }
 
         private void Fold_Button_Click(object sender, RoutedEventArgs e)
@@ -293,6 +325,19 @@ namespace GUI
         private void BackToGC_Click(object sender, RoutedEventArgs e)
         {
             manager.GoToGameCenter();
+        }
+
+        private IEnumerable<Models.ClientUserProfile> RemoveSelfFromPlayersList(IEnumerable<Models.ClientUserProfile> players)
+        {
+            //create new list everytime, to not override the list in other clients.. (i think thats how it works)
+            List<Models.ClientUserProfile> newPlayers = players.ToList();
+
+            if (newPlayers.Contains(manager.GetProfile()))
+            {
+                newPlayers.Remove(manager.GetProfile());
+            }
+
+            return newPlayers;
         }
     }
 }
