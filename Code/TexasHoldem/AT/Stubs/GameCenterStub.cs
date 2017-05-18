@@ -32,13 +32,17 @@ namespace AT.Stubs
             return null;
         }
 
-        public List<string> joinGame(int gameID, string u, int credit , out ClientGame game)
+        public List<string> joinGame(int gameID, string u, int credit)
         {
-            game = null;
             return null;
         }
 
         public List<string> spectateGame(int gameID, string u)
+        {
+            return null;
+        }
+
+        public ClientGame getGameById(int gameId)
         {
             return null;
         }
