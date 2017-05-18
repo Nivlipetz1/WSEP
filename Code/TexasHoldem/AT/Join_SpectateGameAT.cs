@@ -13,6 +13,7 @@ using AT.Stubs;
 
 namespace AT
 {
+ 
     [TestFixture]
     class Join_SpectateGameAT
     {
@@ -22,7 +23,7 @@ namespace AT
         GamePreferences prefs;
         SystemService us;
         GCServiceInterface gc;
-
+        ClientGame retGame;
         [SetUp]
         public void before()
         {

@@ -18,6 +18,8 @@ namespace ServiceLayer
         public bool bet(string user, int gameID, string minimumBet)
         {
             Game game = gc.getGameByID(gameID);
+            if (game == null)
+                return false;
             PlayingUser player = game.GetPlayers().Where(pu => pu.GetUserName().Equals(user)).First();
             player.setInput(minimumBet);
             return true;
@@ -26,6 +28,8 @@ namespace ServiceLayer
         public List<string> removePlayer(string user, int gameID)
         {
             Game game = gc.getGameByID(gameID);
+            if (game == null)
+                return null;
             PlayingUser player = game.GetPlayers().Where(pu => pu.GetUserName().Equals(user)).First(); //@ToDO: Add try and Catch. This Line throws InValidOperation when there are no players in the game.
             game.removePlayer(player);
             return game.GetPlayers().ConvertAll(x => (SpectatingUser)x).Union(game.GetSpectators()).Select(player1 => player1.GetUserName()).ToList();
@@ -34,6 +38,8 @@ namespace ServiceLayer
         public List<string> removeSpectator(string user, int gameID)
         {
             Game game = gc.getGameByID(gameID);
+            if (game == null)
+                return null;
             SpectatingUser spec = game.GetSpectators().Where(sp => sp.GetUserName().Equals(user)).First();
             game.removeSpectator(spec);
             return game.GetPlayers().ConvertAll(x => (SpectatingUser)x).Union(game.GetSpectators()).Select(player => player.GetUserName()).ToList();
@@ -42,6 +48,8 @@ namespace ServiceLayer
         public List<string> postMessage(string user, string message, int gameID)
         {
             Game game = gc.getGameByID(gameID);
+            if (game == null)
+                return null;
             SpectatingUser spec = game.GetSpectators().Where(sp => sp.GetUserName().Equals(user)).First();
             List<SpectatingUser> specs = game.postMessage(spec, message);
             List<string> usernames = new List<string>();
@@ -52,6 +60,8 @@ namespace ServiceLayer
         public List<string> postWhisperMessage(string from, string to, string message, int gameID)
         {
             Game game = gc.getGameByID(gameID);
+            if (game == null)
+                return null;
             SpectatingUser fromSpec = game.GetSpectators().Where(sp => sp.GetUserName().Equals(from)).First();
             SpectatingUser toSpec = game.GetSpectators().Where(sp => sp.GetUserName().Equals(from)).First();
             List<SpectatingUser> specs = game.postMessage(fromSpec, toSpec, message);
