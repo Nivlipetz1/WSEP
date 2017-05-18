@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CreateGameAT.cs" />
+    <Compile Include="GamePlayAT.cs" />
     <Compile Include="joinGameAndRemoveAT.cs" />
     <Compile Include="Join_SpectateGameAT.cs" />
     <Compile Include="LoginAT.cs" />
