@@ -54,6 +54,7 @@ namespace GameSystem
         {
             activeGame func;
             List<Game> gamesInLeague = games.Where(game => user.League.getGames().Contains(game)).ToList();
+            gamesInLeague = gamesInLeague.Where(game => game.GetGamePref().GetStatus().Equals("active") || game.GetGamePref().GetStatus().Equals("init")).ToList();
             switch (criterion)
             {
                 case "playerName":
@@ -81,7 +82,7 @@ namespace GameSystem
         private List<Game> getAllActiveGamesByPlayerName(object playerName , List<Game> games)
         {
             List<Game> activeGames = new List<Game>();
-            foreach (Game game in games.Where(game => game.GetGamePref().GetStatus().Equals("active")).ToList())
+            foreach (Game game in games)
             {
                 List<PlayingUser> players = game.GetPlayers();
 
