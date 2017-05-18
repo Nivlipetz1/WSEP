@@ -247,6 +247,10 @@ namespace GUI
             {
                 wantedFrame.GameWindow.NewCardMove((Models.NewCardMove)move);
             }
+            else if (move is Models.EndGameMove)
+            {
+                wantedFrame.GameWindow.PushEndGameMove((Models.EndGameMove)move);
+            }
         }
 
         internal void QuitGame(int gameID)
