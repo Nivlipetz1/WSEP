@@ -20,10 +20,10 @@ namespace GUI
     /// </summary>
     public partial class CreateGame : Page
     {
-        MainWindow main;
-        public CreateGame(MainWindow main)
+        GUIManager manager;
+        public CreateGame(GUIManager manager)
         {
-            this.main = main;
+            this.manager = manager;
             InitializeComponent();
         }
 
@@ -40,17 +40,7 @@ namespace GUI
             bool aS = Allow_Spec.IsChecked.Value;
             Models.GamePreferences pref = new Models.GamePreferences(maxP, minP, sB, bB, tP, bIP, cP, aS);
 
-            Models.ClientGame newGame =  Communication.GameCenterFunctions.Instance.createGame(pref);
-            if (newGame==null)
-            {
-                MessageBox.Show("Something went wrong!", "Oh Oh!", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            else
-            {
-                MessageBox.Show("New game created successfuly!", "New Game Created!", MessageBoxButton.OK, MessageBoxImage.Information);
-                NavigationService.GoBack();
-
-            }
+            manager.CreateGame(pref);
 /*
             ///FOR DEBUG
             Models.ClientGame game = new Models.ClientGame();

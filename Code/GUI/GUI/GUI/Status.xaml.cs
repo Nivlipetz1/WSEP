@@ -20,13 +20,12 @@ namespace GUI
     /// </summary>
     public partial class Status : Page
     {
-        MainWindow main;
-        public UserMainPage umPage { get; set; }
-        public Status(MainWindow main, UserMainPage umPage)
+        GUIManager manager;
+        public Status(GUIManager manager)
         {
-            this.main = main;
-            Models.ClientUserProfile prof = main.getProfile();
             InitializeComponent();
+            this.manager = manager;
+            Models.ClientUserProfile prof = manager.GetProfile();
             this.credit.Content = "Credit: $"+prof.Credit;
             this.username.Content = "Hello " + prof.Username;
         }
@@ -34,20 +33,20 @@ namespace GUI
         public void RefreshGameList()
         {
             GameList.Items.Clear();
-            foreach (GameFrame gf in umPage.gameList)
+            foreach (GameFrame gf in manager.GetGameFrameList())
                 GameList.Items.Add(gf);
         }
 
         public void RefreshStatus()
         {
-            Models.ClientUserProfile prof = main.getProfile();
+            Models.ClientUserProfile prof = manager.GetProfile();
             this.credit.Content = "Credit: $" + prof.Credit;
             this.username.Content = "Hello " + prof.Username;
         }
 
-        private void GameList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void GoBtn_Click(object sender, RoutedEventArgs e)
         {
-            main.mainFrame.NavigationService.Navigate(GameList.SelectedItem);
+            manager.NavigateToGameFrame(GameList.SelectedIndex);
         }
     }
 }

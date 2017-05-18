@@ -20,10 +20,10 @@ namespace GUI
     /// </summary>
     public partial class Login : Page
     {
-        MainWindow main;
-        public Login(MainWindow main)
+        GUIManager manager;
+        public Login(GUIManager manager)
         {
-            this.main = main;
+            this.manager = manager;
             InitializeComponent();
             username.Focus();
         }
@@ -32,23 +32,7 @@ namespace GUI
         {
             if (!username.Text.Equals(""))
             {
-                
-                //main.mainFrame.NavigationService.Navigate(new UserMainPage(main));
-                //main.statusFrame.NavigationService.Navigate(new Status(main));
-                if (Communication.AuthFunctions.Instance.login(username.Text, password.Password))
-                {
-                    main.setProfile();
-                    main.setLoggedIn(true);
-                    Status status = new Status(main, null);
-                    UserMainPage umP = new UserMainPage(main, status);
-                    status.umPage = umP;
-                    main.statusFrame.NavigationService.Navigate(status);
-                    main.mainFrame.NavigationService.Navigate(umP);
-                }
-                else
-                {
-                    MessageBox.Show("Bad Input", "    WARNING    ", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                manager.Login(username.Text,password.Password);
             }
             else
             {
@@ -58,7 +42,7 @@ namespace GUI
 
         private void Register_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Register());
+            NavigationService.Navigate(new Register(manager));
         }
     }
 }

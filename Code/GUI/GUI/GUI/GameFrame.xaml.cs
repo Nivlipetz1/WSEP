@@ -21,19 +21,20 @@ namespace GUI
     public partial class GameFrame : Page
     {
         private Models.ClientGame game;
-        MainWindow main;
-        GameCenter gCenter;
-        public Game gameWindow { get; set; }
-        public GameFrame(MainWindow main, Models.ClientGame game, GameCenter gCenter)
+        GUIManager manager;
+        public Game GameWindow { get; set; }
+        public GameChat GameChat { get; set; }
+        public GamePM GamePM { get; set; }
+        public int gameID { get; set; }
+        public GameFrame(GUIManager manager, Models.ClientGame game)
         {
-            this.gCenter = gCenter;
-            this.main = main;
+            this.manager = manager;
             this.game = game;
+            this.gameID = gameID;
             InitializeComponent();
-            gameWindow = new Game(this, gCenter);
-            gameFrame.NavigationService.Navigate(gameWindow);
-            chatFrame.NavigationService.Navigate(new GameChat(this));
-            pmFrame.NavigationService.Navigate(new GamePM(this));
+            gameFrame.NavigationService.Navigate(GameWindow = new Game(manager,gameID));
+            chatFrame.NavigationService.Navigate(GameChat = new GameChat(manager,gameID));
+            pmFrame.NavigationService.Navigate(GamePM = new GamePM(manager,gameID));
         }
 
         public Models.ClientGame getGame()
@@ -44,7 +45,7 @@ namespace GUI
 
         public override string ToString()
         {
-            return "Game "+game.GamePref.GameID;
+            return "Game "+game.Id;
         }
     }
 }

@@ -20,14 +20,10 @@ namespace GUI
     /// </summary>
     public partial class SearchGames : Page
     {
-        UserMainPage umP;
-        MainWindow main;
-        GameCenter gCenter;
-        public SearchGames(MainWindow main,UserMainPage umP, GameCenter gCenter)
+        GUIManager manager;
+        public SearchGames(GUIManager manager)
         {
-            this.gCenter = gCenter;
-            this.main = main;
-            this.umP = umP;
+            this.manager = manager;
             InitializeComponent();
         }
 
@@ -38,7 +34,8 @@ namespace GUI
 
         private void Find_game_Click(object sender, RoutedEventArgs e)
         {
-
+            //send to manager to get results and then
+            //show them using showResults
         }
 
         private void showResults(List<Models.ClientGame> gameList)
@@ -47,7 +44,7 @@ namespace GUI
             foreach(Models.ClientGame game in gameList)
             {
                 Models.GamePreferences prefs = game.GamePref;
-                GameDataGrid gdg = new GameDataGrid { ID = prefs.GameID,
+                GameDataGrid gdg = new GameDataGrid { ID = game.Id,
                                                       PlayersInGame = game.Players.Count,
                                                       MaxPlayers = prefs.MaxPlayers,
                                                       BigBlind = prefs.BigBlind,
@@ -69,20 +66,7 @@ namespace GUI
             if (inputDialog.ShowDialog() == true)
                  credit = Int32.Parse(inputDialog.Answer);
             //Join game function
-            Models.ClientGame game =  Communication.GameCenterFunctions.Instance.joinGame(gdg.ID, credit);
-            if (game != null)
-            {
-                main.RefreshProfile();
-                umP.statusFrame.RefreshStatus();
-                GameFrame gameFrame = new GameFrame(main, game,gCenter);
-                umP.AddGame(gameFrame);
-                NavigationService.Navigate(gameFrame);
-            }
-            else
-            {
-                MessageBox.Show("something went wrong:(");
-            }
-            
+            manager.JoinGame(gdg.ID,credit);
         }
 
         private void spectateBtn_Click(object sender, RoutedEventArgs e)

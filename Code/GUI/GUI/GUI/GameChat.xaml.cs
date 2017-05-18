@@ -20,10 +20,12 @@ namespace GUI
     /// </summary>
     public partial class GameChat : Page
     {
-        private GameFrame gameFrame;
-        public GameChat(GameFrame gf)
+        GUIManager manager;
+        int gameID;
+        public GameChat(GUIManager manager, int gameID)
         {
-            gameFrame = gf;
+            this.manager = manager;
+            this.gameID = gameID;
             InitializeComponent();
         }
 
@@ -31,8 +33,7 @@ namespace GUI
         {
             if (!message.Text.Equals(""))
             {
-                int gameID = gameFrame.getGame().GamePref.GameID;
-                if (Communication.GameFunctions.Instance.postMessage(message.Text, gameID))
+                if (manager.PostChatMessage(message.Text, gameID))
                 {
                     message.Text = "";
                     message.Focus();

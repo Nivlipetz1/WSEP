@@ -114,6 +114,7 @@
     <Compile Include="GamePM.xaml.cs">
       <DependentUpon>GamePM.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUIManager.cs" />
     <Compile Include="InputDialog.xaml.cs">
       <DependentUpon>InputDialog.xaml</DependentUpon>
     </Compile>

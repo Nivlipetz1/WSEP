@@ -20,15 +20,16 @@ namespace GUI
     /// </summary>
     public partial class GamePM : Page
     {
-        private GameFrame gameFrame;
+        GUIManager manager;
+        int gameID;
         private IDictionary<string, string> messageList;
-        public GamePM(GameFrame gf)
+        public GamePM(GUIManager manager, int gameID)
         {
-            gameFrame = gf;
+            this.manager = manager;
+            this.gameID = gameID;
             InitializeComponent();
-            Models.ClientGame game = gameFrame.getGame();
             messageList = new Dictionary<string,string>();
-            foreach(Models.ClientUserProfile prof in game.Players)
+            foreach(Models.ClientUserProfile prof in manager.GetPlayers(gameID))
             {
                 users.Items.Add(prof.Username);
                 messageList.Add(prof.Username,"");
@@ -56,8 +57,7 @@ namespace GUI
         {
             if (!message.Text.Equals(""))
             {
-                int gameID = gameFrame.getGame().GamePref.GameID;
-                if(Communication.GameFunctions.Instance.postWhisperMessage(users.SelectedValue.ToString(),message.Text,gameID)){
+                if(manager.SendPMMessage(users.SelectedValue.ToString(),message.Text,gameID)){
 
                 messages.AppendText(message.Text + "\n");
                 messageList[users.Text] += message.Text + "\n";

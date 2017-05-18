@@ -20,8 +20,10 @@ namespace GUI
     /// </summary>
     public partial class Register : Page
     {
-        public Register()
+        GUIManager manager;
+        public Register(GUIManager manager)
         {
+            this.manager = manager;
             InitializeComponent();
         }
 
@@ -33,15 +35,7 @@ namespace GUI
         private void RegButton_Click(object sender, RoutedEventArgs e)
         {
 
-            if (Communication.AuthFunctions.Instance.register(Username.Text, Password.Password))
-            {
-                MessageBox.Show("You can now login with you credentials.", "Registration Successful!", MessageBoxButton.OK, MessageBoxImage.Information);
-                NavigationService.GoBack();
-            }
-            else
-            {
-                MessageBox.Show("Bad Input, Please try again with different username.", "Registration Failed!", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            manager.Register(Username.Text, Password.Password);
              
         }
     }

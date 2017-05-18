@@ -21,12 +21,10 @@ namespace GUI
     /// </summary>
     public partial class EditProfile : Page
     {
-        MainWindow main;
-        UserMainPage umP;
-        public EditProfile(MainWindow main, UserMainPage umP)
+        GUIManager manager;
+        public EditProfile(GUIManager manager)
         {
-            this.umP = umP;
-            this.main = main;
+            this.manager = manager;
             InitializeComponent();
         }
 
@@ -51,29 +49,7 @@ namespace GUI
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            bool changed = false;
-            if (!Password.Text.Equals(""))
-            {
-                if (Communication.AuthFunctions.Instance.editPassword(Password.Text))
-                {
-                    MessageBox.Show("Password Changed!");
-                    changed = true;
-                }
-            }
-            if (!Username.Text.Equals(""))
-            {
-                if (Communication.AuthFunctions.Instance.editPassword(Password.Text))
-                {
-                    MessageBox.Show("Username Changed!");
-                    changed = true;
-                }
-            }
-            if (changed)
-            {
-                main.RefreshProfile();
-                umP.statusFrame.RefreshStatus();
-                NavigationService.GoBack();
-            }
+            manager.EditProfile(Username.Text,Password.Text);
         }
     }
 }

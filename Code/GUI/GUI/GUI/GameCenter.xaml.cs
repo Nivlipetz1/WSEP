@@ -20,23 +20,21 @@ namespace GUI
     /// </summary>
     public partial class GameCenter : Page
     {
-        MainWindow main;
-        UserMainPage umP;
-        public GameCenter(MainWindow main, UserMainPage umP)
+        GUIManager manager;
+        public GameCenter(GUIManager manager)
         {
-            this.umP = umP;
-            this.main = main;
+            this.manager = manager;
             InitializeComponent();
         }
 
         private void CreateGame_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new CreateGame(main));
+            NavigationService.Navigate(new CreateGame(manager));
         }
 
         private void Search_games_click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new SearchGames(main,umP,this));
+            NavigationService.Navigate(new SearchGames(manager));
         }
 
         private void Replay_games_click(object sender, RoutedEventArgs e)

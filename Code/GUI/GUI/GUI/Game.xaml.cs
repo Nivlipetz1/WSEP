@@ -22,8 +22,8 @@ namespace GUI
     /// </summary>
     public partial class Game : Page
     {
-        private GameFrame gameFrame;
-        private GameCenter gCenter;
+        int gameID;
+        GUIManager manager;
         private List<Label> playerLabels;
         private List<Image> playersCards;
         private int revealCard = 0;
@@ -31,11 +31,11 @@ namespace GUI
 
         public static SoundPlayer snd = new SoundPlayer(Properties.Resources.cardsdealt1);
         public static SoundPlayer snd2 = new SoundPlayer(Properties.Resources.cardsdealt2);
-        public Game(GameFrame gameFrame,GameCenter gCenter)
+        public Game(GUIManager manager, int gameID)
         {
             InitializeComponent();
-            this.gCenter = gCenter;
-            this.gameFrame = gameFrame;
+            this.manager = manager;
+            this.gameID = gameID;
             playerLabels = new List<Label>();
             playersCards = new List<Image>();
             playerLabels.Add(player3);
@@ -62,9 +62,8 @@ namespace GUI
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public void Button_Click(object sender, RoutedEventArgs e)
         {
-            startgameBtn.Visibility = Visibility.Hidden;
 
             PushGameStartMove(new Models.GameStartMove());
             snd.Play();
@@ -117,17 +116,16 @@ namespace GUI
         public void EndGameMove(Models.EndGameMove move)
         {
             IDictionary<string, Models.PlayerHand> hands = move.GetPlayerHands();
-            Models.ClientGame game = gameFrame.getGame();
             int cardIndex = 0;
-            foreach (Models.ClientUserProfile prof in game.Players)
+            foreach (Models.ClientUserProfile prof in manager.GetPlayers(gameID))
             {
                 if (hands.ContainsKey(prof.Username))
                 {
                     Models.PlayerHand hand = hands[prof.Username];
                     Image card1 = playersCards.ElementAt(cardIndex);
                     Image card2 = playersCards.ElementAt(cardIndex + 1);
-                    FlopCard1.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.getFirst().toImage(), UriKind.Relative));
-                    FlopCard1.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.getSecond().toImage(), UriKind.Relative));
+                    FlopCard1.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.First.toImage(), UriKind.Relative));
+                    FlopCard1.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.Second.toImage(), UriKind.Relative));
                     cardIndex += 2;
                 }
             }
@@ -174,10 +172,9 @@ namespace GUI
 
         public void DealCards(Models.PlayerHand hand)
         {
-            Models.ClientGame game = gameFrame.getGame();
             int index = 0;
             int cardIndex = 0;
-            foreach(Models.ClientUserProfile prof in game.Players)
+            foreach(Models.ClientUserProfile prof in manager.GetPlayers(gameID))
             {
                 Label lbl = playerLabels.ElementAt(index);
                 int bet = 0;
@@ -188,20 +185,19 @@ namespace GUI
                 index++;
                 cardIndex += 2;
             }
-            UserCard1.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.getFirst().toImage(), UriKind.Relative));
-            UserCard2.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.getSecond().toImage(), UriKind.Relative));
+            UserCard1.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.First.toImage(), UriKind.Relative));
+            UserCard2.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.Second.toImage(), UriKind.Relative));
             UserCard1.Visibility = Visibility.Visible;
             UserCard2.Visibility = Visibility.Visible;
         }
 
         public void PushBetMove(Models.BetMove move)
         {
-            Models.ClientGame game = gameFrame.getGame();
             int bet = move.GetAmount();
             int index = 0;
             int cardIndex = 0;
 
-            foreach (Models.ClientUserProfile prof in game.Players)
+            foreach (Models.ClientUserProfile prof in manager.GetPlayers(gameID))
             {
                 if (prof.Username.Equals(move.GetBettingPlayer()))
                 {
@@ -218,11 +214,10 @@ namespace GUI
 
         public void PushFoldMove(Models.FoldMove move)
         {
-            Models.ClientGame game = gameFrame.getGame();
             int index = 0;
             int cardIndex = 0;
 
-            foreach (Models.ClientUserProfile prof in game.Players)
+            foreach (Models.ClientUserProfile prof in manager.GetPlayers(gameID))
             {
                 if (prof.Username.Equals(move.GetFoldingPlayer()))
                 {
@@ -238,14 +233,14 @@ namespace GUI
             }
         }
 
-        private void HideBetElements()
+        public void HideBetElements()
         {
             BetAmount.Visibility = Visibility.Hidden;
             Bet_Button.Visibility = Visibility.Hidden;
             Fold_Button.Visibility = Visibility.Hidden;
         }
 
-        private void ShowBetElements()
+        public void ShowBetElements()
         {
             BetAmount.Visibility = Visibility.Visible;
             Bet_Button.Visibility = Visibility.Visible;
@@ -281,47 +276,23 @@ namespace GUI
 
         private void Quit_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult rs = MessageBox.Show("Are you sure you want to quit?", "Quit", MessageBoxButton.YesNo, MessageBoxImage.Information, MessageBoxResult.No);
-            if (rs == MessageBoxResult.Yes)
-            {
-                int gameID = gameFrame.getGame().GamePref.GameID;
-                if (Communication.GameFunctions.Instance.removePlayer(gameID))
-                    NavigationService.GoBack();
-                else
-                    MessageBox.Show("Something went wrong", "Information", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            manager.QuitGame(gameID);
         }
 
         private void Bet_Button_Click(object sender, RoutedEventArgs e)
         {
-            if (Int32.Parse(BetAmount.Text) >= minimumBet)
-            {
-                int gameID = gameFrame.getGame().GamePref.GameID;
-                if (Communication.GameFunctions.Instance.bet(gameID, BetAmount.Text))
-                {
-                    HideBetElements();
-                    MessageBox.Show("Bet Accepted", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Minimum bet is "+minimumBet+"! please try again.", "Too Low!", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            manager.Bet(gameID, Int32.Parse(BetAmount.Text),minimumBet,this);
         }
 
         private void Fold_Button_Click(object sender, RoutedEventArgs e)
         {
-            int gameID = gameFrame.getGame().GamePref.GameID;
-            if (Communication.GameFunctions.Instance.bet(gameID, "Fold"))
-            {
-                HideBetElements();
-                MessageBox.Show("You have folded", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+            manager.Fold(gameID, Int32.Parse(BetAmount.Text), minimumBet, this);
+
         }
 
         private void BackToGC_Click(object sender, RoutedEventArgs e)
         {
-            gameFrame.NavigationService.Navigate(gCenter);
+            manager.GoToGameCenter();
         }
     }
 }
