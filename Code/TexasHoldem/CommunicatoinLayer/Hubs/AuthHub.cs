@@ -36,6 +36,8 @@ namespace CommunicatoinLayer.Hubs
 
         public ClientUserProfile getClientUser()
         {
+            if (!AuthManager.Instance.containsConnection(Context.ConnectionId))
+                return null;
             string userName = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             SystemService userService = new SystemService();
             return userService.getUser(userName);
@@ -43,6 +45,8 @@ namespace CommunicatoinLayer.Hubs
 
         public bool editAvatar(byte []  avatar)
         {
+            if (!AuthManager.Instance.containsConnection(Context.ConnectionId))
+                return false;
             string userName = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             SystemService userService = new SystemService();
             return userService.editAvatar(avatar, userName);
@@ -50,6 +54,8 @@ namespace CommunicatoinLayer.Hubs
 
         public bool logout()
         {
+            if (!AuthManager.Instance.containsConnection(Context.ConnectionId))
+                return false;
             string userName = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             SystemService userService = new SystemService();
             if (userService.logout(userName))
@@ -64,6 +70,8 @@ namespace CommunicatoinLayer.Hubs
 
         public bool editPassword(string password)
         {
+            if (!AuthManager.Instance.containsConnection(Context.ConnectionId))
+                return false;
             string userName = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             SystemService userService = new SystemService();
             return userService.editPassword(password, userName);
@@ -71,6 +79,8 @@ namespace CommunicatoinLayer.Hubs
 
         public bool editUserName(string newUserName)
         {
+            if (!AuthManager.Instance.containsConnection(Context.ConnectionId))
+                return false;
             string userName = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             SystemService userService = new SystemService();
             return userService.editUserName(newUserName, userName);
@@ -84,6 +94,8 @@ namespace CommunicatoinLayer.Hubs
 
         public override Task OnDisconnected(bool stopCalled)
         {
+            if (!AuthManager.Instance.containsConnection(Context.ConnectionId))
+                return base.OnDisconnected(stopCalled); ;
             AuthManager.Instance.Logout(AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId), Context.ConnectionId);
             return base.OnDisconnected(stopCalled);
         }

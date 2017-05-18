@@ -73,6 +73,11 @@ namespace CommunicatoinLayer.Managers
             return _usersByConnectionId[id];
         }
 
+        public bool containsConnection(string id)
+        {
+            return _usersByConnectionId.ContainsKey(id);
+        }
+
         public static AuthManager Instance
         {
             get { return LazyInstance.Value; }
