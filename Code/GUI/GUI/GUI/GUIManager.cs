@@ -277,7 +277,7 @@ namespace GUI
             }
         }
 
-        internal void Fold(int gameID, int v, int minimumBet, Game gameWindow)
+        internal void Fold(int gameID, Game gameWindow)
         {
             if (Communication.GameFunctions.Instance.bet(gameID, "Fold"))
             {

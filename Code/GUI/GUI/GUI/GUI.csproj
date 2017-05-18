@@ -88,6 +88,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ClientToServerFunctions.cs" />
     <Compile Include="Communication\AuthFunctions.cs" />
     <Compile Include="Communication\GameCenterFunctions.cs" />
     <Compile Include="Communication\GameFunctions.cs" />

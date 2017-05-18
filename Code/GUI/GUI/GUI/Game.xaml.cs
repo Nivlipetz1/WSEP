@@ -286,7 +286,7 @@ namespace GUI
 
         private void Fold_Button_Click(object sender, RoutedEventArgs e)
         {
-            manager.Fold(gameID, Int32.Parse(BetAmount.Text), minimumBet, this);
+            manager.Fold(gameID, this);
 
         }
 
