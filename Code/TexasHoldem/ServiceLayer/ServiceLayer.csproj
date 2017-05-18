@@ -50,7 +50,6 @@
   <ItemGroup>
     <Compile Include="GameCenterService.cs" />
     <Compile Include="GameService.cs" />
-
     <Compile Include="Interfaces\AuthSystemServiceInterface.cs" />
     <Compile Include="Interfaces\GameServiceInterface.cs" />
     <Compile Include="Interfaces\GCServiceInterface.cs" />

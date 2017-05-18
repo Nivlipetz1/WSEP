@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using CommunicatoinLayer.Hubs;
-using GameSystem;
+using Gaming;
 
 namespace CommunicatoinLayer.Managers
 {
