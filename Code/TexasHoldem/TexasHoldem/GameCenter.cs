@@ -11,9 +11,6 @@ namespace GameSystem
 
         Dictionary<int, League> leagues = new Dictionary<int, League>();
         private ICollection<UserProfile> Users;
-        private UserProfile HighestRankUser=null;
-
-
 
         public class GameCenterFactory
         {
@@ -25,21 +22,56 @@ namespace GameSystem
                     return instance=new GameCenter();
                 return instance;
             }
+            public static void clean()
+            {
+                instance = null;
+            }
         }
 
         private GameCenter()
         {
             Users = new List<UserProfile>();
-            leagues.Add(0, new League(0, "default"));
+            leagues.Add(0, new League(0, "League 0"));
         }
 
-        public Game createGame(GamePreferences preferecnces)
+        public Game createGame(GamePreferences preferecnces , UserProfile user)
         {
             Game game = new Game(preferecnces);
             games.Add(game);
-
+            user.League.addGame(game);
             game.evt += updateLeagueToUser;
             return game;
+        }
+
+        public Game getGameByID(int gameID)
+        {
+            List<Game> gamesID = games.Where(game => game.getGameID() == gameID).ToList();
+            return gamesID.Count == 1 ? gamesID[0] : null;
+        }
+
+        delegate List<Game> activeGame(object param , List<Game> games);
+        public List<Game> getActiveGames(String criterion , object param , UserProfile user)
+        {
+            activeGame func;
+            List<Game> gamesInLeague = games.Where(game => user.League.getGames().Contains(game)).ToList();
+            gamesInLeague = gamesInLeague.Where(game => game.GetGamePref().GetStatus().Equals("active") || game.GetGamePref().GetStatus().Equals("init")).ToList();
+            switch (criterion)
+            {
+                case "playerName":
+                    func = getAllActiveGamesByPlayerName;
+                    break;
+                case "potsize":
+                    func = getAllActiveGamesByPotSize;
+                    break;
+                case "gamepreference":
+                    func = getAllActiveGamesByGamePreference;
+                    break;
+
+                default:
+                    return gamesInLeague;
+            }
+
+            return func(param, gamesInLeague);
         }
 
         public List<Game> getAllSpectatingGames()
@@ -47,10 +79,10 @@ namespace GameSystem
             return games.Where(game => game.GetGamePref().AllowSpec()).ToList();
         }
 
-        public List<Game> getAllActiveGamesByPlayerName(String playerName)
+        private List<Game> getAllActiveGamesByPlayerName(object playerName , List<Game> games)
         {
             List<Game> activeGames = new List<Game>();
-            foreach (Game game in games.Where(game => game.GetGamePref().GetStatus().Equals("active")).ToList())
+            foreach (Game game in games)
             {
                 List<PlayingUser> players = game.GetPlayers();
 
@@ -61,14 +93,14 @@ namespace GameSystem
             return activeGames;
         }
 
-        public List<Game> getAllActiveGamesByPotSize(int potSize)
+        private List<Game> getAllActiveGamesByPotSize(object potSize , List<Game> games)
         {
-            return games.Where(game => ((Game)game).GetPotSize() == potSize).ToList();
+            return games.Where(game => game.GetPotSize() == (int)potSize).ToList();
         }
 
-        public List<Game> getAllActiveGamesByGamePreference(GamePreferences preferences)
+        private List<Game> getAllActiveGamesByGamePreference(object preferences , List<Game> games)
         {
-            return games.Where(game => contained(((Game)game).GetGamePref(), preferences)).ToList();
+            return games.Where(game => contained(game.GetGamePref(), (GamePreferences)preferences)).ToList();
         }
 
         private bool contained(GamePreferences gamePreferences, GamePreferences preferences)
@@ -138,7 +170,7 @@ namespace GameSystem
         {
             foreach (League l in leagues.Values)
             {
-                if (l.MinimumRank == minimumRank)
+                if (l.MinimumRank <= minimumRank && minimumRank < l.MinimumRank + 1000)
                     return false;
             }
             League league = new League(minimumRank, "League" + leagues.Count);
@@ -146,28 +178,11 @@ namespace GameSystem
             return true;
         }
 
-        public bool addUserToLeague(UserProfile user, League league)
-        {
-            if (user.Credit < league.MinimumRank)
-                return false;
-            foreach(League lea in leagues.Values)
-            {
-                if (lea.removeUser(user))
-                    break;
-            }
-            return league.addUser(user);
-        }
         public bool removeUserFromLeague(UserProfile user, League league)
         {
             return league.removeUser(user);
         }
-        public bool changeLeagueMinimumRank(League league, int newRank)
-        {
-            if (leagues.Keys.Contains(newRank))
-                return false;
-            league.update(newRank);
-            return true;
-        }
+
         public League getLeagueByUser(UserProfile user)
         {
             foreach (League league in leagues.Values)
@@ -184,48 +199,41 @@ namespace GameSystem
             }
             catch
             {
-                throw new InvalidOperationException("No league with Rank" + Rank);
+                return null;
             }
         }
- 
-        public void updateState()
-        {
-            foreach (UserProfile user in Users)
-            {
-                if (HighestRankUser == null || HighestRankUser.Credit < user.Credit)
-                    HighestRankUser = user;
-            }
-        }
+
         public void updateLeagueToUser(PlayingUser playingUser)
         {
-
             UserProfile user = GetUserByName(playingUser.GetUserName());
             user.Credit += playingUser.GetCredit();
-            
-            League currLeague = getLeagueByUser(user);
-            if (HighestRankUser==null ||user.Credit > HighestRankUser.Credit)
-                HighestRankUser = user;
+            user.updateStatistics(playingUser);
+
+            if (user.UserStat.Winnings + user.UserStat.Losses < 10)
+                return;
+            League currLeague = user.League;
             foreach (League league in leagues.Values)
             {
-                if (league.MinimumRank <= user.Credit &&
-                    (currLeague.MinimumRank > user.Credit || league.MinimumRank > currLeague.MinimumRank))
+                if (league.MinimumRank <= user.Credit && league.MinimumRank + 1000 > user.Credit)
                 {
                     currLeague.removeUser(user);
                     league.addUser(user);
-                    currLeague = league;
-                   // return;
+                    user.League = league;
+                    return;
                 }
             }
+
+            createNewLeague((user.Credit / 1000) * 1000);
+            currLeague.removeUser(user);
+            League l = getLeagueByRank((user.Credit / 1000) * 1000);
+            l.addUser(user);
+            user.League = l;
         }
-        public UserProfile getHighestRankUser()
-        {
-            return HighestRankUser;
-        }
+
 
         public void setUsers(ICollection<UserProfile> Users)
         {
             this.Users = Users;
-            updateState();
         }
 
 
@@ -244,8 +252,20 @@ namespace GameSystem
             return null;
         }
 
+        public bool unknownUserEditLeague(UserProfile user, League league)
+        {
+            if (user.UserStat.Losses + user.UserStat.Winnings >= 10)
+                return false;
+            league.addUser(user);
+            user.League = league;
+            return true;
+        }
 
-
-
+        public League getLeagueByID(int id)
+        {
+            if(leagues.ContainsKey(id))
+                return leagues[id];
+            return null;
+        }
     }
 }

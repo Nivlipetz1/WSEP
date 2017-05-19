@@ -8,6 +8,8 @@ using NUnit.Framework;
 using GameSystem;
 using ServiceLayer;
 using Gaming;
+using ServiceLayer.Interfaces;
+using AT.Stubs;
 
 namespace AT
 {
@@ -15,13 +17,22 @@ namespace AT
 
     public class RegistrationAT
     {
-       
-        private SystemAPI us;
+
+        private AuthSystemServiceInterface us;
 
         [SetUp]
         public void before()
         {
-            us = new UserSystem_Service();
+            if (SystemService.testable)
+                us = new SystemService();
+            else
+                us = new SystemStub();
+        }
+        [TearDown]
+        public void after()
+        {
+            GameCenter.GameCenterFactory.clean();
+            TexasHoldemSystem.userSystemFactory.clean();
         }
 
         [TestCase]

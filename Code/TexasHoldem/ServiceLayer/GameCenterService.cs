@@ -5,31 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 using Gaming;
 using GameSystem;
+using ServiceLayer.Models;
+using ServiceLayer.Interfaces;
 
 namespace ServiceLayer
 {
-    public class GameCenterService : GameCenterInterface
+    public class GameCenterService : GCServiceInterface
     {
+        public static bool testable = true;
         private GameCenterInterface gc = GameCenter.GameCenterFactory.getInstance();
+        private TexasHoldemSystem system = TexasHoldemSystem.userSystemFactory.getInstance();
 
-        public Game createGame(GamePreferences preferecnces)
+        public ClientGame createGame(GamePreferences preferecnces, string userName)
         {
-            return gc.createGame(preferecnces);
+            return new ClientGame(gc.createGame(preferecnces, system.getUser(userName)));
         }
 
-        public List<Game> getAllActiveGamesByGamePreference(GamePreferences preferences)
+        public List<ClientGame> getActiveGames(string criterion, object param, string userName)
         {
-            return gc.getAllActiveGamesByGamePreference(preferences);
-        }
-
-        public List<Game> getAllActiveGamesByPlayerName(string playerName)
-        {
-            return gc.getAllActiveGamesByPlayerName(playerName);
-        }
-
-        public List<Game> getAllActiveGamesByPotSize(int potSize)
-        {
-            return gc.getAllActiveGamesByPotSize(potSize);
+            return gc.getActiveGames(criterion, param, system.getUser(userName)).Select(game => new ClientGame(game)).ToList();
         }
 
         public List<List<Move>> getAllReplayesOfInActiveGames()
@@ -37,19 +31,35 @@ namespace ServiceLayer
             return gc.getAllReplayesOfInActiveGames();
         }
 
-        public List<Game> getAllSpectatingGames()
+        public List<ClientGame> getAllSpectatingGames()
         {
-            return gc.getAllSpectatingGames();
+            return gc.getAllSpectatingGames().Select(game => new ClientGame(game)).ToList();
         }
 
-        public bool joinGame(Game game, UserProfile u, int credit)
+        public List<string> joinGame(int gameID, string userName, int credit)
         {
-            return gc.joinGame(game, u, credit);
+            Game g = gc.getGameByID(gameID);
+            if (g == null ||!gc.joinGame(g , system.getUser(userName), credit))
+                return null;
+            return g.GetPlayers().ConvertAll(x => (SpectatingUser)x).Union(g.GetSpectators()).Select(player1 => player1.GetUserName()).ToList();
         }
 
-        public bool spectateGame(Game game, UserProfile u)
+        public List<string> spectateGame(int gameID, string userName)
         {
-            return gc.spectateGame(game, u);
+            Game g = gc.getGameByID(gameID); //ToDo add try and catch here. throws execption when there are no games.
+            if (!gc.spectateGame(g, system.getUser(userName)))
+                return null;
+            return g.GetPlayers().ConvertAll(x => (SpectatingUser)x).Union(g.GetSpectators()).Select(player1 => player1.GetUserName()).ToList();
+        }
+
+        public bool unknownUserEditLeague(string userName, int minimumLeagueRank)
+        {
+            return gc.unknownUserEditLeague(system.getUser(userName), gc.getLeagueByID(minimumLeagueRank));
+        }
+
+        public ClientGame getGameById(int gameId)
+        {
+            return new ClientGame(gc.getGameByID(gameId));
         }
     }
 }

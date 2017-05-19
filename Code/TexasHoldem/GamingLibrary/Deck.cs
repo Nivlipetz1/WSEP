@@ -19,9 +19,18 @@ namespace Gaming
             }
         }
 
-        public List<Card> getCards()
+
+        public List<Card> Cards
         {
-            return cards;
+            get
+            {
+                return cards;
+            }
+
+            set
+            {
+                cards = value;
+            }
         }
 
         public void Shuffle()

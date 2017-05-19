@@ -12,11 +12,14 @@ namespace GameSystem
         int minimumRank;
         string name; 
         HashSet<UserProfile> users;
+        Game[] games;
+
         public League(int minimumRank,string name)
         {
             this.name = name;
             this.minimumRank = minimumRank;
             users = new HashSet<UserProfile>();
+            games = new Game[50];
         }
         public int MinimumRank
         {
@@ -29,7 +32,8 @@ namespace GameSystem
             if (users.Contains(user))
                 return false;
             users.Add(user);
-            user.addNotify("You Added to League " + name + " with rank " + minimumRank+" !");
+            user.League = this;
+            TexasHoldemSystem.userSystemFactory.getInstance().notify(user.Username, "You Added to League " + name + " with rank " + minimumRank + " !");
             return true;
         }
 
@@ -60,5 +64,27 @@ namespace GameSystem
             return users.Contains(user);
         }
 
+        public Game[] getGames()
+        {
+            return games;
+        }
+
+        public void addGame(Game g)
+        {
+            for(int i = 0; i < 50; i++)
+            {
+                if(games[i] == null)
+                {
+                    g.setID(i);
+                    games[i] = g;    
+                    break;
+                }
+            }
+        }
+
+        public void removeGame(int gameID)
+        {
+            games[gameID] = null;
+        }
     }
 }

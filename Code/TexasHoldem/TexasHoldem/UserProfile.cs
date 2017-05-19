@@ -15,7 +15,7 @@ namespace GameSystem
         private Image avatar;
         private int credit;
         private League league;
-        private List<Notification> notifications = new List<Notification>();
+        private Statistics userStat;
 
         public string Username
         {
@@ -41,27 +41,58 @@ namespace GameSystem
             set { credit = value; }
         }
 
+        public League League
+        {
+            get
+            {
+                return league;
+            }
+
+            set
+            {
+                league = value;
+            }
+        }
+
+        public Statistics UserStat
+        {
+            get
+            {
+                return userStat;
+            }
+
+            set
+            {
+                userStat = value;
+            }
+        }
+
         public UserProfile(string username, string password)
         {
             this.Username = username;
             this.Password = password;
+            userStat = new Statistics();
         }
         public UserProfile(string username,string password,Image avatar)
         {
             this.Username = username;
             this.Password = password;
             this.Avatar = avatar;
-        }
-
-        public void addNotify(String message)
-        {
-            Notification notification = new Notification(message);
-            notifications.Add(notification);
+            userStat = new Statistics();
         }
 
         public void setUserLeague(League league)
         {
             this.league = league;
+        }
+
+        public void updateStatistics(PlayingUser user)
+        {
+            userStat.Winnings += user.GetRoundsWon();
+            userStat.Losses += user.GetRoundsLost();
+            userStat.BiggestWin = (userStat.BiggestWin > user.GetMostWon()) ? userStat.BiggestWin : user.GetMostWon();
+            userStat.HighestHand = (userStat.HighestHand < user.GetBestHand()) ? userStat.HighestHand : user.GetBestHand();
+            userStat.BiggestWallet = (Credit > userStat.BiggestWallet) ? Credit : userStat.BiggestWallet;
         }
     }
 }

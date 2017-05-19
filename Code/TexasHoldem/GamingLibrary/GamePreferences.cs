@@ -8,7 +8,6 @@ namespace Gaming
 {
     public class GamePreferences
     {
-        private int gameID;
         private int maxPlayers;
         private int minPlayers;
         private int smallBlind;
@@ -23,7 +22,7 @@ namespace Gaming
         const int LIMIT = 1;
         const int NO_LIMIT = 2;
         const int POT_LIMIT = 3;
-        
+
         public GamePreferences(int maxP, int minP, int sB, int bB, int tP, int bIP, int cP, Boolean aS)
         {
             if (maxP > 8)
@@ -31,7 +30,7 @@ namespace Gaming
             if (minP < 2)
                 throw new InvalidOperationException("Minimum number of players must be atleast 2");
             if (minP> maxP)
-                throw new InvalidOperationException("Minimum number of players must be greater then maximum players");
+                throw new InvalidOperationException("Maximum number of players must be greater then minimum players");
 
             maxPlayers = maxP;
             minPlayers = minP;
@@ -41,7 +40,7 @@ namespace Gaming
             buyInPolicy = bIP;
             chipPolicy = cP;
             allowSpectators = aS;
-            status = "active";
+            status = "init";
         }
 
         //testing
@@ -53,7 +52,7 @@ namespace Gaming
             bigBlind = 10;
             allowSpectators = true;
             buyInPolicy = 50;
-            status = "active";
+            status = "init";
         }
 
         public string GetStatus()
@@ -118,5 +117,124 @@ namespace Gaming
         {
             allowSpectators = aS;
         }
+
+
+        public int MaxPlayers
+        {
+            get
+            {
+                return maxPlayers;
+            }
+
+            set
+            {
+                maxPlayers = value;
+            }
+        }
+
+        public int MinPlayers
+        {
+            get
+            {
+                return minPlayers;
+            }
+
+            set
+            {
+                minPlayers = value;
+            }
+        }
+
+        public int SmallBlind
+        {
+            get
+            {
+                return smallBlind;
+            }
+
+            set
+            {
+                smallBlind = value;
+            }
+        }
+
+        public int BigBlind
+        {
+            get
+            {
+                return bigBlind;
+            }
+
+            set
+            {
+                bigBlind = value;
+            }
+        }
+
+        public int TypePolicy
+        {
+            get
+            {
+                return typePolicy;
+            }
+
+            set
+            {
+                typePolicy = value;
+            }
+        }
+
+        public int BuyInPolicy
+        {
+            get
+            {
+                return buyInPolicy;
+            }
+
+            set
+            {
+                buyInPolicy = value;
+            }
+        }
+
+        public int ChipPolicy
+        {
+            get
+            {
+                return chipPolicy;
+            }
+
+            set
+            {
+                chipPolicy = value;
+            }
+        }
+
+        public bool AllowSpectators
+        {
+            get
+            {
+                return allowSpectators;
+            }
+
+            set
+            {
+                allowSpectators = value;
+            }
+        }
+
+        public string Status
+        {
+            get
+            {
+                return status;
+            }
+
+            set
+            {
+                status = value;
+            }
+        }
+
     }
 }

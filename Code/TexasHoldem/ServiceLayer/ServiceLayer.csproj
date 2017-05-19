@@ -49,9 +49,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameCenterService.cs" />
-    <Compile Include="LeagueService.cs" />
+    <Compile Include="GameService.cs" />
+    <Compile Include="Interfaces\AuthSystemServiceInterface.cs" />
+    <Compile Include="Interfaces\GameServiceInterface.cs" />
+    <Compile Include="Interfaces\GCServiceInterface.cs" />
+    <Compile Include="ImageConverter.cs" />
+    <Compile Include="Models\ClientGame.cs" />
+    <Compile Include="Models\ClientUserProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserSystem_Service.cs" />
+    <Compile Include="SystemService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
