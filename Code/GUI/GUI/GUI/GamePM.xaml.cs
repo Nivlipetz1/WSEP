@@ -31,8 +31,8 @@ namespace GUI
             messageList = new Dictionary<string,string>();
             foreach(Models.ClientUserProfile prof in manager.GetPlayers(gameID))
             {
-                users.Items.Add(prof.Username);
-                messageList.Add(prof.Username,"");
+                users.Items.Add(prof.username);
+                messageList.Add(prof.username, "");
             }
            /* foreach (Models.ClientUserProfile prof in game.Spectators)
             {
@@ -43,14 +43,14 @@ namespace GUI
 
         public void AddPlayer(Models.ClientUserProfile prof)
         {
-            users.Items.Add(prof.Username);
-            messageList.Add(prof.Username, "");
+            users.Items.Add(prof.username);
+            messageList.Add(prof.username, "");
         }
 
         public void RemovePlayer(Models.ClientUserProfile prof)
         {
-            users.Items.Remove(prof.Username);
-            messageList.Remove(prof.Username);
+            users.Items.Remove(prof.username);
+            messageList.Remove(prof.username);
         }
 
         private void SendMessage_Click(object sender, RoutedEventArgs e)

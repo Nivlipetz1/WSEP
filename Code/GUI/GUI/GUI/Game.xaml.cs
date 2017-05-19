@@ -65,7 +65,7 @@ namespace GUI
         public void Button_Click(object sender, RoutedEventArgs e)
         {
 
-            PushGameStartMove(new Models.GameStartMove());
+            PushGameStartMove(new Models.GameStartMove(null));
             snd.Play();
             MoveCard(Card1, 55, -150);
             MoveCard(Card2, 70, -150);
@@ -89,25 +89,25 @@ namespace GUI
             MoveCard(UserCard1, 0, 220);
             MoveCard(UserCard2, 30, 220);
 
-            Models.BetMove bet = new Models.BetMove();
+            Models.BetMove bet = new Models.BetMove(null, "", 0);
             bet.setPlayer("niv");
             bet.setAmt(100);
             PushBetMove(bet);
-            Models.BetMove bet2 = new Models.BetMove();
+            Models.BetMove bet2 = new Models.BetMove(null, "", 0);
             bet2.setPlayer("omer");
             bet2.setAmt(200);
             PushBetMove(bet2);
 
-            Models.NewCardMove nm = new Models.NewCardMove();
+            Models.NewCardMove nm = new Models.NewCardMove(null);
             Models.Card c1 = new Models.Card(10, Models.Card.Suit.SPADE);
             Models.Card c2 = new Models.Card(10, Models.Card.Suit.SPADE);
             Models.Card c3 = new Models.Card(1, Models.Card.Suit.SPADE);
             Models.Card[] cArray = { c1, c2, c3 };
 
-            nm.Cards = cArray;
+            nm.cards = cArray;
             //NewCardMove(nm);
 
-            Models.FoldMove fm = new Models.FoldMove();
+            Models.FoldMove fm = new Models.FoldMove(null, "");
             fm.SetFoldPlayer("naor");
             PushFoldMove(fm);
 
@@ -115,7 +115,7 @@ namespace GUI
 
         public void NewCardMove(Models.NewCardMove move)
         {
-            Models.Card[] cards = move.Cards;
+            Models.Card[] cards = move.cards;
             switch (revealCard)
             {
                 case 0:
@@ -160,7 +160,7 @@ namespace GUI
             {
                 Label lbl = playerLabels.ElementAt(index);
                 int bet = 0;
-                lbl.Content = prof.Username + " $" + bet;
+                lbl.Content = prof.username + " $" + bet;
                 lbl.Visibility = Visibility.Visible;
                 playersCards.ElementAt(cardIndex).Visibility = Visibility.Visible;
                 playersCards.ElementAt(cardIndex + 1).Visibility = Visibility.Visible;
@@ -181,10 +181,10 @@ namespace GUI
 
             foreach (Models.ClientUserProfile prof in RemoveSelfFromPlayersList(manager.GetPlayers(gameID)))
             {
-                if (prof.Username.Equals(move.GetBettingPlayer()))
+                if (prof.username.Equals(move.GetBettingPlayer()))
                 {
                     Label lbl = playerLabels.ElementAt(index);
-                    lbl.Content = prof.Username + " $" + bet;
+                    lbl.Content = prof.username + " $" + bet;
                     break;
                 }
 
@@ -201,7 +201,7 @@ namespace GUI
 
             foreach (Models.ClientUserProfile prof in RemoveSelfFromPlayersList(manager.GetPlayers(gameID)))
             {
-                if (prof.Username.Equals(move.GetFoldingPlayer()))
+                if (prof.username.Equals(move.GetFoldingPlayer()))
                 {
                     Label lbl = playerLabels.ElementAt(index);
                     lbl.Visibility = Visibility.Hidden;
@@ -249,10 +249,10 @@ namespace GUI
             int index = 0;
             int cardIndex = 0;
 
-            foreach (string username in move.GetPlayerHands().Keys)
+            foreach (string username in move.playerHands.Keys)
             {
                 //check self in the winners usernames
-                if (!(username.Equals(manager.GetProfile().Username)))
+                if (!(username.Equals(manager.GetProfile().username)))
                 {
                     Label lbl = playerLabels.ElementAt(index);
                     int dollarIndex = lbl.Content.ToString().IndexOf('$') - 1; //-1 in order to get rid of "space" before dollar sign
@@ -261,7 +261,7 @@ namespace GUI
 
                     if (username.Equals(lblPlayerName))
                     {
-                        Models.PlayerHand hand = move.GetPlayerHands()[username];
+                        Models.PlayerHand hand = move.playerHands[username];
                         lbl.Content = lbl.Content.ToString() + " with hand: " + hand.toString();
                         //FLIP THE CARDS:
                         //playersCards[cardIndex]= new BitmapImage(new Uri(@"Images\Cards\" + hand.First.toImage(), UriKind.Relative));
@@ -277,13 +277,13 @@ namespace GUI
 
         public void EndGameMove(Models.EndGameMove move)
         {
-            IDictionary<string, Models.PlayerHand> hands = move.GetPlayerHands();
+            IDictionary<string, Models.PlayerHand> hands = move.playerHands;
             int cardIndex = 0;
             foreach (Models.ClientUserProfile prof in RemoveSelfFromPlayersList(manager.GetPlayers(gameID)))
             {
-                if (hands.ContainsKey(prof.Username))
+                if (hands.ContainsKey(prof.username))
                 {
-                    Models.PlayerHand hand = hands[prof.Username];
+                    Models.PlayerHand hand = hands[prof.username];
                     Image card1 = playersCards.ElementAt(cardIndex);
                     Image card2 = playersCards.ElementAt(cardIndex + 1);
                     card1.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.First.toImage(), UriKind.Relative));

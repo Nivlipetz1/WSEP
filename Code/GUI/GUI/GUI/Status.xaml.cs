@@ -37,8 +37,8 @@ namespace GUI
         public void RefreshStatus()
         {
             Models.ClientUserProfile prof = manager.GetProfile();
-            this.credit.Content = "Credit: $" + prof.Credit;
-            this.username.Content = "Hello " + prof.Username;
+            this.credit.Content = "Credit: $" + prof.credit;
+            this.username.Content = "Hello " + prof.username;
         }
 
         private void GoBtn_Click(object sender, RoutedEventArgs e)

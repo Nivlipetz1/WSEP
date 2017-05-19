@@ -43,13 +43,13 @@ namespace GUI
             List<GameDataGrid> displayList = new List<GameDataGrid>();
             foreach(Models.ClientGame game in gameList)
             {
-                Models.GamePreferences prefs = game.GamePref;
-                GameDataGrid gdg = new GameDataGrid { ID = game.Id,
-                                                      PlayersInGame = game.Players.Count,
-                                                      MaxPlayers = prefs.MaxPlayers,
-                                                      BigBlind = prefs.BigBlind,
-                                                      SmallBlind = prefs.SmallBlind,
-                                                      SpectatingAllowed = prefs.AllowSpectators
+                Models.GamePreferences prefs = game.gamePref;
+                GameDataGrid gdg = new GameDataGrid { ID = game.id,
+                                                      PlayersInGame = game.players.Count,
+                                                      MaxPlayers = prefs.maxPlayers,
+                                                      BigBlind = prefs.bigBlind,
+                                                      SmallBlind = prefs.smallBlind,
+                                                      SpectatingAllowed = prefs.allowSpectators
                                                                                     };
                 displayList.Add(gdg);
             }

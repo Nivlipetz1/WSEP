@@ -120,7 +120,7 @@ namespace GUI
 
         internal IEnumerable<ClientUserProfile> GetPlayers(int gameID)
         {
-            return findGame(gameID).getGame().Players;
+            return findGame(gameID).getGame().players;
         }
 
         private GameFrame findGame(int gameID)
@@ -128,7 +128,7 @@ namespace GUI
             GameFrame wantedFrame = null;
             foreach (GameFrame gf in gameList)
             {
-                if (gf.getGame().Id == gameID)
+                if (gf.getGame().id == gameID)
                 {
                     wantedFrame = gf;
                 }

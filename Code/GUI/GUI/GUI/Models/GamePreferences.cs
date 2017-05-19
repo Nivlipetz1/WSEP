@@ -34,6 +34,20 @@ namespace GUI.Models
             status = "init";
         }
 
+        public GamePreferences(int maxP,int minP,int sB,int bB,int tP,int bIP,int cP,bool aS)
+        {
+            maxPlayers = maxP;
+            minPlayers = minP;
+            smallBlind = sB;
+            bigBlind = bB;
+            allowSpectators = aS;
+            buyInPolicy = buyInPolicy;
+            status = "init";
+            chipPolicy = cP;
+            typePolicy = tP;
+        }
+
+
 
     }
 }
