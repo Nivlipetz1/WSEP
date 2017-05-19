@@ -95,7 +95,7 @@ namespace CommunicatoinLayer.Hubs
         public override Task OnDisconnected(bool stopCalled)
         {
             if (!AuthManager.Instance.containsConnection(Context.ConnectionId))
-                return base.OnDisconnected(stopCalled); ;
+                return base.OnDisconnected(stopCalled);
             AuthManager.Instance.Logout(AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId), Context.ConnectionId);
             return base.OnDisconnected(stopCalled);
         }

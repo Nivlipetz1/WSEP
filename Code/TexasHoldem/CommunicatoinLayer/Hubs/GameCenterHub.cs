@@ -20,10 +20,11 @@ namespace CommunicatoinLayer.Hubs
                 return null;
             string userName = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             GameCenterService gc = new GameCenterService();
-            return gc.createGame(preferecnces , userName);
+            ClientGame game =  gc.createGame(preferecnces , userName);
+            return game;
         }
 
-        List<ClientGame> getActiveGames(string criterion, object param)
+        public List<ClientGame> getActiveGames(string criterion, object param)
         {
             if (!AuthManager.Instance.containsConnection(Context.ConnectionId))
                 return null;
