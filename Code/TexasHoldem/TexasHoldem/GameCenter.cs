@@ -160,13 +160,7 @@ namespace GameSystem
         public List<List<Move>> getAllReplayesOfInActiveGames()
         {
             List<List<Move>> replayes = new List<List<Move>>();
-            IDictionary<string,PlayerHand> players = new Dictionary<string,PlayerHand>();
-            players["dsa"] = new PlayerHand(new Card(4, Card.Suit.CLUB), new Card(5, Card.Suit.DIAMOND));
-            List<Move> moves = new List<Move>();
-            //moves.Add(new EndGameMove(players));
-            moves.Add(new NewCardMove(new Card [] { new Card(5, Card.Suit.DIAMOND) }));
-            replayes.Add(moves);
-            //games.Where(game => !game.GetGamePref().GetStatus().Equals("active")).ToList().ForEach(game => replayes.Add(game.GetGameReplay()));
+            games.Where(game => !game.GetGamePref().GetStatus().Equals("active")).ToList().ForEach(game => replayes.Add(game.GetGameReplay()));
 
             return replayes;
 
