@@ -32,8 +32,9 @@ namespace GUI.Communication
 
         public void initOnFunctions()
         {
-            gameHubProxy.On<Move , int>("pushMove", (move , gameID) =>
+            gameHubProxy.On<string , int>("pushMove", (serializeMove, gameID) =>
             {
+                Move move = MoveTypesConverter.deserializeObject<Move>(serializeMove);
             });
 
             gameHubProxy.On<string, int>("removePlayer", (user, gameID) =>
