@@ -8,19 +8,6 @@ namespace GUI.Models
 {
     public class Deck
     {
-        private List<Card> cards;
-
-        public List<Card> Cards
-        {
-            get
-            {
-                return cards;
-            }
-
-            set
-            {
-                cards = value;
-            }
-        }
+        public List<Card> cards { set; get; }
     }
 }
