@@ -9,6 +9,7 @@ using CommunicatoinLayer.Managers;
 using System.Threading.Tasks;
 using ServiceLayer.Models;
 using Gaming;
+using Newtonsoft.Json;
 
 namespace CommunicatoinLayer.Hubs
 {
@@ -33,10 +34,16 @@ namespace CommunicatoinLayer.Hubs
             return gc.getActiveGames(criterion , param , userName);
         }
 
-        public List<List<Move>> getAllReplayesOfInActiveGames()
+        public string getAllReplayesOfInActiveGames()
         {
             GameCenterService gc = new GameCenterService();
-            return gc.getAllReplayesOfInActiveGames();
+            /*List<List<Move>> moves = new List<List<Move>>();
+            List<Move> move = new List<Move>();
+            move.Add(new NewCardMove(new Card[] { new Card(5, Card.Suit.DIAMOND) }));
+            moves.Add(move);
+            var result = (moves);
+            return result;*/
+            return JsonConvert.SerializeObject(gc.getAllReplayesOfInActiveGames());
         }
 
         public List<ClientGame> getAllSpectatingGames()

@@ -12,6 +12,7 @@ namespace Gaming
         public NewCardMove(Card[] cards)
         {
             this.cards = cards;
+            base.type = "NewCardMove";
         }
 
         public Card[] Cards
@@ -38,6 +39,7 @@ namespace Gaming
         public GameStartMove(IDictionary<string, int> playerBets)
         {
             this.playerBets = playerBets;
+            base.type = "GameStartMove";
         }
 
         public override void update(ref IDictionary<string, int> playerBets, ref Card[] cards, ref IDictionary<string, PlayerHand> playerHands)
@@ -70,6 +72,7 @@ namespace Gaming
             bettingPlayer = better.GetUserName();
             //bettingPlayer.SetStatus("Talked");
             betAmount = amt;
+            base.type = "BetMove";
         }
 
         public override void update(ref IDictionary<string, int> playerBets, ref Card[] cards, ref IDictionary<string, PlayerHand> playerHands)
@@ -131,6 +134,7 @@ namespace Gaming
             this.playerBets = playerBets;
             foldingPlayer = folder.GetUserName();
             //foldingPlayer.SetStatus("Fold");
+            base.type = "FoldMove";
         }
 
         public override void update(ref IDictionary<string, int> playerBets, ref Card[] cards, ref IDictionary<string, PlayerHand> playerHands)
@@ -203,6 +207,7 @@ namespace Gaming
         {
             this.playerHands = playerHands;
             handRanks = new Dictionary<string, CardAnalyzer.HandRank>();
+            base.type = "EndGameMove";
         }
 
         public override void update(ref IDictionary<string, int> playerBets, ref Card[] cards, ref IDictionary<string, PlayerHand> playerHands)
