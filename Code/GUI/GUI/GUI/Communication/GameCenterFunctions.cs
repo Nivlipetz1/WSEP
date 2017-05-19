@@ -41,60 +41,45 @@ namespace GUI.Communication
             });
         }
 
-        public ClientGame createGame(GamePreferences preferecnces)
+        public async Task<ClientGame> createGame(GamePreferences preferecnces)
         {
-            Task<ClientGame> res = gameCenterHubProxy.Invoke<ClientGame>("createGame", preferecnces);
-            res.Wait();
-            return res.Result;
+            return await gameCenterHubProxy.Invoke<ClientGame>("createGame", preferecnces);
         }
 
-        public List<ClientGame> getActiveGames(string criterion, object param)
+        public async Task<List<ClientGame>> getActiveGames(string criterion, object param)
         {
-            Task<List<ClientGame>> res = gameCenterHubProxy.Invoke<List<ClientGame>>("getActiveGames", criterion, param);
-            res.Wait();
-            return res.Result;
+            return await gameCenterHubProxy.Invoke<List<ClientGame>>("getActiveGames", criterion, param);
         }
 
-        public List<List<Move>> getAllReplayesOfInActiveGames()
+        public async Task<List<List<Move>>> getAllReplayesOfInActiveGames()
         {
-            Task<string> res = gameCenterHubProxy.Invoke<string>("getAllReplayesOfInActiveGames");
-            res.Wait();
-            return MoveTypesConverter.deserializeObject<List<List<Move>>>(res.Result);
+            string res = await gameCenterHubProxy.Invoke<string>("getAllReplayesOfInActiveGames");
+            return MoveTypesConverter.deserializeObject<List<List<Move>>>(res);
         }
 
-        public List<ClientGame> getAllSpectatingGames()
+        public async Task<List<ClientGame>> getAllSpectatingGames()
         {
-            Task<List<ClientGame>> res = gameCenterHubProxy.Invoke<List<ClientGame>>("getAllSpectatingGames");
-            res.Wait();
-            return res.Result;
+            return await gameCenterHubProxy.Invoke<List<ClientGame>>("getAllSpectatingGames");
         }
 
-        public ClientGame joinGame(int gameId, int credit)
+        public async Task<ClientGame> joinGame(int gameId, int credit)
         {
-            Task<ClientGame> res = gameCenterHubProxy.Invoke<ClientGame>("joinGame", gameId, credit);
-            res.Wait();
-            return res.Result;
+            return await gameCenterHubProxy.Invoke<ClientGame>("joinGame", gameId, credit);
         }
 
-        public bool spectateGame(int gameId)
+        public async Task<bool> spectateGame(int gameId)
         {
-            Task<bool> res = gameCenterHubProxy.Invoke<bool>("spectateGame", gameId);
-            res.Wait();
-            return res.Result;
+            return await gameCenterHubProxy.Invoke<bool>("spectateGame", gameId);
         }
 
-        public bool unknownUserEditLeague(int minimumLeagueRank)
+        public async Task<bool> unknownUserEditLeague(int minimumLeagueRank)
         {
-            Task<bool> res = gameCenterHubProxy.Invoke<bool>("unknownUserEditLeague", minimumLeagueRank);
-            res.Wait();
-            return res.Result;
+            return await gameCenterHubProxy.Invoke<bool>("unknownUserEditLeague", minimumLeagueRank);
         }
 
-        public ClientGame getGame(int gameId)
+        public async Task<ClientGame> getGame(int gameId)
         {
-            Task<ClientGame> res = gameCenterHubProxy.Invoke<ClientGame>("getGame", gameId);
-            res.Wait();
-            return res.Result;
+            return await gameCenterHubProxy.Invoke<ClientGame>("getGame", gameId);
         }
     }
 }

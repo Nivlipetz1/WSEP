@@ -15,13 +15,13 @@ namespace CommunicatoinLayer.Hubs
     public class AuthHub : Hub
     {
 
-        public async Task<bool> login(string userName, string password)
+        public bool login(string userName, string password)
         {
             SystemService userService = new SystemService();
             if (userService.login(userName, password))
             {
                 AuthManager.Instance.Login(userName, password, Context.ConnectionId);
-                await Groups.Add(Context.ConnectionId, "loginUsers");
+                //await Groups.Add(Context.ConnectionId, "loginUsers");
                 return true;
             }
 
@@ -96,7 +96,10 @@ namespace CommunicatoinLayer.Hubs
         {
             if (!AuthManager.Instance.containsConnection(Context.ConnectionId))
                 return base.OnDisconnected(stopCalled);
-            AuthManager.Instance.Logout(AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId), Context.ConnectionId);
+            string userName = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
+            AuthManager.Instance.Logout(userName, Context.ConnectionId);
+            SystemService userService = new SystemService();
+            userService.logout(userName);
             return base.OnDisconnected(stopCalled);
         }
 

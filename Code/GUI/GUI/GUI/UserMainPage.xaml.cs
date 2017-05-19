@@ -33,11 +33,12 @@ namespace GUI
             NavigationService.Navigate(new EditProfile(manager));
         }
 
-        private void Logout_Click(object sender, RoutedEventArgs e)
+        private async void Logout_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult rs = MessageBox.Show("Are you sure you want to logout?", "Logout", MessageBoxButton.YesNo, MessageBoxImage.Information, MessageBoxResult.No);
             if (rs == MessageBoxResult.Yes)
             {
+                await Communication.AuthFunctions.Instance.logout();
                 manager.ClearStatusFrame();
                 NavigationService.Navigate(new Login(manager));
             }

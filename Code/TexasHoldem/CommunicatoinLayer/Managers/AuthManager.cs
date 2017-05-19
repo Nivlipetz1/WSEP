@@ -44,7 +44,8 @@ namespace CommunicatoinLayer.Managers
 
         private void notifyUser(string userName, string message)
         {
-            Clients.Client(GetConnectionIdByName(userName)).notify(message);
+            if(containsUserName(userName))
+                Clients.Client(GetConnectionIdByName(userName)).notify(message);
         }
 
         private void notifyAllUsers(string message)
@@ -76,6 +77,11 @@ namespace CommunicatoinLayer.Managers
         public bool containsConnection(string id)
         {
             return _usersByConnectionId.ContainsKey(id);
+        }
+
+        public bool containsUserName(string userName)
+        {
+            return _usersByName.ContainsKey(userName);
         }
 
         public static AuthManager Instance

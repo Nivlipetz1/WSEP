@@ -21,6 +21,7 @@ namespace GUI
             this.mainWindow = mainWindow;
             this.status = new Status(this);
             gameList = new List<GameFrame>();
+            statusWindow = new Status(this);
         }
 
         public List<GameFrame> gameList { get; set; }
@@ -64,12 +65,17 @@ namespace GUI
             }
         }
 
-        internal void EditProfile(string username, string password)
+        internal void disconnectFromServer()
+        {
+            Communication.Server.Instance.disconnect();
+        }
+
+        internal async void EditProfile(string username, string password)
         {
             bool changed = false;
             if (!password.Equals(""))
             {
-                if (Communication.AuthFunctions.Instance.editPassword(password))
+                if (await Communication.AuthFunctions.Instance.editPassword(password))
                 {
                     MessageBox.Show("Password Changed!");
                     changed = true;
@@ -77,7 +83,7 @@ namespace GUI
             }
             if (!username.Equals(""))
             {
-                if (Communication.AuthFunctions.Instance.editUserName(username))
+                if (await Communication.AuthFunctions.Instance.editUserName(username))
                 {
                     MessageBox.Show("Username Changed!");
                     changed = true;
@@ -85,14 +91,14 @@ namespace GUI
             }
             if (changed)
             {
-                RefreshProfile();
+                await RefreshProfile();
                 mainWindow.mainFrame.NavigationService.GoBack();
             }
         }
 
-        internal void Register(string username, string password)
+        internal async void Register(string username, string password)
         {
-            if (Communication.AuthFunctions.Instance.register(username, password))
+            if (await Communication.AuthFunctions.Instance.register(username, password))
             {
                 MessageBox.Show("You can now login with you credentials.", "Registration Successful!", MessageBoxButton.OK, MessageBoxImage.Information);
                 mainWindow.mainFrame.NavigationService.GoBack();
@@ -113,9 +119,9 @@ namespace GUI
             return profile;
         }
 
-        internal bool PostChatMessage(string message, int gameID)
+        internal async Task<bool> PostChatMessage(string message, int gameID)
         {
-            return Communication.GameFunctions.Instance.postMessage(message, gameID);
+            return await Communication.GameFunctions.Instance.postMessage(message, gameID);
         }
 
         internal IEnumerable<ClientUserProfile> GetPlayers(int gameID)
@@ -136,9 +142,9 @@ namespace GUI
             return wantedFrame;
         }
 
-        internal void CreateGame(GamePreferences pref)
+        internal async void CreateGame(GamePreferences pref)
         {
-            Models.ClientGame newGame = Communication.GameCenterFunctions.Instance.createGame(pref);
+            Models.ClientGame newGame = await Communication.GameCenterFunctions.Instance.createGame(pref);
             if (newGame == null)
             {
                 MessageBox.Show("Something went wrong!", "Oh Oh!", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -156,19 +162,19 @@ namespace GUI
             return gameList;
         }
 
-        public void RefreshProfile()
+        public async Task RefreshProfile()
         {
-            profile = Communication.AuthFunctions.Instance.getClientUser();
+            profile = await Communication.AuthFunctions.Instance.getClientUser();
             statusWindow.RefreshStatus();
         }
 
-        internal void Login(string username, string password)
+        public async Task Login(string username, string password)
         {
             //main.mainFrame.NavigationService.Navigate(new UserMainPage(main));
             //main.statusFrame.NavigationService.Navigate(new Status(main));
-            if (Communication.AuthFunctions.Instance.login(username, password))
+            if (await Communication.AuthFunctions.Instance.login(username, password))
             {
-                RefreshProfile();
+                await RefreshProfile();
                 Status status = statusWindow;
                 UserMainPage umP = new UserMainPage(this);
                 mainWindow.statusFrame.NavigationService.Navigate(status);
@@ -180,12 +186,12 @@ namespace GUI
             }
         }
 
-        internal bool SendPMMessage(string to, string message, int gameID)
+        public async Task<bool> SendPMMessage(string to, string message, int gameID)
         {
-            return Communication.GameFunctions.Instance.postWhisperMessage(to, message, gameID);
+            return await Communication.GameFunctions.Instance.postWhisperMessage(to, message, gameID);
         }
 
-        internal void NavigateToGameFrame(int selectedIndex)
+        public void NavigateToGameFrame(int selectedIndex)
         {
             NavigateToGameFrame(gameList[selectedIndex]);
         }
@@ -196,12 +202,12 @@ namespace GUI
             wantedFrame.GameWindow.MyTurn(minimumBet);
         }
 
-        internal void JoinGame(int gameID, int credit)
+        internal async void JoinGame(int gameID, int credit)
         {
-            Models.ClientGame game = Communication.GameCenterFunctions.Instance.joinGame(gameID, credit);
+            Models.ClientGame game = await Communication.GameCenterFunctions.Instance.joinGame(gameID, credit);
             if (game != null)
             {
-                RefreshProfile();
+                await RefreshProfile();
                 GameFrame gameFrame = new GameFrame(this, game);
                 AddGameFrame(gameFrame);
                 NavigateToGameFrame(gameFrame);
@@ -253,23 +259,23 @@ namespace GUI
             }
         }
 
-        internal void QuitGame(int gameID)
+        internal async void QuitGame(int gameID)
         {
             MessageBoxResult rs = MessageBox.Show("Are you sure you want to quit?", "Quit", MessageBoxButton.YesNo, MessageBoxImage.Information, MessageBoxResult.No);
             if (rs == MessageBoxResult.Yes)
             {
-                if (Communication.GameFunctions.Instance.removePlayer(gameID))
+                if (await Communication.GameFunctions.Instance.removePlayer(gameID))
                     mainWindow.mainFrame.NavigationService.GoBack();
                 else
                     MessageBox.Show("Something went wrong", "Information", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
-        internal void Bet(int gameID, int amount, int minimumBet, Game gameWindow)
+        internal async void Bet(int gameID, int amount, int minimumBet, Game gameWindow)
         {
             if (amount >= minimumBet)
             {
-                if (Communication.GameFunctions.Instance.bet(gameID, amount.ToString()))
+                if (await Communication.GameFunctions.Instance.bet(gameID, amount.ToString()))
                 {
                     gameWindow.HideBetElements();
                     MessageBox.Show("Bet Accepted", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -281,9 +287,9 @@ namespace GUI
             }
         }
 
-        internal void Fold(int gameID, Game gameWindow)
+        internal async void Fold(int gameID, Game gameWindow)
         {
-            if (Communication.GameFunctions.Instance.bet(gameID, "Fold"))
+            if (await Communication.GameFunctions.Instance.bet(gameID, "Fold"))
             {
                 gameWindow.HideBetElements();
                 MessageBox.Show("You have folded", "Information", MessageBoxButton.OK, MessageBoxImage.Information);

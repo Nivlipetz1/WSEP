@@ -29,11 +29,11 @@ namespace GUI
             InitializeComponent();
         }
 
-        private void SendMessageToChat_Click(object sender, RoutedEventArgs e)
+        private async void SendMessageToChat_Click(object sender, RoutedEventArgs e)
         {
             if (!message.Text.Equals(""))
             {
-                if (manager.PostChatMessage(message.Text, gameID))
+                if (await manager.PostChatMessage(message.Text, gameID))
                 {
                     message.Text = "";
                     message.Focus();

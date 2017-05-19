@@ -53,11 +53,11 @@ namespace GUI
             messageList.Remove(prof.username);
         }
 
-        private void SendMessage_Click(object sender, RoutedEventArgs e)
+        private async void SendMessage_Click(object sender, RoutedEventArgs e)
         {
             if (!message.Text.Equals(""))
             {
-                if(manager.SendPMMessage(users.SelectedValue.ToString(),message.Text,gameID)){
+                if(await manager.SendPMMessage(users.SelectedValue.ToString(),message.Text,gameID)){
 
                 messages.AppendText(message.Text + "\n");
                 messageList[users.Text] += message.Text + "\n";

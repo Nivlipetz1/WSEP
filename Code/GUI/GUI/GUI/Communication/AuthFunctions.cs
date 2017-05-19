@@ -37,53 +37,39 @@ namespace GUI.Communication
             });
         }
 
-        public bool register(string userName, string password)
+        public async Task<bool> register(string userName, string password)
         {
-            Task<bool> res = authHubProxy.Invoke<bool>("register", userName, password);
-            res.Wait();
-            return res.Result;
+            return await authHubProxy.Invoke<bool>("register", userName, password);
         }
 
-        public bool login(string userName, string password)
+        public async Task<bool> login(string userName, string password)
         {
-            Task<bool> res = authHubProxy.Invoke<bool>("login", userName, password);
-            res.Wait();
-            return res.Result;
+            return await authHubProxy.Invoke<bool>("login", userName, password);
         }
 
-        public ClientUserProfile getClientUser()
+        public async Task<ClientUserProfile> getClientUser()
         {
-            Task<ClientUserProfile> res = authHubProxy.Invoke<ClientUserProfile>("getClientUser");
-            res.Wait();
-            return res.Result;
+            return await authHubProxy.Invoke<ClientUserProfile>("getClientUser");
         }
 
-        public bool logout(string user)
+        public async Task<bool> logout()
         {
-            Task<bool> res = authHubProxy.Invoke<bool>("logout" , user);
-            res.Wait();
-            return res.Result;
+            return await authHubProxy.Invoke<bool>("logout");
         }
 
-        public bool editAvatar(byte [] avatar)
+        public async Task<bool> editAvatar(byte [] avatar)
         {
-            Task<bool> res = authHubProxy.Invoke<bool>("editAvatar", avatar);
-            res.Wait();
-            return res.Result;
+            return await authHubProxy.Invoke<bool>("editAvatar", avatar);
         }
 
-        public bool editPassword(string password)
+        public async Task<bool> editPassword(string password)
         {
-            Task<bool> res = authHubProxy.Invoke<bool>("editPassword", password);
-            res.Wait();
-            return res.Result;
+            return await authHubProxy.Invoke<bool>("editPassword", password);
         }
 
-        public bool editUserName(string newUserName)
+        public async Task<bool> editUserName(string newUserName)
         {
-            Task<bool> res = authHubProxy.Invoke<bool>("editUserName", newUserName);
-            res.Wait();
-            return res.Result;
+            return await authHubProxy.Invoke<bool>("editUserName", newUserName);
         }
 
 

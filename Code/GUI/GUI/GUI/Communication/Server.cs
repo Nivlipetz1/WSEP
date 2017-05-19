@@ -10,6 +10,7 @@ namespace GUI.Communication
     public class Server
     {
         private static Lazy<Server> LazyInstance = new Lazy<Server>(() => new Server(), true);
+        private HubConnection hubConnection;
         private Server()
         {
 
@@ -23,7 +24,7 @@ namespace GUI.Communication
         {
             try
             {
-                var hubConnection = new HubConnection("http://52.29.58.18:80/");
+                hubConnection = new HubConnection("http://localhost:51509/");
                 IHubProxy authHubProxy = hubConnection.CreateHubProxy("AuthHub"); 
                 IHubProxy gameCenterProxy = hubConnection.CreateHubProxy("GameCenterHub");
                 IHubProxy gameProxy = hubConnection.CreateHubProxy("GameHub");
@@ -51,5 +52,20 @@ namespace GUI.Communication
             return true;
 
         }
+
+        public bool disconnect()
+        {
+            try
+            {
+                hubConnection.Stop();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
+
+
 }

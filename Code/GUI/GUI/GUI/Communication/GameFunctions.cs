@@ -62,39 +62,29 @@ namespace GUI.Communication
             });
         }
 
-        public bool bet(int gameID, string minimumBet)
+        public async Task<bool> bet(int gameID, string minimumBet)
         {
-            Task<bool> res = gameHubProxy.Invoke<bool>("bet", gameID , minimumBet);
-            res.Wait();
-            return res.Result;
+            return await gameHubProxy.Invoke<bool>("bet", gameID , minimumBet);
         }
 
-        public bool removePlayer(int gameID)
+        public async Task<bool> removePlayer(int gameID)
         {
-            Task<bool> res = gameHubProxy.Invoke<bool>("removePlayer", gameID);
-            res.Wait();
-            return res.Result;
+            return await gameHubProxy.Invoke<bool>("removePlayer", gameID);
         }
 
-        public bool removeSpectator(int gameID)
+        public async Task<bool> removeSpectator(int gameID)
         {
-            Task<bool> res = gameHubProxy.Invoke<bool>("removeSpectator", gameID);
-            res.Wait();
-            return res.Result;
+            return await gameHubProxy.Invoke<bool>("removeSpectator", gameID);
         }
 
-        public bool postMessage(string message, int gameID)
+        public async Task<bool> postMessage(string message, int gameID)
         {
-            Task<bool> res = gameHubProxy.Invoke<bool>("postMessage", message ,  gameID);
-            res.Wait();
-            return res.Result;
+            return await gameHubProxy.Invoke<bool>("postMessage", message ,  gameID);
         }
 
-        public bool postWhisperMessage(string to, string message, int gameID)
+        public async Task<bool> postWhisperMessage(string to, string message, int gameID)
         {
-            Task<bool> res = gameHubProxy.Invoke<bool>("postWhisperMessage", to , message, gameID);
-            res.Wait();
-            return res.Result;
+            return await gameHubProxy.Invoke<bool>("postWhisperMessage", to , message, gameID);
         }
     }
 }

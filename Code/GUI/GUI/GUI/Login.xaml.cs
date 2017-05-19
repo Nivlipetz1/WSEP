@@ -28,11 +28,11 @@ namespace GUI
             username.Focus();
         }
 
-        private void Login_Click(object sender, RoutedEventArgs e)
+        private async void Login_Click(object sender, RoutedEventArgs e)
         {
             if (!username.Text.Equals(""))
             {
-                manager.Login(username.Text,password.Password);
+                await manager.Login(username.Text,password.Password);
             }
             else
             {

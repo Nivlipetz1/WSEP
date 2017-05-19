@@ -31,12 +31,13 @@ namespace GUI
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
- /*           if (loggedIn)
-            {
-                Communication.AuthFunctions.Instance.logout(prof.Username);
-            }
-            loggedIn = false;
-            */
+            /*           if (loggedIn)
+                       {
+                           Communication.AuthFunctions.Instance.logout(prof.Username);
+                       }
+                       loggedIn = false;
+                       */
+           manager.disconnectFromServer();
         }
     }
 }
