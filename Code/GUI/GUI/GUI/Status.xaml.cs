@@ -20,11 +20,30 @@ namespace GUI
     /// </summary>
     public partial class Status : Page
     {
-        public Status(string username)
+        GUIManager manager;
+        public Status(GUIManager manager)
         {
             InitializeComponent();
-            this.credit.Content = "Credit: 200.00$";
-            this.username.Content = "Hello " + username;
+            this.manager = manager;
+        }
+
+        public void RefreshGameList()
+        {
+            GameList.Items.Clear();
+            foreach (GameFrame gf in manager.GetGameFrameList())
+                GameList.Items.Add(gf.ToString());
+        }
+
+        public void RefreshStatus()
+        {
+            Models.ClientUserProfile prof = manager.GetProfile();
+            this.credit.Content = "Credit: $" + prof.Credit;
+            this.username.Content = "Hello " + prof.Username;
+        }
+
+        private void GoBtn_Click(object sender, RoutedEventArgs e)
+        {
+            manager.NavigateToGameFrame(GameList.SelectedIndex);
         }
     }
 }

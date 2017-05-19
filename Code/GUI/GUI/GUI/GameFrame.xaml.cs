@@ -20,12 +20,32 @@ namespace GUI
     /// </summary>
     public partial class GameFrame : Page
     {
-        public GameFrame()
+        private Models.ClientGame game;
+        GUIManager manager;
+        public Game GameWindow { get; set; }
+        public GameChat GameChat { get; set; }
+        public GamePM GamePM { get; set; }
+        public int gameID { get; set; }
+        public GameFrame(GUIManager manager, Models.ClientGame game)
         {
+            this.manager = manager;
+            this.game = game;
+            this.gameID = gameID;
             InitializeComponent();
-            gameFrame.NavigationService.Navigate(new Game());
-            chatFrame.NavigationService.Navigate(new GameChat());
-            pmFrame.NavigationService.Navigate(new GamePM());
+            gameFrame.NavigationService.Navigate(GameWindow = new Game(manager,gameID));
+            chatFrame.NavigationService.Navigate(GameChat = new GameChat(manager,gameID));
+            pmFrame.NavigationService.Navigate(GamePM = new GamePM(manager,gameID));
+        }
+
+        public Models.ClientGame getGame()
+        {
+            return game;
+            
+        }
+
+        public override string ToString()
+        {
+            return "Game "+game.Id;
         }
     }
 }

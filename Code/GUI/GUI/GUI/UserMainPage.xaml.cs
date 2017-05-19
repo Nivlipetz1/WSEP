@@ -20,16 +20,17 @@ namespace GUI
     /// </summary>
     public partial class UserMainPage : Page
     {
-        MainWindow main;
-        public UserMainPage(MainWindow main)
+        GUIManager manager;
+        
+        public UserMainPage(GUIManager manager)
         {
             InitializeComponent();
-            this.main = main;
+            this.manager = manager;
         }
 
         private void EditProfile_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new EditProfile());
+            NavigationService.Navigate(new EditProfile(manager));
         }
 
         private void Logout_Click(object sender, RoutedEventArgs e)
@@ -37,14 +38,15 @@ namespace GUI
             MessageBoxResult rs = MessageBox.Show("Are you sure you want to logout?", "Logout", MessageBoxButton.YesNo, MessageBoxImage.Information, MessageBoxResult.No);
             if (rs == MessageBoxResult.Yes)
             {
-                main.statusFrame.Content = null;
-                NavigationService.Navigate(new Login(main));
+                manager.ClearStatusFrame();
+                NavigationService.Navigate(new Login(manager));
             }
         }
 
         private void GameCenter_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new GameCenter());
+            NavigationService.Navigate(new GameCenter(manager));
         }
+
     }
 }

@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\Code",
-    "\\Code\\GUI"
+    "\\Code\\GUI",
+    "\\Code\\GUI\\GUI"
   ],
-  "SelectedNode": "\\Code\\GUI",
+  "SelectedNode": "\\Code\\GUI\\GUI\\GUI.sln",
   "PreviewInSolutionExplorer": false
 }

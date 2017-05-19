@@ -26,18 +26,28 @@
         <Image Name="Card12" Visibility="Hidden" Height="70" Source="./Images/Cards/back.png" Canvas.Left="241" Canvas.Top="152"/>
         <Image Name="Card13" Visibility="Hidden" Height="70" Source="./Images/Cards/back.png" Canvas.Left="241" Canvas.Top="152"/>
         <Image Name="Card14" Visibility="Hidden" Height="70" Source="./Images/Cards/back.png" Canvas.Left="241" Canvas.Top="152"/>
-
-        <Button Click="Button_Click" Name="startgameBtn" Content="Start Game" Canvas.Left="216" Canvas.Top="291" Width="75"/>
         <Image Name="FlopCard1" Visibility="Hidden" Height="70" Source="./Images/Cards/S1.png" Canvas.Left="241" Canvas.Top="152"/>
-        <Image Name="FlopCard2" Visibility="Hidden" Height="70" Source="./Images/Cards/Sk.png" Canvas.Left="241" Canvas.Top="152"/>
-        <Image Name="FlopCard3" Visibility="Hidden" Height="70" Source="./Images/Cards/Sq.png" Canvas.Left="241" Canvas.Top="152"/>
-        <Image Name="RiverCard" Visibility="Hidden" Height="70" Source="./Images/Cards/Sj.png" Canvas.Left="241" Canvas.Top="152"/>
+        <Image Name="FlopCard2" Visibility="Hidden" Height="70"  Canvas.Left="241" Canvas.Top="152"/>
+        <Image Name="FlopCard3" Visibility="Hidden" Height="70"  Canvas.Left="241" Canvas.Top="152"/>
+        <Image Name="RiverCard" Visibility="Hidden" Height="70"  Canvas.Left="241" Canvas.Top="152"/>
         <Image Name="TurnCard" Visibility="Hidden" Height="70" Source="./Images/Cards/S10.png" Canvas.Left="241" Canvas.Top="152"/>
         <Image Name="UserCard1" Visibility="Hidden" Height="70" Source="./Images/Cards/S1.png" Canvas.Left="241" Canvas.Top="152"/>
         <Image Name="UserCard2" Visibility="Hidden" Height="70" Source="./Images/Cards/S1.png" Canvas.Left="241" Canvas.Top="152"/>
         <TextBox Name="BetAmount" Visibility="Hidden" Height="20" Canvas.Left="18" TextWrapping="Wrap" Text="" Canvas.Top="467" Width="65"/>
-        <Button Name="Bet_Button" Visibility="Hidden" Content="Bet" Canvas.Left="99" Canvas.Top="465" Width="75"/>
-        <Button Name="Fold_Button" Visibility="Hidden" Content="Fold" Canvas.Left="99" Canvas.Top="494" Width="75"/>
+        <Button Name="Bet_Button" Click="Bet_Button_Click" Visibility="Hidden" Content="Bet" Canvas.Left="99" Canvas.Top="465" Width="75"/>
+        <Button Name="Fold_Button" Click="Fold_Button_Click" Visibility="Hidden" Content="Fold" Canvas.Left="99" Canvas.Top="494" Width="75"/>
+        <Label Name="player1" Visibility="Hidden" Content="Label" Canvas.Left="30" Canvas.Top="388"/>
+        <Label Name="player2" Visibility="Hidden" Content="Label" Canvas.Left="30" Canvas.Top="243"/>
+        <Label Name="player3" Visibility="Hidden" Content="Label" Canvas.Left="99" Canvas.Top="70"/>
+        <Label Name="player4" Visibility="Hidden" Content="Label" Canvas.Left="278" Canvas.Top="70"/>
+        <Label Name="player5" Visibility="Hidden" Content="Label" Canvas.Left="416" Canvas.Top="70"/>
+        <Label Name="player6" Visibility="Hidden" Content="Label" Canvas.Left="516" Canvas.Top="388"/>
+        <Label Name="player7" Visibility="Hidden" Content="Label" Canvas.Left="516" Canvas.Top="243"/>
+        <Label Name="credit" Visibility="Hidden" Content="Label" Canvas.Left="290" Canvas.Top="482"/>
+        <Label Name="betted" Visibility="Hidden" Content="Label" Canvas.Left="290" Canvas.Top="460"/>
+        <Button Name="Quit" Click="Quit_Click" Content="Quit" Canvas.Left="487" Canvas.Top="493" Width="75"/>
+        <Button x:Name="BackToGC" Click="BackToGC_Click"  Content="Back To Game Center" Canvas.Left="487" Canvas.Top="463" Width="75"/>
+        <Button Name="startgameBtn" Visibility="Hidden"/>
     </Canvas>
 </Page>
 

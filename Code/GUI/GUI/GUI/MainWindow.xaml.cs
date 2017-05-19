@@ -20,10 +20,23 @@ namespace GUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        GUIManager manager;
         public MainWindow()
         {
             InitializeComponent();
-            mainFrame.NavigationService.Navigate(new Login(this));
+            manager = new GUIManager(this);
+            manager.ConnectToServer();
+        }
+
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+ /*           if (loggedIn)
+            {
+                Communication.AuthFunctions.Instance.logout(prof.Username);
+            }
+            loggedIn = false;
+            */
         }
     }
 }

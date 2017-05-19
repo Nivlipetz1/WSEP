@@ -13,8 +13,10 @@ namespace GUI.Models
         public NewCardMove(Card[] cards)
         {
             this.cards = cards;
+
         }
     }
+    
     public class GameStartMove : Move
     {
         public IDictionary<string, int> playerBets { set; get; }
@@ -32,10 +34,31 @@ namespace GUI.Models
         public int betAmount { set; get; }
 
         public BetMove(IDictionary<string, int> playerBets, string bettingPlayer, int betAmount)
+
         {
             this.playerBets = playerBets;
             this.bettingPlayer = bettingPlayer;
             this.betAmount = betAmount;
+        }
+
+        public string GetBettingPlayer()
+        {
+            return bettingPlayer;
+        }
+
+        public int GetAmount()
+        {
+            return betAmount;
+        }
+
+        public void setPlayer(string name)
+        {
+            bettingPlayer = name;
+        }
+
+        public void setAmt(int amt)
+        {
+            betAmount = amt;
         }
     }
 
@@ -48,6 +71,15 @@ namespace GUI.Models
         {
             this.playerBets = playerBets;
             this.foldingPlayer = foldingPlayer;
+        }
+
+        public string GetFoldingPlayer()
+        {
+            return foldingPlayer;
+        }
+
+        public void SetFoldPlayer(string name) {
+            foldingPlayer = name;
         }
     }
 
@@ -62,5 +94,6 @@ namespace GUI.Models
             this.playerHands = playerHands;
             this.handRanks = handRanks;
         }
+
     }
 }

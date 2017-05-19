@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace GUI
 {
@@ -20,14 +21,35 @@ namespace GUI
     /// </summary>
     public partial class EditProfile : Page
     {
-        public EditProfile()
+        GUIManager manager;
+        public EditProfile(GUIManager manager)
         {
+            this.manager = manager;
             InitializeComponent();
         }
 
         private void cancelBtn_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "Select a picture";
+            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";
+            if (op.ShowDialog() == true)
+            {
+                //inserted correct avatar file
+            }
+
+        }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            manager.EditProfile(Username.Text,Password.Text);
         }
     }
 }
