@@ -57,9 +57,9 @@ namespace GUI.Communication
 
         public List<List<Move>> getAllReplayesOfInActiveGames()
         {
-            Task<List<List<Move>>> res = gameCenterHubProxy.Invoke<List<List<Move>>>("getAllReplayesOfInActiveGames");
+            Task<string> res = gameCenterHubProxy.Invoke<string>("getAllReplayesOfInActiveGames");
             res.Wait();
-            return res.Result;
+            return MoveTypesConverter.deserializeObject<List<List<Move>>>(res.Result);
         }
 
         public List<ClientGame> getAllSpectatingGames()

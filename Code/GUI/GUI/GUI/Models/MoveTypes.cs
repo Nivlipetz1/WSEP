@@ -8,32 +8,37 @@ namespace GUI.Models
 {
     public class NewCardMove : Move
     {
-        Card[] cards;
-        public Card[] Cards
+        public Card[] cards { set; get; }
+
+        public NewCardMove(Card[] cards)
         {
-            get { return cards; }
-            set { cards = value; }
+            this.cards = cards;
+
         }
     }
+    
     public class GameStartMove : Move
     {
-        private IDictionary<string, int> playerBets;
+        public IDictionary<string, int> playerBets { set; get; }
 
-        public IDictionary<string, int> GetPlayerBets()
+        public GameStartMove(IDictionary<string, int> playerBets)
         {
-            return playerBets;
+            this.playerBets = playerBets;
         }
     }
 
     public class BetMove : Move
     {
-        IDictionary<string, int> playerBets;
-        string bettingPlayer;
-        int betAmount;
+        public IDictionary<string, int> playerBets { set; get; }
+        public string bettingPlayer { set; get; }
+        public int betAmount { set; get; }
 
-        public IDictionary<string, int> GetPlayerBets()
+        public BetMove(IDictionary<string, int> playerBets, string bettingPlayer, int betAmount)
+
         {
-            return playerBets;
+            this.playerBets = playerBets;
+            this.bettingPlayer = bettingPlayer;
+            this.betAmount = betAmount;
         }
 
         public string GetBettingPlayer()
@@ -59,11 +64,13 @@ namespace GUI.Models
 
     public class FoldMove : Move
     {
-        IDictionary<string, int> playerBets;
-        string foldingPlayer;
-        public IDictionary<string, int> GetPlayerBets()
+        public IDictionary<string, int> playerBets { set; get; }
+        public string foldingPlayer { set; get; }
+
+        public FoldMove(IDictionary<string, int> playerBets, string foldingPlayer)
         {
-            return playerBets;
+            this.playerBets = playerBets;
+            this.foldingPlayer = foldingPlayer;
         }
 
         public string GetFoldingPlayer()
@@ -79,11 +86,14 @@ namespace GUI.Models
 
     public class EndGameMove : Move
     {
-        IDictionary<string, PlayerHand> playerHands;
-        public IDictionary<string, PlayerHand> GetPlayerHands()
+        public IDictionary<string, PlayerHand> playerHands { set; get; }
+        public IDictionary<string, CardAnalyzer.HandRank> handRanks { set; get; }
+
+        public EndGameMove(IDictionary<string, PlayerHand> playerHands, IDictionary<string, CardAnalyzer.HandRank> handRanks)
         {
-            return playerHands;
+            this.playerHands = playerHands;
+            this.handRanks = handRanks;
         }
-        IDictionary<string, CardAnalyzer.HandRank> handRanks;
+
     }
 }

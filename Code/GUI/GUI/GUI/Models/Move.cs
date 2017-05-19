@@ -8,5 +8,6 @@ namespace GUI.Models
 {
     public abstract class Move
     {
+        public string type { set; get; }
     }
 }
