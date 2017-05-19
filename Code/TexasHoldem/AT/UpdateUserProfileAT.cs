@@ -7,52 +7,67 @@ using GameSystem;
 using NUnit.Framework;
 using System.Drawing;
 using ServiceLayer;
-
+using ServiceLayer.Models;
+using ServiceLayer.Interfaces;
+using AT.Stubs;
+using System.IO;
 
 namespace AT
 {
     class UpdateUserProfileAT
     {
        
-        private UserSystem_Service us;
+        private AuthSystemServiceInterface us;
         [SetUp]
         public void before()
         {
-            us = new UserSystem_Service();
+            if (SystemService.testable)
+                us = new SystemService();
+            else
+                us = new SystemStub();
+
             us.register("abc", "123");
+        }
+        [TearDown]
+        public void after()
+        {
+            GameCenter.GameCenterFactory.clean();
+            TexasHoldemSystem.userSystemFactory.clean();
         }
 
         [TestCase]
         public void successEditUsername()
         {
             us.login("abc", "123");
-            UserProfile user = us.getUser("abc", "123");
-            Assert.True(us.editUserName("aaaaa", user));
+            ClientUserProfile user = us.getUser("abc");
+            Assert.True(us.editUserName("aaaaa", user.Username));
+            
         }
 
         [TestCase]
         public void badEditUsername_Loggedout()
         {
-            UserProfile user = us.getUser("abc", "123");
-            Assert.False(us.editUserName("aaaaa", user));
+            us.logout("abc");
+            //ClientUserProfile user = us.getUser("abc");
+            Assert.False(us.editUserName("aaaaa", "abc"));
         }
 
         [TestCase]
         public void badEditUsername_Loggedin()
         {
-            us.login("abc", "123"); 
-            UserProfile user = us.getUser("abc", "123");
-            Assert.False(us.editUserName("", user));
-            Assert.False(us.editUserName("   ", user));
+            us.login("abc", "123");
+            ClientUserProfile user = us.getUser("abc");
+            Assert.False(us.editUserName("", user.Username));
+            Assert.False(us.editUserName("   ", user.Username));
         }
 
         [TestCase]
         public void successEditPassword()
         {
             us.login("abc", "123");
-            UserProfile user = us.getUser("abc", "123");
-            us.editPassword("124", user);
-            us.logout(user);
+            ClientUserProfile user = us.getUser("abc");
+            us.editPassword("124", user.Username);
+            us.logout(user.Username);
             Assert.True(us.login("abc", "124"));
         }
 
@@ -60,20 +75,24 @@ namespace AT
         public void badEditPassword()
         {
             us.login("abc", "123");
-            UserProfile user = us.getUser("abc", "123");
-            Assert.False(us.editPassword("", user));
-            Assert.False(us.editPassword("    ", user));
+            ClientUserProfile user = us.getUser("abc");
+            Assert.False(us.editPassword("", user.Username));
+            Assert.False(us.editPassword("    ", user.Username));
         }
 
         [TestCase]
         public void editAvatar()
         {
             
-            Image avatar = new Bitmap("C:\\Users\\pc\\Desktop\\capture.png");
+            Image avatar = new Bitmap(@"C:\Users\pc\Desktop\Capture.PNG");
+            byte[] avatarBytes = ServiceLayer.ImageConverter.imageToByteArray(avatar);
+
             us.login("abc", "123");
-            UserProfile user = us.getUser("abc", "123");
-            Assert.True(us.editAvatar(avatar, user));
-            Assert.AreEqual(user.Avatar, avatar);
+            ClientUserProfile user = us.getUser("abc");
+            Assert.True(us.editAvatar(avatarBytes, user.Username));
+            byte[] arr = ServiceLayer.ImageConverter.imageToByteArray(TexasHoldemSystem.userSystemFactory.getInstance().getUser(user.Username).Avatar);
+            Image a2 = ServiceLayer.ImageConverter.byteArrayToImage(arr);
+            Assert.AreEqual(avatarBytes, arr);
         }
     }
 }

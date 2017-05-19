@@ -10,7 +10,6 @@ namespace GameSystem
 {
     public class TexasHoldemSystem : SystemAPI
     {
-        public delegate void Notify(string message);
         public class userSystemFactory
         {
             private static TexasHoldemSystem instance = null;
@@ -21,10 +20,13 @@ namespace GameSystem
                     return instance=new TexasHoldemSystem();
                 return instance;
             }
+            public static void clean()
+            {
+                instance = null; ;
+            }
         }
         private Dictionary<String, UserProfile> activeUsers;
         private Dictionary<String, UserProfile> users;
-        public static event Notify evt;
         private GameCenter gc;
 
         private TexasHoldemSystem()
@@ -57,13 +59,14 @@ namespace GameSystem
             if (!users.ContainsKey(userName))
             {
                 UserProfile user = new UserProfile(userName, password);
+                user.Credit = 200;
                 users.Add(userName, user);
-                gc.addUserToLeague(user, gc.getLeagueByRank(0));
+                user.League = gc.getLeagueByRank(0);
+                user.League.addUser(user);
                 gc.setUsers(users.Values);
             }
             else return false;
 
-            evt += users[userName].addNotify;
             return true;
         }
 
@@ -118,11 +121,20 @@ namespace GameSystem
             return activeUsers.ContainsKey(username);
         }
 
-        public void notifyAllUsers(String message)
+        public void notifyAllUsers(string message)
         {
-            var e = evt;
-            if (e != null)
-                e(message);
+            NotificationService.Instance.notifyAllUsers(message);
+        }
+
+        public void notify(string userName , string message)
+        {
+            NotificationService.Instance.notifyUser(userName , message);
+        }
+
+        public void clearUsers()
+        {
+            users.Clear();
+            activeUsers.Clear();
         }
     }
 }

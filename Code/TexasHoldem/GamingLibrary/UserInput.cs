@@ -6,8 +6,22 @@ using System.Threading.Tasks;
 
 namespace Gaming
 {
-    interface UserInput
+    class UserInput : UserInputAPI
     {
-        string GetInput();
+        private string amount;
+        private bool hasInputBet = false;
+
+        public string GetInput()
+        {
+            while(!hasInputBet);
+            hasInputBet = false;
+            return amount;
+        }
+
+        public void setInput(string minimumBet)
+        {
+            amount = minimumBet;
+            hasInputBet = true;
+        }
     }
 }

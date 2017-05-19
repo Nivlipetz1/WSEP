@@ -7,9 +7,12 @@ using Gaming;
 
 namespace GameSystem
 {
-    public abstract class GameAPI
+    public interface GameAPI
     {
-        public abstract void sendMessage();
-        public abstract void receiveMessage();
+        List<string> bet(UserProfile player, int gameID, string minimumBet);
+        List<string> removePlayer(UserProfile player, int gameID);
+        List<string> removeSpectator(UserProfile spec, int gameID);
+        List<string> postMessage(UserProfile spec, string message, int gameID);
+        List<string> postWhisperMessage(UserProfile from, UserProfile to, string message, int gameID);
     }
 }

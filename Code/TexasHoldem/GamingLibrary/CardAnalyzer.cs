@@ -368,11 +368,11 @@ namespace Gaming
                     return true;
                 }
             }
-            if (card.equals(hand.getFirst()))
+            if (card.equals(hand.First))
             {
                 return true;
             }
-            if (card.equals(hand.getSecond()))
+            if (card.equals(hand.Second))
             {
                 return true;
             }

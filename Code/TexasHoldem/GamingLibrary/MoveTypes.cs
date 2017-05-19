@@ -8,10 +8,23 @@ namespace Gaming
 {
     public class NewCardMove : Move
     {
-        Card[] cards;
+        private Card[] cards;
         public NewCardMove(Card[] cards)
         {
             this.cards = cards;
+            base.type = "NewCardMove";
+        }
+
+        public Card[] Cards
+        {
+            get
+            {
+                return cards;
+            }
+            set
+            {
+                cards = value;
+            }
         }
 
         public override void update(ref IDictionary<string, int> playerBets, ref Card[] cards, ref IDictionary<string, PlayerHand> playerHands)
@@ -21,31 +34,45 @@ namespace Gaming
     }
     public class GameStartMove : Move
     {
-        IDictionary<string, int> playerBets;
+        private IDictionary<string, int> playerBets;
         
         public GameStartMove(IDictionary<string, int> playerBets)
         {
             this.playerBets = playerBets;
+            base.type = "GameStartMove";
         }
 
         public override void update(ref IDictionary<string, int> playerBets, ref Card[] cards, ref IDictionary<string, PlayerHand> playerHands)
         {
             playerBets = this.playerBets;
+        }
+
+        public IDictionary<string, int> PlayerBets
+        {
+            get
+            {
+                return playerBets;
+            }
+            set
+            {
+                playerBets = value;
+            }
         }
     }
 
     public class BetMove : Move
     {
-        IDictionary<string, int> playerBets;
-        PlayingUser bettingPlayer;
-        int betAmount;
+        private IDictionary<string, int> playerBets;
+        private string bettingPlayer;
+        private int betAmount;
 
         public BetMove(IDictionary<string, int> playerBets, PlayingUser better, int amt)
         {
             this.playerBets = playerBets;
-            bettingPlayer = better;
+            bettingPlayer = better.GetUserName();
             //bettingPlayer.SetStatus("Talked");
             betAmount = amt;
+            base.type = "BetMove";
         }
 
         public override void update(ref IDictionary<string, int> playerBets, ref Card[] cards, ref IDictionary<string, PlayerHand> playerHands)
@@ -56,19 +83,58 @@ namespace Gaming
         public IDictionary<string, int> GetPlayerBets()
         {
             return playerBets;
+        }
+
+
+        public IDictionary<string, int> PlayerBets
+        {
+            get
+            {
+                return playerBets;
+            }
+
+            set
+            {
+                playerBets = value;
+            }
+        }
+
+        public string BettingPlayer
+        {
+            get
+            {
+                return bettingPlayer;
+            }
+            set
+            {
+                bettingPlayer = value;
+            }
+        }
+
+        public int BetAmount
+        {
+            get
+            {
+                return betAmount;
+            }
+            set
+            {
+                betAmount = value;
+            }
         }
     }
 
     public class FoldMove : Move
     {
-        IDictionary<string, int> playerBets;
-        PlayingUser foldingPlayer;
+        private IDictionary<string, int> playerBets;
+        private string foldingPlayer;
 
         public FoldMove(IDictionary<string, int> playerBets, PlayingUser folder)
         {
             this.playerBets = playerBets;
-            foldingPlayer = folder;
+            foldingPlayer = folder.GetUserName();
             //foldingPlayer.SetStatus("Fold");
+            base.type = "FoldMove";
         }
 
         public override void update(ref IDictionary<string, int> playerBets, ref Card[] cards, ref IDictionary<string, PlayerHand> playerHands)
@@ -79,20 +145,69 @@ namespace Gaming
         public IDictionary<string, int> GetPlayerBets()
         {
             return playerBets;
+        }
+
+        public IDictionary<string, int> PlayerBets
+        {
+            get
+            {
+                return playerBets;
+            }
+            set
+            {
+                playerBets = value;
+            }
+        }
+
+        public string FoldingPlayer
+        {
+            get
+            {
+                return foldingPlayer;
+            }
+            set
+            {
+                foldingPlayer = value;
+            }
         }
     }
 
 
     public class EndGameMove : Move
     {
-        IDictionary<string, PlayerHand> playerHands;
-        IDictionary<string, CardAnalyzer.HandRank> handRanks;
-        CardAnalyzer ca = new CardAnalyzer();
+        private IDictionary<string, PlayerHand> playerHands;
+        private IDictionary<string, CardAnalyzer.HandRank> handRanks;
+        private CardAnalyzer ca = new CardAnalyzer();
+
+        public IDictionary<string, PlayerHand> PlayerHands
+        {
+            get
+            {
+                return playerHands;
+            }
+            set
+            {
+                playerHands = value;
+            }
+        }
+
+        public IDictionary<string, CardAnalyzer.HandRank> HandRanks
+        {
+            get
+            {
+                return handRanks;
+            }
+            set
+            {
+                handRanks = value;
+            }
+        }
 
         public EndGameMove(IDictionary<string, PlayerHand> playerHands)
         {
             this.playerHands = playerHands;
             handRanks = new Dictionary<string, CardAnalyzer.HandRank>();
+            base.type = "EndGameMove";
         }
 
         public override void update(ref IDictionary<string, int> playerBets, ref Card[] cards, ref IDictionary<string, PlayerHand> playerHands)
@@ -101,12 +216,12 @@ namespace Gaming
             if (cards != null) //this happens when all fold before flop
             {
                 ca.setCardArray(cards);
-                if (handRanks.Count == 0)
+                if (HandRanks.Count == 0)
                 {
                     foreach (string player in playerHands.Keys)
                     {
                         ca.setHand(playerHands[player]);
-                        handRanks.Add(player, ca.analyze());
+                        HandRanks.Add(player, ca.analyze());
                     }
                 }
             }

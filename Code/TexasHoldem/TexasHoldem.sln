@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameSystem", "TexasHoldem\GameSystem.csproj", "{C25E63FF-8ADC-460D-922B-DC31F600828D}"
 EndProject
@@ -21,6 +21,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLayer", "ServiceLayer\ServiceLayer.csproj", "{5997B991-D27A-4CF4-9C9D-5119FD0DDB64}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemTests", "SystemTests\SystemTests.csproj", "{79EE7E15-5E1F-4932-B7A6-87BF79F07938}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommunicatoinLayer", "CommunicatoinLayer\CommunicatoinLayer.csproj", "{FB1AD5AF-1591-47C5-A0B1-FA566AC07194}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,6 +58,10 @@ Global
 		{79EE7E15-5E1F-4932-B7A6-87BF79F07938}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79EE7E15-5E1F-4932-B7A6-87BF79F07938}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79EE7E15-5E1F-4932-B7A6-87BF79F07938}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB1AD5AF-1591-47C5-A0B1-FA566AC07194}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB1AD5AF-1591-47C5-A0B1-FA566AC07194}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB1AD5AF-1591-47C5-A0B1-FA566AC07194}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB1AD5AF-1591-47C5-A0B1-FA566AC07194}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

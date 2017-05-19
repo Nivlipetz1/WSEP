@@ -72,10 +72,10 @@ namespace GamingTests
         }
 
         [TestCase]
-        public void ActiveGame()
+        public void InitGame()
         {
             Game g = new Game(new GamePreferences());
-            Assert.True(g.GetGamePref().GetStatus().Equals("active"));
+            Assert.True(g.GetGamePref().GetStatus().Equals("init"));
             g.InactivateGame();
             Assert.True(g.GetGamePref().GetStatus().Equals("inactive"));
         }

@@ -11,18 +11,62 @@ namespace Gaming
         private int credit;
         private string status;
         private PlayerHand hand;
-        private UserInput userInput;
+        private UserInputAPI userInput;
+        private CardAnalyzer.HandRank bestHand;
+        private int roundsWon;
+        private int roundsLost;
+        private int biggestPotWon;
 
         public PlayingUser(string name, int credit, Game game) : base (name,game)
         {
             this.credit = credit;
             status = "Active";
+            roundsWon = 0;
+            roundsLost = 0;
+            biggestPotWon = 0;
+            bestHand = CardAnalyzer.HandRank.HighCard;
         }
 
         public void SetFakeUserInput(Queue<string> inputs)
         {
             userInput = new FakeInput(inputs);
         }
+
+        public void setInput(string input)
+        {
+            userInput.setInput(input);
+        }
+
+        public int GetRoundsWon()
+        {
+            return roundsWon;
+        }
+
+        public int GetRoundsLost()
+        {
+            return roundsLost;
+        }
+
+        public void SetRoundsLost(int timesLost)
+        {
+            roundsLost = timesLost;
+        }
+
+        public void SetBestHand(CardAnalyzer.HandRank hr)
+        {
+            bestHand = hr;
+        }
+
+        public CardAnalyzer.HandRank GetBestHand()
+        {
+            return bestHand;
+        }
+
+        public int GetMostWon()
+        {
+            return biggestPotWon;
+        }
+
 
         public int GetCredit()
         {
@@ -51,6 +95,7 @@ namespace Gaming
 
         public int GetBlind(int amount)
         {
+            status = "Active";
             credit -= amount;
             return amount;
         }
@@ -97,11 +142,17 @@ namespace Gaming
 
         internal void ReceiveWinnings(int amount)
         {
+            if (amount > biggestPotWon)
+            {
+                biggestPotWon = amount;
+            }
+
+            roundsWon++;
             credit+=amount;
         }
-    }
+   }
 
-    class FakeInput : UserInput
+    class FakeInput : UserInputAPI
     {
         Queue<string> inputs;
         string input = "0";
@@ -117,5 +168,11 @@ namespace Gaming
             }
             return input;
         }
+
+        public void setInput(string minimumBet)
+        {
+            throw new NotImplementedException();
+        }
     }
+
 }

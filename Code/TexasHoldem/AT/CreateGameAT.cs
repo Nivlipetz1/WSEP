@@ -6,20 +6,45 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using Gaming;
 using ServiceLayer;
+using GameSystem;
+using ServiceLayer.Models;
+using ServiceLayer.Interfaces;
+using AT.Stubs;
 
 namespace AT
 {
     [TestFixture]
     class CreateGameAT
     {
-        GameCenterService gc = new GameCenterService();
+        GCServiceInterface gc;
+        SystemService us;
 
+        [SetUp]
+        public void before()
+        {
+            us = new SystemService();
+            if (GameCenterService.testable)
+                gc = new GameCenterService();
+            else
+                gc = new GameCenterStub();
+            GameCenter.GameCenterFactory.getInstance().createNewLeague(0);
+            us.register("ohad", "213");
+        }
+        [TearDown]
+        public void after()
+        {
+            GameCenter.GameCenterFactory.clean();
+            TexasHoldemSystem.userSystemFactory.clean();
+        }
         [TestCase]
         public void Valid_createGame()
         {
             GamePreferences prefs = new GamePreferences(8, 2, 5, 10, 1, 2, 3, true);
-            gc.createGame(prefs);
-            Assert.AreEqual(gc.getAllActiveGamesByGamePreference(prefs).Count(), 1);
+           // ClientUserProfile ohadUser = new ClientUserProfile (new UserProfile("ohad", "213"));
+            us.login("ohad","213");
+            gc.createGame(prefs, "ohad");
+            Assert.AreEqual(gc.getActiveGames("preferences" , prefs , "ohad").Count(), 1);
+            us.logout("ohad");
         }
 
         [TestCase]
@@ -40,7 +65,7 @@ namespace AT
         public void Invalid_createGame_MaxminPlayers()
         {
             var ex = Assert.Throws<InvalidOperationException>(() => new GamePreferences(0, 2, 5, 10, 1, 2, 3, true));
-            Assert.That(ex.Message == "Minimum number of players must be greater then maximum players");
+            Assert.That(ex.Message == "Maximum number of players must be greater then minimum players");
         }
     }
 }

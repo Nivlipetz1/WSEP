@@ -6,35 +6,46 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using ServiceLayer;
 using GameSystem;
-
+using ServiceLayer.Models;
+using ServiceLayer.Interfaces;
+using AT.Stubs;
 
 namespace AT
 {
     class LogoutAT
     {
-        private SystemAPI us;
+        private AuthSystemServiceInterface us;
 
         [SetUp]
         public void before()
         {
-            us =new UserSystem_Service();
+            if (SystemService.testable)
+                us = new SystemService();
+            else
+                us = new SystemStub();
             us.register("abc", "123");
+        }
+        [TearDown]
+        public void after()
+        {
+            GameCenter.GameCenterFactory.clean();
+            TexasHoldemSystem.userSystemFactory.clean();
         }
 
         [TestCase]
         public void Logout_Loggedin()
         {
             Assert.True(us.login("abc", "123"));
-            UserProfile prof = us.getUser("abc");
-            Assert.True(us.logout(prof));
-            Assert.False(us.logout(prof));
+            ClientUserProfile prof = us.getUser("abc");
+            Assert.True(us.logout(prof.Username));
+            Assert.False(us.logout(prof.Username));
         }
 
         [TestCase]
         public void Logout_NotLoggedin()
         {
-            UserProfile prof = us.getUser("abc");
-            Assert.False(us.logout(prof));
+           // ClientUserProfile prof = us.getUser("abc");
+            Assert.False(us.logout("abc"));
         }
     }
 }
