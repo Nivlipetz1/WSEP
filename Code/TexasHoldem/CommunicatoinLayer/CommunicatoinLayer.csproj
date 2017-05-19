@@ -147,6 +147,7 @@
     <Compile Include="Managers\AuthManager.cs" />
     <Compile Include="Managers\GameCenterManager.cs" />
     <Compile Include="Managers\GameManager.cs" />
+    <Compile Include="Managers\JsonConvertor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
