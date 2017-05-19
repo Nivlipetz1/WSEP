@@ -40,13 +40,10 @@ C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHo
 C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\Gaming.dll
 C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\GamingTests.dll
 C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\Logger.dll
-C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\nunit.framework.dll
-C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\ServiceLayer.dll
 C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\TexasHoldemSystem.exe
 C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\Gaming.pdb
 C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\GamingTests.pdb
 C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\Logger.pdb
-C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\ServiceLayer.pdb
 C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\TexasHoldemSystem.pdb
 C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\nunit.framework.xml
 C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\obj\Debug\AT.csprojResolveAssemblyReference.cache
@@ -70,3 +67,6 @@ D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\
 D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\obj\Debug\AT.csprojResolveAssemblyReference.cache
 D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\obj\Debug\AT.dll
 D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\obj\Debug\AT.pdb
+C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\ServiceLayer.dll
+C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\ServiceLayer.pdb
+C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\nunit.framework.dll
