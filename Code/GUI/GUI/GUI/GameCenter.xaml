@@ -1,0 +1,21 @@
+﻿<Page x:Class="GUI.GameCenter"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GUI"
+      mc:Ignorable="d" 
+      d:DesignHeight="569" d:DesignWidth="825"
+      Title="GameCenter">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="./Images/background4.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
+        <Label Background="Black" OpacityMask="Black" Opacity="50" Foreground="WhiteSmoke" FontSize="35" FontWeight="Bold" FontStretch="Medium" Content="Game Center" HorizontalAlignment="Left" Margin="296,66,0,0" VerticalAlignment="Top"/>
+        <Button Content="Search for Games" HorizontalAlignment="Left" Margin="71,158,0,0" VerticalAlignment="Top" Width="104" Height="33" Click="Search_games_click"/>
+        <Button Click="CreateGame_Click" Content="Create Game" HorizontalAlignment="Left" Margin="71,206,0,0" VerticalAlignment="Top" Width="104" Height="33"/>
+        <Button Content="Replay Games" HorizontalAlignment="Left" Margin="71,250,0,0" VerticalAlignment="Top" Width="104" Height="33" Click="Replay_games_click"/>
+
+    </Grid>
+</Page>

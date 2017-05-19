@@ -1,0 +1,24 @@
+﻿<Page x:Class="GUI.Register"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GUI"
+      mc:Ignorable="d" 
+      d:DesignHeight="569" d:DesignWidth="825"
+      Title="Register">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="./Images/background3.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
+        <Label Content="Register" FontSize="40" Foreground="WhiteSmoke" HorizontalAlignment="Left" Margin="85,52,0,0" VerticalAlignment="Top"/>
+        <Label Content="Username" Foreground="WhiteSmoke" HorizontalAlignment="Left" Margin="85,152,0,0" VerticalAlignment="Top"/>
+        <Label Content="Password" Foreground="WhiteSmoke" HorizontalAlignment="Left" Margin="85,203,0,0" VerticalAlignment="Top"/>
+        <Button Click="RegButton_Click" Name="RegButton" Content="Register" HorizontalAlignment="Left" Margin="420,315,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Click="GoBack_Click" Name="GoBack" Content="Go Back" HorizontalAlignment="Left" Margin="324,315,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBox Name="Username" HorizontalAlignment="Left" Height="23" Margin="189,154,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <PasswordBox x:Name="Password" HorizontalAlignment="Left" Height="23" Margin="189,202,0,0" VerticalAlignment="Top" Width="120"/>
+
+    </Grid>
+</Page>
