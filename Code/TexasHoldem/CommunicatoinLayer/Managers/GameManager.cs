@@ -35,7 +35,7 @@ namespace CommunicatoinLayer.Managers
         private void pushMove(List<string> userNames, Move move, int gameId)
         {
             List<string> connectionIds = userNames.Select(user => AuthManager.Instance.GetConnectionIdByName(user)).ToList();
-            Clients.Clients(connectionIds).pushMove(move, gameId);
+            Clients.Clients(connectionIds).pushMove(JsonConvertor.SerializeObject(move), gameId);
         }
 
 
