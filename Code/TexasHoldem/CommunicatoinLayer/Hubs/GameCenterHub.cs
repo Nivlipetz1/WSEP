@@ -37,12 +37,6 @@ namespace CommunicatoinLayer.Hubs
         public string getAllReplayesOfInActiveGames()
         {
             GameCenterService gc = new GameCenterService();
-            /*List<List<Move>> moves = new List<List<Move>>();
-            List<Move> move = new List<Move>();
-            move.Add(new NewCardMove(new Card[] { new Card(5, Card.Suit.DIAMOND) }));
-            moves.Add(move);
-            var result = (moves);
-            return result;*/
             return JsonConvert.SerializeObject(gc.getAllReplayesOfInActiveGames());
         }
 
