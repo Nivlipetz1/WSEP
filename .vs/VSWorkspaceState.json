@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\Code",
-    "\\Code\\TexasHoldem"
+    "\\Code\\GUI",
+    "\\Code\\GUI\\GUI"
   ],
-  "SelectedNode": "\\Code\\TexasHoldem\\TexasHoldem.sln",
+  "SelectedNode": "\\Code\\GUI\\GUI\\GUI.sln",
   "PreviewInSolutionExplorer": false
 }

@@ -1,0 +1,16 @@
+﻿<Page x:Class="GUI.GameFrame"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GUI"
+      mc:Ignorable="d" 
+      d:DesignHeight="569" d:DesignWidth="825"
+      Title="GameFrame">
+
+    <Grid>
+        <Frame Name="gameFrame" HorizontalAlignment="Left" Width="625"/>
+        <Frame Name="chatFrame" HorizontalAlignment="Right" VerticalAlignment="Top" Height="284.5" Width="200"/>
+        <Frame Name="pmFrame" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="248" Width="200"/>
+    </Grid>
+</Page>

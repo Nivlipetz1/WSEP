@@ -46,7 +46,7 @@ namespace CommunicatoinLayer.Hubs
             return gc.getAllSpectatingGames();
         }
 
-        public async Task<ClientGame> joinGame(int gameId, int credit)
+        public ClientGame joinGame(int gameId, int credit)
         {
             if (!AuthManager.Instance.containsConnection(Context.ConnectionId))
                 return null;
@@ -56,7 +56,7 @@ namespace CommunicatoinLayer.Hubs
             if ((usersToSend = gc.joinGame(gameId, userName, credit)) != null)
             {
                 GameCenterManager.Instance.joinGame(userName, gameId);
-                await Groups.Add(Context.ConnectionId, "game " + gameId);
+                //await Groups.Add(Context.ConnectionId, "game " + gameId);
                 Clients.Clients(usersToSend.Select(user => AuthManager.Instance.GetConnectionIdByName(user)).ToList()).joinGame(gameId, userName);
                 return gc.getGameById(gameId);
             }
@@ -64,7 +64,7 @@ namespace CommunicatoinLayer.Hubs
             return null;
         }
 
-        public async Task<bool> spectateGame(int gameId)
+        public bool spectateGame(int gameId)
         {
             if (!AuthManager.Instance.containsConnection(Context.ConnectionId))
                 return false;
@@ -74,7 +74,7 @@ namespace CommunicatoinLayer.Hubs
             if((usersToSend = gc.spectateGame(gameId, userName)) != null)
             {
                 GameCenterManager.Instance.spectateGame(userName, gameId);
-                await Groups.Add(Context.ConnectionId, "game " + gameId);
+                //await Groups.Add(Context.ConnectionId, "game " + gameId);
                 Clients.Clients(usersToSend.Select(user => AuthManager.Instance.GetConnectionIdByName(user)).ToList()).spectateGame(gameId, userName);
                 return true;
             }
