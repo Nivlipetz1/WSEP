@@ -43,13 +43,10 @@ namespace GUI
 
         public void PushMessage(string sender, string message)
         {
-            Dispatcher.InvokeAsync(() =>
-            {
-                messages.AppendText(sender + ": " + message + "\n");
-                messages.Focus();
-                messages.CaretIndex = messages.Text.Length;
-                messages.ScrollToEnd();
-            });
+            messages.AppendText(sender + ": " + message + "\n");
+            messages.Focus();
+            messages.CaretIndex = messages.Text.Length;
+            messages.ScrollToEnd();
         }
     }
 }
