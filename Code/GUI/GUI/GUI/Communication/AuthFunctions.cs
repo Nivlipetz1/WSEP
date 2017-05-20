@@ -12,6 +12,7 @@ namespace GUI.Communication
     {
         private static Lazy<AuthFunctions> LazyInstance = new Lazy<AuthFunctions>(() => new AuthFunctions(), true);
         private IHubProxy authHubProxy;
+        public ServerToClientFunctions serverToClient { get; set; }
 
         private AuthFunctions()
         {
@@ -34,6 +35,7 @@ namespace GUI.Communication
         {
             authHubProxy.On<string>("notify" , (message) =>
             {
+                serverToClient.Notify(message);
             });
         }
 

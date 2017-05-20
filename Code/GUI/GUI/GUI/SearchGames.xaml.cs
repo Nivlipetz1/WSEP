@@ -36,6 +36,8 @@ namespace GUI
         {
             //send to manager to get results and then
             //show them using showResults
+            List<Models.ClientGame> gameList = manager.SearchGames();
+            showResults(gameList);
         }
 
         private void showResults(List<Models.ClientGame> gameList)

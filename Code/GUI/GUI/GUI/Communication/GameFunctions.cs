@@ -12,6 +12,7 @@ namespace GUI.Communication
     {
         private static Lazy<GameFunctions> LazyInstance = new Lazy<GameFunctions>(() => new GameFunctions(), true);
         private IHubProxy gameHubProxy;
+        public ServerToClientFunctions serverToClient { get; set; }
 
         private GameFunctions()
         {
@@ -35,6 +36,7 @@ namespace GUI.Communication
             gameHubProxy.On<string , int>("pushMove", (serializeMove, gameID) =>
             {
                 Move move = MoveTypesConverter.deserializeObject<Move>(serializeMove);
+                serverToClient.PushMoveToGame(move, gameID);
             });
 
             gameHubProxy.On<string, int>("removePlayer", (user, gameID) =>
@@ -47,6 +49,7 @@ namespace GUI.Communication
 
             gameHubProxy.On<string, string , int>("postMessage", (user, message , gameID) =>
             {
+                
             });
 
             gameHubProxy.On<List<string>, int>("pushWinners", (winners, gameID) =>
@@ -55,10 +58,12 @@ namespace GUI.Communication
 
             gameHubProxy.On<int,int>("yourTurn", (minimumBet , gameId) =>
             {
+                serverToClient.NotifyTurn(minimumBet, gameId);
             });
 
             gameHubProxy.On<PlayerHand, int>("setHand", (playerHand, gameId) =>
             {
+                serverToClient.PushHand(playerHand, gameId);
             });
         }
 
