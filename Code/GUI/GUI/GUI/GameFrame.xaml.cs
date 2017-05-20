@@ -47,5 +47,12 @@ namespace GUI
         {
             return "Game "+game.id;
         }
+
+        internal void RemovePlayer(string username)
+        {
+            GamePM.RemovePlayer(username);
+            GameWindow.removePlayer(username);
+            
+        }
     }
 }
