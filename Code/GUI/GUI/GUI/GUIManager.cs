@@ -253,6 +253,7 @@ namespace GUI
                 await RefreshProfile();
                 GameFrame gameFrame = new GameFrame(this, game);
                 AddGameFrame(gameFrame);
+                gameFrame.Init();
                 NavigateToGameFrame(gameFrame);
             }
             else

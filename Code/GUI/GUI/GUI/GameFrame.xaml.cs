@@ -31,10 +31,15 @@ namespace GUI
             this.manager = manager;
             this.game = game;
             this.gameID = gameID;
+
+        }
+
+        public void Init()
+        {
             InitializeComponent();
-            gameFrame.NavigationService.Navigate(GameWindow = new Game(manager,gameID));
-            chatFrame.NavigationService.Navigate(GameChat = new GameChat(manager,gameID));
-            pmFrame.NavigationService.Navigate(GamePM = new GamePM(manager,gameID));
+            gameFrame.NavigationService.Navigate(GameWindow = new Game(manager, gameID));
+            chatFrame.NavigationService.Navigate(GameChat = new GameChat(manager, gameID));
+            pmFrame.NavigationService.Navigate(GamePM = new GamePM(manager, gameID));
         }
 
         public Models.ClientGame getGame()
