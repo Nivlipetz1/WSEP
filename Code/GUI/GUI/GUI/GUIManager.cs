@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
 using GUI.Models;
+using System.Windows.Media.Imaging;
+using System.IO;
 
 namespace GUI
 {
@@ -80,7 +82,7 @@ namespace GUI
             Communication.Server.Instance.disconnect();
         }
 
-        internal async void EditProfile(string username, string password)
+        internal async void EditProfile(string username, string password, BitmapImage avatar)
         {
             bool changed = false;
             if (!password.Equals(""))
@@ -99,6 +101,25 @@ namespace GUI
                     changed = true;
                 }
             }
+            if (avatar != null)
+            {
+                byte[] data;
+                JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(avatar));
+                using(MemoryStream ms = new MemoryStream())
+                {
+                    encoder.Save(ms);
+                    data = ms.ToArray();
+                }
+
+                if (await Communication.AuthFunctions.Instance.editAvatar(data))
+                {
+                    MessageBox.Show("Avatar Changed!");
+                    changed = true;
+                }
+
+            }
+
             if (changed)
             {
                 await RefreshProfile();
