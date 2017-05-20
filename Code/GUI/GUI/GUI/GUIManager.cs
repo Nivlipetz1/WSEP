@@ -25,6 +25,9 @@ namespace GUI
             this.status = new Status(this);
             gameList = new List<GameFrame>();
             statusWindow = new Status(this);
+            Communication.GameFunctions.Instance.serverToClient = this;
+            Communication.GameCenterFunctions.Instance.serverToClient = this;
+            Communication.AuthFunctions.Instance.serverToClient = this;
         }
 
         public List<GameFrame> gameList { get; set; }

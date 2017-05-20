@@ -25,6 +25,7 @@ namespace GUI
         {
             InitializeComponent();
             manager = new GUIManager(this);
+            
             manager.ConnectToServer();
         }
 
