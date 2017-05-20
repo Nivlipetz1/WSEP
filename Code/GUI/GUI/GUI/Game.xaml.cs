@@ -271,6 +271,7 @@ namespace GUI
             BetAmount.Visibility = Visibility.Hidden;
             Bet_Button.Visibility = Visibility.Hidden;
             Fold_Button.Visibility = Visibility.Hidden;
+            MinimumBetLabel.Visibility = Visibility.Hidden;
         }
 
         public void ShowBetElements()
@@ -278,11 +279,13 @@ namespace GUI
             BetAmount.Visibility = Visibility.Visible;
             Bet_Button.Visibility = Visibility.Visible;
             Fold_Button.Visibility = Visibility.Visible;
+            MinimumBetLabel.Visibility = Visibility.Visible;
         }
 
         public void MyTurn(int minimumBet)
         {
             this.minimumBet = minimumBet;
+            MinimumBetLabel.Content = "Minimum Bet: $" + minimumBet;
             ShowBetElements();
         }
 

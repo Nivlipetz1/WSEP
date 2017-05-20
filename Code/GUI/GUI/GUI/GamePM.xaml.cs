@@ -87,12 +87,10 @@ namespace GUI
         {
             messageList[sender] += sender+ ": "+message + "\n";
             MessageBox.Show("New Personal Message From: "+sender, "Got New Message!", MessageBoxButton.OK, MessageBoxImage.Information);
-            if (users.SelectedValue.ToString().Equals(sender))
-            {
-                messages.Text = messageList[users.SelectedValue.ToString()];
+            users.Text = sender;
+                messages.Text = messageList[sender];
                 messages.CaretIndex = messages.Text.Length;
                 messages.ScrollToEnd();
-            }
         }
     }
 }
