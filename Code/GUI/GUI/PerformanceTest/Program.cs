@@ -18,8 +18,8 @@ namespace PerformanceTest
         static void Main(string[] args)
         {
             username = RandomString(4);
-            testAuthHub(100);
-            GameCenterHubTest(100);
+            testAuthHub(3);
+            GameCenterHubTest(10);
             Console.Read();
         }
         public static void testAuthHub(int N)
@@ -156,7 +156,7 @@ namespace PerformanceTest
                         proxy2.Invoke<ClientGame>("joinGame", gameId[k/3], 50).ContinueWith(resp =>
                         {
                             s.Stop();
-                            joins[k/3] = s.ElapsedMilliseconds;
+                            joins[k] = s.ElapsedMilliseconds;
                             if (resp.IsFaulted)
                             {
                                 Console.WriteLine(resp.Exception.GetBaseException());
@@ -327,11 +327,14 @@ namespace PerformanceTest
         private static double averageTime(long[] time)
         {
             double sum = 0;
+            int nones = 0;
             for(int i=0;i<time.Length;i++)
             {
+                if (time[i] == 0)
+                    nones++;
                 sum += time[i];
             }
-            return sum / time.Length;
+            return sum / (time.Length-nones);
         }
         private static Random random = new Random();
         public static string RandomString(int length)
