@@ -65,7 +65,12 @@ namespace GUI
             }
         }
 
-        internal async List<ClientGame> SearchGames()
+        internal async Task<List<ClientGame>> SearchGames(string criterion,object parameter)
+        {
+            return await Communication.GameCenterFunctions.Instance.getActiveGames(criterion,parameter);
+        }
+
+        internal async Task<List<ClientGame>> SearchGamesToSpectate()
         {
             return await Communication.GameCenterFunctions.Instance.getAllSpectatingGames();
         }
