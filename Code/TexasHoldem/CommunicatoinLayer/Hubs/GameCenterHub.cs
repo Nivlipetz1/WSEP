@@ -57,7 +57,9 @@ namespace CommunicatoinLayer.Hubs
             {
                 GameCenterManager.Instance.joinGame(userName, gameId);
                 //await Groups.Add(Context.ConnectionId, "game " + gameId);
-                Clients.Clients(usersToSend.Select(user => AuthManager.Instance.GetConnectionIdByName(user)).ToList()).joinGame(gameId, userName);
+                SystemService userService = new SystemService();
+                ClientUserProfile userProfile = userService.getUser(userName);
+                Clients.Clients(usersToSend.Select(user => AuthManager.Instance.GetConnectionIdByName(user)).ToList()).joinGame(gameId, userProfile);
                 return gc.getGameById(gameId);
             }
 
@@ -75,7 +77,9 @@ namespace CommunicatoinLayer.Hubs
             {
                 GameCenterManager.Instance.spectateGame(userName, gameId);
                 //await Groups.Add(Context.ConnectionId, "game " + gameId);
-                Clients.Clients(usersToSend.Select(user => AuthManager.Instance.GetConnectionIdByName(user)).ToList()).spectateGame(gameId, userName);
+                SystemService userService = new SystemService();
+                ClientUserProfile userProfile =  userService.getUser(userName);
+                Clients.Clients(usersToSend.Select(user => AuthManager.Instance.GetConnectionIdByName(user)).ToList()).spectateGame(gameId, userProfile);
                 return true;
             }
 

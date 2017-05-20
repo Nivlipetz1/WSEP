@@ -33,12 +33,12 @@ namespace GUI.Communication
 
         public void initOnFunctions()
         {
-            gameCenterHubProxy.On<int , string>("joinGame", (gameID , userName) =>
+            gameCenterHubProxy.On<int , ClientUserProfile>("joinGame", (gameID , userProfile) =>
             {
                 
             });
 
-            gameCenterHubProxy.On<int, string>("spectateGame", (gameID , userName) =>
+            gameCenterHubProxy.On<int, ClientUserProfile>("spectateGame", (gameID , userProfile) =>
             {
             });
         }
