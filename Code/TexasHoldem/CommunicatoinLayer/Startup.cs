@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.SignalR;
+﻿
+using Microsoft.AspNet.SignalR;
 using Newtonsoft.Json;
 using Owin;
 using System;
@@ -14,7 +15,6 @@ namespace CommunicatoinLayer
         {
             // Any connection or hub wire up and configuration should go here
             app.MapSignalR();
-
         }
     }
 }

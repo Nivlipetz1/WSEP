@@ -14,6 +14,6 @@ namespace GUI.Models
         public List<ClientUserProfile> spectators { set; get; }
         public int[] pot { set; get; }
         public GamePreferences gamePref { set; get; }
-        public IDictionary<ClientUserProfile, int> playerBets { set; get; }
+        public Dictionary<ClientUserProfile, int> playerBets { set; get; }
     }
 }

@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI", "GUI\GUI.csproj", "{6242940B-670D-4B8D-A3AC-5837B0701EB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerformanceTest", "PerformanceTest\PerformanceTest.csproj", "{D07CC68E-66FD-4972-BD28-F7C5E3BFDEE3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{6242940B-670D-4B8D-A3AC-5837B0701EB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6242940B-670D-4B8D-A3AC-5837B0701EB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6242940B-670D-4B8D-A3AC-5837B0701EB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D07CC68E-66FD-4972-BD28-F7C5E3BFDEE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D07CC68E-66FD-4972-BD28-F7C5E3BFDEE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D07CC68E-66FD-4972-BD28-F7C5E3BFDEE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D07CC68E-66FD-4972-BD28-F7C5E3BFDEE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
