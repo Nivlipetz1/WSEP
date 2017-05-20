@@ -48,6 +48,7 @@
         <Button Name="Quit" Click="Quit_Click" Content="Quit" Canvas.Left="487" Canvas.Top="493" Width="75"/>
         <Button x:Name="BackToGC" Click="BackToGC_Click"  Content="Game Center" Canvas.Left="487" Canvas.Top="463" Width="75"/>
         <Button Name="startgameBtn" Visibility="Hidden"/>
+        <Label Name="MinimumBetLabel" Content="Label" Visibility="Hidden" Canvas.Left="20" Canvas.Top="440"/>
     </Canvas>
 </Page>
 

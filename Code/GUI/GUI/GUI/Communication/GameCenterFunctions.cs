@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace GUI.Communication
 {
@@ -35,7 +36,10 @@ namespace GUI.Communication
         {
             gameCenterHubProxy.On<int , ClientUserProfile>("joinGame", (gameID , userProfile) =>
             {
-                
+                Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    serverToClient.PlayerJoinedGame(gameID, userProfile);
+                });
             });
 
             gameCenterHubProxy.On<int, ClientUserProfile>("spectateGame", (gameID , userProfile) =>

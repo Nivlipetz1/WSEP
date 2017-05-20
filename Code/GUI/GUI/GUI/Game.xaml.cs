@@ -66,8 +66,8 @@ namespace GUI
         {
             foreach(Image card in playersCards)
             {
-                card.SetValue(Canvas.LeftProperty,241);
-                card.SetValue(Canvas.TopProperty,152);
+                //card.SetValue(Canvas.LeftProperty,241);
+                //card.SetValue(Canvas.TopProperty,152);
             }
         }
 
@@ -146,14 +146,14 @@ namespace GUI
                     TurnCard.Source = new BitmapImage(new Uri(@"Images\Cards\" + cards[3].toImage(), UriKind.Relative));
                     TurnCard.Visibility = Visibility.Visible;
                     snd2.Play();
-                    MoveCard(RiverCard, 0, 40);
+                    MoveCard(TurnCard, 0, 40);
                     revealCard++;
                     break;
                 case 2:
                     RiverCard.Source = new BitmapImage(new Uri(@"Images\Cards\" + cards[4].toImage(), UriKind.Relative));
                     RiverCard.Visibility = Visibility.Visible;
                     snd2.Play();
-                    MoveCard(TurnCard, -70, 40);
+                    MoveCard(RiverCard, -70, 40);
                     revealCard++;
                     break;
             }
@@ -204,6 +204,11 @@ namespace GUI
             int bet = move.GetAmount();
             int index = 0;
             int cardIndex = 0;
+
+            if(move.GetBettingPlayer().Equals(manager.GetProfile().username))
+            {
+                betted.Content = "$" + bet;
+            }
 
             foreach (Models.ClientUserProfile prof in RemoveSelfFromPlayersList(manager.GetPlayers(gameID)))
             {

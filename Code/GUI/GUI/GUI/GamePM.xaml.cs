@@ -50,6 +50,7 @@ namespace GUI
         {
             messageList.Add(prof.username, "");
             users.ItemsSource = messageList.Keys;
+            
         }
 
         public void RemovePlayer(string username)
