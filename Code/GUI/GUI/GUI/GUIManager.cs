@@ -34,18 +34,24 @@ namespace GUI
 
         public void AddGameFrame(GameFrame gameFrame)
         {
-            gameList.Add(gameFrame);
-            status.RefreshGameList();
+            Dispatcher.CurrentDispatcher.InvokeAsync(() =>
+            {
+                gameList.Add(gameFrame);
+                status.RefreshGameList();
+            });
         }
 
 
         public void RemoveGameFrame(GameFrame gf)
         {
-            if (gameList.Contains(gf))
+            Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
-                gameList.Remove(gf);
-                status.RefreshGameList();
-            }
+                if (gameList.Contains(gf))
+                {
+                    gameList.Remove(gf);
+                    status.RefreshGameList();
+                }
+            });
         }
 
         internal void ConnectToServer()
@@ -79,9 +85,11 @@ namespace GUI
 
         public void RemovePlayer(int gameID,string username)
         {
-            GameFrame gameFrame = findGame(gameID);
-            gameFrame.RemovePlayer(username);
-
+            Dispatcher.CurrentDispatcher.InvokeAsync(() =>
+            {
+                GameFrame gameFrame = findGame(gameID);
+                gameFrame.RemovePlayer(username);
+            });
         }
 
         internal async Task<List<ClientGame>> SearchGames(string criterion,object parameter)
@@ -255,8 +263,11 @@ namespace GUI
 
         public void NotifyTurn(int minimumBet, int gameID)
         {
-            GameFrame wantedFrame = findGame(gameID);
-            wantedFrame.GameWindow.MyTurn(minimumBet);
+            Dispatcher.CurrentDispatcher.InvokeAsync(() =>
+            {
+                GameFrame wantedFrame = findGame(gameID);
+                wantedFrame.GameWindow.MyTurn(minimumBet);
+            });
         }
 
         internal async void JoinGame(int gameID, int credit)
@@ -283,8 +294,11 @@ namespace GUI
 
         public void PushHand(Models.PlayerHand hand, int gameID)
         {
-            GameFrame wantedFrame = findGame(gameID);
-            wantedFrame.GameWindow.DealCards(hand);
+            Dispatcher.CurrentDispatcher.InvokeAsync(() =>
+            {
+                GameFrame wantedFrame = findGame(gameID);
+                wantedFrame.GameWindow.DealCards(hand);
+            });
         }
 
         public void Notify(string message)
@@ -294,27 +308,30 @@ namespace GUI
 
         public void PushMoveToGame(Models.Move move, int gameID)
         {
-            GameFrame wantedFrame = findGame(gameID);
-            if (move is Models.BetMove)
+            Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
-                wantedFrame.GameWindow.PushBetMove((Models.BetMove)move);
-            }
-            else if (move is Models.FoldMove)
-            {
-                wantedFrame.GameWindow.PushFoldMove((Models.FoldMove)move);
-            }
-            else if (move is Models.GameStartMove)
-            {
-                wantedFrame.GameWindow.PushGameStartMove((Models.GameStartMove)move);
-            }
-            else if (move is Models.NewCardMove)
-            {
-                wantedFrame.GameWindow.NewCardMove((Models.NewCardMove)move);
-            }
-            else if (move is Models.EndGameMove)
-            {
-                wantedFrame.GameWindow.PushEndGameMove((Models.EndGameMove)move);
-            }
+                GameFrame wantedFrame = findGame(gameID);
+                if (move is Models.BetMove)
+                {
+                    wantedFrame.GameWindow.PushBetMove((Models.BetMove)move);
+                }
+                else if (move is Models.FoldMove)
+                {
+                    wantedFrame.GameWindow.PushFoldMove((Models.FoldMove)move);
+                }
+                else if (move is Models.GameStartMove)
+                {
+                    wantedFrame.GameWindow.PushGameStartMove((Models.GameStartMove)move);
+                }
+                else if (move is Models.NewCardMove)
+                {
+                    wantedFrame.GameWindow.NewCardMove((Models.NewCardMove)move);
+                }
+                else if (move is Models.EndGameMove)
+                {
+                    wantedFrame.GameWindow.PushEndGameMove((Models.EndGameMove)move);
+                }
+            });
         }
 
         internal async void QuitGame(int gameID)
@@ -372,8 +389,11 @@ namespace GUI
 
         public void PushPMMessage(int gameId, string sender, string message)
         {
-            GameFrame gameFrame = findGame(gameId);
-            gameFrame.GamePM.PushMessage(sender, message);
+            Dispatcher.CurrentDispatcher.InvokeAsync(() =>
+            {
+                GameFrame gameFrame = findGame(gameId);
+                gameFrame.GamePM.PushMessage(sender, message);
+            });
         }
 
         public void PushChatMessage(int gameId, string sender, string message)
