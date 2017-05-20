@@ -19,9 +19,9 @@ namespace GUI.Models
     
     public class GameStartMove : Move
     {
-        public IDictionary<string, int> playerBets { set; get; }
+        public Dictionary<string, int> playerBets { set; get; }
 
-        public GameStartMove(IDictionary<string, int> playerBets)
+        public GameStartMove(Dictionary<string, int> playerBets)
         {
             this.playerBets = playerBets;
         }
@@ -29,11 +29,11 @@ namespace GUI.Models
 
     public class BetMove : Move
     {
-        public IDictionary<string, int> playerBets { set; get; }
+        public Dictionary<string, int> playerBets { set; get; }
         public string bettingPlayer { set; get; }
         public int betAmount { set; get; }
 
-        public BetMove(IDictionary<string, int> playerBets, string bettingPlayer, int betAmount)
+        public BetMove(Dictionary<string, int> playerBets, string bettingPlayer, int betAmount)
 
         {
             this.playerBets = playerBets;
@@ -64,10 +64,10 @@ namespace GUI.Models
 
     public class FoldMove : Move
     {
-        public IDictionary<string, int> playerBets { set; get; }
+        public Dictionary<string, int> playerBets { set; get; }
         public string foldingPlayer { set; get; }
 
-        public FoldMove(IDictionary<string, int> playerBets, string foldingPlayer)
+        public FoldMove(Dictionary<string, int> playerBets, string foldingPlayer)
         {
             this.playerBets = playerBets;
             this.foldingPlayer = foldingPlayer;
@@ -86,10 +86,10 @@ namespace GUI.Models
 
     public class EndGameMove : Move
     {
-        public IDictionary<string, PlayerHand> playerHands { set; get; }
-        public IDictionary<string, CardAnalyzer.HandRank> handRanks { set; get; }
+        public Dictionary<string, PlayerHand> playerHands { set; get; }
+        public Dictionary<string, CardAnalyzer.HandRank> handRanks { set; get; }
 
-        public EndGameMove(IDictionary<string, PlayerHand> playerHands, IDictionary<string, CardAnalyzer.HandRank> handRanks)
+        public EndGameMove(Dictionary<string, PlayerHand> playerHands, Dictionary<string, CardAnalyzer.HandRank> handRanks)
         {
             this.playerHands = playerHands;
             this.handRanks = handRanks;

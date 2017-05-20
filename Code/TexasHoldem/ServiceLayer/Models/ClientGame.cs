@@ -16,7 +16,7 @@ namespace ServiceLayer.Models
         private List<ClientUserProfile> spectators;
         private int[] pot;
         private GamePreferences gamePref;
-        private IDictionary<ClientUserProfile, int> playerBets = new Dictionary<ClientUserProfile, int>();
+        private Dictionary<string, int> playerBets = new Dictionary<string, int>();
 
         public ClientGame(Game game)
         {
@@ -30,7 +30,7 @@ namespace ServiceLayer.Models
             spectators = game.GetSpectators().Select(pl => new ClientUserProfile(system.getUser(pl.GetUserName()))).ToList();
 
             foreach (KeyValuePair<PlayingUser, int> p in game.getplayerBets())
-                playerBets.Add(new KeyValuePair<ClientUserProfile, int>(new ClientUserProfile(system.getUser(p.Key.GetUserName())), p.Value));
+                playerBets.Add(p.Key.GetUserName(), p.Value);
         }
 
         public int getID()
@@ -103,7 +103,7 @@ namespace ServiceLayer.Models
             }
         }
 
-        public IDictionary<ClientUserProfile, int> PlayerBets
+        public Dictionary<string, int> PlayerBets
         {
             get
             {
