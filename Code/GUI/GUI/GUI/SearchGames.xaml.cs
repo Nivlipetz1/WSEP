@@ -32,10 +32,47 @@ namespace GUI
             NavigationService.GoBack();
         }
 
-        private void Find_game_Click(object sender, RoutedEventArgs e)
+        private async void Find_game_Click(object sender, RoutedEventArgs e)
         {
             //send to manager to get results and then
             //show them using showResults
+            string criterion = "";
+            object param = null;
+            if (!player_name.Text.Equals(""))
+            {
+                criterion = "playerName";
+                param = player_name.Text;
+            }
+            else if(!pot_size.Text.Equals(""))
+            {
+                criterion = "potsize";
+                param = pot_size.Text;
+            }
+            else if (gamePrefFieldsEdited())
+            {
+                int sB = -1;
+                int bI = -1;
+                int tP = -1;
+                int cP = -1;
+                Int32.TryParse(small_blind.Text, out sB);
+                Int32.TryParse(buy_in.Text, out bI);
+                Int32.TryParse(Type_Policy.Text, out tP);
+                Int32.TryParse(chip_policy.Text, out cP);
+                bool aS = Allow_Spec.IsChecked.Value;
+                param = new Models.GamePreferences(-1, -1, sB, -1, tP, bI, cP, aS);
+                criterion = "gamepreference";
+            }
+
+            List<Models.ClientGame> gameList = await manager.SearchGames(criterion, param);
+            showResults(gameList);
+        }
+
+        private bool gamePrefFieldsEdited()
+        {
+            return !small_blind.Text.Equals("") ||
+                    !buy_in.Text.Equals("") ||
+                    !Type_Policy.Text.Equals("") ||
+                    !chip_policy.Text.Equals("");
         }
 
         private void showResults(List<Models.ClientGame> gameList)
@@ -72,6 +109,12 @@ namespace GUI
         private void spectateBtn_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private async void Spec_Click(object sender, RoutedEventArgs e)
+        {
+            List<Models.ClientGame> gameList = await manager.SearchGamesToSpectate();
+            showResults(gameList);
         }
     }
 }
