@@ -171,6 +171,23 @@ namespace GUI
             UserCard2.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.Second.toImage(), UriKind.Relative));
             UserCard1.Visibility = Visibility.Visible;
             UserCard2.Visibility = Visibility.Visible;
+            snd.Play();
+            MoveCard(Card1, 55, -150);
+            MoveCard(Card2, 70, -150);
+            MoveCard(Card3, -130, -150);
+            MoveCard(Card4, -145, -150);
+            MoveCard(Card5, 200, -150);
+            MoveCard(Card6, 215, -150);
+            MoveCard(Card7, 290, 20);
+            MoveCard(Card8, 305, 20);
+            MoveCard(Card9, 290, 170);
+            MoveCard(Card10, 305, 170);
+            MoveCard(Card11, -190, 170);
+            MoveCard(Card12, -205, 170);
+            MoveCard(Card13, -190, 20);
+            MoveCard(Card14, -205, 20);
+            MoveCard(UserCard1, 0, 220);
+            MoveCard(UserCard2, 30, 220);
         }
 
         public void PushBetMove(Models.BetMove move)
@@ -284,8 +301,8 @@ namespace GUI
                         Models.PlayerHand hand = move.playerHands[username];
                         lbl.Content = lbl.Content.ToString() + " with hand: " + hand.toString();
                         //FLIP THE CARDS:
-                        //playersCards[cardIndex]= new BitmapImage(new Uri(@"Images\Cards\" + hand.First.toImage(), UriKind.Relative));
-                        //playersCards[cardIndex+1] = new BitmapImage(new Uri(@"Images\Cards\" + hand.Second.toImage(), UriKind.Relative));
+                        playersCards[cardIndex].Source =  new BitmapImage(new Uri(@"Images\Cards\" + hand.First.toImage(), UriKind.Relative));
+                        playersCards[cardIndex+1].Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.Second.toImage(), UriKind.Relative));
                     }
                 }
 

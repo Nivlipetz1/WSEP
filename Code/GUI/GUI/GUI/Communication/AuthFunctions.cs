@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace GUI.Communication
 {
@@ -35,8 +36,11 @@ namespace GUI.Communication
         {
             authHubProxy.On<string>("notify" , (message) =>
             {
-                serverToClient.Notify(message);
-            });
+                Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    serverToClient.Notify(message);
+                });
+        });
         }
 
         public async Task<bool> register(string userName, string password)
