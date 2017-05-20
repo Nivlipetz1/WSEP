@@ -12,6 +12,7 @@ namespace GUI.Communication
     {
         private static Lazy<GameCenterFunctions> LazyInstance = new Lazy<GameCenterFunctions>(() => new GameCenterFunctions(), true);
         private IHubProxy gameCenterHubProxy;
+        public ServerToClientFunctions serverToClient { get; set; }
 
         private GameCenterFunctions()
         {
@@ -32,11 +33,12 @@ namespace GUI.Communication
 
         public void initOnFunctions()
         {
-            gameCenterHubProxy.On<int , string>("joinGame", (gameID , userName) =>
+            gameCenterHubProxy.On<int , ClientUserProfile>("joinGame", (gameID , userProfile) =>
             {
+                
             });
 
-            gameCenterHubProxy.On<int, string>("spectateGame", (gameID , userName) =>
+            gameCenterHubProxy.On<int, ClientUserProfile>("spectateGame", (gameID , userProfile) =>
             {
             });
         }

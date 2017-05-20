@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using Gaming;
+using System.Threading;
 
 namespace GameSystem
 {
     public class GameCenter : LeagueAPI , GameCenterInterface
     {
         List<Game> games = new List<Game>();
-
+        private static int GAMEID = 0;
         Dictionary<int, League> leagues = new Dictionary<int, League>();
         private ICollection<UserProfile> Users;
 
@@ -36,7 +37,8 @@ namespace GameSystem
 
         public Game createGame(GamePreferences preferecnces , UserProfile user)
         {
-            Game game = new Game(preferecnces);
+            Game game = new Game(GAMEID,preferecnces);
+            GAMEID++;
             games.Add(game);
             user.League.addGame(game);
             game.evt += updateLeagueToUser;

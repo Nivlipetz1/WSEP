@@ -215,6 +215,26 @@ namespace GUI
             }
         }
 
+        public void removePlayer(string username)
+        {
+            int index = 0;
+            int cardIndex = 0;
+
+            foreach (Models.ClientUserProfile prof in RemoveSelfFromPlayersList(manager.GetPlayers(gameID)))
+            {
+                if (prof.username.Equals(username))
+                {
+                    Label lbl = playerLabels.ElementAt(index);
+                    lbl.Visibility = Visibility.Hidden;
+                    playersCards.ElementAt(cardIndex).Visibility = Visibility.Hidden;
+                    playersCards.ElementAt(cardIndex + 1).Visibility = Visibility.Hidden;
+                    break;
+                }
+                index++;
+                cardIndex += 2;
+            }
+        }
+
         public void HideBetElements()
         {
             BetAmount.Visibility = Visibility.Hidden;

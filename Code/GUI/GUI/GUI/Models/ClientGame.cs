@@ -14,6 +14,24 @@ namespace GUI.Models
         public List<ClientUserProfile> spectators { set; get; }
         public int[] pot { set; get; }
         public GamePreferences gamePref { set; get; }
-        public Dictionary<ClientUserProfile, int> playerBets { set; get; }
+        public Dictionary<string, int> playerBets { set; get; }
+
+
+        public void RemovePlayer(string username)
+        {
+            foreach(ClientUserProfile prof in players)
+            {
+                if (prof.username.Equals(username))
+                {
+                    players.Remove(prof);
+                    return;
+                }
+            }
+        }
+
+        public void AddPlayer(ClientUserProfile profile)
+        {
+            players.Add(profile);
+        }
     }
 }

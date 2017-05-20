@@ -22,9 +22,13 @@ namespace GUI
     public partial class EditProfile : Page
     {
         GUIManager manager;
-        public EditProfile(GUIManager manager)
+        UserMainPage mainPage;
+        BitmapImage avatar;
+        public EditProfile(GUIManager manager, UserMainPage mainPage)
         {
             this.manager = manager;
+            this.mainPage = mainPage;
+            avatar = null;
             InitializeComponent();
         }
 
@@ -40,16 +44,18 @@ namespace GUI
             op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
               "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
               "Portable Network Graphic (*.png)|*.png";
+
             if (op.ShowDialog() == true)
             {
-                //inserted correct avatar file
+                if (op.CheckFileExists){
+                    avatar = new BitmapImage(new Uri(op.FileName, UriKind.Relative));
+                }
             }
-
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            manager.EditProfile(Username.Text,Password.Text);
+            manager.EditProfile(Username.Text,Password.Text, avatar,mainPage);
         }
     }
 }

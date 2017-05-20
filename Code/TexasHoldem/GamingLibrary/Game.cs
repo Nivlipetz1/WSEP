@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Logger;
+using System.Collections.ObjectModel;
+using System.Threading;
 
 namespace Gaming
 {
@@ -11,7 +13,7 @@ namespace Gaming
     {
         private int id;
         private Deck gameDeck;
-        private List<PlayingUser> players; //these will be of type playingUsers
+        private ObservableCollection<PlayingUser> players; //these will be of type playingUsers
         private List<PlayingUser> waitingList; //these will be of type playingUsers
         private List<SpectatingUser> spectators; //these will be of type spectators
         private int[] pot; // pot[0] = main pot ||| pot[1] = sidepot
@@ -24,13 +26,29 @@ namespace Gaming
         private Card[] cards;
         private GameChat chat;
         private bool gameEnded;
+        private GamePreferences preferecnces;
+
         public delegate void Update(PlayingUser user);
         public event Update evt;
 
         public Game(GamePreferences gp)
         {
             gameDeck = new Deck();
-            players = new List<PlayingUser>();
+            players = new ObservableCollection<PlayingUser>();
+            waitingList = new List<PlayingUser>();
+            spectators = new List<SpectatingUser>();
+            pot = new int[2];
+            ca = new CardAnalyzer();
+            gamePref = gp;
+            logger = new GameLogger();
+            chat = new GameChat(this);
+        }
+
+        public Game(int gAMEID, GamePreferences gp)
+        {
+            this.id = gAMEID;
+            gameDeck = new Deck();
+            players = new ObservableCollection<PlayingUser>();
             waitingList = new List<PlayingUser>();
             spectators = new List<SpectatingUser>();
             pot = new int[2];
@@ -57,6 +75,7 @@ namespace Gaming
 
         public void StartGame()
         {
+                
             gamePref.SetStatus("active");
 
             while (waitingList.Count > 0)
@@ -443,6 +462,11 @@ namespace Gaming
             //player.GetAccount().Credit -= player.GetCredit(); //gamecenter
             players.Add(player);
             playerBets.Add(player, 0);
+            if (players.Count >= gamePref.GetMinPlayers())
+            {
+                Thread thread = new Thread(new ThreadStart(StartGame));
+                thread.Start();
+            }
         }
 
         public void removeWaitingPlayer(PlayingUser player)
@@ -545,7 +569,7 @@ namespace Gaming
 
         public List<PlayingUser> GetPlayers()
         {
-            return players;
+            return players.ToList();
         }
 
         public List<SpectatingUser> GetSpectators()

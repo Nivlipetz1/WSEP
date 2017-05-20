@@ -49,8 +49,7 @@ namespace CommunicatoinLayer.Hubs
             string user = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             GameService gs = new GameService();
             List<string> usersToSend = gs.postMessage(user, message , gameID);
-            usersToSend.Remove(user);
-            Clients.Clients(usersToSend.Select(u => AuthManager.Instance.GetConnectionIdByName(u)).ToList()).postMessage(user, message , gameID);
+            Clients.Clients(usersToSend.Select(u => AuthManager.Instance.GetConnectionIdByName(u)).ToList()).pushMessage(user, message , gameID);
             return true;
         }
 
@@ -62,7 +61,7 @@ namespace CommunicatoinLayer.Hubs
             GameService gs = new GameService();
             List<string> usersToSend = gs.postWhisperMessage(from , to , message, gameID);
             usersToSend.Remove(from);
-            Clients.Clients(usersToSend.Select(u => AuthManager.Instance.GetConnectionIdByName(u)).ToList()).postMessage(from, message, gameID);
+            Clients.Clients(usersToSend.Select(u => AuthManager.Instance.GetConnectionIdByName(u)).ToList()).pushWhisperMessage(from, message, gameID);
             return true;
         }
     }
