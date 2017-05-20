@@ -49,7 +49,6 @@ namespace CommunicatoinLayer.Hubs
             string user = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             GameService gs = new GameService();
             List<string> usersToSend = gs.postMessage(user, message , gameID);
-            usersToSend.Remove(user);
             Clients.Clients(usersToSend.Select(u => AuthManager.Instance.GetConnectionIdByName(u)).ToList()).pushMessage(user, message , gameID);
             return true;
         }
