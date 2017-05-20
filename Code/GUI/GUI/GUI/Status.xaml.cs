@@ -32,6 +32,7 @@ namespace GUI
             GameList.Items.Clear();
             foreach (GameFrame gf in manager.GetGameFrameList())
                 GameList.Items.Add(gf.ToString());
+            GameList.Items.Refresh();
         }
 
         public void RefreshStatus()

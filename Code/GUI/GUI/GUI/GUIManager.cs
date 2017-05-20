@@ -191,6 +191,7 @@ namespace GUI
         private GameFrame findGame(int gameID)
         {
             GameFrame wantedFrame = null;
+            //while (gameList.Count == 0) ;
             foreach (GameFrame gf in gameList)
             {
                 if (gf.getGame().id == gameID)
@@ -383,11 +384,19 @@ namespace GUI
             return status;
         }
 
-        /*public void PlayerJoinedGame(int gameID,string username)
+        public void PlayerJoinedGame(int gameID,Models.ClientUserProfile prof)
         {
-            GameFrame gameFrame = findGame(gameID);
-            gameFrame.
-        }*/
+            Dispatcher.CurrentDispatcher.InvokeAsync(() =>
+            {
+                GameFrame gameFrame = findGame(gameID);
+                if (gameFrame!=null)
+                {
+                    gameFrame.GamePM.AddPlayer(prof);
+
+                    gameFrame.getGame().AddPlayer(prof);
+                }
+            });
+        }
 
         public void PushPMMessage(int gameId, string sender, string message)
         {

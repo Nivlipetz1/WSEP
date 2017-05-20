@@ -62,6 +62,15 @@ namespace GUI
 
         }
 
+        private void RepositionCards()
+        {
+            foreach(Image card in playersCards)
+            {
+                //card.SetValue(Canvas.LeftProperty,241);
+                //card.SetValue(Canvas.TopProperty,152);
+            }
+        }
+
         public void Button_Click(object sender, RoutedEventArgs e)
         {
 
@@ -137,14 +146,14 @@ namespace GUI
                     TurnCard.Source = new BitmapImage(new Uri(@"Images\Cards\" + cards[3].toImage(), UriKind.Relative));
                     TurnCard.Visibility = Visibility.Visible;
                     snd2.Play();
-                    MoveCard(RiverCard, 0, 40);
+                    MoveCard(TurnCard, 0, 40);
                     revealCard++;
                     break;
                 case 2:
                     RiverCard.Source = new BitmapImage(new Uri(@"Images\Cards\" + cards[4].toImage(), UriKind.Relative));
                     RiverCard.Visibility = Visibility.Visible;
                     snd2.Play();
-                    MoveCard(TurnCard, -70, 40);
+                    MoveCard(RiverCard, -70, 40);
                     revealCard++;
                     break;
             }
@@ -171,6 +180,23 @@ namespace GUI
             UserCard2.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.Second.toImage(), UriKind.Relative));
             UserCard1.Visibility = Visibility.Visible;
             UserCard2.Visibility = Visibility.Visible;
+            snd.Play();
+            MoveCard(Card1, 55, -150);
+            MoveCard(Card2, 70, -150);
+            MoveCard(Card3, -130, -150);
+            MoveCard(Card4, -145, -150);
+            MoveCard(Card5, 200, -150);
+            MoveCard(Card6, 215, -150);
+            MoveCard(Card7, 290, 20);
+            MoveCard(Card8, 305, 20);
+            MoveCard(Card9, 290, 170);
+            MoveCard(Card10, 305, 170);
+            MoveCard(Card11, -190, 170);
+            MoveCard(Card12, -205, 170);
+            MoveCard(Card13, -190, 20);
+            MoveCard(Card14, -205, 20);
+            MoveCard(UserCard1, 0, 220);
+            MoveCard(UserCard2, 30, 220);
         }
 
         public void PushBetMove(Models.BetMove move)
@@ -178,6 +204,11 @@ namespace GUI
             int bet = move.GetAmount();
             int index = 0;
             int cardIndex = 0;
+
+            if(move.GetBettingPlayer().Equals(manager.GetProfile().username))
+            {
+                betted.Content = "$" + bet;
+            }
 
             foreach (Models.ClientUserProfile prof in RemoveSelfFromPlayersList(manager.GetPlayers(gameID)))
             {
@@ -240,6 +271,7 @@ namespace GUI
             BetAmount.Visibility = Visibility.Hidden;
             Bet_Button.Visibility = Visibility.Hidden;
             Fold_Button.Visibility = Visibility.Hidden;
+            MinimumBetLabel.Visibility = Visibility.Hidden;
         }
 
         public void ShowBetElements()
@@ -247,16 +279,19 @@ namespace GUI
             BetAmount.Visibility = Visibility.Visible;
             Bet_Button.Visibility = Visibility.Visible;
             Fold_Button.Visibility = Visibility.Visible;
+            MinimumBetLabel.Visibility = Visibility.Visible;
         }
 
         public void MyTurn(int minimumBet)
         {
             this.minimumBet = minimumBet;
+            MinimumBetLabel.Content = "Minimum Bet: $" + minimumBet;
             ShowBetElements();
         }
 
         public void PushGameStartMove(Models.GameStartMove move)
         {
+            RepositionCards();
             MessageBox.Show("Game Started!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             betted.Content = "$0";
             betted.Visibility = Visibility.Visible;
@@ -284,14 +319,15 @@ namespace GUI
                         Models.PlayerHand hand = move.playerHands[username];
                         lbl.Content = lbl.Content.ToString() + " with hand: " + hand.toString();
                         //FLIP THE CARDS:
-                        //playersCards[cardIndex]= new BitmapImage(new Uri(@"Images\Cards\" + hand.First.toImage(), UriKind.Relative));
-                        //playersCards[cardIndex+1] = new BitmapImage(new Uri(@"Images\Cards\" + hand.Second.toImage(), UriKind.Relative));
+                        playersCards[cardIndex].Source =  new BitmapImage(new Uri(@"Images\Cards\" + hand.First.toImage(), UriKind.Relative));
+                        playersCards[cardIndex+1].Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.Second.toImage(), UriKind.Relative));
                     }
                 }
 
                 index++;
                 cardIndex += 2;
             }
+            
 
         }
 
@@ -311,6 +347,7 @@ namespace GUI
                     cardIndex += 2;
                 }
             }
+            
         }
 
 
@@ -350,11 +387,13 @@ namespace GUI
         private IEnumerable<Models.ClientUserProfile> RemoveSelfFromPlayersList(IEnumerable<Models.ClientUserProfile> players)
         {
             //create new list everytime, to not override the list in other clients.. (i think thats how it works)
-            List<Models.ClientUserProfile> newPlayers = players.ToList();
-
-            if (newPlayers.Contains(manager.GetProfile()))
+            List<Models.ClientUserProfile> newPlayers = new List<Models.ClientUserProfile>();
+            string userName = manager.GetProfile().username;
+            foreach(Models.ClientUserProfile prof in players)
             {
-                newPlayers.Remove(manager.GetProfile());
+                if (!prof.username.Equals(userName))
+                    newPlayers.Add(prof);
+
             }
 
             return newPlayers;

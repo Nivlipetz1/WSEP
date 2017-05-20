@@ -31,33 +31,39 @@ namespace GUI
             messageList = new Dictionary<string,string>();
             foreach(Models.ClientUserProfile prof in manager.GetPlayers(gameID))
             {
-                users.Items.Add(prof.username);
-                messageList.Add(prof.username, "");
+                if (!prof.username.Equals(manager.GetProfile().username))
+                {
+                    messageList.Add(prof.username, "");
+                }
             }
             foreach (Models.ClientUserProfile prof in manager.GetSpectators(gameID))
             {
-                users.Items.Add(prof.username);
-                messageList.Add(prof.username, "");
+                if (!prof.username.Equals(manager.GetProfile().username))
+                {
+                    messageList.Add(prof.username, "");
+                }
             }
+            users.ItemsSource = messageList.Keys;
         }
 
         public void AddPlayer(Models.ClientUserProfile prof)
         {
-            users.Items.Add(prof.username);
             messageList.Add(prof.username, "");
+            users.ItemsSource = messageList.Keys;
+            
         }
 
         public void RemovePlayer(string username)
         {
-            users.Items.Remove(username);
             messageList.Remove(username);
+            users.ItemsSource = messageList.Keys;
         }
 
         private async void SendMessage_Click(object sender, RoutedEventArgs e)
         {
             if (!message.Text.Equals(""))
             {
-                if(await manager.SendPMMessage(users.SelectedValue.ToString(),message.Text,gameID)){
+                if(await manager.SendPMMessage(users.SelectedItem as string,message.Text,gameID)){
 
                 messages.AppendText(message.Text + "\n");
                 messageList[users.Text] += message.Text + "\n";
@@ -81,12 +87,10 @@ namespace GUI
         {
             messageList[sender] += sender+ ": "+message + "\n";
             MessageBox.Show("New Personal Message From: "+sender, "Got New Message!", MessageBoxButton.OK, MessageBoxImage.Information);
-            if (users.SelectedValue.ToString().Equals(sender))
-            {
-                messages.Text = messageList[users.SelectedValue.ToString()];
+            users.Text = sender;
+                messages.Text = messageList[sender];
                 messages.CaretIndex = messages.Text.Length;
                 messages.ScrollToEnd();
-            }
         }
     }
 }

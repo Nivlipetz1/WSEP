@@ -37,8 +37,11 @@ namespace GUI.Communication
         {
             gameHubProxy.On<string , int>("pushMove", (serializeMove, gameID) =>
             {
-                Move move = MoveTypesConverter.deserializeObject<Move>(serializeMove);
-                serverToClient.PushMoveToGame(move, gameID);
+                Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    Move move = MoveTypesConverter.deserializeObject<Move>(serializeMove);
+                    serverToClient.PushMoveToGame(move, gameID);
+                });
             });
 
             gameHubProxy.On<string, int>("removePlayer", (user, gameID) =>
@@ -60,7 +63,11 @@ namespace GUI.Communication
 
             gameHubProxy.On<string, string, int>("pushWhisperMessage", (from, message, gameID) =>
             {
-                serverToClient.PushPMMessage(gameID, from, message);
+                
+                Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    serverToClient.PushPMMessage(gameID, from, message);
+                });
             });
 
             gameHubProxy.On<List<string>, int>("pushWinners", (winners, gameID) =>
@@ -69,12 +76,18 @@ namespace GUI.Communication
 
             gameHubProxy.On<int,int>("yourTurn", (minimumBet , gameId) =>
             {
-                serverToClient.NotifyTurn(minimumBet, gameId);
+                Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    serverToClient.NotifyTurn(minimumBet, gameId);
+                });
             });
 
             gameHubProxy.On<PlayerHand, int>("setHand", (playerHand, gameId) =>
             {
-                serverToClient.PushHand(playerHand, gameId);
+                Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    serverToClient.PushHand(playerHand, gameId);
+                });
             });
         }
 

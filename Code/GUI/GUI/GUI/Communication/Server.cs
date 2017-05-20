@@ -24,8 +24,8 @@ namespace GUI.Communication
         {
             try
             {
-                hubConnection = new HubConnection("http://52.29.58.18:80/");
-                hubConnection.Error += (error) => { throw new Exception("server error: " + error); } ;
+                hubConnection = new HubConnection("http://192.168.0.104:80/");
+                hubConnection.Error += (error) => { throw new Exception("server error: " + error.GetBaseException()); } ;
                 IHubProxy authHubProxy = hubConnection.CreateHubProxy("AuthHub"); 
                 IHubProxy gameCenterProxy = hubConnection.CreateHubProxy("GameCenterHub");
                 IHubProxy gameProxy = hubConnection.CreateHubProxy("GameHub");
