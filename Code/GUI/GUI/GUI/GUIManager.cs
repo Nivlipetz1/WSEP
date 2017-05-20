@@ -8,6 +8,7 @@ using System.Windows;
 using GUI.Models;
 using System.Windows.Media.Imaging;
 using System.IO;
+using System.Windows.Threading;
 
 namespace GUI
 {
@@ -359,6 +360,12 @@ namespace GUI
             return status;
         }
 
+        /*public void PlayerJoinedGame(int gameID,string username)
+        {
+            GameFrame gameFrame = findGame(gameID);
+            gameFrame.
+        }*/
+
         public void PushPMMessage(int gameId, string sender, string message)
         {
             GameFrame gameFrame = findGame(gameId);
@@ -367,8 +374,11 @@ namespace GUI
 
         public void PushChatMessage(int gameId, string sender, string message)
         {
-            GameFrame gameFrame = findGame(gameId);
-            gameFrame.GamePM.PushMessage(sender, message);
+            Dispatcher.CurrentDispatcher.InvokeAsync(() =>
+            {
+                GameFrame gameFrame = findGame(gameId);
+                gameFrame.GamePM.PushMessage(sender, message);
+            });
         }
     }
 }
