@@ -67,6 +67,18 @@ namespace GUI
             }
         }
 
+        internal IEnumerable<ClientUserProfile> GetSpectators(int gameID)
+        {
+            return findGame(gameID).getGame().spectators;
+        }
+
+        public void RemovePlayer(int gameID,string username)
+        {
+            GameFrame gameFrame = findGame(gameID);
+            gameFrame.RemovePlayer(username);
+
+        }
+
         internal async Task<List<ClientGame>> SearchGames(string criterion,object parameter)
         {
             return await Communication.GameCenterFunctions.Instance.getActiveGames(criterion,parameter);

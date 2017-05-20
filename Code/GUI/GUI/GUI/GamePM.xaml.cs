@@ -34,11 +34,11 @@ namespace GUI
                 users.Items.Add(prof.username);
                 messageList.Add(prof.username, "");
             }
-           /* foreach (Models.ClientUserProfile prof in game.Spectators)
+            foreach (Models.ClientUserProfile prof in manager.GetSpectators(gameID))
             {
-                users.Items.Add(prof.Username);
-                messageList.Add(prof.Username, "");
-            }*/
+                users.Items.Add(prof.username);
+                messageList.Add(prof.username, "");
+            }
         }
 
         public void AddPlayer(Models.ClientUserProfile prof)
@@ -47,10 +47,10 @@ namespace GUI
             messageList.Add(prof.username, "");
         }
 
-        public void RemovePlayer(Models.ClientUserProfile prof)
+        public void RemovePlayer(string username)
         {
-            users.Items.Remove(prof.username);
-            messageList.Remove(prof.username);
+            users.Items.Remove(username);
+            messageList.Remove(username);
         }
 
         private async void SendMessage_Click(object sender, RoutedEventArgs e)
