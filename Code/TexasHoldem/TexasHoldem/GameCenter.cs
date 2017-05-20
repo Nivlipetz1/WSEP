@@ -41,8 +41,6 @@ namespace GameSystem
             games.Add(game);
             user.League.addGame(game);
             game.evt += updateLeagueToUser;
-            Thread thread = new Thread(new ThreadStart(game.StartGame));
-            thread.Start();
             return game;
         }
 
