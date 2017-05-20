@@ -41,6 +41,7 @@
         <CheckBox Name="Allow_Spec" HorizontalAlignment="Left" Height="22" Margin="165,189.2,0,0" Grid.Row="1" VerticalAlignment="Top" Width="25" RenderTransformOrigin="0.624,-0.373"/>
         <DataGrid x:Name="Display_game_results" HorizontalAlignment="Left" Margin="469,86,0,0" VerticalAlignment="Top" Height="242" Grid.RowSpan="2" Width="315" CanUserResizeColumns="False" IsReadOnly="True"/>
         <Button Name="goBack" Content="Go Back" Click="goBack_Click" HorizontalAlignment="Left" Margin="16,361.667,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
+        <Button Name="Spec" Content="Get All Spactiting Games" HorizontalAlignment="Left" Height="42" Margin="547,323.667,0,0" Grid.Row="1" VerticalAlignment="Top" Width="184" Click="Spec_Click"/>
 
     </Grid>
 </Page>

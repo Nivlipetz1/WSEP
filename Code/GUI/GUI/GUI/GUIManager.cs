@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
 using GUI.Models;
+using System.Windows.Media.Imaging;
+using System.IO;
 
 namespace GUI
 {
@@ -65,12 +67,34 @@ namespace GUI
             }
         }
 
+        internal IEnumerable<ClientUserProfile> GetSpectators(int gameID)
+        {
+            return findGame(gameID).getGame().spectators;
+        }
+
+        public void RemovePlayer(int gameID,string username)
+        {
+            GameFrame gameFrame = findGame(gameID);
+            gameFrame.RemovePlayer(username);
+
+        }
+
+        internal async Task<List<ClientGame>> SearchGames(string criterion,object parameter)
+        {
+            return await Communication.GameCenterFunctions.Instance.getActiveGames(criterion,parameter);
+        }
+
+        internal async Task<List<ClientGame>> SearchGamesToSpectate()
+        {
+            return await Communication.GameCenterFunctions.Instance.getAllSpectatingGames();
+        }
+
         internal void disconnectFromServer()
         {
             Communication.Server.Instance.disconnect();
         }
 
-        internal async void EditProfile(string username, string password)
+        internal async void EditProfile(string username, string password, BitmapImage avatar)
         {
             bool changed = false;
             if (!password.Equals(""))
@@ -89,6 +113,25 @@ namespace GUI
                     changed = true;
                 }
             }
+            if (avatar != null)
+            {
+                byte[] data;
+                JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(avatar));
+                using(MemoryStream ms = new MemoryStream())
+                {
+                    encoder.Save(ms);
+                    data = ms.ToArray();
+                }
+
+                if (await Communication.AuthFunctions.Instance.editAvatar(data))
+                {
+                    MessageBox.Show("Avatar Changed!");
+                    changed = true;
+                }
+
+            }
+
             if (changed)
             {
                 await RefreshProfile();
@@ -210,6 +253,7 @@ namespace GUI
                 await RefreshProfile();
                 GameFrame gameFrame = new GameFrame(this, game);
                 AddGameFrame(gameFrame);
+                gameFrame.Init();
                 NavigateToGameFrame(gameFrame);
             }
             else
@@ -304,6 +348,18 @@ namespace GUI
         private Status GetStatusFrame()
         {
             return status;
+        }
+
+        public void PushPMMessage(int gameId, string sender, string message)
+        {
+            GameFrame gameFrame = findGame(gameId);
+            gameFrame.GameChat.PushMessage(sender, message);
+        }
+
+        public void PushChatMessage(int gameId, string sender, string message)
+        {
+            GameFrame gameFrame = findGame(gameId);
+            gameFrame.GamePM.PushMessage(sender, message);
         }
     }
 }

@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace GUI
 {
-    interface ServerToClientFunctions
+    public interface ServerToClientFunctions
     {
        void PushHand(Models.PlayerHand hand, int gameID);
        void Notify(string message);
        void PushMoveToGame(Models.Move move, int gameID);
        void NotifyTurn(int minimumBet, int gameID);
-       //void PushPMMessage(int gameId, string sender, string message);
-       //void PushChatMessage(int gameId, string sender, string message);
+       void PushPMMessage(int gameId, string sender, string message);
+       void PushChatMessage(int gameId, string sender, string message);
         //Missing Functions:
         //a player has joined the game
         //a playe has quit the game
