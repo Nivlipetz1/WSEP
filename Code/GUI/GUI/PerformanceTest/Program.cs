@@ -18,8 +18,9 @@ namespace PerformanceTest
         static void Main(string[] args)
         {
             username = RandomString(4);
-            testAuthHub(3);
-            GameCenterHubTest(10);
+             testAuthHub(3);
+             GameCenterHubTest(30);
+              ChatOverLoad(5);
             Console.Read();
         }
         public static void testAuthHub(int N)
@@ -39,6 +40,7 @@ namespace PerformanceTest
             {
                // var hubConnection = new HubConnection("http://localhost:51509");
                 var hubConnection = new HubConnection("http://52.29.58.18:80/");
+               //   hubConnection.Error += (error) => { throw new Exception("server error: " + error); } ;
                 Stopwatch s = new Stopwatch();
                 s.Start();
                 int k = i;
@@ -51,7 +53,7 @@ namespace PerformanceTest
                     times[k] = s.ElapsedMilliseconds;
                     Thread.Sleep(500);
                     s.Restart();
-                    Task res=proxy.Invoke<bool>("Register", username + k, password).ContinueWith(res1 =>
+                    Task res=proxy.Invoke<bool>("register", username + k, password).ContinueWith(res1 =>
                      {
                          s.Stop();
                          regs[k] = s.ElapsedMilliseconds;
@@ -60,7 +62,7 @@ namespace PerformanceTest
                      });
                     res.Wait();
                     s.Restart();
-                    res=proxy.Invoke<bool>("Login", username + k, password).ContinueWith(res1 =>
+                    res=proxy.Invoke<bool>("login", username + k, password).ContinueWith(res1 =>
                     {
                         s.Stop();
                         logins[k] = s.ElapsedMilliseconds;
@@ -105,7 +107,7 @@ namespace PerformanceTest
                 Console.WriteLine(" ==Summary==");
                 Console.WriteLine("Average " + (registersTime + loginsTime+logoutsTime) / 3 + " ms");
                 
-                // Console.Read();
+                
             
         }
 
@@ -137,52 +139,50 @@ namespace PerformanceTest
                     Console.WriteLine("User " + k + " connected to server in " + times[k] + "ms");
                     proxy.Invoke("Login", username + k, password).ContinueWith(res =>
                     {
-                    
-                    if (k%3 == 0)
-                    {
+
+                        if (k % 3 == 0)
+                        {
                             s.Restart();
                             proxy2.Invoke<ClientGame>("createGame", new GamePreferences(8, 2, 5, 10, 1, 2, 3, true)).ContinueWith(game1 =>
                             {
                                 s.Stop();
-                                creates[k/3] = s.ElapsedMilliseconds;
+                                creates[k / 3] = s.ElapsedMilliseconds;
                                 gameId[k / 3] = game1.Result.id;
                                 Console.WriteLine("Game " + gameId[k / 3] + " created");
                                 Succesfullcreates++;
                             });
-                    }
-                    else
-                        Thread.Sleep(500);
+                        }
+                        else
+                            Thread.Sleep(500);
                         s.Restart();
-                        proxy2.Invoke<ClientGame>("joinGame", gameId[k/3], 50).ContinueWith(resp =>
-                        {
-                            s.Stop();
-                            joins[k] = s.ElapsedMilliseconds;
-                            if (resp.IsFaulted)
-                            {
-                                Console.WriteLine(resp.Exception.GetBaseException());
-                              //  throw (resp.Exception.GetBaseException());   
-                            }
-
-                            else if (resp.Result != null)
-                            {
-                                Console.WriteLine("User " + k + " has join to Game" + gameId[k/3]);
-                                Succesfulljoins++;
-                            }
-                            else
-                            {
-                                Console.WriteLine("User " + k + " cannot join to Game " + gameId[k / 3]);
-                            }
-                            done--;
-                            if (done == 0)
-                                sem.Release();
-                               
-                        });
-                  });
-                });
+                        proxy2.Invoke<ClientGame>("joinGame", gameId[k / 3], 50).ContinueWith(resp =>
+                          {
+                              s.Stop();
+                              joins[k] = s.ElapsedMilliseconds;
+                              if (resp.IsFaulted)
+                              {
+                                  Console.WriteLine(resp.Exception.GetBaseException());
+                                  //  throw (resp.Exception.GetBaseException());   
+                              }
+                              else if (resp.Result != null)
+                              {
+                                  Console.WriteLine("User " + k + " has join to Game" + gameId[k / 3]);
+                                  Succesfulljoins++;
+                              }
+                              else
+                              {
+                                  Console.WriteLine("User " + k + " cannot join to Game " + gameId[k / 3]);
+                              }
+                              done--;
+                              hubConnection.Stop();
+                              if (done == 0)
+                                  sem.Release();
+                          });
+                    });
+                }).Wait(); 
             }
             sem.Wait();
             Console.WriteLine("Average connection Time: " + averageTime(times) + " ms");
-
             double createTime = averageTime(creates);
             Console.WriteLine("Succesfull CreateGame Operations " + Succesfullcreates);
             Console.WriteLine("Average Response Time :" + createTime + "ms");
@@ -307,6 +307,7 @@ namespace PerformanceTest
                     proxy3.Invoke("postMessage", "Hi everybody", gameId[2]);
                     proxy3.Invoke("bet", gameId[2], 12);
                 });
+                
 
             }
             sem.Wait();
@@ -321,6 +322,60 @@ namespace PerformanceTest
 
             Console.WriteLine(" ==Summary==");
             Console.WriteLine("Average " + (createTime + joinTime) / 2 + " ms");
+        }
+
+        private static void ChatOverLoad(int N)
+        {
+            int done = N;
+            int gameId=999;
+            SemaphoreSlim sem = new SemaphoreSlim(0, 1);
+            for (int i = 0; i < N; i++)
+            {
+                var hubConnection = new HubConnection("http://52.29.58.18:80/");
+                Stopwatch s = new Stopwatch();
+                s.Start();
+                int k = i;
+                IHubProxy proxy = hubConnection.CreateHubProxy("AuthHub");
+                IHubProxy proxy2 = hubConnection.CreateHubProxy("GameCenterHub");
+                IHubProxy proxy3 = hubConnection.CreateHubProxy("GameHub");
+                proxy3.On<string,string,int>("pushMessage", (user, msg, gID) =>
+                 {
+                     Console.WriteLine("user "+k+ "got msg from "+user+"  ---"+msg);
+                 });
+                hubConnection.Start().ContinueWith(response =>
+                {
+                    Console.WriteLine(k+" connected");
+                    proxy.Invoke("register", username + "chat" + k, password).Wait();
+                    proxy.Invoke("login", username + "chat" + k, password).Wait();
+                    if (k == 0)
+                    {
+                        Task<ClientGame> t = proxy2.Invoke<ClientGame>("createGame", new GamePreferences(N, 2, 5, 10, 1, 2, 3, true));
+                        t.Wait();
+                        gameId = t.Result.id;
+                        Console.WriteLine("game"+gameId+" created by "+k);
+                    }
+                    else
+                        Thread.Sleep(1000);
+                    proxy2.Invoke<ClientGame>("joinGame", gameId, 50).ContinueWith(res =>
+                    {
+                      if (res.Result != null)
+                        Console.WriteLine(k+" join to game");
+                    }).Wait();
+
+                    Thread.Sleep(500);
+                    proxy3.Invoke("postMessage", "Hi everybody, I am " + k, gameId).ContinueWith(res =>
+                    {
+                        Console.WriteLine("Message posted by "+k);
+                    });
+                    //  proxy3.Invoke("bet", gameId, 12);
+                    done--;
+                    if (done == 0)
+                        sem.Release();
+                        
+                });
+            }
+            sem.Wait();
+            Console.Read();
         }
 
         

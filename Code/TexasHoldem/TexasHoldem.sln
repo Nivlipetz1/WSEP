@@ -24,8 +24,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemTests", "SystemTests\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommunicatoinLayer", "CommunicatoinLayer\CommunicatoinLayer.csproj", "{FB1AD5AF-1591-47C5-A0B1-FA566AC07194}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerformanceTest", "PerformanceTest\PerformanceTest.csproj", "{F7723E07-5145-4629-A5CA-EE899DAF2746}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,10 +62,6 @@ Global
 		{FB1AD5AF-1591-47C5-A0B1-FA566AC07194}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB1AD5AF-1591-47C5-A0B1-FA566AC07194}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB1AD5AF-1591-47C5-A0B1-FA566AC07194}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F7723E07-5145-4629-A5CA-EE899DAF2746}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F7723E07-5145-4629-A5CA-EE899DAF2746}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F7723E07-5145-4629-A5CA-EE899DAF2746}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F7723E07-5145-4629-A5CA-EE899DAF2746}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
