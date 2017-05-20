@@ -26,7 +26,6 @@ namespace Gaming
         private Card[] cards;
         private GameChat chat;
         private bool gameEnded;
-        private GamePreferences preferecnces;
 
         public delegate void Update(PlayingUser user);
         public event Update evt;
@@ -75,7 +74,7 @@ namespace Gaming
 
         public void StartGame()
         {
-                
+            
             gamePref.SetStatus("active");
 
             while (waitingList.Count > 0)
@@ -124,6 +123,7 @@ namespace Gaming
             {
                 PlayerHand ph = gameDeck.drawPlayerHand();
                 player.SetHand(ph);
+                NotificationService.Instance.setHand(player.GetUserName(), ph, id);
                 playerHands.Add(player.GetUserName(), ph); //only username
             }
 
@@ -131,7 +131,7 @@ namespace Gaming
             //request bet from rest of players
 
             TraversePlayers(2 % players.Count);
-            if (gameEnded)
+            if (gameEnded) //WAS gameEnded
             {
                 GiveWinnings();
                 PushMoveToObservers(new EndGameMove(playerHands));
@@ -555,10 +555,20 @@ namespace Gaming
 
         private void PushMoveToObservers(Move m)
         {
+            List<string> userNames = new List<string>();
             foreach (SpectatingUser spectator in spectators)
+            {
                 spectator.PushMove(m);
+                userNames.Add(spectator.GetUserName());
+            }
+                
             foreach (PlayingUser player in players)
+            {
                 player.PushMove(m);
+                userNames.Add(player.GetUserName());
+            }
+
+            NotificationService.Instance.pushMove(userNames, m , id);
             logger.AddMove(m);
         }
 

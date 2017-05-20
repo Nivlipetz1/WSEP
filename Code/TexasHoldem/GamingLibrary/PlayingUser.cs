@@ -25,6 +25,7 @@ namespace Gaming
             roundsLost = 0;
             biggestPotWon = 0;
             bestHand = CardAnalyzer.HandRank.HighCard;
+            userInput = new UserInput();
         }
 
         public void SetFakeUserInput(Queue<string> inputs)
@@ -102,6 +103,7 @@ namespace Gaming
 
         public int Bet(int minimumBet)
         {
+            NotificationService.Instance.pushYourTurn(GetUserName(), minimumBet, game.getGameID());
             string input;
             int betInput;
 
