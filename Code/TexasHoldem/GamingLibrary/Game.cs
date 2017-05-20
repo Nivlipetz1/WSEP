@@ -26,11 +26,28 @@ namespace Gaming
         private Card[] cards;
         private GameChat chat;
         private bool gameEnded;
+        private int gAMEID;
+        private GamePreferences preferecnces;
+
         public delegate void Update(PlayingUser user);
         public event Update evt;
 
         public Game(GamePreferences gp)
         {
+            gameDeck = new Deck();
+            players = new ObservableCollection<PlayingUser>();
+            waitingList = new List<PlayingUser>();
+            spectators = new List<SpectatingUser>();
+            pot = new int[2];
+            ca = new CardAnalyzer();
+            gamePref = gp;
+            logger = new GameLogger();
+            chat = new GameChat(this);
+        }
+
+        public Game(int gAMEID, GamePreferences gp)
+        {
+            this.gAMEID = gAMEID;
             gameDeck = new Deck();
             players = new ObservableCollection<PlayingUser>();
             waitingList = new List<PlayingUser>();
