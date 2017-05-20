@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,11 +27,32 @@ namespace GUI
         {
             InitializeComponent();
             this.manager = manager;
+
+
         }
+
+        public void ShowAvatar()
+        {
+            byte[] byte_avatar = manager.GetProfile().avatar;
+
+            if (byte_avatar != null)
+            {
+                var stream = new MemoryStream(byte_avatar);
+                stream.Seek(0, SeekOrigin.Begin);
+                var image = new BitmapImage();
+                image.BeginInit();
+                image.StreamSource = stream;
+                image.EndInit();
+
+                user_avatar.Source = image;
+
+            }
+        }
+
 
         private void EditProfile_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new EditProfile(manager));
+            NavigationService.Navigate(new EditProfile(manager,this));
         }
 
         private async void Logout_Click(object sender, RoutedEventArgs e)

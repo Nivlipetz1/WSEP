@@ -14,16 +14,53 @@ namespace Gaming
             this.g = g;
         }
 
-        public void SendMessage(string message)
+        public List<string> SendMessage(SpectatingUser sender,string message)
         {
-            foreach(SpectatingUser su in g.GetSpectators())
+            List<string> usersToSendTo = new List<string>();
+            if (sender is PlayingUser)
             {
-                su.PushMessage(message);
+                foreach (SpectatingUser su in g.GetSpectators())
+                {
+                    su.PushMessage(message);
+                    usersToSendTo.Add(su.GetUserName());
+                }
+                foreach (SpectatingUser su in g.GetPlayers())
+                {
+                    su.PushMessage(message);
+                    usersToSendTo.Add(su.GetUserName());
+                }
+            }
+            else
+            {
+                foreach (SpectatingUser su in g.GetSpectators())
+                {
+                    su.PushMessage(message);
+                    usersToSendTo.Add(su.GetUserName());
+                }
+            }
+            return usersToSendTo;
+        }
+
+        public List<string> SendPMMessage(string from,string to,string message)
+        {
+            List<string> usersToSendTo = new List<string>();
+            foreach (SpectatingUser su in g.GetSpectators())
+            {
+                if (su.GetUserName().Equals(to))
+                {
+                    //su.PushMessage(message);
+                    usersToSendTo.Add(su.GetUserName());
+                }
             }
             foreach (SpectatingUser su in g.GetPlayers())
             {
-                su.PushMessage(message);
+                if (su.GetUserName().Equals(to))
+                {
+                    //su.PushMessage(message);
+                    usersToSendTo.Add(su.GetUserName());
+                }
             }
+            return usersToSendTo;
         }
 
     }

@@ -8,6 +8,7 @@ using System.Windows;
 using GUI.Models;
 using System.Windows.Media.Imaging;
 using System.IO;
+using System.Windows.Threading;
 
 namespace GUI
 {
@@ -94,7 +95,7 @@ namespace GUI
             Communication.Server.Instance.disconnect();
         }
 
-        internal async void EditProfile(string username, string password, BitmapImage avatar)
+        internal async void EditProfile(string username, string password, BitmapImage avatar,UserMainPage mainPage)
         {
             bool changed = false;
             if (!password.Equals(""))
@@ -124,10 +125,19 @@ namespace GUI
                     data = ms.ToArray();
                 }
 
-                if (await Communication.AuthFunctions.Instance.editAvatar(data))
+                if (data.Length > 32000)
                 {
-                    MessageBox.Show("Avatar Changed!");
-                    changed = true;
+                    MessageBox.Show("Avatar size too big!");
+                }
+                else
+                {
+                    if (await Communication.AuthFunctions.Instance.editAvatar(data))
+                    {
+                        mainPage.ShowAvatar();
+                        MessageBox.Show("Avatar Changed!");
+                        changed = true;
+
+                    }
                 }
 
             }
@@ -350,6 +360,12 @@ namespace GUI
             return status;
         }
 
+        /*public void PlayerJoinedGame(int gameID,string username)
+        {
+            GameFrame gameFrame = findGame(gameID);
+            gameFrame.
+        }*/
+
         public void PushPMMessage(int gameId, string sender, string message)
         {
             GameFrame gameFrame = findGame(gameId);
@@ -358,8 +374,11 @@ namespace GUI
 
         public void PushChatMessage(int gameId, string sender, string message)
         {
-            GameFrame gameFrame = findGame(gameId);
-            gameFrame.GamePM.PushMessage(sender, message);
+            Dispatcher.CurrentDispatcher.InvokeAsync(() =>
+            {
+                GameFrame gameFrame = findGame(gameId);
+                gameFrame.GamePM.PushMessage(sender, message);
+            });
         }
     }
 }

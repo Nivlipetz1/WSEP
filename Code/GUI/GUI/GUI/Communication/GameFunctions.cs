@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace GUI.Communication
 {
@@ -49,11 +50,12 @@ namespace GUI.Communication
 
             gameHubProxy.On<string, string , int>("pushMessage", (user, message , gameID) =>
             {
+                serverToClient.PushChatMessage(gameID, user, message);
             });
 
             gameHubProxy.On<string, string, int>("pushWhisperMessage", (from, message, gameID) =>
             {
-                
+                serverToClient.PushPMMessage(gameID, from, message);
             });
 
             gameHubProxy.On<List<string>, int>("pushWinners", (winners, gameID) =>
