@@ -26,7 +26,6 @@ namespace Gaming
         private Card[] cards;
         private GameChat chat;
         private bool gameEnded;
-        private int gAMEID;
         private GamePreferences preferecnces;
 
         public delegate void Update(PlayingUser user);
@@ -47,7 +46,7 @@ namespace Gaming
 
         public Game(int gAMEID, GamePreferences gp)
         {
-            this.gAMEID = gAMEID;
+            this.id = gAMEID;
             gameDeck = new Deck();
             players = new ObservableCollection<PlayingUser>();
             waitingList = new List<PlayingUser>();
