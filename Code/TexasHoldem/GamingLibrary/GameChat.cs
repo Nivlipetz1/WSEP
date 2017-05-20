@@ -14,10 +14,10 @@ namespace Gaming
             this.g = g;
         }
 
-        public List<string> SendMessage(SpectatingUser sender,string message)
+        public List<string> SendMessage(string sender,string message)
         {
             List<string> usersToSendTo = new List<string>();
-            if (sender is PlayingUser)
+            if (isPlayer(sender))
             {
                 foreach (SpectatingUser su in g.GetSpectators())
                 {
@@ -39,6 +39,16 @@ namespace Gaming
                 }
             }
             return usersToSendTo;
+        }
+
+        private bool isPlayer(string sender)
+        {
+            foreach(SpectatingUser user in g.GetPlayers())
+            {
+                if (user.GetUserName().Equals(sender))
+                    return true;
+            }
+            return false;
         }
 
         public List<string> SendPMMessage(string from,string to,string message)
