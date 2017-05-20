@@ -379,11 +379,13 @@ namespace GUI
         private IEnumerable<Models.ClientUserProfile> RemoveSelfFromPlayersList(IEnumerable<Models.ClientUserProfile> players)
         {
             //create new list everytime, to not override the list in other clients.. (i think thats how it works)
-            List<Models.ClientUserProfile> newPlayers = players.ToList();
-
-            if (newPlayers.Contains(manager.GetProfile()))
+            List<Models.ClientUserProfile> newPlayers = new List<Models.ClientUserProfile>();
+            string userName = manager.GetProfile().username;
+            foreach(Models.ClientUserProfile prof in players)
             {
-                newPlayers.Remove(manager.GetProfile());
+                if (!prof.username.Equals(userName))
+                    newPlayers.Add(prof);
+
             }
 
             return newPlayers;

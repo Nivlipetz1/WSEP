@@ -191,6 +191,7 @@ namespace GUI
         private GameFrame findGame(int gameID)
         {
             GameFrame wantedFrame = null;
+            //while (gameList.Count == 0) ;
             foreach (GameFrame gf in gameList)
             {
                 if (gf.getGame().id == gameID)
