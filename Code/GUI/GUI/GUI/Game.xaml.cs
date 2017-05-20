@@ -62,6 +62,15 @@ namespace GUI
 
         }
 
+        private void RepositionCards()
+        {
+            foreach(Image card in playersCards)
+            {
+                card.SetValue(Canvas.LeftProperty,241);
+                card.SetValue(Canvas.TopProperty,152);
+            }
+        }
+
         public void Button_Click(object sender, RoutedEventArgs e)
         {
 
@@ -274,6 +283,7 @@ namespace GUI
 
         public void PushGameStartMove(Models.GameStartMove move)
         {
+            RepositionCards();
             MessageBox.Show("Game Started!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             betted.Content = "$0";
             betted.Visibility = Visibility.Visible;
@@ -309,6 +319,7 @@ namespace GUI
                 index++;
                 cardIndex += 2;
             }
+            
 
         }
 
@@ -328,6 +339,7 @@ namespace GUI
                     cardIndex += 2;
                 }
             }
+            
         }
 
 
