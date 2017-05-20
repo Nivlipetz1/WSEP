@@ -41,7 +41,7 @@ namespace Gaming
 
         public void SendMessage(string m)
         {
-            game.GetChat().SendMessage(this,m);
+            game.GetChat().SendMessage(this.userName,m);
         }
 
         public List<string> GetMessages()
