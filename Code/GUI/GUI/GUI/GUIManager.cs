@@ -124,10 +124,17 @@ namespace GUI
                     data = ms.ToArray();
                 }
 
-                if (await Communication.AuthFunctions.Instance.editAvatar(data))
+                if (data.Length > 32000)
                 {
-                    MessageBox.Show("Avatar Changed!");
-                    changed = true;
+                    MessageBox.Show("Avatar size too big!");
+                }
+                else
+                {
+                    if (await Communication.AuthFunctions.Instance.editAvatar(data))
+                    {
+                        MessageBox.Show("Avatar Changed!");
+                        changed = true;
+                    }
                 }
 
             }
