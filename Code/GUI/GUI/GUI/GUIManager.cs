@@ -32,6 +32,7 @@ namespace GUI
         public void AddGameFrame(GameFrame gameFrame)
         {
             gameList.Add(gameFrame);
+            status.RefreshGameList();
         }
 
 
