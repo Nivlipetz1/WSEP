@@ -34,24 +34,18 @@ namespace GUI
 
         public void AddGameFrame(GameFrame gameFrame)
         {
-            Dispatcher.CurrentDispatcher.InvokeAsync(() =>
-            {
                 gameList.Add(gameFrame);
                 status.RefreshGameList();
-            });
         }
 
 
         public void RemoveGameFrame(GameFrame gf)
         {
-            Dispatcher.CurrentDispatcher.InvokeAsync(() =>
+            if (gameList.Contains(gf))
             {
-                if (gameList.Contains(gf))
-                {
-                    gameList.Remove(gf);
-                    status.RefreshGameList();
-                }
-            });
+                gameList.Remove(gf);
+                status.RefreshGameList();
+            }
         }
 
         internal void ConnectToServer()
@@ -303,7 +297,11 @@ namespace GUI
 
         public void Notify(string message)
         {
-            MessageBox.Show("System Message:\nmessage");
+            Dispatcher.CurrentDispatcher.InvokeAsync(() =>
+            {
+
+                MessageBox.Show("System Message:\nmessage");
+            });
         }
 
         public void PushMoveToGame(Models.Move move, int gameID)
@@ -340,7 +338,11 @@ namespace GUI
             if (rs == MessageBoxResult.Yes)
             {
                 if (await Communication.GameFunctions.Instance.removePlayer(gameID))
+                {
+                    RemoveGameFrame(findGame(gameID));
                     mainWindow.mainFrame.NavigationService.GoBack();
+             
+                }
                 else
                     MessageBox.Show("Something went wrong", "Information", MessageBoxButton.OK, MessageBoxImage.Error);
             }
