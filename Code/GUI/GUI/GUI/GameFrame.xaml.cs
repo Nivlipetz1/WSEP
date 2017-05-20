@@ -57,7 +57,13 @@ namespace GUI
         {
             GamePM.RemovePlayer(username);
             GameWindow.removePlayer(username);
-            
+            game.RemovePlayer(username);
+        }
+
+        public void AddPlayer(Models.ClientUserProfile profile)
+        {
+            game.AddPlayer(profile);
+            GamePM.AddPlayer(profile);
         }
     }
 }

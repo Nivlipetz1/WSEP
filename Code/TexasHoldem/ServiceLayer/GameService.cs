@@ -50,11 +50,8 @@ namespace ServiceLayer
             Game game = gc.getGameByID(gameID);
             if (game == null)
                 return null;
-            SpectatingUser spec = game.GetSpectators().Where(sp => sp.GetUserName().Equals(user)).First();
-            List<SpectatingUser> specs = game.postMessage(spec, message);
-            List<string> usernames = new List<string>();
-            specs.ForEach(spec1 => usernames.Add(spec1.GetUserName()));
-            return usernames;
+            SpectatingUser sender = game.GetSpectators().Where(sp => sp.GetUserName().Equals(user)).First();
+            return game.GetChat().SendMessage(sender, message);
         }
 
         public List<string> postWhisperMessage(string from, string to, string message, int gameID)
@@ -62,13 +59,7 @@ namespace ServiceLayer
             Game game = gc.getGameByID(gameID);
             if (game == null)
                 return null;
-            SpectatingUser fromSpec = game.GetSpectators().Where(sp => sp.GetUserName().Equals(from)).First();
-            SpectatingUser toSpec = game.GetSpectators().Where(sp => sp.GetUserName().Equals(from)).First();
-            List<SpectatingUser> specs = game.postMessage(fromSpec, toSpec, message);
-            List<string> usernames = new List<string>();
-            specs.ForEach(spec => usernames.Add(spec.GetUserName()));
-            return usernames;
-
+            return game.GetChat().SendPMMessage(from, to, message);
         }
 
         private List<PlayingUser> GetPlayers(ClientUserProfile user, int gameID)

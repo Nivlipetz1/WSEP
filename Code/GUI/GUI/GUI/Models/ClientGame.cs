@@ -28,5 +28,10 @@ namespace GUI.Models
                 }
             }
         }
+
+        public void AddPlayer(ClientUserProfile profile)
+        {
+            players.Add(profile);
+        }
     }
 }
