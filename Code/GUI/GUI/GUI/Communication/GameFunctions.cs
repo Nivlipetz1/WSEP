@@ -45,7 +45,11 @@ namespace GUI.Communication
             {
             });
 
-            gameHubProxy.On<string, string , int>("postMessage", (user, message , gameID) =>
+            gameHubProxy.On<string, string , int>("pushMessage", (user, message , gameID) =>
+            {
+            });
+
+            gameHubProxy.On<string, string, int>("pushWhisperMessage", (from, message, gameID) =>
             {
             });
 
