@@ -50,8 +50,8 @@ namespace ServiceLayer
             Game game = gc.getGameByID(gameID);
             if (game == null)
                 return null;
-            SpectatingUser sender = game.GetSpectators().Where(sp => sp.GetUserName().Equals(user)).First();
-            return game.GetChat().SendMessage(sender, message);
+            
+            return game.GetChat().SendMessage(user, message);
         }
 
         public List<string> postWhisperMessage(string from, string to, string message, int gameID)
