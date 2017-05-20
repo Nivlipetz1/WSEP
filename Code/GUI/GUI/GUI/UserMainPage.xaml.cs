@@ -28,7 +28,12 @@ namespace GUI
             InitializeComponent();
             this.manager = manager;
 
-            byte [] byte_avatar = manager.GetProfile().avatar;
+
+        }
+
+        public void ShowAvatar()
+        {
+            byte[] byte_avatar = manager.GetProfile().avatar;
 
             if (byte_avatar != null)
             {
@@ -39,15 +44,15 @@ namespace GUI
                 image.StreamSource = stream;
                 image.EndInit();
 
-                ImageSourceConverter c = new ImageSourceConverter();
-                user_avatar = (Image)c.ConvertFrom(image);
+                user_avatar.Source = image;
 
             }
         }
 
+
         private void EditProfile_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new EditProfile(manager));
+            NavigationService.Navigate(new EditProfile(manager,this));
         }
 
         private async void Logout_Click(object sender, RoutedEventArgs e)

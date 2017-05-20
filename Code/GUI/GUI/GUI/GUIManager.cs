@@ -94,7 +94,7 @@ namespace GUI
             Communication.Server.Instance.disconnect();
         }
 
-        internal async void EditProfile(string username, string password, BitmapImage avatar)
+        internal async void EditProfile(string username, string password, BitmapImage avatar,UserMainPage mainPage)
         {
             bool changed = false;
             if (!password.Equals(""))
@@ -132,8 +132,10 @@ namespace GUI
                 {
                     if (await Communication.AuthFunctions.Instance.editAvatar(data))
                     {
+                        mainPage.ShowAvatar();
                         MessageBox.Show("Avatar Changed!");
                         changed = true;
+
                     }
                 }
 
