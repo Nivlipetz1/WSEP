@@ -373,7 +373,7 @@ namespace GUI
         public void PushPMMessage(int gameId, string sender, string message)
         {
             GameFrame gameFrame = findGame(gameId);
-            gameFrame.GameChat.PushMessage(sender, message);
+            gameFrame.GamePM.PushMessage(sender, message);
         }
 
         public void PushChatMessage(int gameId, string sender, string message)
@@ -381,7 +381,7 @@ namespace GUI
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
                 GameFrame gameFrame = findGame(gameId);
-                gameFrame.GamePM.PushMessage(sender, message);
+                gameFrame.GameChat.PushMessage(sender, message);
             });
         }
     }
