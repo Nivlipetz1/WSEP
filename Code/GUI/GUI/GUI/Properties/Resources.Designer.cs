@@ -77,5 +77,14 @@ namespace GUI.Properties {
                 return ResourceManager.GetStream("cardsdealt2", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream cash_register_x {
+            get {
+                return ResourceManager.GetStream("cash_register_x", resourceCulture);
+            }
+        }
     }
 }

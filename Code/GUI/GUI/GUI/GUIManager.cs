@@ -24,6 +24,7 @@ namespace GUI
             this.mainWindow = mainWindow;
             this.status = new Status(this);
             gameList = new List<GameFrame>();
+            gamesList = new List<ClientGame>();
             statusWindow = new Status(this);
             Communication.GameFunctions.Instance.serverToClient = this;
             Communication.GameCenterFunctions.Instance.serverToClient = this;
@@ -368,6 +369,7 @@ namespace GUI
                 {
                     RemoveGame(findGame(gameID));
                     RemoveGameFrame(findGameFrame(gameID));
+                    await RefreshProfile();
                     mainWindow.mainFrame.NavigationService.GoBack();
              
                 }

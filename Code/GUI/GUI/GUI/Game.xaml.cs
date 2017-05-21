@@ -31,6 +31,7 @@ namespace GUI
 
         public static SoundPlayer snd = new SoundPlayer(Properties.Resources.cardsdealt1);
         public static SoundPlayer snd2 = new SoundPlayer(Properties.Resources.cardsdealt2);
+        public static SoundPlayer bet_sound = new SoundPlayer(Properties.Resources.cash_register_x);
         public Game(GUIManager manager, int gameID)
         {
             InitializeComponent();
@@ -45,10 +46,10 @@ namespace GUI
             playerLabels.Add(player6);
             playerLabels.Add(player1);
             playerLabels.Add(player2);
-            playersCards.Add(Card1);
-            playersCards.Add(Card2);
             playersCards.Add(Card3);
             playersCards.Add(Card4);
+            playersCards.Add(Card1);
+            playersCards.Add(Card2);
             playersCards.Add(Card5);
             playersCards.Add(Card6);
             playersCards.Add(Card7);
@@ -201,6 +202,7 @@ namespace GUI
 
         public void PushBetMove(Models.BetMove move)
         {
+            bet_sound.Play();
             int bet = move.GetAmount();
             int index = 0;
             int cardIndex = 0;
