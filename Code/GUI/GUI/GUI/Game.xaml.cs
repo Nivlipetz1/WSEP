@@ -253,6 +253,13 @@ namespace GUI
             int index = 0;
             int cardIndex = 0;
 
+            if (move.foldingPlayer.Equals(manager.GetProfile().username))
+            {
+                betted.Content = "Folded";
+                UserCard1.Visibility = Visibility.Hidden;
+                UserCard2.Visibility = Visibility.Hidden;
+            }
+
             foreach (Models.ClientUserProfile prof in RemoveSelfFromPlayersList(manager.GetPlayers(gameID)))
             {
                 if (prof.username.Equals(move.GetFoldingPlayer()))
