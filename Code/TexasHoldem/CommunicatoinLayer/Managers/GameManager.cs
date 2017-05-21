@@ -54,7 +54,12 @@ namespace CommunicatoinLayer.Managers
         private void setHand(string userName, PlayerHand playerHand , int gameId)
         {
             string connectionId = AuthManager.Instance.GetConnectionIdByName(userName);
-            Clients.Client(connectionId).yourTurn(playerHand, gameId);
+            Clients.Client(connectionId).setHand(playerHand, gameId);
+        }
+
+        public void joinGame(string userName, int gameId)
+        {
+            
         }
     }
 }

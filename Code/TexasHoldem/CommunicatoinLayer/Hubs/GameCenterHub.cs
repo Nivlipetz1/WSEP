@@ -59,6 +59,7 @@ namespace CommunicatoinLayer.Hubs
                 //await Groups.Add(Context.ConnectionId, "game " + gameId);
                 SystemService userService = new SystemService();
                 ClientUserProfile userProfile = userService.getUser(userName);
+                GameManager.Instance.joinGame(userName, gameId);
                 Clients.Clients(usersToSend.Select(user => AuthManager.Instance.GetConnectionIdByName(user)).ToList()).joinGame(gameId, userProfile);
                 return gc.getGameById(gameId);
             }
