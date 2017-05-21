@@ -168,7 +168,6 @@ namespace Gaming
                 ResetGame();
                 goto GameEnd;
             }
-
             cards[4] = gameDeck.DrawTableCard();
 
             PushMoveToObservers(new NewCardMove(cards));
@@ -182,9 +181,11 @@ namespace Gaming
                 goto GameEnd;
             }
 
+            
             PushMoveToObservers(new EndGameMove(playerHands));
             List<PlayingUser> winners = DetermineWinner();
-            NotificationService.Instance.pushWinners(spectators.Union(players).Select(user=>user.GetUserName()).ToList(), winners.Select(winner => winner.GetUserName()).ToList(), id);
+            List<string> userNames = spectators.Union(players).Select(user => user.GetUserName()).ToList();
+            NotificationService.Instance.pushWinners(userNames, winners.Select(winner => winner.GetUserName()).ToList(), id);
             foreach (PlayingUser player in winners)
             {
                 player.ReceiveWinnings(pot[0] / winners.Count);
@@ -200,7 +201,7 @@ namespace Gaming
             
         GameEnd:
             ResetGame();
-            Thread.Sleep(3000);
+            Thread.Sleep(30000);
             if ((waitingList.Count + playerBets.Count) >= gamePref.GetMinPlayers())
                 StartGame();
 
