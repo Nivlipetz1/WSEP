@@ -410,7 +410,7 @@ namespace GUI
 
         private void Bet_Button_Click(object sender, RoutedEventArgs e)
         {
-
+            if(!BetAmount.Text.Equals(""))
             manager.Bet(gameID, Int32.Parse(BetAmount.Text), minimumBet, this);
         }
 
