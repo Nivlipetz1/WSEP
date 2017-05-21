@@ -312,18 +312,13 @@ namespace GUI
             int index = 0;
             int cardIndex = 0;
 
-            foreach (string username in move.playerHands.Keys)
+            foreach (Models.ClientUserProfile prof in RemoveSelfFromPlayersList(manager.GetPlayers(gameID)))
             {
-                //check self in the winners usernames
-                if (!(username.Equals(manager.GetProfile().username)))
+                foreach (string username in move.handRanks.Keys)
                 {
-                    Label lbl = playerLabels.ElementAt(index);
-                    int dollarIndex = lbl.Content.ToString().IndexOf('$') - 1; //-1 in order to get rid of "space" before dollar sign
-                    int size = lbl.Content.ToString().Length - (lbl.Content.ToString().Length - dollarIndex);
-                    string lblPlayerName = lbl.Content.ToString().Substring(0, size);
-
-                    if (username.Equals(lblPlayerName))
+                    if (username.Equals(prof.username))
                     {
+                        Label lbl = playerLabels.ElementAt(index);
                         Models.PlayerHand hand = move.playerHands[username];
                         lbl.Content = lbl.Content.ToString() + " with hand: " + hand.toString();
                         //FLIP THE CARDS:
@@ -331,14 +326,12 @@ namespace GUI
                         playersCards[cardIndex+1].Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.Second.toImage(), UriKind.Relative));
                     }
                 }
-
                 index++;
                 cardIndex += 2;
             }
-            
-
         }
 
+        /*
         public void EndGameMove(Models.EndGameMove move)
         {
             IDictionary<string, Models.PlayerHand> hands = move.playerHands;
@@ -356,7 +349,7 @@ namespace GUI
                 }
             }
             
-        }
+        }*/
 
 
         private void MoveCard(Image card, int x, int y)
