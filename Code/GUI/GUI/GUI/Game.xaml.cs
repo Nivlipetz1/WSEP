@@ -28,6 +28,7 @@ namespace GUI
         private List<Image> playersCards;
         private int revealCard = 0;
         private int minimumBet = 0;
+        private int potSizeInt = 0;
 
         public static SoundPlayer snd = new SoundPlayer(Properties.Resources.cardsdealt1);
         public static SoundPlayer snd2 = new SoundPlayer(Properties.Resources.cardsdealt2);
@@ -67,9 +68,27 @@ namespace GUI
         {
             foreach(Image card in playersCards)
             {
+                Canvas.SetLeft(card, 241);
+                Canvas.SetTop(card, 152);
+                card.Source = new BitmapImage(new Uri(@"Images\Cards\back.png", UriKind.Relative));
                 //card.SetValue(Canvas.LeftProperty,241);
                 //card.SetValue(Canvas.TopProperty,152);
             }
+            Canvas.SetLeft(FlopCard1, 241);
+            Canvas.SetTop(FlopCard1, 152);
+            Canvas.SetLeft(FlopCard2, 241);
+            Canvas.SetTop(FlopCard2, 152);
+            Canvas.SetLeft(FlopCard3, 241);
+            Canvas.SetTop(FlopCard3, 152);
+            Canvas.SetLeft(RiverCard, 241);
+            Canvas.SetTop(RiverCard, 152);
+            Canvas.SetLeft(TurnCard, 241);
+            Canvas.SetTop(TurnCard, 152);
+            FlopCard1.Visibility = Visibility.Hidden;
+            FlopCard2.Visibility = Visibility.Hidden;
+            FlopCard3.Visibility = Visibility.Hidden;
+            RiverCard.Visibility = Visibility.Hidden;
+            TurnCard.Visibility = Visibility.Hidden;
         }
 
         public void Button_Click(object sender, RoutedEventArgs e)
@@ -206,8 +225,10 @@ namespace GUI
             int bet = move.GetAmount();
             int index = 0;
             int cardIndex = 0;
+            potSizeInt += bet;
+            PotSizeLbl.Content = "Pot Size: $" + potSizeInt;
 
-            if(move.GetBettingPlayer().Equals(manager.GetProfile().username))
+            if (move.GetBettingPlayer().Equals(manager.GetProfile().username))
             {
                 betted.Content = "$" + bet;
             }
@@ -217,7 +238,7 @@ namespace GUI
                 if (prof.username.Equals(move.GetBettingPlayer()))
                 {
                     Label lbl = playerLabels.ElementAt(index);
-                    lbl.Content = prof.username + " $" + bet;
+                    lbl.Content = prof.username + " $" + move.GetAmount();
                     break;
                 }
 
@@ -232,12 +253,19 @@ namespace GUI
             int index = 0;
             int cardIndex = 0;
 
+            if (move.foldingPlayer.Equals(manager.GetProfile().username))
+            {
+                betted.Content = "Folded";
+                UserCard1.Visibility = Visibility.Hidden;
+                UserCard2.Visibility = Visibility.Hidden;
+            }
+
             foreach (Models.ClientUserProfile prof in RemoveSelfFromPlayersList(manager.GetPlayers(gameID)))
             {
                 if (prof.username.Equals(move.GetFoldingPlayer()))
                 {
                     Label lbl = playerLabels.ElementAt(index);
-                    lbl.Visibility = Visibility.Hidden;
+                    lbl.Content = prof.username + " Fold";
                     playersCards.ElementAt(cardIndex).Visibility = Visibility.Hidden;
                     playersCards.ElementAt(cardIndex + 1).Visibility = Visibility.Hidden;
                     break;
@@ -286,6 +314,8 @@ namespace GUI
 
         public void MyTurn(int minimumBet)
         {
+            Bet_Button.IsEnabled = true;
+            Fold_Button.IsEnabled = true;
             this.minimumBet = minimumBet;
             MinimumBetLabel.Content = "Minimum Bet: $" + minimumBet;
             ShowBetElements();
@@ -294,9 +324,24 @@ namespace GUI
         public void PushGameStartMove(Models.GameStartMove move)
         {
             RepositionCards();
+            potSizeInt = 0;
+            revealCard = 0;
             MessageBox.Show("Game Started!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            //credit.Visibility = Visibility.Visible;
             betted.Content = "$0";
             betted.Visibility = Visibility.Visible;
+            PotSizeLbl.Content = "Pot Size: $" + potSizeInt;
+            PotSizeLbl.Visibility = Visibility.Visible;
+        }
+
+        public void PushWinners(List<string> winners)
+        {
+            string winnersStr = "";
+            foreach(string winner in winners)
+            {
+                winnersStr += "\n"+winner;
+            }
+            MessageBox.Show("The Winners Are: "+winnersStr+"\nThey each get "+potSizeInt/winners.Count, "Winners", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
 
@@ -306,33 +351,26 @@ namespace GUI
             int index = 0;
             int cardIndex = 0;
 
-            foreach (string username in move.playerHands.Keys)
+            foreach (Models.ClientUserProfile prof in RemoveSelfFromPlayersList(manager.GetPlayers(gameID)))
             {
-                //check self in the winners usernames
-                if (!(username.Equals(manager.GetProfile().username)))
+                foreach (string username in move.handRanks.Keys)
                 {
-                    Label lbl = playerLabels.ElementAt(index);
-                    int dollarIndex = lbl.Content.ToString().IndexOf('$') - 1; //-1 in order to get rid of "space" before dollar sign
-                    int size = lbl.Content.ToString().Length - (lbl.Content.ToString().Length - dollarIndex);
-                    string lblPlayerName = lbl.Content.ToString().Substring(0, size);
-
-                    if (username.Equals(lblPlayerName))
+                    if (username.Equals(prof.username))
                     {
+                        Label lbl = playerLabels.ElementAt(index);
                         Models.PlayerHand hand = move.playerHands[username];
-                        lbl.Content = lbl.Content.ToString() + " with hand: " + hand.toString();
+                        //lbl.Content = lbl.Content.ToString() + " with hand: " + hand.toString();
                         //FLIP THE CARDS:
                         playersCards[cardIndex].Source =  new BitmapImage(new Uri(@"Images\Cards\" + hand.First.toImage(), UriKind.Relative));
                         playersCards[cardIndex+1].Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.Second.toImage(), UriKind.Relative));
                     }
                 }
-
                 index++;
                 cardIndex += 2;
             }
-            
-
         }
 
+        /*
         public void EndGameMove(Models.EndGameMove move)
         {
             IDictionary<string, Models.PlayerHand> hands = move.playerHands;
@@ -350,7 +388,7 @@ namespace GUI
                 }
             }
             
-        }
+        }*/
 
 
         private void MoveCard(Image card, int x, int y)
@@ -372,11 +410,14 @@ namespace GUI
 
         private void Bet_Button_Click(object sender, RoutedEventArgs e)
         {
+            if(!BetAmount.Text.Equals(""))
             manager.Bet(gameID, Int32.Parse(BetAmount.Text), minimumBet, this);
         }
 
         private void Fold_Button_Click(object sender, RoutedEventArgs e)
         {
+            Bet_Button.IsEnabled = false;
+            Fold_Button.IsEnabled = false;
             manager.Fold(gameID, this);
 
         }

@@ -15,6 +15,7 @@ namespace GUI
        void PushPMMessage(int gameId, string sender, string message);
        void PushChatMessage(int gameId, string sender, string message);
         void PlayerJoinedGame(int gameID, Models.ClientUserProfile prof);
+        void PushWinners(List<string> winners, int gameID);
         //Missing Functions:
         //a player has joined the game
         //a playe has quit the game

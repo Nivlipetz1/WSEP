@@ -107,7 +107,7 @@ namespace Gaming
             string input;
             int betInput;
 
-            do
+            while(true)
             {
                 input = userInput.GetInput();
 
@@ -116,9 +116,22 @@ namespace Gaming
                     status = "Fold";
                     return -1;
                 }
-            }
-            while (!Int32.TryParse(input, out betInput) && !(input.Equals("Fold")) && (betInput>credit));
+                else{
+                    if (Int32.TryParse(input, out betInput))
+                    {
+                        if (betInput > credit)
+                        {
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        continue;
+                    }
 
+                    break;
+                }
+            }
 
             status = "Talked";
 

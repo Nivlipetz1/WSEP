@@ -98,7 +98,7 @@ namespace Gaming
 
             //send the array of players to all the observers
             PushStartGameMove();
-
+            Thread.Sleep(3000); //waiting for observers
 
             //request small blind
             PlayingUser smallBlindPlayer = players.ElementAt(0);
@@ -136,7 +136,7 @@ namespace Gaming
                 GiveWinnings();
                 PushMoveToObservers(new EndGameMove(playerHands));
                 ResetGame();
-                return;
+                goto GameEnd;
             }
 
             cards = new Card[5];
@@ -153,7 +153,7 @@ namespace Gaming
                 GiveWinnings();
                 PushMoveToObservers(new EndGameMove(playerHands));
                 ResetGame();
-                return;
+                goto GameEnd;
             }
 
             cards[3] = gameDeck.DrawTableCard();
@@ -166,9 +166,8 @@ namespace Gaming
                 GiveWinnings();
                 PushMoveToObservers(new EndGameMove(playerHands));
                 ResetGame();
-                return;
+                goto GameEnd;
             }
-
             cards[4] = gameDeck.DrawTableCard();
 
             PushMoveToObservers(new NewCardMove(cards));
@@ -179,12 +178,14 @@ namespace Gaming
                 GiveWinnings();
                 PushMoveToObservers(new EndGameMove(playerHands));
                 ResetGame();
-                return;
+                goto GameEnd;
             }
 
+            
             PushMoveToObservers(new EndGameMove(playerHands));
             List<PlayingUser> winners = DetermineWinner();
-
+            List<string> userNames = spectators.Union(players).Select(user => user.GetUserName()).ToList();
+            NotificationService.Instance.pushWinners(userNames, winners.Select(winner => winner.GetUserName()).ToList(), id);
             foreach (PlayingUser player in winners)
             {
                 player.ReceiveWinnings(pot[0] / winners.Count);
@@ -197,7 +198,13 @@ namespace Gaming
                 }
             }
 
+            
+        GameEnd:
             ResetGame();
+            Thread.Sleep(30000);
+            if ((waitingList.Count + playerBets.Count) >= gamePref.GetMinPlayers())
+                StartGame();
+
 
         }
 

@@ -49,6 +49,7 @@
         <Button x:Name="BackToGC" Click="BackToGC_Click"  Content="Game Center" Canvas.Left="487" Canvas.Top="463" Width="75"/>
         <Button Name="startgameBtn" Visibility="Hidden"/>
         <Label Name="MinimumBetLabel" Content="Label" Visibility="Hidden" Canvas.Left="20" Canvas.Top="440"/>
+        <Label Name="PotSizeLbl" Visibility="Hidden"  Content="Label" Canvas.Left="203" Canvas.Top="332" Width="125"/>
     </Canvas>
 </Page>
 
