@@ -124,7 +124,7 @@
   <data name="cardsdealt2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cardsdealt2.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="cash_register_x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cash_register_x.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="chaching" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\chaching.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

@@ -31,7 +31,7 @@ namespace GUI
 
         public static SoundPlayer snd = new SoundPlayer(Properties.Resources.cardsdealt1);
         public static SoundPlayer snd2 = new SoundPlayer(Properties.Resources.cardsdealt2);
-        public static SoundPlayer bet_sound = new SoundPlayer(Properties.Resources.cash_register_x);
+        public static SoundPlayer bet_sound = new SoundPlayer(Properties.Resources.chaching);
         public Game(GUIManager manager, int gameID)
         {
             InitializeComponent();

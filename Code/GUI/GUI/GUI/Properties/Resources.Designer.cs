@@ -81,9 +81,9 @@ namespace GUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        internal static System.IO.UnmanagedMemoryStream cash_register_x {
+        internal static System.IO.UnmanagedMemoryStream chaching {
             get {
-                return ResourceManager.GetStream("cash_register_x", resourceCulture);
+                return ResourceManager.GetStream("chaching", resourceCulture);
             }
         }
     }
