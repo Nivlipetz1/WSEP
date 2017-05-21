@@ -29,10 +29,7 @@ namespace GUI
 
         public void RefreshGameList()
         {
-            GameList.Items.Clear();
-            foreach (GameFrame gf in manager.GetGameFrameList())
-                GameList.Items.Add(gf.ToString());
-            GameList.Items.Refresh();
+            GameList.ItemsSource = manager.GetGameFrameList();
         }
 
         public void RefreshStatus()
