@@ -68,6 +68,8 @@ namespace GUI
         {
             foreach(Image card in playersCards)
             {
+                Canvas.SetLeft(card, 241);
+                Canvas.SetTop(card, 152);
                 //card.SetValue(Canvas.LeftProperty,241);
                 //card.SetValue(Canvas.TopProperty,152);
             }
