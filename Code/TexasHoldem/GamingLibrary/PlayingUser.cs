@@ -117,7 +117,8 @@ namespace Gaming
                     return -1;
                 }
             }
-            while (!Int32.TryParse(input, out betInput) && !(input.Equals("Fold")));
+            while (!Int32.TryParse(input, out betInput) && !(input.Equals("Fold")) && (betInput>credit));
+
 
             status = "Talked";
 

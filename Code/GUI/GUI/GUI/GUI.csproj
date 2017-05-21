@@ -334,6 +334,8 @@
     <Resource Include="Images\Cards\S8.png" />
     <Resource Include="Images\Cards\S9.png" />
     <Resource Include="Images\question.png" />
+    <None Include="Resources\cash_register_x.wav" />
+    <None Include="Resources\chaching.wav" />
     <Content Include="Sounds\cardPlace1.wav" />
   </ItemGroup>
   <ItemGroup>

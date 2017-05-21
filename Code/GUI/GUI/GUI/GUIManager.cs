@@ -24,6 +24,7 @@ namespace GUI
             this.mainWindow = mainWindow;
             this.status = new Status(this);
             gameList = new List<GameFrame>();
+            gamesList = new List<ClientGame>();
             statusWindow = new Status(this);
             Communication.GameFunctions.Instance.serverToClient = this;
             Communication.GameCenterFunctions.Instance.serverToClient = this;
@@ -31,6 +32,17 @@ namespace GUI
         }
 
         public List<GameFrame> gameList { get; set; }
+        public List<ClientGame> gamesList { get; set; }
+
+        public void AddGame(ClientGame game)
+        {
+            gamesList.Add(game);
+        }
+
+        public void RemoveGame(ClientGame game)
+        {
+            gamesList.Remove(game);
+        }
 
         public void AddGameFrame(GameFrame gameFrame)
         {
@@ -74,14 +86,14 @@ namespace GUI
 
         internal IEnumerable<ClientUserProfile> GetSpectators(int gameID)
         {
-            return findGame(gameID).getGame().spectators;
+            return findGame(gameID).spectators;
         }
 
         public void RemovePlayer(int gameID,string username)
         {
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
-                GameFrame gameFrame = findGame(gameID);
+                GameFrame gameFrame = findGameFrame(gameID);
                 gameFrame.RemovePlayer(username);
             });
         }
@@ -185,21 +197,35 @@ namespace GUI
 
         internal IEnumerable<ClientUserProfile> GetPlayers(int gameID)
         {
-            return findGame(gameID).getGame().players;
+            return findGame(gameID).players;
         }
 
-        private GameFrame findGame(int gameID)
+        private ClientGame findGame(int gameID)
         {
-            GameFrame wantedFrame = null;
+            ClientGame game = null;
             //while (gameList.Count == 0) ;
-            foreach (GameFrame gf in gameList)
+            foreach (ClientGame g in gamesList)
             {
-                if (gf.getGame().id == gameID)
+                if (g.id == gameID)
                 {
-                    wantedFrame = gf;
+                    game = g;
                 }
             }
-            return wantedFrame;
+            return game;
+        }
+
+        private GameFrame findGameFrame(int gameID)
+        {
+            GameFrame gameFrame = null;
+            //while (gameList.Count == 0) ;
+            foreach (GameFrame g in gameList)
+            {
+                if (g.getGame().id == gameID)
+                {
+                    gameFrame = g;
+                }
+            }
+            return gameFrame;
         }
 
         internal async void CreateGame(GamePreferences pref)
@@ -260,7 +286,7 @@ namespace GUI
         {
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
-                GameFrame wantedFrame = findGame(gameID);
+                GameFrame wantedFrame = findGameFrame(gameID);
                 wantedFrame.GameWindow.MyTurn(minimumBet);
             });
         }
@@ -270,6 +296,7 @@ namespace GUI
             Models.ClientGame game = await Communication.GameCenterFunctions.Instance.joinGame(gameID, credit);
             if (game != null)
             {
+                AddGame(game);
                 await RefreshProfile();
                 GameFrame gameFrame = new GameFrame(this, game);
                 AddGameFrame(gameFrame);
@@ -291,7 +318,7 @@ namespace GUI
         {
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
-                GameFrame wantedFrame = findGame(gameID);
+                GameFrame wantedFrame = findGameFrame(gameID);
                 wantedFrame.GameWindow.DealCards(hand);
             });
         }
@@ -309,7 +336,7 @@ namespace GUI
         {
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
-                GameFrame wantedFrame = findGame(gameID);
+                GameFrame wantedFrame = findGameFrame(gameID);
                 if (move is Models.BetMove)
                 {
                     wantedFrame.GameWindow.PushBetMove((Models.BetMove)move);
@@ -340,7 +367,9 @@ namespace GUI
             {
                 if (await Communication.GameFunctions.Instance.removePlayer(gameID))
                 {
-                    RemoveGameFrame(findGame(gameID));
+                    RemoveGame(findGame(gameID));
+                    RemoveGameFrame(findGameFrame(gameID));
+                    await RefreshProfile();
                     mainWindow.mainFrame.NavigationService.GoBack();
              
                 }
@@ -388,7 +417,7 @@ namespace GUI
         {
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
-                GameFrame gameFrame = findGame(gameID);
+                GameFrame gameFrame = findGameFrame(gameID);
                 if (gameFrame!=null)
                 {
                     gameFrame.GamePM.AddPlayer(prof);
@@ -402,7 +431,7 @@ namespace GUI
         {
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
-                GameFrame gameFrame = findGame(gameId);
+                GameFrame gameFrame = findGameFrame(gameId);
                 gameFrame.GamePM.PushMessage(sender, message);
             });
         }
@@ -411,7 +440,7 @@ namespace GUI
         {
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
-                GameFrame gameFrame = findGame(gameId);
+                GameFrame gameFrame = findGameFrame(gameId);
                 gameFrame.GameChat.PushMessage(sender, message);
             });
         }
