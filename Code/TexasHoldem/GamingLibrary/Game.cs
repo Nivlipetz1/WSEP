@@ -98,7 +98,7 @@ namespace Gaming
 
             //send the array of players to all the observers
             PushStartGameMove();
-            Thread.Sleep(1000); //waiting for observers
+            Thread.Sleep(3000); //waiting for observers
 
             //request small blind
             PlayingUser smallBlindPlayer = players.ElementAt(0);
@@ -184,7 +184,7 @@ namespace Gaming
 
             PushMoveToObservers(new EndGameMove(playerHands));
             List<PlayingUser> winners = DetermineWinner();
-
+            NotificationService.Instance.pushWinners(spectators.Union(players).Select(user=>user.GetUserName()).ToList(), winners.Select(winner => winner.GetUserName()).ToList(), id);
             foreach (PlayingUser player in winners)
             {
                 player.ReceiveWinnings(pot[0] / winners.Count);
