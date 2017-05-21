@@ -72,6 +72,10 @@ namespace GUI.Communication
 
             gameHubProxy.On<List<string>, int>("pushWinners", (winners, gameID) =>
             {
+                Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    serverToClient.PushWinners(winners, gameID);
+                });
             });
 
             gameHubProxy.On<int,int>("yourTurn", (minimumBet , gameId) =>

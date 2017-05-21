@@ -289,6 +289,8 @@ namespace GUI
 
         public void MyTurn(int minimumBet)
         {
+            Bet_Button.IsEnabled = true;
+            Fold_Button.IsEnabled = true;
             this.minimumBet = minimumBet;
             MinimumBetLabel.Content = "Minimum Bet: $" + minimumBet;
             ShowBetElements();
@@ -297,12 +299,23 @@ namespace GUI
         public void PushGameStartMove(Models.GameStartMove move)
         {
             RepositionCards();
+            potSizeInt = 0;
             MessageBox.Show("Game Started!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             //credit.Visibility = Visibility.Visible;
             betted.Content = "$0";
             betted.Visibility = Visibility.Visible;
             PotSizeLbl.Content = "Pot Size: $" + potSizeInt;
             PotSizeLbl.Visibility = Visibility.Visible;
+        }
+
+        public void PushWinners(List<string> winners)
+        {
+            string winnersStr = "";
+            foreach(string winner in winners)
+            {
+                winnersStr += "\n"+winner;
+            }
+            MessageBox.Show("The Winners Are: "+winnersStr+"\nThey each get "+potSizeInt/winners.Count, "Winners", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
 
@@ -371,11 +384,15 @@ namespace GUI
 
         private void Bet_Button_Click(object sender, RoutedEventArgs e)
         {
+            Bet_Button.IsEnabled = false;
+            Fold_Button.IsEnabled = false;
             manager.Bet(gameID, Int32.Parse(BetAmount.Text), minimumBet, this);
         }
 
         private void Fold_Button_Click(object sender, RoutedEventArgs e)
         {
+            Bet_Button.IsEnabled = false;
+            Fold_Button.IsEnabled = false;
             manager.Fold(gameID, this);
 
         }

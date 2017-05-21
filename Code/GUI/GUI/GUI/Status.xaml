@@ -18,7 +18,7 @@
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Game "/>
-                        <TextBlock Text="{Binding gameID}" />
+                        <TextBlock Text="{Binding }" />
                     </StackPanel>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
