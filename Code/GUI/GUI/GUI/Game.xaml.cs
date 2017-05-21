@@ -318,6 +318,7 @@ namespace GUI
         {
             RepositionCards();
             potSizeInt = 0;
+            revealCard = 0;
             MessageBox.Show("Game Started!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             //credit.Visibility = Visibility.Visible;
             betted.Content = "$0";
@@ -402,8 +403,7 @@ namespace GUI
 
         private void Bet_Button_Click(object sender, RoutedEventArgs e)
         {
-            Bet_Button.IsEnabled = false;
-            Fold_Button.IsEnabled = false;
+
             manager.Bet(gameID, Int32.Parse(BetAmount.Text), minimumBet, this);
         }
 
