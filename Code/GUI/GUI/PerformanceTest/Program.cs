@@ -18,9 +18,9 @@ namespace PerformanceTest
         static void Main(string[] args)
         {
             username = RandomString(4);
-             testAuthHub(3);
-             GameCenterHubTest(30);
-              ChatOverLoad(5);
+             testAuthHub(100);
+             GameCenterHubTest(5);
+             ChatOverLoad(5);
             Console.Read();
         }
         public static void testAuthHub(int N)
@@ -38,8 +38,8 @@ namespace PerformanceTest
             Task[] resps = new Task[N];
             for (int i = 0; i < N; i++)
             {
-               // var hubConnection = new HubConnection("http://localhost:51509");
-                var hubConnection = new HubConnection("http://52.29.58.18:80/");
+                var hubConnection = new HubConnection("http://192.168.0.104:80");
+               // var hubConnection = new HubConnection("http://52.29.58.18:80/");
                //   hubConnection.Error += (error) => { throw new Exception("server error: " + error); } ;
                 Stopwatch s = new Stopwatch();
                 s.Start();
@@ -124,8 +124,8 @@ namespace PerformanceTest
             int done = N;
             for (int i=0;i< N;i++)
             {
-              //  var hubConnection = new HubConnection("http://localhost:51509");
-                var hubConnection = new HubConnection("http://52.29.58.18:80/");
+                 var hubConnection = new HubConnection("http://192.168.0.104:80");
+               // var hubConnection = new HubConnection("http://52.29.58.18:80/");
                 Stopwatch s = new Stopwatch();
                 s.Start();
                 int k = i;
@@ -208,8 +208,8 @@ namespace PerformanceTest
             int done = N;
             for (int i = 0; i < N; i++)
             {
-                //  var hubConnection = new HubConnection("http://localhost:51509");
-                var hubConnection = new HubConnection("http://52.29.58.18:80/");
+                var hubConnection = new HubConnection("http://192.168.0.104:80");
+                //var hubConnection = new HubConnection("http://52.29.58.18:80/");
                 Stopwatch s = new Stopwatch();
                 s.Start();
                 int k = i;
