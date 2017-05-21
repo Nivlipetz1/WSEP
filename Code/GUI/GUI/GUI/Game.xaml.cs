@@ -28,6 +28,7 @@ namespace GUI
         private List<Image> playersCards;
         private int revealCard = 0;
         private int minimumBet = 0;
+        private int potSizeInt = 0;
 
         public static SoundPlayer snd = new SoundPlayer(Properties.Resources.cardsdealt1);
         public static SoundPlayer snd2 = new SoundPlayer(Properties.Resources.cardsdealt2);
@@ -206,8 +207,10 @@ namespace GUI
             int bet = move.GetAmount();
             int index = 0;
             int cardIndex = 0;
+            potSizeInt += bet;
+            PotSizeLbl.Content = "Pot Size: $" + potSizeInt;
 
-            if(move.GetBettingPlayer().Equals(manager.GetProfile().username))
+            if (move.GetBettingPlayer().Equals(manager.GetProfile().username))
             {
                 betted.Content = "$" + bet;
             }
@@ -237,7 +240,7 @@ namespace GUI
                 if (prof.username.Equals(move.GetFoldingPlayer()))
                 {
                     Label lbl = playerLabels.ElementAt(index);
-                    lbl.Visibility = Visibility.Hidden;
+                    lbl.Content = prof.username + " Fold";
                     playersCards.ElementAt(cardIndex).Visibility = Visibility.Hidden;
                     playersCards.ElementAt(cardIndex + 1).Visibility = Visibility.Hidden;
                     break;
@@ -295,8 +298,11 @@ namespace GUI
         {
             RepositionCards();
             MessageBox.Show("Game Started!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            //credit.Visibility = Visibility.Visible;
             betted.Content = "$0";
             betted.Visibility = Visibility.Visible;
+            PotSizeLbl.Content = "Pot Size: $" + potSizeInt;
+            PotSizeLbl.Visibility = Visibility.Visible;
         }
 
 
