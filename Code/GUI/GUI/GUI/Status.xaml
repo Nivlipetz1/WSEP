@@ -16,10 +16,7 @@
         <ComboBox Name="GameList" HorizontalAlignment="Center" Margin="100,4,0,0" VerticalAlignment="Top" Width="120">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="Game "/>
-                        <TextBlock Text="{Binding }" />
-                    </StackPanel>
+                    <TextBlock Text="{Binding }" />
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>

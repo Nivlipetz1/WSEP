@@ -70,9 +70,25 @@ namespace GUI
             {
                 Canvas.SetLeft(card, 241);
                 Canvas.SetTop(card, 152);
+                card.Source = new BitmapImage(new Uri(@"Images\Cards\back.png", UriKind.Relative));
                 //card.SetValue(Canvas.LeftProperty,241);
                 //card.SetValue(Canvas.TopProperty,152);
             }
+            Canvas.SetLeft(FlopCard1, 241);
+            Canvas.SetTop(FlopCard1, 152);
+            Canvas.SetLeft(FlopCard2, 241);
+            Canvas.SetTop(FlopCard2, 152);
+            Canvas.SetLeft(FlopCard3, 241);
+            Canvas.SetTop(FlopCard3, 152);
+            Canvas.SetLeft(RiverCard, 241);
+            Canvas.SetTop(RiverCard, 152);
+            Canvas.SetLeft(TurnCard, 241);
+            Canvas.SetTop(TurnCard, 152);
+            FlopCard1.Visibility = Visibility.Hidden;
+            FlopCard2.Visibility = Visibility.Hidden;
+            FlopCard3.Visibility = Visibility.Hidden;
+            RiverCard.Visibility = Visibility.Hidden;
+            TurnCard.Visibility = Visibility.Hidden;
         }
 
         public void Button_Click(object sender, RoutedEventArgs e)
@@ -222,7 +238,7 @@ namespace GUI
                 if (prof.username.Equals(move.GetBettingPlayer()))
                 {
                     Label lbl = playerLabels.ElementAt(index);
-                    lbl.Content = prof.username + " $" + bet;
+                    lbl.Content = prof.username + " $" + move.GetAmount();
                     break;
                 }
 
