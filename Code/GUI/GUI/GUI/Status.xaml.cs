@@ -63,5 +63,10 @@ namespace GUI
             foreach (int gameID in gameIDList)
                     GameList.Items.Add(gameID);
         }
+
+        private void GameList_DropDownOpened(object sender, EventArgs e)
+        {
+            RefreshGamesList();
+        }
     }
 }

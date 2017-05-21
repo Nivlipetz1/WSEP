@@ -13,10 +13,13 @@
         <Label Name="username" Content="Label" Foreground="WhiteSmoke" HorizontalAlignment="Left" Margin="5,4,0,0" VerticalAlignment="Top"/>
         <Label Name="credit" Content="Label" Foreground="WhiteSmoke" HorizontalAlignment="Right" Margin="0,4,5,0" VerticalAlignment="Top"/>
         <Label Content="Active Games:" Foreground="WhiteSmoke" HorizontalAlignment="Center" Margin="-100,0,0,0" VerticalAlignment="Top"/>
-        <ComboBox Name="GameList" HorizontalAlignment="Center" Margin="100,4,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="GameList_SelectionChanged">
+        <ComboBox Name="GameList" HorizontalAlignment="Center" Margin="100,4,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="GameList_SelectionChanged" DropDownOpened="GameList_DropDownOpened">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding }" />
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Game "/>
+                        <TextBlock Text="{Binding }" />
+                    </StackPanel>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
