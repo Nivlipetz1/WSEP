@@ -46,8 +46,8 @@ namespace GUI
 
         public void AddGameFrame(GameFrame gameFrame)
         {
-                gameList.Add(gameFrame);
-                status.RefreshGameList();
+            gameList.Add(gameFrame);
+            status.AddGameToList(gameFrame.gameID);
         }
 
 
@@ -56,7 +56,7 @@ namespace GUI
             if (gameList.Contains(gf))
             {
                 gameList.Remove(gf);
-                status.RefreshGameList();
+                status.AddGameToList(gf.gameID);
             }
         }
 
@@ -95,6 +95,10 @@ namespace GUI
             {
                 GameFrame gameFrame = findGameFrame(gameID);
                 gameFrame.RemovePlayer(username);
+                ClientGame game = findGame(gameID);
+                foreach (ClientUserProfile prof in game.players)
+                    if (prof.username.Equals(username))
+                        game.players.Remove(prof);
             });
         }
 
@@ -323,12 +327,21 @@ namespace GUI
             });
         }
 
+        public void PushWinners(List<string> winners,int gameID)
+        {
+            Dispatcher.CurrentDispatcher.InvokeAsync(() =>
+            {
+                GameFrame gameFrame = findGameFrame(gameID);
+                gameFrame.GameWindow.PushWinners(winners);
+            });
+        }
+
         public void Notify(string message)
         {
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
 
-                MessageBox.Show("System Message:\nmessage");
+                MessageBox.Show("System Message:\n"+message);
             });
         }
 
@@ -385,7 +398,7 @@ namespace GUI
                 if (await Communication.GameFunctions.Instance.bet(gameID, amount.ToString()))
                 {
                     gameWindow.HideBetElements();
-                    MessageBox.Show("Bet Accepted", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                    //MessageBox.Show("Bet Accepted", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             else

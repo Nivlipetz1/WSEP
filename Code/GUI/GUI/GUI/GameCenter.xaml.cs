@@ -41,5 +41,10 @@ namespace GUI
         {
             NavigationService.Navigate(new ReplayGames());
         }
+
+        private void GoBack_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
     }
 }
