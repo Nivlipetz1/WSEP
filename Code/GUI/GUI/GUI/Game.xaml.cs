@@ -333,7 +333,7 @@ namespace GUI
                     {
                         Label lbl = playerLabels.ElementAt(index);
                         Models.PlayerHand hand = move.playerHands[username];
-                        lbl.Content = lbl.Content.ToString() + " with hand: " + hand.toString();
+                        //lbl.Content = lbl.Content.ToString() + " with hand: " + hand.toString();
                         //FLIP THE CARDS:
                         playersCards[cardIndex].Source =  new BitmapImage(new Uri(@"Images\Cards\" + hand.First.toImage(), UriKind.Relative));
                         playersCards[cardIndex+1].Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.Second.toImage(), UriKind.Relative));
