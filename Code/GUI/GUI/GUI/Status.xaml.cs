@@ -52,5 +52,16 @@ namespace GUI
         {
             manager.NavigateToGameFrame(GameList.SelectedIndex);
         }
+
+        private void GameList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RefreshGamesList();
+        }
+
+        private void RefreshGamesList(){
+            GameList.Items.Clear();
+            foreach (int gameID in gameIDList)
+                    GameList.Items.Add(gameID);
+        }
     }
 }
