@@ -98,7 +98,7 @@ namespace Gaming
 
             //send the array of players to all the observers
             PushStartGameMove();
-
+            Thread.Sleep(1000); //waiting for observers
 
             //request small blind
             PlayingUser smallBlindPlayer = players.ElementAt(0);
