@@ -110,6 +110,12 @@ namespace GUI {
             return;
             case 3:
             this.GameList = ((System.Windows.Controls.ComboBox)(target));
+            
+            #line 16 "..\..\Status.xaml"
+            this.GameList.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(this.GameList_SelectionChanged);
+            
+            #line default
+            #line hidden
             return;
             case 4:
             this.GoBtn = ((System.Windows.Controls.Button)(target));
