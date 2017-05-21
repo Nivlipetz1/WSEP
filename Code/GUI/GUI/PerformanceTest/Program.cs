@@ -18,9 +18,9 @@ namespace PerformanceTest
         static void Main(string[] args)
         {
             username = RandomString(4);
-             testAuthHub(100);
+             testAuthHub(7);
              GameCenterHubTest(5);
-             ChatOverLoad(5);
+             //ChatOverLoad(5);
             Console.Read();
         }
         public static void testAuthHub(int N)
@@ -38,7 +38,7 @@ namespace PerformanceTest
             Task[] resps = new Task[N];
             for (int i = 0; i < N; i++)
             {
-                var hubConnection = new HubConnection("http://192.168.0.104:80");
+                var hubConnection = new HubConnection("http://132.73.193.128:80");
                // var hubConnection = new HubConnection("http://52.29.58.18:80/");
                //   hubConnection.Error += (error) => { throw new Exception("server error: " + error); } ;
                 Stopwatch s = new Stopwatch();
@@ -47,7 +47,7 @@ namespace PerformanceTest
                 IHubProxy proxy = hubConnection.CreateHubProxy("AuthHub");
                 hubConnection.Start().ContinueWith(response =>
                 {
-                    
+                    SemaphoreSlim PersonalSem = new SemaphoreSlim(0,1);
                     s.Stop();
                     Console.WriteLine(k+" Connected");
                     times[k] = s.ElapsedMilliseconds;
@@ -84,9 +84,14 @@ namespace PerformanceTest
                         if (res1.Result)
                             SuccesfullLogouts++;
                         done++;
+                        PersonalSem.Release();
                         if (done == N)
                             sem.Release();
                     });
+                    PersonalSem.Wait();
+                    hubConnection.Stop();
+                    Console.WriteLine("Disconnected");
+
                 });
 
                 Thread.Sleep(300);
@@ -124,7 +129,7 @@ namespace PerformanceTest
             int done = N;
             for (int i=0;i< N;i++)
             {
-                 var hubConnection = new HubConnection("http://192.168.0.104:80");
+                 var hubConnection = new HubConnection("http://132.73.193.128:80");
                // var hubConnection = new HubConnection("http://52.29.58.18:80/");
                 Stopwatch s = new Stopwatch();
                 s.Start();
