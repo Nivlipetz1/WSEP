@@ -136,7 +136,7 @@ namespace Gaming
                 GiveWinnings();
                 PushMoveToObservers(new EndGameMove(playerHands));
                 ResetGame();
-                return;
+                goto GameEnd;
             }
 
             cards = new Card[5];
@@ -153,7 +153,7 @@ namespace Gaming
                 GiveWinnings();
                 PushMoveToObservers(new EndGameMove(playerHands));
                 ResetGame();
-                return;
+                goto GameEnd;
             }
 
             cards[3] = gameDeck.DrawTableCard();
@@ -166,7 +166,7 @@ namespace Gaming
                 GiveWinnings();
                 PushMoveToObservers(new EndGameMove(playerHands));
                 ResetGame();
-                return;
+                goto GameEnd;
             }
 
             cards[4] = gameDeck.DrawTableCard();
@@ -179,7 +179,7 @@ namespace Gaming
                 GiveWinnings();
                 PushMoveToObservers(new EndGameMove(playerHands));
                 ResetGame();
-                return;
+                goto GameEnd;
             }
 
             PushMoveToObservers(new EndGameMove(playerHands));
@@ -197,7 +197,13 @@ namespace Gaming
                 }
             }
 
+            
+        GameEnd:
             ResetGame();
+            Thread.Sleep(3000);
+            if ((waitingList.Count + playerBets.Count) >= gamePref.GetMinPlayers())
+                StartGame();
+
 
         }
 
