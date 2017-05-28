@@ -73,20 +73,26 @@
     <Content Include="Images\LOGIN_LOGO_WEB_white.png" />
     <Content Include="Images\Statistics logo.png" />
     <Content Include="Images\table.png" />
-    <Content Include="LeaderboardsPage.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="LeaderBoardsPage.aspx" />
     <Content Include="HomePage.aspx" />
+    <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LeaderboardsPage.aspx.cs">
-      <DependentUpon>LeaderboardsPage.aspx</DependentUpon>
+    <Compile Include="LeaderBoardsPage.aspx.cs">
+      <DependentUpon>LeaderBoardsPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="LeaderBoardsPage.aspx.designer.cs">
+      <DependentUpon>LeaderBoardsPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="HomePage.aspx.cs">
       <DependentUpon>HomePage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="HomePage.aspx.designer.cs">
+      <DependentUpon>HomePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

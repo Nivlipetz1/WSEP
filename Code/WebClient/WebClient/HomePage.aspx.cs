@@ -5,18 +5,29 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class HomePage : System.Web.UI.Page
+namespace WebClient
 {
-    protected void Page_Load(object sender, EventArgs e)
+    public partial class LoginPage : System.Web.UI.Page
     {
-    }
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            invalidLabel.Visible = false;
+        }
 
-    protected void Button1_Click(object sender, EventArgs e)
-    {
-    }
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            if (checkUserDetails(usernameField.Text, passwordField.Text))
+            {
+                invalidLabel.Visible = false;
+                Response.Redirect("LeaderboardsPage.aspx");
+            }
+            else
+                invalidLabel.Visible = true;
+        }
 
-    private bool checkUserDetails(string p1, string p2)
-    {
-        return true;
+        private bool checkUserDetails(string p1, string p2)
+        {
+            return true;
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="LeaderboardsPage.aspx.cs" Inherits="LeaderboardsPage" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LeaderBoardsPage.aspx.cs" Inherits="WebClient.LeaderBoards" %>
 
 <!DOCTYPE html>
 

@@ -1,8 +1,8 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="HomePage.aspx.cs" Inherits="HomePage" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="HomePage.aspx.cs" Inherits="WebClient.LoginPage" %>
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" >
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
     <style type="text/css">
@@ -23,7 +23,7 @@
     </style>
 </head>
 <body >
-    <form id="loginForm" runat="server">
+    <form id="form1" runat="server">
     <div style="height: 274px; width: 297px; position:absolute; top: 123px; left: 519px;">
         <asp:TextBox ID="usernameField" runat="server" style="position:absolute; top: 87px; left: 126px;"></asp:TextBox>
         <asp:TextBox TextMode="Password" runat="server" ID="passwordField" style="position:absolute; top: 127px; left: 126px;"></asp:TextBox>
