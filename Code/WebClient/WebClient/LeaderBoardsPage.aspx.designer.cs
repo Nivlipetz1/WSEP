@@ -49,6 +49,33 @@ namespace WebClient {
         protected global::System.Web.UI.WebControls.Label GamesLabel;
         
         /// <summary>
+        /// grossPorfitTable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table grossPorfitTable;
+        
+        /// <summary>
+        /// cashGainTable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table cashGainTable;
+        
+        /// <summary>
+        /// gamesTable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table gamesTable;
+        
+        /// <summary>
         /// WinRateLabel control.
         /// </summary>
         /// <remarks>

@@ -16,7 +16,47 @@ namespace WebClient
             invalidLabel.Visible = false;
             WinRateValueLabel.Visible = false;
             ProfitRateValueLabel.Visible = false;
+
+            loadTables();
         }
+
+        private void loadTables()
+        {
+            loadTable(cashGainTable.ID);
+            loadTable(grossPorfitTable.ID);
+            loadTable(gamesTable.ID);
+        }
+
+        private void loadTable(string tableID)
+        {
+            Table table = (Table)FindControl(tableID);
+            List<Pair<string, int>> games = getGamesRecords();
+            for (int i = 0; i < 20; i++)
+            {
+                TableRow newRow = new TableRow();
+                TableCell firstCell = new TableCell();
+                TableCell secondCell = new TableCell();
+                firstCell.Text = games[i].getUsername();
+                secondCell.Text = games[i].getValue().ToString();
+                newRow.Cells.Add(firstCell);
+                newRow.Cells.Add(new TableCell());
+                newRow.Cells.Add(new TableCell());
+                newRow.Cells.Add(new TableCell());
+                newRow.Cells.Add(new TableCell());
+                newRow.Cells.Add(secondCell);
+                table.Rows.Add(newRow);
+            }
+        }
+
+        private List<Pair<string, int>> getGamesRecords()
+        {
+            List<Pair<string, int>> list = new List<Pair<string,int>>();
+            for (int i = 0; i < 20; i++)
+                list.Add(new Pair<string,int>("Koren", 20 - i));
+            return list;
+        }
+        
+
         protected void Back_Click(object sender, ImageClickEventArgs e)
         {
             Response.Redirect("HomePage.aspx");

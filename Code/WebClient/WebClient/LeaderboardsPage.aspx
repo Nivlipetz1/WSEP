@@ -38,6 +38,10 @@
     <img src="Images/table.png" style="position:absolute; top: 157px; left: 777px;" class="auto-style5" />
     <img src="Images/table.png" style="position:absolute; top: 158px; left: -9px;" class="auto-style5" />
     
+    <asp:Table ID="grossPorfitTable" style="position:absolute; top: 247px; left: 897px;" runat="server" Font-Bold="True" Font-Names="Arial" Font-Size="Small" ForeColor="White"></asp:Table>
+    <asp:Table ID="cashGainTable" style="position:absolute; top: 248px; left: 490px;" runat="server" Font-Bold="True" Font-Names="Arial" Font-Size="Small" ForeColor="White"></asp:Table>
+    <asp:Table ID="gamesTable" style="position:absolute; top: 249px; left: 112px;" runat="server" Font-Bold="True" Font-Names="Arial" Font-Size="Small" ForeColor="White"></asp:Table>
+
     <img src="Images/Statistics%20logo.png" style="position:absolute; top: 622px; left: 417px;"  />;
 
     <asp:Label ID="WinRateLabel" Text="Win rate:" runat="server" style="position:absolute; font-size:large; top: 894px; left: 512px; width: 197px; height: 41px;" Font-Bold="True" ForeColor="White" Font-Names="Comic Sans MS"></asp:Label>   
