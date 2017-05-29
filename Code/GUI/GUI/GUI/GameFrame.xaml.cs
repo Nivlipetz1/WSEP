@@ -30,7 +30,7 @@ namespace GUI
         {
             this.manager = manager;
             this.game = game;
-            this.gameID = gameID;
+            this.gameID = game.id;
 
         }
 

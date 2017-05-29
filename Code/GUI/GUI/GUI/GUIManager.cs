@@ -19,13 +19,14 @@ namespace GUI
         Status status;
         private MainWindow mainWindow;
         Status statusWindow;
-        Dictionary<int, int> mutexLocks = new Dictionary<int, int>();
+        Dictionary<int, bool> mutexLocks = new Dictionary<int, bool>();
         public GUIManager(MainWindow mainWindow)
         {
             this.mainWindow = mainWindow;
+            gamesList = new List<ClientGame>();
             this.status = new Status(this);
             gameList = new List<GameFrame>();
-            gamesList = new List<ClientGame>();
+            
             statusWindow = new Status(this);
             Communication.GameFunctions.Instance.serverToClient = this;
             Communication.GameCenterFunctions.Instance.serverToClient = this;
@@ -49,6 +50,16 @@ namespace GUI
         {
             gameList.Add(gameFrame);
             status.AddGameToList(gameFrame.gameID);
+        }
+
+        public List<int> GetGameIDList()
+        {
+            List<int> list = new List<int>();
+            foreach(ClientGame game in gamesList)
+            {
+                list.Add(game.id);
+            }
+            return list;
         }
 
 
@@ -284,33 +295,34 @@ namespace GUI
 
         public void NavigateToGameFrame(int selectedIndex)
         {
-            NavigateToGameFrame(gameList[selectedIndex]);
+            GameFrame wantedFrame = null;
+            foreach(GameFrame frame in gameList)
+            {
+                if (frame.gameID == selectedIndex)
+                {
+                    wantedFrame = frame;
+                    break;
+                }
+            }
+            if(wantedFrame!=null)
+                NavigateToGameFrame(wantedFrame);
         }
 
         public void NotifyTurn(int minimumBet, int gameID)
         {
+           // while (mutexLocks[gameID]) ;
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
-                Monitor.Enter(mutexLocks[gameID]);
-                try
-                {
-                    GameFrame wantedFrame = findGameFrame(gameID);
+                
+                GameFrame wantedFrame = findGameFrame(gameID);
                     wantedFrame.GameWindow.MyTurn(minimumBet);
-                }
-                finally
-                {
-                    Monitor.Exit(mutexLocks[gameID]);
-                }
             });
         }
 
         internal async void JoinGame(int gameID, int credit)
         {
-            int mutexLock = new int();
+            bool mutexLock = true;
             mutexLocks.Add(gameID,mutexLock);
-            Monitor.Enter(mutexLocks[gameID]);
-            try
-            {
                 Models.ClientGame game = await Communication.GameCenterFunctions.Instance.joinGame(gameID, credit);
                 if (game != null)
                 {
@@ -325,11 +337,7 @@ namespace GUI
                 {
                     MessageBox.Show("something went wrong:(");
                 }
-            }
-            finally
-            {
-                Monitor.Exit(mutexLocks[gameID]);
-            }
+            mutexLocks[gameID] = false ;
         }
 
         private void NavigateToGameFrame(GameFrame gameFrame)
@@ -339,18 +347,11 @@ namespace GUI
 
         public void PushHand(Models.PlayerHand hand, int gameID)
         {
+           // while (mutexLocks[gameID]) ;
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
-                Monitor.Enter(mutexLocks[gameID]);
-                try
-                {
-                    GameFrame wantedFrame = findGameFrame(gameID);
+                GameFrame wantedFrame = findGameFrame(gameID);
                     wantedFrame.GameWindow.DealCards(hand);
-                }
-                finally
-                {
-                    Monitor.Exit(mutexLocks[gameID]);
-                }
             });
         }
 
@@ -358,16 +359,8 @@ namespace GUI
         {
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
-                Monitor.Enter(mutexLocks[gameID]);
-                try
-                {
-                    GameFrame gameFrame = findGameFrame(gameID);
+                GameFrame gameFrame = findGameFrame(gameID);
                     gameFrame.GameWindow.PushWinners(winners);
-                }
-                finally
-                {
-                    Monitor.Exit(mutexLocks[gameID]);
-                }
             });
         }
 
@@ -375,18 +368,17 @@ namespace GUI
         {
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
+
                 MessageBox.Show("System Message:\n"+message);
             });
         }
 
         public void PushMoveToGame(Models.Move move, int gameID)
         {
+            //while (mutexLocks[gameID]) ;
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
-                Monitor.Enter(mutexLocks[gameID]);
-                try
-                {
-                    GameFrame wantedFrame = findGameFrame(gameID);
+                GameFrame wantedFrame = findGameFrame(gameID);
                     if (move is Models.BetMove)
                     {
                         wantedFrame.GameWindow.PushBetMove((Models.BetMove)move);
@@ -407,11 +399,6 @@ namespace GUI
                     {
                         wantedFrame.GameWindow.PushEndGameMove((Models.EndGameMove)move);
                     }
-                }
-                finally
-                {
-                    Monitor.Exit(mutexLocks[gameID]);
-                }
         });
         }
 
@@ -425,7 +412,8 @@ namespace GUI
                     RemoveGame(findGame(gameID));
                     RemoveGameFrame(findGameFrame(gameID));
                     await RefreshProfile();
-                    mainWindow.mainFrame.NavigationService.GoBack();
+                    GoToGameCenter();
+                    //mainWindow.mainFrame.NavigationService.GoBack();
              
                 }
                 else
@@ -472,21 +460,13 @@ namespace GUI
         {
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
-                Monitor.Enter(mutexLocks[gameID]);
-                try
-                {
-                    GameFrame gameFrame = findGameFrame(gameID);
+                GameFrame gameFrame = findGameFrame(gameID);
                     if (gameFrame != null)
                     {
                         gameFrame.GamePM.AddPlayer(prof);
 
                         gameFrame.getGame().AddPlayer(prof);
                     }
-                }
-                finally
-                {
-                    Monitor.Exit(mutexLocks[gameID]);
-                }
         });
         }
 
@@ -494,34 +474,20 @@ namespace GUI
         {
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
-                Monitor.Enter(mutexLocks[gameId]);
-                try
-                {
-                    GameFrame gameFrame = findGameFrame(gameId);
+                GameFrame gameFrame = findGameFrame(gameId);
                     gameFrame.GamePM.PushMessage(sender, message);
-                }
-                finally
-                {
-                    Monitor.Exit(mutexLocks[gameId]);
-                }
 
             });
         }
 
         public void PushChatMessage(int gameId, string sender, string message)
         {
+            //while (mutexLocks[gameId]) ;
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
-                Monitor.Enter(mutexLocks[gameId]);
-                try
-                {
-                    GameFrame gameFrame = findGameFrame(gameId);
+                
+                GameFrame gameFrame = findGameFrame(gameId);
                     gameFrame.GameChat.PushMessage(sender, message);
-                }
-                finally
-                {
-                    Monitor.Exit(mutexLocks[gameId]);
-                }
             });
         }
     }

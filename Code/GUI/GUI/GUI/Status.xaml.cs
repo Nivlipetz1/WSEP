@@ -27,18 +27,19 @@ namespace GUI
             InitializeComponent();
             this.manager = manager;
             gameIDList = new List<int>();
+            RefreshGamesList();
         }
 
         public void AddGameToList(int gameID)
         {
             gameIDList.Add(gameID);
-            GameList.ItemsSource = gameIDList;
+            //GameList.ItemsSource = gameIDList;
         }
 
         public void RemoveGameFromList(int gameID)
         {
             gameIDList.Remove(gameID);
-            GameList.ItemsSource = gameIDList;
+            //GameList.ItemsSource = gameIDList;
         }
 
         public void RefreshStatus()
@@ -46,21 +47,25 @@ namespace GUI
             Models.ClientUserProfile prof = manager.GetProfile();
             this.credit.Content = "Credit: $" + prof.credit;
             this.username.Content = "Hello " + prof.username;
+            
         }
+
+
 
         private void GoBtn_Click(object sender, RoutedEventArgs e)
         {
-            manager.NavigateToGameFrame(GameList.SelectedIndex);
+            manager.NavigateToGameFrame(Int32.Parse(GameList.Text));
         }
 
         private void GameList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            RefreshGamesList();
+            //RefreshGamesList();
         }
 
         private void RefreshGamesList(){
+            
             GameList.Items.Clear();
-            foreach (int gameID in gameIDList)
+            foreach (int gameID in manager.GetGameIDList())
                     GameList.Items.Add(gameID);
         }
 

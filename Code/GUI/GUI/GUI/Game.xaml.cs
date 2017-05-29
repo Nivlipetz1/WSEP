@@ -26,6 +26,8 @@ namespace GUI
         GUIManager manager;
         private List<Label> playerLabels;
         private List<Image> playersCards;
+        private List<int> playersBets;
+        private List<int> playersCredit;
         private int revealCard = 0;
         private int minimumBet = 0;
         private int potSizeInt = 0;
@@ -40,6 +42,11 @@ namespace GUI
             this.gameID = gameID;
             playerLabels = new List<Label>();
             playersCards = new List<Image>();
+            playersBets = new List<int>();
+            for(int i = 0; i < 7; i++)
+            {
+                playersBets.Add(new int());
+            }
             playerLabels.Add(player3);
             playerLabels.Add(player4);
             playerLabels.Add(player5);
@@ -328,7 +335,7 @@ namespace GUI
             revealCard = 0;
             MessageBox.Show("Game Started!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             //credit.Visibility = Visibility.Visible;
-            betted.Content = "$0";
+            //betted.Content = "$0";
             betted.Visibility = Visibility.Visible;
             PotSizeLbl.Content = "Pot Size: $" + potSizeInt;
             PotSizeLbl.Visibility = Visibility.Visible;
