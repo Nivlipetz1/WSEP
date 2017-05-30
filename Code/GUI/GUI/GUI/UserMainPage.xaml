@@ -92,7 +92,7 @@
         <Button Click="GameCenter_Click" Content="Button" HorizontalAlignment="Left" Width="199" Height="49" Margin="306,186,0,0" VerticalAlignment="Top" Style="{DynamicResource GameCenterButton}"/>
         <Button Click="EditProfile_Click" Content="EditProfile" HorizontalAlignment="Left" Width="199" Height="49" Margin="306,246,0,0" VerticalAlignment="Top" Style="{DynamicResource EditProfileButton}"/>
         <Button Click="Logout_Click" Content="Logout" HorizontalAlignment="Left" Width="199" Height="49" Margin="306,306,0,0" VerticalAlignment="Top" Style="{DynamicResource LogoutButton}"/>
-        <Image Name="user_avatar" HorizontalAlignment="Left" Height="128" Margin="92,205,0,0" VerticalAlignment="Top" Width="142"/>
+        <Image Name="user_avatar" Source="./Images/default_avatar.png" HorizontalAlignment="Left" Height="128" Margin="92,205,0,0" VerticalAlignment="Top" Width="142"/>
         <Label Name="username" Foreground="WhiteSmoke" FontSize="20" Content="L" HorizontalAlignment="Left" Margin="92,338,0,0" VerticalAlignment="Top" Width="142"/>
         <Label Name="credit" Foreground="WhiteSmoke" Content="Label" HorizontalAlignment="Left" Margin="92,375,0,0" VerticalAlignment="Top" Width="142"/>
     </Grid>

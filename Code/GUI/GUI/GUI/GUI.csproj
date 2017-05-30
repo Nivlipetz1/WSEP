@@ -336,6 +336,7 @@
     <Resource Include="Images\Cards\S9.png" />
     <Resource Include="Images\question.png" />
     <None Include="Resources\chaching.wav" />
+    <Resource Include="Images\default_avatar.png" />
     <Content Include="Sounds\cardPlace1.wav" />
   </ItemGroup>
   <ItemGroup>
