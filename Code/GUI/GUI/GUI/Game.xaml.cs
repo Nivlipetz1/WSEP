@@ -24,10 +24,9 @@ namespace GUI
     {
         int gameID;
         GUIManager manager;
-        private List<Label> playerLabels;
+        //private List<Label> playerLabels;
         private List<Image> playersCards;
-        private List<int> playersBets;
-        private List<int> playersCredit;
+        private List<PlayerAtTable> players;
         private int revealCard = 0;
         private int minimumBet = 0;
         private int potSizeInt = 0;
@@ -40,20 +39,16 @@ namespace GUI
             InitializeComponent();
             this.manager = manager;
             this.gameID = gameID;
-            playerLabels = new List<Label>();
+            players = new List<PlayerAtTable>();
+            players.Add(new PlayerAtTable(player3, Card3, Card4));
+            players.Add(new PlayerAtTable(player4, Card1, Card2));
+            players.Add(new PlayerAtTable(player5, Card5, Card6));
+            players.Add(new PlayerAtTable(player7, Card7, Card8));
+            players.Add(new PlayerAtTable(player6, Card9, Card10));
+            players.Add(new PlayerAtTable(player1, Card11, Card12));
+            players.Add(new PlayerAtTable(player2, Card13, Card14));
+            //playerLabels = new List<Label>();
             playersCards = new List<Image>();
-            playersBets = new List<int>();
-            for(int i = 0; i < 7; i++)
-            {
-                playersBets.Add(new int());
-            }
-            playerLabels.Add(player3);
-            playerLabels.Add(player4);
-            playerLabels.Add(player5);
-            playerLabels.Add(player7);
-            playerLabels.Add(player6);
-            playerLabels.Add(player1);
-            playerLabels.Add(player2);
             playersCards.Add(Card3);
             playersCards.Add(Card4);
             playersCards.Add(Card1);
@@ -190,18 +185,16 @@ namespace GUI
 
         public void DealCards(Models.PlayerHand hand)
         {
-            int index = 0;
-            int cardIndex = 0;
             foreach (Models.ClientUserProfile prof in RemoveSelfFromPlayersList(manager.GetPlayers(gameID)))
             {
-                Label lbl = playerLabels.ElementAt(index);
-                int bet = 0;
-                lbl.Content = prof.username + " $" + bet;
-                lbl.Visibility = Visibility.Visible;
-                playersCards.ElementAt(cardIndex).Visibility = Visibility.Visible;
-                playersCards.ElementAt(cardIndex + 1).Visibility = Visibility.Visible;
-                index++;
-                cardIndex += 2;
+                foreach(PlayerAtTable player in players)
+                {
+                    if (player.Username.Equals(""))
+                    {
+                        player.ShowLabels(prof.username);
+                        break;
+                    }
+                }
             }
             UserCard1.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.First.toImage(), UriKind.Relative));
             UserCard2.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.Second.toImage(), UriKind.Relative));
@@ -230,76 +223,59 @@ namespace GUI
         {
             bet_sound.Play();
             int bet = move.GetAmount();
-            int index = 0;
-            int cardIndex = 0;
             potSizeInt += bet;
             PotSizeLbl.Content = "Pot Size: $" + potSizeInt;
 
             if (move.GetBettingPlayer().Equals(manager.GetProfile().username))
             {
                 betted.Content = "$" + bet;
+                return;
             }
 
-            foreach (Models.ClientUserProfile prof in RemoveSelfFromPlayersList(manager.GetPlayers(gameID)))
+            foreach (PlayerAtTable player in players)
             {
-                if (prof.username.Equals(move.GetBettingPlayer()))
+                if (player.Username.Equals(move.GetBettingPlayer()))
                 {
-                    Label lbl = playerLabels.ElementAt(index);
-                    lbl.Content = prof.username + " $" + move.GetAmount();
-                    break;
+                    
+                    player.BetAmount = move.GetAmount();
+                    player.RefreshLabel();
+                    return;
                 }
-
-                index++;
-                cardIndex += 2;
             }
         }
 
 
         public void PushFoldMove(Models.FoldMove move)
         {
-            int index = 0;
-            int cardIndex = 0;
 
             if (move.foldingPlayer.Equals(manager.GetProfile().username))
             {
                 betted.Content = "Folded";
                 UserCard1.Visibility = Visibility.Hidden;
                 UserCard2.Visibility = Visibility.Hidden;
+                return;
             }
 
-            foreach (Models.ClientUserProfile prof in RemoveSelfFromPlayersList(manager.GetPlayers(gameID)))
+            foreach (PlayerAtTable player in players)
             {
-                if (prof.username.Equals(move.GetFoldingPlayer()))
+                if (player.Username.Equals(move.GetFoldingPlayer()))
                 {
-                    Label lbl = playerLabels.ElementAt(index);
-                    lbl.Content = prof.username + " Fold";
-                    playersCards.ElementAt(cardIndex).Visibility = Visibility.Hidden;
-                    playersCards.ElementAt(cardIndex + 1).Visibility = Visibility.Hidden;
+                    player.Fold();
                     break;
                 }
-
-                index++;
-                cardIndex += 2;
             }
         }
 
         public void removePlayer(string username)
         {
-            int index = 0;
-            int cardIndex = 0;
 
-            foreach (Models.ClientUserProfile prof in RemoveSelfFromPlayersList(manager.GetPlayers(gameID)))
+            foreach (PlayerAtTable player in players)
             {
-                if (prof.username.Equals(username))
+                if (player.Username.Equals(username))
                 {
-                    Label lbl = playerLabels.ElementAt(index);
-                    lbl.Visibility = Visibility.Hidden;
-                    playersCards.ElementAt(cardIndex).Visibility = Visibility.Hidden;
-                    playersCards.ElementAt(cardIndex + 1).Visibility = Visibility.Hidden;
+                    player.Remove();
                     break;
                 }
-                index++;
-                cardIndex += 2;
             }
         }
 
@@ -355,25 +331,19 @@ namespace GUI
         //didn't check this..
         public void PushEndGameMove(Models.EndGameMove move)
         {
-            int index = 0;
-            int cardIndex = 0;
-
-            foreach (Models.ClientUserProfile prof in RemoveSelfFromPlayersList(manager.GetPlayers(gameID)))
+            foreach (PlayerAtTable player in players)
             {
                 foreach (string username in move.handRanks.Keys)
                 {
-                    if (username.Equals(prof.username))
+                    if (username.Equals(player.Username))
                     {
-                        Label lbl = playerLabels.ElementAt(index);
                         Models.PlayerHand hand = move.playerHands[username];
                         //lbl.Content = lbl.Content.ToString() + " with hand: " + hand.toString();
                         //FLIP THE CARDS:
-                        playersCards[cardIndex].Source =  new BitmapImage(new Uri(@"Images\Cards\" + hand.First.toImage(), UriKind.Relative));
-                        playersCards[cardIndex+1].Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.Second.toImage(), UriKind.Relative));
+                        player.SetCards(hand);
+                        break;
                     }
                 }
-                index++;
-                cardIndex += 2;
             }
         }
 
@@ -419,7 +389,7 @@ namespace GUI
         private void Bet_Button_Click(object sender, RoutedEventArgs e)
         {
             if(!BetAmount.Text.Equals(""))
-            manager.Bet(gameID, Int32.Parse(BetAmount.Text), minimumBet, this);
+            manager.Bet(gameID, BetAmount.Text, minimumBet, this);
         }
 
         private void Fold_Button_Click(object sender, RoutedEventArgs e)

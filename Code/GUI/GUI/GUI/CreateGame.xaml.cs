@@ -25,13 +25,38 @@ namespace GUI
         {
             this.manager = manager;
             InitializeComponent();
+            for(int i = 2; i <= 8; i++)
+            {
+                minPlayers.Items.Add(i);
+            }
+            minPlayers.SelectedItem = 2;
+        }
+
+        private void SetMaxPlayerCombo()
+        {
+            int selectedItem = 8;
+            if(maxPlayers.SelectedItem != null)
+                selectedItem = (int)maxPlayers.SelectedItem;
+            maxPlayers.Items.Clear();
+            for (int i = (int)minPlayers.SelectedItem; i <= 8; i++)
+            {
+                maxPlayers.Items.Add(i);
+            }
+            if(selectedItem < (int)minPlayers.SelectedItem)
+            {
+                maxPlayers.SelectedItem = minPlayers.SelectedItem;
+            }
+            else
+            {
+                maxPlayers.SelectedItem = selectedItem;
+            }
         }
 
         private void New_Game_Click(object sender, RoutedEventArgs e)
         {
 
-            int maxP = Int32.Parse(Max_Players.Text);
-            int minP = Int32.Parse(Min_Players.Text);
+            int maxP = (int)minPlayers.SelectedItem;
+            int minP = (int)maxPlayers.SelectedItem;
             int sB = Int32.Parse(Small_Blind.Text);
             int bB = Int32.Parse(Big_Blind.Text);
             int cP = Int32.Parse(Chip_Policy.Text);
@@ -72,7 +97,17 @@ namespace GUI
 
         private void GoBack_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.GoBack();
+            manager.GoToGameCenter();
+        }
+
+        private void minPlayers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SetMaxPlayerCombo();
+        }
+
+        private void minPlayers_DropDownOpened(object sender, EventArgs e)
+        {
+            SetMaxPlayerCombo();
         }
     }
 }

@@ -47,7 +47,6 @@ namespace GUI
             Models.ClientUserProfile prof = manager.GetProfile();
             this.credit.Content = "Credit: $" + prof.credit;
             this.username.Content = "Hello " + prof.username;
-            
         }
 
 

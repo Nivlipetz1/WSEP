@@ -44,7 +44,7 @@ namespace GUI
 
         private void GoBack_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.GoBack();
+            manager.GoToUserMainPage();
         }
     }
 }

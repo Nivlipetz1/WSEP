@@ -424,11 +424,12 @@ namespace GUI
             }
         }
 
-        internal async void Bet(int gameID, int amount, int minimumBet, Game gameWindow)
+        internal async void Bet(int gameID, string amount, int minimumBet, Game gameWindow)
         {
-            if (amount >= minimumBet)
+            int betAmount = 0;
+            if (Int32.TryParse(amount,out betAmount) && betAmount >= minimumBet)
             {
-                if (await Communication.GameFunctions.Instance.bet(gameID, amount.ToString()))
+                if (await Communication.GameFunctions.Instance.bet(gameID, betAmount.ToString()))
                 {
                     gameWindow.HideBetElements();
                     //MessageBox.Show("Bet Accepted", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -452,6 +453,11 @@ namespace GUI
         internal void GoToGameCenter()
         {
             mainWindow.mainFrame.NavigationService.Navigate(new GameCenter(this));
+        }
+
+        internal void GoToUserMainPage()
+        {
+            mainWindow.mainFrame.NavigationService.Navigate(new UserMainPage(this));
         }
 
         private Status GetStatusFrame()
