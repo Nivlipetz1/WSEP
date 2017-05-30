@@ -131,12 +131,13 @@ namespace GUI
 
         internal async void EditProfile(string username, string password, BitmapImage avatar,UserMainPage mainPage)
         {
+            string changedString = "";
             bool changed = false;
             if (!password.Equals(""))
             {
                 if (await Communication.AuthFunctions.Instance.editPassword(password))
                 {
-                    MessageBox.Show("Password Changed!");
+                    changedString += "Password Changed!\n";
                     changed = true;
                 }
             }
@@ -144,7 +145,7 @@ namespace GUI
             {
                 if (await Communication.AuthFunctions.Instance.editUserName(username))
                 {
-                    MessageBox.Show("Username Changed!");
+                    changedString += "Username Changed!\n";
                     changed = true;
                 }
             }
@@ -167,8 +168,8 @@ namespace GUI
                 {
                     if (await Communication.AuthFunctions.Instance.editAvatar(data))
                     {
-                        mainPage.ShowAvatar();
-                        MessageBox.Show("Avatar Changed!");
+                        
+                        changedString += "Avatar Changed!\n";
                         changed = true;
 
                     }
@@ -178,7 +179,9 @@ namespace GUI
 
             if (changed)
             {
+                MessageBox.Show(changedString);
                 await RefreshProfile();
+                mainPage.ShowAvatar();
                 mainWindow.mainFrame.NavigationService.GoBack();
             }
         }
