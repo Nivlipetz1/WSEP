@@ -19,7 +19,10 @@ namespace WebClient
             if (checkUserDetails(usernameField.Text, passwordField.Text))
             {
                 invalidLabel.Visible = false;
+                //How to call js function
+                //ScriptManager.RegisterStartupScript(this, GetType(), "key", "myFunc()", true); 
                 Response.Redirect("LeaderboardsPage.aspx");
+                
             }
             else
                 invalidLabel.Visible = true;
