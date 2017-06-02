@@ -186,6 +186,24 @@ namespace GUI
             }
         }
 
+        internal async void JoinGameAsSpectator(int gameID)
+        {
+            Models.ClientGame game = await Communication.GameCenterFunctions.Instance.spectateGame(gameID);
+            if (game != null)
+            {
+                AddGame(game);
+                await RefreshProfile();
+                GameFrame gameFrame = new GameFrame(this, game);
+                AddGameFrame(gameFrame);
+                gameFrame.Init(true);
+                NavigateToGameFrame(gameFrame);
+            }
+            else
+            {
+                MessageBox.Show("something went wrong:(");
+            }
+        }
+
         internal async void Register(string username, string password)
         {
             if (await Communication.AuthFunctions.Instance.register(username, password))
@@ -333,7 +351,7 @@ namespace GUI
                     await RefreshProfile();
                     GameFrame gameFrame = new GameFrame(this, game);
                     AddGameFrame(gameFrame);
-                    gameFrame.Init();
+                    gameFrame.Init(false);
                     NavigateToGameFrame(gameFrame);
                 }
                 else

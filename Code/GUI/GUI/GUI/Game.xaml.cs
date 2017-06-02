@@ -34,7 +34,7 @@ namespace GUI
         public static SoundPlayer snd = new SoundPlayer(Properties.Resources.cardsdealt1);
         public static SoundPlayer snd2 = new SoundPlayer(Properties.Resources.cardsdealt2);
         public static SoundPlayer bet_sound = new SoundPlayer(Properties.Resources.chaching);
-        public Game(GUIManager manager, int gameID)
+        public Game(GUIManager manager, int gameID, bool SpecMode)
         {
             InitializeComponent();
             this.manager = manager;
@@ -47,6 +47,8 @@ namespace GUI
             players.Add(new PlayerAtTable(player6, Card9, Card10));
             players.Add(new PlayerAtTable(player1, Card11, Card12));
             players.Add(new PlayerAtTable(player2, Card13, Card14));
+            if(SpecMode)
+                players.Add(new PlayerAtTable(betted, UserCard1, UserCard2));
             //playerLabels = new List<Label>();
             playersCards = new List<Image>();
             playersCards.Add(Card3);
@@ -63,6 +65,16 @@ namespace GUI
             playersCards.Add(Card12);
             playersCards.Add(Card13);
             playersCards.Add(Card14);
+            if (SpecMode)
+            {
+                playersCards.Add(UserCard1);
+                playersCards.Add(UserCard2);
+            }
+
+            if (SpecMode)
+            {
+                SpecLbl.Visibility = Visibility.Visible;
+            }
 
         }
 

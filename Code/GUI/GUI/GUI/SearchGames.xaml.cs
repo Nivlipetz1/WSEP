@@ -108,7 +108,8 @@ namespace GUI
 
         private void spectateBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            GameDataGrid gdg = (GameDataGrid)Display_game_results.SelectedItem;
+            manager.JoinGameAsSpectator(gdg.ID);
         }
 
         private async void Spec_Click(object sender, RoutedEventArgs e)

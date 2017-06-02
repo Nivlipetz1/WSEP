@@ -25,7 +25,9 @@ namespace GUI
         public Game GameWindow { get; set; }
         public GameChat GameChat { get; set; }
         public GamePM GamePM { get; set; }
+        public GameReplayCont GameReplayCont { get; set; }
         public int gameID { get; set; }
+        private bool initialized = false;
         public GameFrame(GUIManager manager, Models.ClientGame game)
         {
             this.manager = manager;
@@ -34,12 +36,28 @@ namespace GUI
 
         }
 
-        public void Init()
+        public void Init(bool SpecMode)
         {
-            InitializeComponent();
-            gameFrame.NavigationService.Navigate(GameWindow = new Game(manager, gameID));
-            chatFrame.NavigationService.Navigate(GameChat = new GameChat(manager, gameID));
-            pmFrame.NavigationService.Navigate(GamePM = new GamePM(manager, gameID));
+            if (!initialized)
+            {
+                initialized = true;
+                InitializeComponent();
+                gameFrame.NavigationService.Navigate(GameWindow = new Game(manager, gameID, SpecMode));
+                chatFrame.NavigationService.Navigate(GameChat = new GameChat(manager, gameID));
+                pmFrame.NavigationService.Navigate(GamePM = new GamePM(manager, gameID));
+            }
+        }
+
+        public void InitReplay()
+        {
+            if (!initialized)
+            {
+                initialized = true;
+                InitializeComponent();
+                gameFrame.NavigationService.Navigate(GameWindow = new Game(manager, gameID, true));
+                chatFrame.NavigationService.Navigate(GameReplayCont = new GameReplayCont());
+            }
+           
         }
 
         public Models.ClientGame getGame()
