@@ -16,6 +16,7 @@ namespace GUI
         public Image SecondCard { get; set; }
         public string Username { get; set; }
         public int BetAmount { get; set; }
+        public int Credit { get; set; }
 
         public PlayerAtTable(Label lbl,Image firstCard,Image secondCard)
         {
@@ -26,9 +27,16 @@ namespace GUI
             BetAmount = 0;
         }
 
+        public void Bet(int betAmount)
+        {
+            BetAmount = betAmount;
+            Credit -= BetAmount;
+            RefreshLabel();
+        }
+
         public void RefreshLabel()
         {
-            Label.Content = Username + " $" + BetAmount;
+            Label.Content = Username + " $" + BetAmount +"\nCredit: $"+Credit;
         }
         public void Fold()
         {
@@ -62,6 +70,7 @@ namespace GUI
         internal void Remove()
         {
             Fold();
+            ReSetCards();
             Label.Visibility = Visibility.Hidden;
             Username = "";
         }

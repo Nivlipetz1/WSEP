@@ -238,9 +238,8 @@ namespace GUI
             {
                 if (player.Username.Equals(move.GetBettingPlayer()))
                 {
-                    
-                    player.BetAmount = move.GetAmount();
-                    player.RefreshLabel();
+
+                    player.Bet(move.GetAmount());
                     return;
                 }
             }
@@ -308,7 +307,10 @@ namespace GUI
 
         public void PushGameStartMove(Models.GameStartMove move)
         {
-
+            foreach(PlayerAtTable player in players)
+            {
+                player.Remove();
+            }
             manager.UpdatePlayerList(gameID,move);
             RepositionCards();
             foreach (Models.ClientUserProfile prof in RemoveSelfFromPlayersList(manager.GetPlayers(gameID)))
@@ -324,13 +326,14 @@ namespace GUI
             }
             potSizeInt = 0;
             revealCard = 0;
-            MessageBox.Show("Game Started!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            
             //credit.Visibility = Visibility.Visible;
             betted.Content = "$0";
             betted.Visibility = Visibility.Visible;
             PotSizeLbl.Content = "Pot Size: $" + potSizeInt;
             PotSizeLbl.Visibility = Visibility.Visible;
-            
+            MessageBox.Show("Game Started!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+
         }
 
         public void PushWinners(List<string> winners)
@@ -341,11 +344,6 @@ namespace GUI
                 winnersStr += "\n"+winner;
             }
             MessageBox.Show("The Winners Are: "+winnersStr+"\nThey each get "+potSizeInt/winners.Count, "Winners", MessageBoxButton.OK, MessageBoxImage.Information);
-
-            foreach(PlayerAtTable player in players)
-            {
-                player.Username = "";
-            }
         }
 
 
