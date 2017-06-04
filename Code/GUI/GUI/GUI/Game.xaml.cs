@@ -337,6 +337,11 @@ namespace GUI
                 winnersStr += "\n"+winner;
             }
             MessageBox.Show("The Winners Are: "+winnersStr+"\nThey each get "+potSizeInt/winners.Count, "Winners", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            foreach(PlayerAtTable player in players)
+            {
+                player.Username = "";
+            }
         }
 
 

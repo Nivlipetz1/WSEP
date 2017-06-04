@@ -50,7 +50,7 @@ namespace GUI
         public void SetCards(Models.PlayerHand hand)
         {
             FirstCard.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.First.toImage(), UriKind.Relative));
-            SecondCard.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.First.toImage(), UriKind.Relative));
+            SecondCard.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.Second.toImage(), UriKind.Relative));
         }
 
         public void ReSetCards()

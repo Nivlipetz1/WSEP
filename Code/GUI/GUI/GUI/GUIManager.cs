@@ -74,12 +74,10 @@ namespace GUI
 
         internal void ConnectToServer()
         {
+            TRY_AGAIN:
             if (!(Communication.Server.Instance.connect()))
             {
-                mainWindow.imgLoadingImage.Visibility = Visibility.Hidden;
-                mainWindow.notConnectLbl.Visibility = Visibility.Visible;
-                mainWindow.tryAgainBtn.Visibility = Visibility.Visible;
-                /*MessageBoxResult rs = MessageBox.Show("Could not connect.\nClick Yes to try again or No to quit", "No Connection", MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.No);
+                MessageBoxResult rs = MessageBox.Show("Could not connect.\nClick Yes to try again or No to quit", "No Connection", MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.No);
                 if (rs == MessageBoxResult.Yes)
                 {
                     goto TRY_AGAIN;
@@ -87,7 +85,7 @@ namespace GUI
                 else
                 {
                     mainWindow.Close();
-                }*/
+                }
             }
             else
             {
