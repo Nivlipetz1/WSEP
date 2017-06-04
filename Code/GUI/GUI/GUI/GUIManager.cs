@@ -19,7 +19,6 @@ namespace GUI
         Status status;
         private MainWindow mainWindow;
         Status statusWindow;
-        Dictionary<int, bool> mutexLocks = new Dictionary<int, bool>();
         public GUIManager(MainWindow mainWindow)
         {
             this.mainWindow = mainWindow;
@@ -342,8 +341,6 @@ namespace GUI
 
         internal async void JoinGame(int gameID, int credit)
         {
-            bool mutexLock = true;
-            mutexLocks.Add(gameID,mutexLock);
                 Models.ClientGame game = await Communication.GameCenterFunctions.Instance.joinGame(gameID, credit);
                 if (game != null)
                 {
@@ -358,7 +355,6 @@ namespace GUI
                 {
                     MessageBox.Show("something went wrong:(");
                 }
-            mutexLocks[gameID] = false ;
         }
 
         private void NavigateToGameFrame(GameFrame gameFrame)
