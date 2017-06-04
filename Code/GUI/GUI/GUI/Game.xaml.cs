@@ -319,6 +319,7 @@ namespace GUI
                 {
                     if (player.Username.Equals(""))
                     {
+                        player.Credit = move.playerBets[prof.username];
                         player.ShowLabels(prof.username);
                         break;
                     }
