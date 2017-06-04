@@ -12,6 +12,7 @@ namespace GUI.Models
         public Deck gameDeck { set; get; }
         public List<ClientUserProfile> players { set; get; }
         public List<ClientUserProfile> spectators { set; get; }
+        public List<ClientUserProfile> waitingList { set; get; }
         public int[] pot { set; get; }
         public GamePreferences gamePref { set; get; }
         public Dictionary<string, int> playerBets { set; get; }
@@ -32,6 +33,21 @@ namespace GUI.Models
         public void AddPlayer(ClientUserProfile profile)
         {
             players.Add(profile);
+        }
+
+        public void AddPlayerToWaitingList(ClientUserProfile profile)
+        {
+            waitingList.Add(profile);
+        }
+
+        public void UpdatePlayerListFromWaitingList()
+        {
+            foreach (Models.ClientUserProfile prof in waitingList)
+            {
+                AddPlayer(prof);
+            }
+
+            waitingList.Clear();
         }
     }
 }
