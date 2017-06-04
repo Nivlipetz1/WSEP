@@ -25,7 +25,7 @@ namespace GUI
         {
             InitializeComponent();
             manager = new GUIManager(this);
-            
+            this.Show();
             manager.ConnectToServer();
         }
 
@@ -39,6 +39,23 @@ namespace GUI
                        loggedIn = false;
                        */
            manager.disconnectFromServer();
+        }
+
+        private void imgLoadingImage_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            imgLoadingImage.Position = new TimeSpan(0, 0, 1);
+            imgLoadingImage.Play();
+        }
+
+        private void tryAgainBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+                tryAgainBtn.Visibility = Visibility.Hidden;
+                notConnectLbl.Visibility = Visibility.Hidden;
+                imgLoadingImage.Visibility = Visibility.Visible;
+
+                manager.ConnectToServer();
+
         }
     }
 }

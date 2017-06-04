@@ -74,10 +74,12 @@ namespace GUI
 
         internal void ConnectToServer()
         {
-        TRY_AGAIN:
             if (!(Communication.Server.Instance.connect()))
             {
-                MessageBoxResult rs = MessageBox.Show("Could not connect.\nClick Yes to try again or No to quit", "No Connection", MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.No);
+                mainWindow.imgLoadingImage.Visibility = Visibility.Hidden;
+                mainWindow.notConnectLbl.Visibility = Visibility.Visible;
+                mainWindow.tryAgainBtn.Visibility = Visibility.Visible;
+                /*MessageBoxResult rs = MessageBox.Show("Could not connect.\nClick Yes to try again or No to quit", "No Connection", MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.No);
                 if (rs == MessageBoxResult.Yes)
                 {
                     goto TRY_AGAIN;
@@ -85,7 +87,7 @@ namespace GUI
                 else
                 {
                     mainWindow.Close();
-                }
+                }*/
             }
             else
             {
@@ -188,7 +190,7 @@ namespace GUI
 
         internal async void JoinGameAsSpectator(int gameID)
         {
-            Models.ClientGame game = await Communication.GameCenterFunctions.Instance.spectateGame(gameID);
+           /* Models.ClientGame game = await Communication.GameCenterFunctions.Instance.spectateGame(gameID);
             if (game != null)
             {
                 AddGame(game);
@@ -201,7 +203,7 @@ namespace GUI
             else
             {
                 MessageBox.Show("something went wrong:(");
-            }
+            }*/
         }
 
         internal async void Register(string username, string password)
@@ -452,9 +454,15 @@ namespace GUI
                     gameWindow.HideBetElements();
                     //MessageBox.Show("Bet Accepted", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
+                else
+                {
+                    MessageBox.Show("Bet is over your credit! \nplease try again.", "Too Low!", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                
             }
             else
             {
+                
                 MessageBox.Show("Minimum bet is " + minimumBet + "! please try again.", "Too Low!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

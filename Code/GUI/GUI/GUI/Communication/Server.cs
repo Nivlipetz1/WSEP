@@ -24,7 +24,7 @@ namespace GUI.Communication
         {
             try
             {
-                hubConnection = new HubConnection("http://localhost:51509/");
+                hubConnection = new HubConnection("http://localhost:80/PublishTest");
                 hubConnection.Error += (error) => { throw new Exception("server error: " + error.GetBaseException()); } ;
                 IHubProxy authHubProxy = hubConnection.CreateHubProxy("AuthHub"); 
                 IHubProxy gameCenterProxy = hubConnection.CreateHubProxy("GameCenterHub");

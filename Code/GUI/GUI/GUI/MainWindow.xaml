@@ -13,7 +13,16 @@
             <RowDefinition Height="31*"/>
             <RowDefinition Height="541*"/>
         </Grid.RowDefinitions>
+        <MediaElement x:Name="imgLoadingImage" 
+    MediaEnded="imgLoadingImage_MediaEnded" 
+    UnloadedBehavior="Manual"     
+    Source="http://kaushikichakraborty.com/sites/all/themes/koushiki/images/loading.gif"
+    LoadedBehavior="Play" 
+    Stretch="None" 
+    Visibility="Visible" Grid.Row="1"/>
         <Frame Name="statusFrame" Grid.Row="0" NavigationUIVisibility="Hidden"/>
-        <Frame Content="" Name="mainFrame" Grid.Row="1" Background="AliceBlue" NavigationUIVisibility="Hidden" />
+        <Frame Content="" Name="mainFrame" Grid.Row="1"  NavigationUIVisibility="Hidden" />
+        <Label Name="notConnectLbl" Foreground="WhiteSmoke" Content="Could Not Connect to Server.." Visibility="Hidden" HorizontalAlignment="Left" Margin="360,331.333,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Button Name="tryAgainBtn" Visibility="Hidden" Click="tryAgainBtn_Click" Content="Try Again" HorizontalAlignment="Left" Margin="393,419.333,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </Window>
