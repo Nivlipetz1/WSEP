@@ -355,6 +355,7 @@
     <Resource Include="Images\loading.gif" />
     <None Include="Resources\loading.bmp" />
     <None Include="Resources\loading.gif" />
+    <None Include="Resources\buzzer.wav" />
     <Content Include="Sounds\cardPlace1.wav" />
   </ItemGroup>
   <ItemGroup>

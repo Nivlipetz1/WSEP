@@ -34,6 +34,7 @@ namespace GUI
         public static SoundPlayer snd = new SoundPlayer(Properties.Resources.cardsdealt1);
         public static SoundPlayer snd2 = new SoundPlayer(Properties.Resources.cardsdealt2);
         public static SoundPlayer bet_sound = new SoundPlayer(Properties.Resources.chaching);
+        public static SoundPlayer startGameSound = new SoundPlayer(Properties.Resources.buzzer);
         public Game(GUIManager manager, int gameID, bool SpecMode)
         {
             InitializeComponent();
@@ -333,7 +334,7 @@ namespace GUI
             betted.Visibility = Visibility.Visible;
             PotSizeLbl.Content = "Pot Size: $" + potSizeInt;
             PotSizeLbl.Visibility = Visibility.Visible;
-            MessageBox.Show("Game Started!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            startGameSound.Play();
 
         }
 
