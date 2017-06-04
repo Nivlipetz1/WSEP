@@ -74,7 +74,9 @@ namespace Gaming
 
         public void StartGame()
         {
-            
+            List<PlayingUser> winners = new List<PlayingUser>();
+            List<string> userNames = new List<string>();
+
             gamePref.SetStatus("active");
 
             while (waitingList.Count > 0)
@@ -82,7 +84,7 @@ namespace Gaming
                 foreach (PlayingUser player in waitingList)
                 {
                     players.Add(player);
-                    playerBets.Add(player, 0);
+                    playerBets.Add(player, player.GetCredit());
                     waitingList.Remove(player);
                 }
             }
@@ -135,7 +137,10 @@ namespace Gaming
             {
                 GiveWinnings();
                 PushMoveToObservers(new EndGameMove(playerHands));
-                ResetGame();
+                winners = DetermineWinner();
+                userNames = spectators.Union(players).Select(user => user.GetUserName()).ToList();
+                NotificationService.Instance.pushWinners(userNames, winners.Select(winner => winner.GetUserName()).ToList(), id);
+                //ResetGame();
                 goto GameEnd;
             }
 
@@ -152,7 +157,10 @@ namespace Gaming
             {
                 GiveWinnings();
                 PushMoveToObservers(new EndGameMove(playerHands));
-                ResetGame();
+                winners = DetermineWinner();
+                userNames = spectators.Union(players).Select(user => user.GetUserName()).ToList();
+                NotificationService.Instance.pushWinners(userNames, winners.Select(winner => winner.GetUserName()).ToList(), id);
+                //ResetGame();
                 goto GameEnd;
             }
 
@@ -165,7 +173,10 @@ namespace Gaming
             {
                 GiveWinnings();
                 PushMoveToObservers(new EndGameMove(playerHands));
-                ResetGame();
+                winners = DetermineWinner();
+                userNames = spectators.Union(players).Select(user => user.GetUserName()).ToList();
+                NotificationService.Instance.pushWinners(userNames, winners.Select(winner => winner.GetUserName()).ToList(), id);
+                //ResetGame();
                 goto GameEnd;
             }
             cards[4] = gameDeck.DrawTableCard();
@@ -177,14 +188,17 @@ namespace Gaming
             {
                 GiveWinnings();
                 PushMoveToObservers(new EndGameMove(playerHands));
-                ResetGame();
+                winners = DetermineWinner();
+                userNames = spectators.Union(players).Select(user => user.GetUserName()).ToList();
+                NotificationService.Instance.pushWinners(userNames, winners.Select(winner => winner.GetUserName()).ToList(), id);
+                //ResetGame();
                 goto GameEnd;
             }
 
             
             PushMoveToObservers(new EndGameMove(playerHands));
-            List<PlayingUser> winners = DetermineWinner();
-            List<string> userNames = spectators.Union(players).Select(user => user.GetUserName()).ToList();
+            winners = DetermineWinner();
+            userNames = spectators.Union(players).Select(user => user.GetUserName()).ToList();
             NotificationService.Instance.pushWinners(userNames, winners.Select(winner => winner.GetUserName()).ToList(), id);
             foreach (PlayingUser player in winners)
             {
@@ -204,7 +218,6 @@ namespace Gaming
             Thread.Sleep(30000);
             if ((waitingList.Count + playerBets.Count) >= gamePref.GetMinPlayers())
                 StartGame();
-
 
         }
 
@@ -320,7 +333,7 @@ namespace Gaming
             IDictionary<string, int> playerBetsString = new Dictionary<string, int>();
             foreach (PlayingUser player in playerBets.Keys)
             {
-                playerBetsString.Add(player.GetUserName(), playerBets[player]);//username
+                playerBetsString.Add(player.GetUserName(), player.GetCredit());//username
             }
             PushMoveToObservers(new GameStartMove(playerBetsString));
         }
@@ -468,7 +481,7 @@ namespace Gaming
 
             //player.GetAccount().Credit -= player.GetCredit(); //gamecenter
             players.Add(player);
-            playerBets.Add(player, 0);
+            playerBets.Add(player, player.GetCredit());
             if (players.Count >= gamePref.GetMinPlayers())
             {
                 Thread thread = new Thread(new ThreadStart(StartGame));
