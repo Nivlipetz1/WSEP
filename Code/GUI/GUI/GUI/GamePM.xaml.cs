@@ -22,75 +22,51 @@ namespace GUI
     {
         GUIManager manager;
         int gameID;
-        private IDictionary<string, string> messageList;
         public GamePM(GUIManager manager, int gameID)
         {
             this.manager = manager;
             this.gameID = gameID;
             InitializeComponent();
-            messageList = new Dictionary<string,string>();
-            foreach(Models.ClientUserProfile prof in manager.GetPlayers(gameID))
-            {
-                if (!prof.username.Equals(manager.GetProfile().username))
-                {
-                    messageList.Add(prof.username, "");
-                }
-            }
-            foreach (Models.ClientUserProfile prof in manager.GetSpectators(gameID))
-            {
-                if (!prof.username.Equals(manager.GetProfile().username))
-                {
-                    messageList.Add(prof.username, "");
-                }
-            }
-            users.ItemsSource = messageList.Keys;
-        }
-
-        public void AddPlayer(Models.ClientUserProfile prof)
-        {
-            messageList.Add(prof.username, "");
-            users.ItemsSource = messageList.Keys;
-            
-        }
-
-        public void RemovePlayer(string username)
-        {
-            messageList.Remove(username);
-            users.ItemsSource = messageList.Keys;
+            RefreshSelectionList();
         }
 
         private async void SendMessage_Click(object sender, RoutedEventArgs e)
         {
-            if (!message.Text.Equals(""))
+            if (!message.Text.Equals("") && (users.SelectedValue != null))
             {
                 if(await manager.SendPMMessage(users.SelectedItem as string,message.Text,gameID)){
-
-                messages.AppendText(message.Text + "\n");
-                messageList[users.Text] += message.Text + "\n";
-                message.Text = "";
-                messages.Focus();
-                messages.CaretIndex = messages.Text.Length;
-                messages.ScrollToEnd();
-                message.Focus();
+                    
+                    message.Text = "";
+                    messages.Text = manager.GetMessages(gameID,users.SelectedValue.ToString());
+                    messages.Focus();
+                    messages.CaretIndex = messages.Text.Length;
+                    messages.ScrollToEnd();
+                    message.Focus();
                 }
             }
         }
 
         private void users_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-                messages.Text = messageList[users.SelectedValue.ToString()];
+            string messagesString = manager.GetMessages(gameID,users.SelectedValue.ToString());
+            messages.Text = messagesString;
+            messages.CaretIndex = messages.Text.Length;
+            messages.ScrollToEnd();
+        }
+
+        public void PushMessage(string sender)
+        {
+            RefreshSelectionList();
+            MessageBox.Show("New Personal Message From: "+sender+"\nAt Game: "+gameID, "Got New Message!", MessageBoxButton.OK, MessageBoxImage.Information);
+            users.Text = sender;
+            messages.Text = manager.GetMessages(gameID, sender);
                 messages.CaretIndex = messages.Text.Length;
                 messages.ScrollToEnd();
         }
 
-        public void PushMessage(string sender, string message)
+        public void RefreshSelectionList()
         {
-            messageList[sender] += sender+ ": "+message + "\n";
-            MessageBox.Show("New Personal Message From: "+sender, "Got New Message!", MessageBoxButton.OK, MessageBoxImage.Information);
-            users.Text = sender;
-                messages.Text = messageList[sender];
-                messages.CaretIndex = messages.Text.Length;
-                messages.ScrollToEnd();
+            users.ItemsSource = manager.GetUsersForPM(gameID);
         }
     }
 }

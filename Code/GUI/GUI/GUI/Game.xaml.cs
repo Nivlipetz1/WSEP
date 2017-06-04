@@ -30,11 +30,15 @@ namespace GUI
         private int revealCard = 0;
         private int minimumBet = 0;
         private int potSizeInt = 0;
+        private int playerCredit = 0;
+        private int playerBet = 0;
 
         public static SoundPlayer snd = new SoundPlayer(Properties.Resources.cardsdealt1);
         public static SoundPlayer snd2 = new SoundPlayer(Properties.Resources.cardsdealt2);
         public static SoundPlayer bet_sound = new SoundPlayer(Properties.Resources.chaching);
-        public static SoundPlayer startGameSound = new SoundPlayer(Properties.Resources.buzzer);
+        public static SoundPlayer startGameSound = new SoundPlayer(Properties.Resources.TableOpenForBetting);
+        public static SoundPlayer WinnerSound = new SoundPlayer(Properties.Resources.WeveGotAWinner);
+        public static SoundPlayer LoserSound = new SoundPlayer(Properties.Resources.LoserSound);
         public Game(GUIManager manager, int gameID, bool SpecMode)
         {
             InitializeComponent();
@@ -106,56 +110,6 @@ namespace GUI
             TurnCard.Visibility = Visibility.Hidden;
         }
 
-        public void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-            PushGameStartMove(new Models.GameStartMove(null));
-            snd.Play();
-            MoveCard(Card1, 55, -150);
-            MoveCard(Card2, 70, -150);
-            MoveCard(Card3, -130, -150);
-            MoveCard(Card4, -145, -150);
-            MoveCard(Card5, 200, -150);
-            MoveCard(Card6, 215, -150);
-            MoveCard(Card7, 290, 20);
-            MoveCard(Card8, 305, 20);
-            MoveCard(Card9, 290, 170);
-            MoveCard(Card10, 305, 170);
-            MoveCard(Card11, -190, 170);
-            MoveCard(Card12, -205, 170);
-            MoveCard(Card13, -190, 20);
-            MoveCard(Card14, -205, 20);
-            //            MoveCard(FlopCard1, 210, 40);
-            //            MoveCard(FlopCard2, 140, 40);
-            //            MoveCard(FlopCard3, 70, 40);
-            //            MoveCard(RiverCard, 0, 40);
-            //            MoveCard(TurnCard, -70, 40);
-            MoveCard(UserCard1, 0, 220);
-            MoveCard(UserCard2, 30, 220);
-
-            Models.BetMove bet = new Models.BetMove(null, "", 0);
-            bet.setPlayer("niv");
-            bet.setAmt(100);
-            PushBetMove(bet);
-            Models.BetMove bet2 = new Models.BetMove(null, "", 0);
-            bet2.setPlayer("omer");
-            bet2.setAmt(200);
-            PushBetMove(bet2);
-
-            Models.NewCardMove nm = new Models.NewCardMove(null);
-            Models.Card c1 = new Models.Card(10, Models.Card.Suit.SPADE);
-            Models.Card c2 = new Models.Card(10, Models.Card.Suit.SPADE);
-            Models.Card c3 = new Models.Card(1, Models.Card.Suit.SPADE);
-            Models.Card[] cArray = { c1, c2, c3 };
-
-            nm.cards = cArray;
-            //NewCardMove(nm);
-
-            Models.FoldMove fm = new Models.FoldMove(null, "");
-            fm.SetFoldPlayer("naor");
-            PushFoldMove(fm);
-
-        }
 
         public void NewCardMove(Models.NewCardMove move)
         {
@@ -231,7 +185,10 @@ namespace GUI
 
             if (move.GetBettingPlayer().Equals(manager.GetProfile().username))
             {
-                betted.Content = "$" + bet;
+                playerCredit -= bet;
+                playerBet += bet;
+                credit.Content = "Credit: $" + playerCredit;
+                betted.Content = "$" + playerBet;
                 return;
             }
 
@@ -323,6 +280,8 @@ namespace GUI
                 player.Remove();
             }
             manager.UpdatePlayerList(gameID,move);
+            playerBet = 0;
+            playerCredit = move.playerBets[manager.GetProfile().username];
             RepositionCards();
             foreach (Models.ClientUserProfile prof in RemoveSelfFromPlayersList(manager.GetPlayers(gameID)))
             {
@@ -338,18 +297,29 @@ namespace GUI
             }
             potSizeInt = 0;
             revealCard = 0;
-            
-            //credit.Visibility = Visibility.Visible;
+
+            BitmapImage image = manager.getAvatar();
+            if (image != null)
+            {
+                playerAvatar.Source = image;
+            }
+            playerAvatar.Visibility = Visibility.Visible;
+            credit.Content = "Credit: $" + playerCredit;
+            credit.Visibility = Visibility.Visible;
             betted.Content = "$0";
             betted.Visibility = Visibility.Visible;
             PotSizeLbl.Content = "Pot Size: $" + potSizeInt;
             PotSizeLbl.Visibility = Visibility.Visible;
-            startGameSound.Play();
+            startGameSound.PlaySync();
 
         }
 
         public void PushWinners(List<string> winners)
         {
+            if (winners.Contains(manager.GetProfile().username))
+                WinnerSound.Play();
+            else
+                LoserSound.Play();
             string winnersStr = "";
             foreach(string winner in winners)
             {

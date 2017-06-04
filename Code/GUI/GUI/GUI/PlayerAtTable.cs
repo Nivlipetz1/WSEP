@@ -29,8 +29,8 @@ namespace GUI
 
         public void Bet(int betAmount)
         {
-            BetAmount = betAmount;
-            Credit -= BetAmount;
+            BetAmount += betAmount;
+            Credit -= betAmount;
             RefreshLabel();
         }
 

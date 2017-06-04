@@ -73,15 +73,15 @@ namespace GUI
 
         internal void RemovePlayer(string username)
         {
-            GamePM.RemovePlayer(username);
+            GamePM.RefreshSelectionList();
             GameWindow.removePlayer(username);
             game.RemovePlayer(username);
         }
 
-        public void AddPlayer(Models.ClientUserProfile profile)
+        /*public void AddPlayer(Models.ClientUserProfile profile)
         {
             game.AddPlayer(profile);
-            GamePM.AddPlayer(profile);
-        }
+            GamePM.RefreshSelectionList();
+        }*/
     }
 }

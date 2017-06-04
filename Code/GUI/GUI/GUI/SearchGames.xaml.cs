@@ -84,6 +84,7 @@ namespace GUI
                 GameDataGrid gdg = new GameDataGrid { ID = game.id,
                                                       PlayersInGame = game.players.Count,
                                                       MaxPlayers = prefs.maxPlayers,
+                                                      MinPlayers = prefs.minPlayers,
                                                       BigBlind = prefs.bigBlind,
                                                       SmallBlind = prefs.smallBlind,
                                                       SpectatingAllowed = prefs.allowSpectators

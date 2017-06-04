@@ -16,6 +16,7 @@ namespace GUI.Models
         public int[] pot { set; get; }
         public GamePreferences gamePref { set; get; }
         public Dictionary<string, int> playerBets { set; get; }
+        public Dictionary<string, string> messageList { set; get; }
 
 
         public void RemovePlayer(string username)
@@ -25,26 +26,53 @@ namespace GUI.Models
                 if (prof.username.Equals(username))
                 {
                     players.Remove(prof);
+                    messageList.Remove(username);
                     return;
                 }
             }
         }
 
-        public void AddPlayer(ClientUserProfile profile)
-        {
-            players.Add(profile);
-        }
-
         public void AddPlayerToWaitingList(ClientUserProfile profile)
         {
             waitingList.Add(profile);
+            messageList.Add(profile.username, "");
+        }
+
+        public void AddMessage(string sender, string message)
+        {
+            messageList[sender] += sender + ": " + message + "\n";
+        }
+
+        public void AddMyMessage(string sender, string message)
+        {
+            messageList[sender] += "me" + ": " + message + "\n";
+        }
+
+        public string GetMessages(string user)
+        {
+            return messageList[user];
+        }
+
+        public void InitMessageList(string username)
+        {
+            messageList = new Dictionary<string, string>();
+            foreach(ClientUserProfile prof in players)
+            {
+                messageList.Add(prof.username, "");
+            }
+            foreach(ClientUserProfile prof in spectators)
+            {
+                messageList.Add(prof.username, "");
+            }
+
+            messageList.Remove(username);
         }
 
         public void UpdatePlayerListFromWaitingList()
         {
             foreach (Models.ClientUserProfile prof in waitingList)
             {
-                AddPlayer(prof);
+                players.Add(prof);
             }
 
             waitingList.Clear();

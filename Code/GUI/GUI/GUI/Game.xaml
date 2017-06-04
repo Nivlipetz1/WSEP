@@ -37,6 +37,7 @@
         <Button Name="Bet_Button" Click="Bet_Button_Click" Visibility="Hidden" Content="Bet" Canvas.Left="99" Canvas.Top="465" Width="75"/>
         <Button Name="Fold_Button" Click="Fold_Button_Click" Visibility="Hidden" Content="Fold" Canvas.Left="99" Canvas.Top="494" Width="75"/>
         <Label Name="player1" Visibility="Hidden" Content="Label" Canvas.Left="30" Canvas.Top="388"/>
+        <Image Name="player1Avatar" Visibility="Hidden" Height="15" Width="15" Canvas.Left="30" Canvas.Top="388"/>
         <Label Name="player2" Visibility="Hidden" Content="Label" Canvas.Left="30" Canvas.Top="243"/>
         <Label Name="player3" Visibility="Hidden" Content="Label" Canvas.Left="99" Canvas.Top="70"/>
         <Label Name="player4" Visibility="Hidden" Content="Label" Canvas.Left="278" Canvas.Top="70"/>
@@ -45,6 +46,7 @@
         <Label Name="player7" Visibility="Hidden" Content="Label" Canvas.Left="516" Canvas.Top="243"/>
         <Label Name="credit" Visibility="Hidden" Content="Label" Canvas.Left="290" Canvas.Top="482"/>
         <Label Name="betted" Visibility="Hidden" Content="Label" Canvas.Left="290" Canvas.Top="460"/>
+        <Image Name="playerAvatar" Source="./Images/default_avatar.png" Visibility="Hidden" Height="20" Width="20" Canvas.Left="265" Canvas.Top="470"/>
         <Button Name="Quit" Click="Quit_Click" Content="Quit" Canvas.Left="487" Canvas.Top="493" Width="75"/>
         <Button x:Name="BackToGC" Click="BackToGC_Click"  Content="Game Center" Canvas.Left="487" Canvas.Top="463" Width="75"/>
         <Button Name="startgameBtn" Visibility="Hidden"/>

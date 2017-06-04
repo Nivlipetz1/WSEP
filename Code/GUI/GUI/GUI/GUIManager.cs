@@ -72,6 +72,47 @@ namespace GUI
             }
         }
 
+        public BitmapImage getAvatar()
+        {
+            byte[] byte_avatar = GetProfile().avatar;
+            BitmapImage image = null;
+            if (byte_avatar != null)
+            {
+                image = LoadImage(byte_avatar);
+            }
+            return image;
+        }
+
+        private static BitmapImage LoadImage(byte[] imageData)
+        {
+            if (imageData == null || imageData.Length == 0) return null;
+            var image = new BitmapImage();
+            using (var mem = new MemoryStream(imageData))
+            {
+                mem.Position = 0;
+                image.BeginInit();
+                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.UriSource = null;
+                image.StreamSource = mem;
+                image.EndInit();
+            }
+            image.Freeze();
+            return image;
+        }
+
+        internal string GetMessages(int gameID,string v)
+        {
+            Models.ClientGame game = findGame(gameID);
+            return game.GetMessages(v);
+        }
+
+        internal List<string> GetUsersForPM(int gameID)
+        {
+            Models.ClientGame game = findGame(gameID);
+            return new List<string>(game.messageList.Keys);
+        }
+
         internal void ConnectToServer()
         {
             TRY_AGAIN:
@@ -179,7 +220,7 @@ namespace GUI
 
             if (changed)
             {
-                MessageBox.Show(changedString);
+                MessageBox.Show(changedString,"Profile Updated",MessageBoxButton.OK,MessageBoxImage.Information);
                 await RefreshProfile();
                 mainPage.ShowAvatar();
                 mainWindow.mainFrame.NavigationService.GoBack();
@@ -311,7 +352,16 @@ namespace GUI
 
         public async Task<bool> SendPMMessage(string to, string message, int gameID)
         {
-            return await Communication.GameFunctions.Instance.postWhisperMessage(to, message, gameID);
+            if(await Communication.GameFunctions.Instance.postWhisperMessage(to, message, gameID))
+            {
+                ClientGame game = findGame(gameID);
+                game.AddMyMessage(to, message);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void NavigateToGameFrame(int selectedIndex)
@@ -345,6 +395,7 @@ namespace GUI
                 Models.ClientGame game = await Communication.GameCenterFunctions.Instance.joinGame(gameID, credit);
                 if (game != null)
                 {
+                game.InitMessageList(profile.username);
                     AddGame(game);
                     await RefreshProfile();
                     GameFrame gameFrame = new GameFrame(this, game);
@@ -502,9 +553,10 @@ namespace GUI
         {
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
+                ClientGame game = findGame(gameId);
+                game.AddMessage(sender, message);
                 GameFrame gameFrame = findGameFrame(gameId);
-                    gameFrame.GamePM.PushMessage(sender, message);
-
+                gameFrame.GamePM.PushMessage(sender);
             });
         }
 
