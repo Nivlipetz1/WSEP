@@ -117,6 +117,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="mainForm.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -138,12 +139,21 @@
   <ItemGroup>
     <Content Include="Scripts\jquery.signalR-2.2.2.js" />
     <Content Include="Scripts\jquery.signalR-2.2.2.min.js" />
+    <Content Include="authHub.js" />
+    <Content Include="serverInit.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Hubs\AuthHub.cs" />
     <Compile Include="Hubs\GameCenterHub.cs" />
     <Compile Include="Hubs\GameHub.cs" />
+    <Compile Include="mainForm.aspx.cs">
+      <DependentUpon>mainForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="mainForm.aspx.designer.cs">
+      <DependentUpon>mainForm.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Managers\AuthManager.cs" />
     <Compile Include="Managers\GameCenterManager.cs" />
     <Compile Include="Managers\GameManager.cs" />

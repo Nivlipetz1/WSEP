@@ -10,9 +10,11 @@ using System.Threading.Tasks;
 using ServiceLayer.Models;
 using Gaming;
 using Newtonsoft.Json;
+using Microsoft.AspNet.SignalR.Hubs;
 
 namespace CommunicatoinLayer.Hubs
 {
+    [HubName("GameCenterHub")]
     public class GameCenterHub : Hub
     {
         public ClientGame createGame(GamePreferences preferecnces)

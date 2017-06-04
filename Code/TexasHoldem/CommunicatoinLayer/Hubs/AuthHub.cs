@@ -9,9 +9,11 @@ using CommunicatoinLayer.Managers;
 using System.Threading.Tasks;
 using System.Drawing;
 using ServiceLayer.Models;
+using Microsoft.AspNet.SignalR.Hubs;
 
 namespace CommunicatoinLayer.Hubs
 {
+    [HubName("AuthHub")]
     public class AuthHub : Hub
     {
 

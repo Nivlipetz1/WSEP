@@ -6,9 +6,11 @@ using Microsoft.AspNet.SignalR;
 using ServiceLayer.Models;
 using ServiceLayer;
 using CommunicatoinLayer.Managers;
+using Microsoft.AspNet.SignalR.Hubs;
 
 namespace CommunicatoinLayer.Hubs
 {
+    [HubName("GameHub")]
     public class GameHub : Hub
     {
         public bool bet(int gameID, string minimumBet)
