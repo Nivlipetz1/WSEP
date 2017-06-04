@@ -38,6 +38,7 @@ namespace GUI
 
         public void AddGame(ClientGame game)
         {
+            game.waitingList = new List<ClientUserProfile>();
             gamesList.Add(game);
         }
 
@@ -496,9 +497,7 @@ namespace GUI
                 GameFrame gameFrame = findGameFrame(gameID);
                     if (gameFrame != null)
                     {
-                        gameFrame.GamePM.AddPlayer(prof);
-
-                        gameFrame.getGame().AddPlayer(prof);
+                        gameFrame.getGame().AddPlayerToWaitingList(prof);
                     }
         });
         }
@@ -522,6 +521,16 @@ namespace GUI
                 GameFrame gameFrame = findGameFrame(gameId);
                     gameFrame.GameChat.PushMessage(sender, message);
             });
+        }
+
+        internal void UpdatePlayerList(int gameID, GameStartMove move)
+        {
+            Models.ClientGame game = findGame(gameID);
+            game.UpdatePlayerListFromWaitingList();
+            foreach (Models.ClientUserProfile prof in game.players)
+            {
+                prof.credit = move.playerBets[prof.username];
+            }
         }
     }
 }

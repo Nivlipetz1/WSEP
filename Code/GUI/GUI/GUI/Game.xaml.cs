@@ -197,17 +197,7 @@ namespace GUI
 
         public void DealCards(Models.PlayerHand hand)
         {
-            foreach (Models.ClientUserProfile prof in RemoveSelfFromPlayersList(manager.GetPlayers(gameID)))
-            {
-                foreach(PlayerAtTable player in players)
-                {
-                    if (player.Username.Equals(""))
-                    {
-                        player.ShowLabels(prof.username);
-                        break;
-                    }
-                }
-            }
+
             UserCard1.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.First.toImage(), UriKind.Relative));
             UserCard2.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.Second.toImage(), UriKind.Relative));
             UserCard1.Visibility = Visibility.Visible;
@@ -318,15 +308,29 @@ namespace GUI
 
         public void PushGameStartMove(Models.GameStartMove move)
         {
+
+            manager.UpdatePlayerList(gameID,move);
             RepositionCards();
+            foreach (Models.ClientUserProfile prof in RemoveSelfFromPlayersList(manager.GetPlayers(gameID)))
+            {
+                foreach (PlayerAtTable player in players)
+                {
+                    if (player.Username.Equals(""))
+                    {
+                        player.ShowLabels(prof.username);
+                        break;
+                    }
+                }
+            }
             potSizeInt = 0;
             revealCard = 0;
             MessageBox.Show("Game Started!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             //credit.Visibility = Visibility.Visible;
-            //betted.Content = "$0";
+            betted.Content = "$0";
             betted.Visibility = Visibility.Visible;
             PotSizeLbl.Content = "Pot Size: $" + potSizeInt;
             PotSizeLbl.Visibility = Visibility.Visible;
+            
         }
 
         public void PushWinners(List<string> winners)
