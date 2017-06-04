@@ -287,6 +287,7 @@ namespace GUI
             Bet_Button.Visibility = Visibility.Hidden;
             Fold_Button.Visibility = Visibility.Hidden;
             MinimumBetLabel.Visibility = Visibility.Hidden;
+            CheckBtn.Visibility = Visibility.Hidden;
         }
 
         public void ShowBetElements()
@@ -295,6 +296,15 @@ namespace GUI
             Bet_Button.Visibility = Visibility.Visible;
             Fold_Button.Visibility = Visibility.Visible;
             MinimumBetLabel.Visibility = Visibility.Visible;
+            if (minimumBet == 0)
+            {
+                CheckBtn.IsEnabled = true;
+            }
+            else
+            {
+                CheckBtn.IsEnabled = false;
+            }
+            CheckBtn.Visibility = Visibility.Visible;
         }
 
         public void MyTurn(int minimumBet)
@@ -439,6 +449,11 @@ namespace GUI
             }
 
             return newPlayers;
+        }
+
+        private void CheckBtn_Click(object sender, RoutedEventArgs e)
+        {
+            manager.Bet(gameID, "0", minimumBet, this);
         }
     }
 }

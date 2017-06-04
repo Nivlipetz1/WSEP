@@ -51,6 +51,7 @@
         <Label Name="MinimumBetLabel" Content="Label" Visibility="Hidden" Canvas.Left="20" Canvas.Top="440"/>
         <Label Name="PotSizeLbl" Visibility="Hidden"  Content="Label" Canvas.Left="203" Canvas.Top="332" Width="125"/>
         <Label Name="SpecLbl" FontSize="19" Visibility="Hidden" Content="Spectator Mode" Canvas.Left="10" Canvas.Top="525" Width="150"/>
+        <Button x:Name="CheckBtn" Click="CheckBtn_Click" Visibility="Hidden" Content="Check" Canvas.Left="19" Canvas.Top="494" Width="75"/>
     </Canvas>
 </Page>
 
