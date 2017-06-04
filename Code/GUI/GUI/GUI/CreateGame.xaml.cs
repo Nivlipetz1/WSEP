@@ -55,8 +55,8 @@ namespace GUI
         private void New_Game_Click(object sender, RoutedEventArgs e)
         {
 
-            int maxP = (int)minPlayers.SelectedItem;
-            int minP = (int)maxPlayers.SelectedItem;
+            int minP = (int)minPlayers.SelectedItem;
+            int maxP = (int)maxPlayers.SelectedItem;
             int sB = Int32.Parse(Small_Blind.Text);
             int bB = Int32.Parse(Big_Blind.Text);
             int cP = Int32.Parse(Chip_Policy.Text);
