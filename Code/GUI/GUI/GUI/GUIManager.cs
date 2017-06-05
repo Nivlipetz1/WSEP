@@ -587,14 +587,14 @@ namespace GUI
             }
         }
 
-        public void PlayerQuitGame(Models.ClientUserProfile player, int gameId)
+        public void PlayerQuitGame(string player, int gameId)
         {
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
                 GameFrame gameFrame = findGameFrame(gameId);
                 ClientGame cg = findGame(gameId);
-                gameFrame.RemovePlayer(player.username);
-                cg.RemovePlayer(player.username);
+                gameFrame.RemovePlayer(player);
+                cg.RemovePlayer(player);
             });
         }
     }

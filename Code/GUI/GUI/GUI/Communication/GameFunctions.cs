@@ -44,7 +44,7 @@ namespace GUI.Communication
                 });
             });
 
-            gameHubProxy.On<Models.ClientUserProfile, int>("removePlayer", (user, gameID) =>
+            gameHubProxy.On<string, int>("removePlayer", (user, gameID) =>
             {
                 Application.Current.Dispatcher.InvokeAsync(() =>
                 {
