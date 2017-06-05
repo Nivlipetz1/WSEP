@@ -90,9 +90,9 @@ namespace Gaming
             }
             
             //SystemLogger.Log("game started","GameLogs.log");
-            if (gamePref.GetMinPlayers() > GetNumberOfPlayers())
-                throw new InvalidOperationException("Can't start game with less than the minimum number of players");
-
+            //if (gamePref.GetMinPlayers() > GetNumberOfPlayers())
+             //   throw new InvalidOperationException("Can't start game with less than the minimum number of players");
+            Thread.Sleep(1000);
             int potInt = pot[0];
             //announce game started
             gameEnded = false;
@@ -100,7 +100,7 @@ namespace Gaming
 
             //send the array of players to all the observers
             PushStartGameMove();
-            Thread.Sleep(3000); //waiting for observers
+            //Thread.Sleep(2000); //waiting for observers
 
             //request small blind
             PlayingUser smallBlindPlayer = players.ElementAt(0);
@@ -212,10 +212,11 @@ namespace Gaming
                 }
             }
 
-            
-        GameEnd:
+
+            GameEnd:
+            gamePref.Status = "inactive";
             ResetGame();
-            Thread.Sleep(30000);
+            Thread.Sleep(10000);
             if ((waitingList.Count + playerBets.Count) >= gamePref.GetMinPlayers())
                 StartGame();
 
@@ -506,6 +507,7 @@ namespace Gaming
             //player.GetAccount().Credit += player.GetCredit(); //gamecenter
             players.Remove(player);
             playerBets.Remove(player);
+            
 
             var e = evt;
             if (e != null)
@@ -590,6 +592,7 @@ namespace Gaming
 
             NotificationService.Instance.pushMove(userNames, m , id);
             logger.AddMove(m);
+            Thread.Sleep(500);
         }
 
         public GameLogger GetLogger()
