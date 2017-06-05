@@ -73,9 +73,9 @@ namespace GUI.Communication
             return await gameCenterHubProxy.Invoke<ClientGame>("joinGame", gameId, credit);
         }
 
-        public async Task<bool> spectateGame(int gameId)
+        public async Task<ClientGame> spectateGame(int gameId)
         {
-            return await gameCenterHubProxy.Invoke<bool>("spectateGame", gameId);
+            return await gameCenterHubProxy.Invoke<ClientGame>("spectateGame", gameId);
         }
 
         public async Task<bool> unknownUserEditLeague(int minimumLeagueRank)

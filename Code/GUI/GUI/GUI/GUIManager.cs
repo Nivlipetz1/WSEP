@@ -229,7 +229,7 @@ namespace GUI
 
         internal async void JoinGameAsSpectator(int gameID)
         {
-           /* Models.ClientGame game = await Communication.GameCenterFunctions.Instance.spectateGame(gameID);
+           Models.ClientGame game = await Communication.GameCenterFunctions.Instance.spectateGame(gameID);
             if (game != null)
             {
                 AddGame(game);
@@ -242,7 +242,7 @@ namespace GUI
             else
             {
                 MessageBox.Show("something went wrong:(");
-            }*/
+            }
         }
 
         internal async void Register(string username, string password)
