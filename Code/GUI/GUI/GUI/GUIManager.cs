@@ -586,5 +586,16 @@ namespace GUI
                 prof.credit = move.playerBets[prof.username];
             }
         }
+
+        internal void PlayerQuitGame(ClientUserProfile player, int gameId)
+        {
+            Dispatcher.CurrentDispatcher.InvokeAsync(() =>
+            {
+                GameFrame gameFrame = findGameFrame(gameId);
+                ClientGame cg = findGame(gameId);
+                gameFrame.RemovePlayer(player.username);
+                cg.RemovePlayer(player.username);
+            });
+        }
     }
 }
