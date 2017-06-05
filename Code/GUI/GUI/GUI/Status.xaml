@@ -12,13 +12,13 @@
     <Grid>
         <Label Name="username" Content="Label" Foreground="WhiteSmoke" HorizontalAlignment="Left" Margin="5,4,0,0" VerticalAlignment="Top"/>
         <Label Name="credit" Content="Label" Foreground="WhiteSmoke" HorizontalAlignment="Right" Margin="0,4,5,0" VerticalAlignment="Top"/>
-        <Label Content="Active Games:" Foreground="WhiteSmoke" HorizontalAlignment="Center" Margin="263,0,478.333,0" VerticalAlignment="Top"/>
-        <ComboBox Name="GameList" HorizontalAlignment="Center" Margin="350,4,355.333,0" VerticalAlignment="Top" Width="120" SelectionChanged="GameList_SelectionChanged" DropDownOpened="GameList_DropDownOpened">
+        <Label Content="Active Games:" Foreground="WhiteSmoke" HorizontalAlignment="Center" Margin="289,0,452.333,0" VerticalAlignment="Top"/>
+        <ComboBox Name="GameList" HorizontalAlignment="Center" Margin="376,4,329.333,0" VerticalAlignment="Top" Width="120" SelectionChanged="GameList_SelectionChanged" DropDownOpened="GameList_DropDownOpened">
         </ComboBox>
 
 
-        <Button Name="GoBtn" Click="GoBtn_Click" Content="Go" HorizontalAlignment="Left" Margin="481,5,0,0" VerticalAlignment="Top" Width="75"/>
-        
+        <Button Name="GoBtn" Click="GoBtn_Click" Content="Go" HorizontalAlignment="Left" Margin="507,5,0,0" VerticalAlignment="Top" Width="75"/>
+
 
     </Grid>
 </Page>

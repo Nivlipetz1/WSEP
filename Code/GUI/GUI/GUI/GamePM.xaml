@@ -14,7 +14,7 @@
         <TextBox Name="messages" IsReadOnly="True"  VerticalScrollBarVisibility="Visible"  HorizontalAlignment="Left" Height="149" Margin="0,54,-1,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="201"/>
         <TextBox Name="message" HorizontalAlignment="Left" Height="23" Margin="3,212,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="157"/>
         <Button Name="SendMessage" Click="SendMessage_Click" Content="Send" HorizontalAlignment="Left" Margin="164,213,0,0" VerticalAlignment="Top" Width="35" Height="20"/>
-        <ComboBox Name="users" SelectionChanged="users_SelectionChanged" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="200" Height="22">
+        <ComboBox Name="users" SelectionChanged="users_SelectionChanged" DropDownOpened="users_DropDownOpened" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="200" Height="22">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding }" />

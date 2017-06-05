@@ -390,6 +390,12 @@ namespace GUI
             });
         }
 
+        internal BitmapImage GetAvatar(int gameID, string username)
+        {
+            ClientGame game = findGame(gameID);
+            return LoadImage(game.GetAvatar(username));
+        }
+
         internal async void JoinGame(int gameID, int credit)
         {
                 Models.ClientGame game = await Communication.GameCenterFunctions.Instance.joinGame(gameID, credit);

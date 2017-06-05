@@ -68,5 +68,10 @@ namespace GUI
         {
             users.ItemsSource = manager.GetUsersForPM(gameID);
         }
+
+        private void users_DropDownOpened(object sender, EventArgs e)
+        {
+            RefreshSelectionList();
+        }
     }
 }

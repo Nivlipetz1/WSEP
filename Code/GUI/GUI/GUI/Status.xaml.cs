@@ -21,24 +21,24 @@ namespace GUI
     public partial class Status : Page
     {
         GUIManager manager;
-        private List<int> gameIDList;
+        private List<string> gameIDList;
         public Status(GUIManager manager)
         {
             InitializeComponent();
             this.manager = manager;
-            gameIDList = new List<int>();
+            gameIDList = new List<string>();
             RefreshGamesList();
         }
 
         public void AddGameToList(int gameID)
         {
-            gameIDList.Add(gameID);
+            gameIDList.Add(string.Format("Game {0}",gameID));
             //GameList.ItemsSource = gameIDList;
         }
 
         public void RemoveGameFromList(int gameID)
         {
-            gameIDList.Remove(gameID);
+            gameIDList.Remove(string.Format("Game {0}", gameID));
             //GameList.ItemsSource = gameIDList;
         }
 
@@ -53,7 +53,8 @@ namespace GUI
 
         private void GoBtn_Click(object sender, RoutedEventArgs e)
         {
-            manager.NavigateToGameFrame(Int32.Parse(GameList.Text));
+            if(!GameList.Text.Equals(""))
+               manager.NavigateToGameFrame(Int32.Parse(GameList.Text.Substring(4)));
         }
 
         private void GameList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -65,7 +66,7 @@ namespace GUI
             
             GameList.Items.Clear();
             foreach (int gameID in manager.GetGameIDList())
-                    GameList.Items.Add(gameID);
+                    GameList.Items.Add("Game "+gameID);
         }
 
         private void GameList_DropDownOpened(object sender, EventArgs e)

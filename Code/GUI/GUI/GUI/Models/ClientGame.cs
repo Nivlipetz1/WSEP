@@ -77,5 +77,19 @@ namespace GUI.Models
 
             waitingList.Clear();
         }
+
+        public byte[] GetAvatar(string username)
+        {
+            byte[] array = null;
+            foreach(ClientUserProfile prof in players)
+            {
+                if (prof.username.Equals(username))
+                {
+                    array = prof.avatar;
+                }
+            }
+
+            return array;
+        }
     }
 }

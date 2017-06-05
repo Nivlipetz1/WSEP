@@ -14,15 +14,17 @@ namespace GUI
         public Label Label { get; set; }
         public Image FirstCard { get; set; }
         public Image SecondCard { get; set; }
+        public Image Avatar { get; set; }
         public string Username { get; set; }
         public int BetAmount { get; set; }
         public int Credit { get; set; }
 
-        public PlayerAtTable(Label lbl,Image firstCard,Image secondCard)
+        public PlayerAtTable(Label lbl,Image firstCard,Image secondCard,Image avatar)
         {
             Label = lbl;
             FirstCard = firstCard;
             SecondCard = secondCard;
+            Avatar = avatar;
             Username = "";
             BetAmount = 0;
         }
@@ -53,6 +55,13 @@ namespace GUI
             Label.Visibility = Visibility.Visible;
             FirstCard.Visibility = Visibility.Visible;
             SecondCard.Visibility = Visibility.Visible;
+            Avatar.Visibility = Visibility.Visible;
+        }
+
+        public void SetAvatar(BitmapImage img)
+        {
+            if(img != null)
+                Avatar.Source = img;
         }
 
         public void SetCards(Models.PlayerHand hand)

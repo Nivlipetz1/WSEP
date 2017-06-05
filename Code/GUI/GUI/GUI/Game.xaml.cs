@@ -45,15 +45,15 @@ namespace GUI
             this.manager = manager;
             this.gameID = gameID;
             players = new List<PlayerAtTable>();
-            players.Add(new PlayerAtTable(player3, Card3, Card4));
-            players.Add(new PlayerAtTable(player4, Card1, Card2));
-            players.Add(new PlayerAtTable(player5, Card5, Card6));
-            players.Add(new PlayerAtTable(player7, Card7, Card8));
-            players.Add(new PlayerAtTable(player6, Card9, Card10));
-            players.Add(new PlayerAtTable(player1, Card11, Card12));
-            players.Add(new PlayerAtTable(player2, Card13, Card14));
+            players.Add(new PlayerAtTable(player3, Card3, Card4, player3Avatar));
+            players.Add(new PlayerAtTable(player4, Card1, Card2, player4Avatar));
+            players.Add(new PlayerAtTable(player5, Card5, Card6, player5Avatar));
+            players.Add(new PlayerAtTable(player7, Card7, Card8, player7Avatar));
+            players.Add(new PlayerAtTable(player6, Card9, Card10, player6Avatar));
+            players.Add(new PlayerAtTable(player1, Card11, Card12, player1Avatar));
+            players.Add(new PlayerAtTable(player2, Card13, Card14, player2Avatar));
             if(SpecMode)
-                players.Add(new PlayerAtTable(betted, UserCard1, UserCard2));
+                players.Add(new PlayerAtTable(betted, UserCard1, UserCard2, playerAvatar));
             //playerLabels = new List<Label>();
             playersCards = new List<Image>();
             playersCards.Add(Card3);
@@ -290,6 +290,7 @@ namespace GUI
                     if (player.Username.Equals(""))
                     {
                         player.Credit = move.playerBets[prof.username];
+                        player.SetAvatar(manager.GetAvatar(gameID, prof.username));
                         player.ShowLabels(prof.username);
                         break;
                     }
