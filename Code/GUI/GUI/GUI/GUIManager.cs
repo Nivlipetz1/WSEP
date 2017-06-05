@@ -587,7 +587,7 @@ namespace GUI
             }
         }
 
-        internal void PlayerQuitGame(ClientUserProfile player, int gameId)
+        public void PlayerQuitGame(Models.ClientUserProfile player, int gameId)
         {
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
