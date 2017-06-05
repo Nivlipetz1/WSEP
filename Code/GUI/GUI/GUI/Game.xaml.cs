@@ -390,8 +390,10 @@ namespace GUI
 
         private void Bet_Button_Click(object sender, RoutedEventArgs e)
         {
-            if(!BetAmount.Text.Equals(""))
-            manager.Bet(gameID, BetAmount.Text, minimumBet, this);
+            if (!BetAmount.Text.Equals(""))
+            {
+                manager.Bet(gameID, BetAmount.Text, minimumBet, this);
+            }
         }
 
         private void Fold_Button_Click(object sender, RoutedEventArgs e)

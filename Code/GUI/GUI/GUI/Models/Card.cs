@@ -51,7 +51,7 @@ namespace GUI.Models
                 case Suit.DIAMOND:
                     return "D" + value + ".png";
                 default:
-                    return "";
+                    throw new Exception("Bad Card");
             }
         }
 
