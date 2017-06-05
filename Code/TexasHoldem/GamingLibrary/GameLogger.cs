@@ -8,17 +8,19 @@ namespace Gaming
 {
     public class GameLogger
     {
+        public int gameID { get; set; }
+        public List<Move> gameMoves { get; set; }
 
-        private List<Move> gameMoves;
-
-        public GameLogger()
+        public GameLogger(int gameID)
         {
+            this.gameID = gameID;
             gameMoves = new List<Move>();
         }
 
         public bool AddMove(Move m)
         {
             gameMoves.Add(m);
+            NotificationService.Instance.saveReplay(this);
             return true;
         }
 

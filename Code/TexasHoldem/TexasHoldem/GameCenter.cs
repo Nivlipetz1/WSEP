@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Gaming;
 using System.Threading;
+using GameSystem.Data_Layer;
 
 namespace GameSystem
 {
@@ -32,7 +33,17 @@ namespace GameSystem
         private GameCenter()
         {
             Users = new List<UserProfile>();
-            leagues.Add(0, new League(0, "League 0"));
+            List<League> l = DBConnection.Instance.getLeagues();
+            foreach(League league in l)
+            {
+                leagues.Add(league.minimumRank, league);
+            }
+            if(!leagues.ContainsKey(0))
+            {
+                League league = new League(0, "deafult league");
+                league.Save();
+                leagues.Add(0, league);
+            }
         }
 
         public Game createGame(GamePreferences preferecnces , UserProfile user)
@@ -177,6 +188,7 @@ namespace GameSystem
             }
             League league = new League(minimumRank, "League" + leagues.Count);
             leagues.Add(minimumRank, league);
+            league.Save();
             return true;
         }
 

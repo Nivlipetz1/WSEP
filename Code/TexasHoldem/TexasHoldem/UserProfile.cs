@@ -5,16 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using Gaming;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace GameSystem
 {
     public class UserProfile
     {
+        public ObjectId Id { get; set; }
         private string username;
         private string password;
         private Image avatar;
         private int credit;
         private League league;
+        private int leagueId;
         private Statistics userStat;
 
         public string Username
@@ -41,6 +45,7 @@ namespace GameSystem
             set { credit = value; }
         }
 
+        [BsonIgnore]
         public League League
         {
             get
@@ -51,6 +56,20 @@ namespace GameSystem
             set
             {
                 league = value;
+                LeagueId = league.minimumRank;
+            }
+        }
+
+        public int LeagueId
+        {
+            get
+            {
+                return leagueId;
+            }
+
+            set
+            {
+                leagueId = value;
             }
         }
 
@@ -84,6 +103,7 @@ namespace GameSystem
         public void setUserLeague(League league)
         {
             this.league = league;
+            
         }
 
         public void updateStatistics(PlayingUser user)
