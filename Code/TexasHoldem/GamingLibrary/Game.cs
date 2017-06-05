@@ -81,6 +81,7 @@ namespace Gaming
             {
                 foreach (PlayingUser player in waitingList)
                 {
+                    player.GainPerRound.Add(0);
                     players.Add(player);
                     playerBets.Add(player, 0);
                     waitingList.Remove(player);
@@ -189,6 +190,7 @@ namespace Gaming
             foreach (PlayingUser player in winners)
             {
                 player.ReceiveWinnings(pot[0] / winners.Count);
+                
             }
 
             foreach (PlayingUser player in players)
@@ -215,6 +217,7 @@ namespace Gaming
                 if (player.GetStatus() != "Fold")
                 {
                     player.ReceiveWinnings(pot[0]);
+        
                 }
                 else
                 {

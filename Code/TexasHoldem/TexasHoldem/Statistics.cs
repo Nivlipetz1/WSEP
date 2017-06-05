@@ -10,6 +10,11 @@ namespace GameSystem
         private int biggestWin;
         private int biggestWallet;
 
+        private int totalGrossProfit; 
+        private double avgGrossProfit; //Player gross profit win rate
+        private double avgCashGain; //Player $ win rate.
+        
+
         public Statistics()
         {
             winnings = 0;
@@ -80,6 +85,26 @@ namespace GameSystem
             set
             {
                 biggestWallet = value;
+            }
+        }
+
+        public int TotalGrossProfit
+        {
+            get { return totalGrossProfit; }
+            set { totalGrossProfit = value; }
+        }
+        
+        public double AvgGrossProfit
+        {
+            get { return avgGrossProfit; }
+            set { avgGrossProfit = value; }
+        }
+        public double AvgCashGain
+        {
+            get { return avgCashGain; }
+            set
+            {
+                avgCashGain = value;
             }
         }
 

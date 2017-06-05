@@ -88,11 +88,18 @@ namespace GameSystem
 
         public void updateStatistics(PlayingUser user)
         {
+
+            int Grosssum = (from g in user.GainPerRound where g >= 0 select g).Sum();
+            int roundsPlayed = userStat.Winnings + userStat.Losses;
+            
             userStat.Winnings += user.GetRoundsWon();
             userStat.Losses += user.GetRoundsLost();
             userStat.BiggestWin = (userStat.BiggestWin > user.GetMostWon()) ? userStat.BiggestWin : user.GetMostWon();
             userStat.HighestHand = (userStat.HighestHand < user.GetBestHand()) ? userStat.HighestHand : user.GetBestHand();
             userStat.BiggestWallet = (Credit > userStat.BiggestWallet) ? Credit : userStat.BiggestWallet;
+            userStat.TotalGrossProfit += Grosssum;
+            UserStat.AvgCashGain = (userStat.AvgCashGain * roundsPlayed + user.GainPerRound.Sum()) / (userStat.Winnings + userStat.Losses);
+            userStat.AvgGrossProfit = userStat.TotalGrossProfit / (userStat.Winnings + userStat.Losses);
         }
     }
 }
