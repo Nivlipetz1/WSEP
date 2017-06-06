@@ -47,6 +47,11 @@ namespace GameSystem.Data_Layer
             return Leagues.AsQueryable().ToList();
         }
 
+        public int getNewGameId()
+        {
+            return Replayes.AsQueryable().Select(repl => repl.gameID).AsEnumerable().DefaultIfEmpty(0).Max() + 1;
+        }
+
         public void saveReplay(GameLogger replay)
         {
             if (Replayes.Find(repl => repl.gameID == replay.gameID).ToList().Count > 0)
@@ -58,6 +63,13 @@ namespace GameSystem.Data_Layer
             }
             else
                 Replayes.InsertOne(replay);
+        }
+
+        public GameLogger getReplayById(int gameId)
+        {
+            return (from logger in Replayes.AsQueryable()
+            where logger.gameID == gameId
+            select logger).First();
         }
     }
 

@@ -31,6 +31,12 @@ namespace ServiceLayer
             return gc.getAllReplayesOfInActiveGames();
         }
 
+
+        public List<Move> getReplayByGameId(int gameId)
+        {
+            return gc.getReplayByGameId(gameId);
+        }
+
         public List<ClientGame> getAllSpectatingGames()
         {
             return gc.getAllSpectatingGames().Select(game => new ClientGame(game)).ToList();

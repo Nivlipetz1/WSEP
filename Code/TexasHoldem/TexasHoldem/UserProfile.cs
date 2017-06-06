@@ -7,6 +7,7 @@ using System.Drawing;
 using Gaming;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System.IO;
 
 namespace GameSystem
 {
@@ -16,6 +17,7 @@ namespace GameSystem
         private string username;
         private string password;
         private Image avatar;
+        private byte[] avatarContent;
         private int credit;
         private League league;
         private int leagueId;
@@ -33,10 +35,33 @@ namespace GameSystem
             set {password = value; }
         }
 
+        [BsonIgnore]
         public Image Avatar
         {
             get {return avatar;}
-            set {avatar = value;}
+            set
+            {
+                avatar = value;
+                if (avatar == null)
+                    return;
+                MemoryStream ms = new MemoryStream();
+                avatar.Save(ms, avatar.RawFormat);
+                avatarContent = ms.ToArray();
+            }
+        }
+
+        public byte[] AvatarContent
+        {
+            get { return avatarContent; }
+            set
+            {
+                avatarContent = value;
+                if (avatarContent == null)
+                    return;
+                MemoryStream ms = new MemoryStream(avatarContent);
+                Image returnImage = Image.FromStream(ms);
+                avatar = returnImage;
+            }
         }
 
         public int Credit
@@ -96,7 +121,7 @@ namespace GameSystem
         {
             this.Username = username;
             this.Password = password;
-            this.Avatar = avatar;
+            Avatar = avatar;
             userStat = new Statistics();
         }
 

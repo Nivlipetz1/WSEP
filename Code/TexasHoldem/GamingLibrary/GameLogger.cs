@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace Gaming
 {
     public class GameLogger
     {
+        [BsonId]
         public int gameID { get; set; }
         public List<Move> gameMoves { get; set; }
 

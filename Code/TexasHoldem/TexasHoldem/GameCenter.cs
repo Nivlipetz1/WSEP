@@ -10,7 +10,6 @@ namespace GameSystem
     public class GameCenter : LeagueAPI , GameCenterInterface
     {
         List<Game> games = new List<Game>();
-        private static int GAMEID = 0;
         Dictionary<int, League> leagues = new Dictionary<int, League>();
         private ICollection<UserProfile> Users;
 
@@ -48,8 +47,8 @@ namespace GameSystem
 
         public Game createGame(GamePreferences preferecnces , UserProfile user)
         {
-            Game game = new Game(GAMEID,preferecnces);
-            GAMEID++;
+            int gameId = DBConnection.Instance.getNewGameId();
+            Game game = new Game(gameId, preferecnces);
             games.Add(game);
             user.League.addGame(game);
             game.evt += updateLeagueToUser;
@@ -178,6 +177,10 @@ namespace GameSystem
             return replayes;
 
         }
+        public List<Move> getReplayByGameId(int gameId)
+        {
+            return DBConnection.Instance.getReplayById(gameId).gameMoves;
+        }
 
         public bool createNewLeague(int minimumRank)
         {
@@ -281,5 +284,6 @@ namespace GameSystem
                 return leagues[id];
             return null;
         }
+
     }
 }
