@@ -28,11 +28,22 @@ namespace GUI
         public GameReplayCont GameReplayCont { get; set; }
         public int gameID { get; set; }
         private bool initialized = false;
+        private List<Models.Move> moves;
+        private int movesIndex = 0;
         public GameFrame(GUIManager manager, Models.ClientGame game)
         {
             this.manager = manager;
             this.game = game;
             this.gameID = game.id;
+
+        }
+
+        public GameFrame(GUIManager manager, int gameID, List<Models.Move> moves)//USED ONLY FOR REPLAYS
+        {
+            this.manager = manager;
+            this.game = null;
+            this.gameID = gameID;
+            this.moves = moves;
 
         }
 
@@ -42,7 +53,7 @@ namespace GUI
             {
                 initialized = true;
                 InitializeComponent();
-                gameFrame.NavigationService.Navigate(GameWindow = new Game(manager, gameID, SpecMode));
+                gameFrame.NavigationService.Navigate(GameWindow = new Game(manager, gameID, SpecMode, false));
                 chatFrame.NavigationService.Navigate(GameChat = new GameChat(manager, gameID));
                 pmFrame.NavigationService.Navigate(GamePM = new GamePM(manager, gameID));
             }
@@ -54,8 +65,8 @@ namespace GUI
             {
                 initialized = true;
                 InitializeComponent();
-                gameFrame.NavigationService.Navigate(GameWindow = new Game(manager, gameID, true));
-                chatFrame.NavigationService.Navigate(GameReplayCont = new GameReplayCont());
+                gameFrame.NavigationService.Navigate(GameWindow = new Game(manager, gameID, true,true));
+                chatFrame.NavigationService.Navigate(GameReplayCont = new GameReplayCont(this));
             }
            
         }
@@ -64,6 +75,22 @@ namespace GUI
         {
             return game;
             
+        }
+
+        public int getGameID()
+        {
+            return gameID;
+
+        }
+
+        internal void PushMove()
+        {
+            manager.PushMoveToGame(moves[movesIndex], gameID);
+            movesIndex++;
+            if(movesIndex == moves.Count)
+            {
+                GameReplayCont.DisablePlayButton();
+            }
         }
 
         public override string ToString()

@@ -275,6 +275,15 @@ namespace GUI
             return await Communication.GameFunctions.Instance.postMessage(message, gameID);
         }
 
+        internal async void GetReplay(int gameID)
+        {
+            List<Move> moves = await Communication.GameCenterFunctions.Instance.getReplayByGameId(gameID);
+            GameFrame gf = new GameFrame(this, gameID,moves);
+            AddGameFrame(gf);
+            gf.InitReplay();
+            NavigateToGameFrame(gf);
+        }
+
         internal IEnumerable<ClientUserProfile> GetPlayers(int gameID)
         {
             return findGame(gameID).players;
@@ -300,7 +309,7 @@ namespace GUI
             //while (gameList.Count == 0) ;
             foreach (GameFrame g in gameList)
             {
-                if (g.getGame().id == gameID)
+                if (g.getGameID() == gameID)
                 {
                     gameFrame = g;
                 }

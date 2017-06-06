@@ -20,14 +20,21 @@ namespace GUI
     /// </summary>
     public partial class GameReplayCont : Page
     {
-        public GameReplayCont()
+        public GameFrame gameFrame {get; set;}
+        public GameReplayCont(GameFrame gf)
         {
             InitializeComponent();
+            this.gameFrame = gf;
         }
 
         private void NextMoveBtn_Click(object sender, RoutedEventArgs e)
         {
+            gameFrame.PushMove();
+        }
 
+        internal void DisablePlayButton()
+        {
+            NextMoveBtn.IsEnabled = false;
         }
     }
 }

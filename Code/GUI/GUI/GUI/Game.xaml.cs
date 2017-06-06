@@ -33,6 +33,7 @@ namespace GUI
         private int playerCredit = 0;
         private int playerBet = 0;
         private bool SpecMode;
+        private bool ReplayMode = false;
 
         public static SoundPlayer snd = new SoundPlayer(Properties.Resources.cardsdealt1);
         public static SoundPlayer snd2 = new SoundPlayer(Properties.Resources.cardsdealt2);
@@ -44,12 +45,13 @@ namespace GUI
         public static SoundPlayer SeeEmSound = new SoundPlayer(Properties.Resources.LetsSeeEm);
         public static SoundPlayer ChecksSound = new SoundPlayer(Properties.Resources.Check);
         public static SoundPlayer FoldsSound = new SoundPlayer(Properties.Resources.PlayerFolds);
-        public Game(GUIManager manager, int gameID, bool SpecMode)
+        public Game(GUIManager manager, int gameID, bool SpecMode, bool ReplayMode)
         {
             InitializeComponent();
             this.manager = manager;
             this.gameID = gameID;
             this.SpecMode = SpecMode;
+            this.ReplayMode = ReplayMode;
             players = new List<PlayerAtTable>();
             players.Add(new PlayerAtTable(player3, Card3, Card4, player3Avatar));
             players.Add(new PlayerAtTable(player4, Card1, Card2, player4Avatar));
@@ -198,14 +200,16 @@ namespace GUI
             }
             potSizeInt += bet;
             PotSizeLbl.Content = "Pot Size: $" + potSizeInt;
-
-            if (move.GetBettingPlayer().Equals(manager.GetProfile().username))
+            if (!ReplayMode)
             {
-                playerCredit -= bet;
-                playerBet += bet;
-                credit.Content = "Credit: $" + playerCredit;
-                betted.Content = "$" + playerBet;
-                return;
+                if (move.GetBettingPlayer().Equals(manager.GetProfile().username))
+                {
+                    playerCredit -= bet;
+                    playerBet += bet;
+                    credit.Content = "Credit: $" + playerCredit;
+                    betted.Content = "$" + playerBet;
+                    return;
+                }
             }
 
             foreach (PlayerAtTable player in players)
@@ -224,12 +228,15 @@ namespace GUI
         public void PushFoldMove(Models.FoldMove move)
         {
             FoldsSound.Play();
-            if (move.foldingPlayer.Equals(manager.GetProfile().username))
+            if (!ReplayMode)
             {
-                betted.Content = "Folded";
-                UserCard1.Visibility = Visibility.Hidden;
-                UserCard2.Visibility = Visibility.Hidden;
-                return;
+                if (move.foldingPlayer.Equals(manager.GetProfile().username))
+                {
+                    betted.Content = "Folded";
+                    UserCard1.Visibility = Visibility.Hidden;
+                    UserCard2.Visibility = Visibility.Hidden;
+                    return;
+                }
             }
 
             foreach (PlayerAtTable player in players)
@@ -298,34 +305,56 @@ namespace GUI
             {
                 player.Remove();
             }
-            manager.UpdatePlayerList(gameID,move);
+            if (!ReplayMode)
+            {
+                manager.UpdatePlayerList(gameID, move);
+            }
             playerBet = 0;
             if(!SpecMode)
                 playerCredit = move.playerBets[manager.GetProfile().username];
             RepositionCards();
-            foreach (Models.ClientUserProfile prof in RemoveSelfFromPlayersList(manager.GetPlayers(gameID)))
+            if (ReplayMode)
             {
-                foreach (PlayerAtTable player in players)
+                foreach (string username in move.playerBets.Keys)
                 {
-                    if (player.Username.Equals(""))
+                    foreach (PlayerAtTable player in players)
                     {
-                        player.Credit = move.playerBets[prof.username];
-                        player.SetAvatar(manager.GetAvatar(gameID, prof.username));
-                        player.ShowLabels(prof.username);
-                        break;
+                        if (player.Username.Equals(""))
+                        {
+                            player.Credit = move.playerBets[username];
+                            player.SetAvatar(null);
+                            player.ShowLabels(username);
+                            break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                foreach (Models.ClientUserProfile prof in RemoveSelfFromPlayersList(manager.GetPlayers(gameID)))
+                {
+                    foreach (PlayerAtTable player in players)
+                    {
+                        if (player.Username.Equals(""))
+                        {
+                            player.Credit = move.playerBets[prof.username];
+                            player.SetAvatar(manager.GetAvatar(gameID, prof.username));
+                            player.ShowLabels(prof.username);
+                            break;
+                        }
                     }
                 }
             }
             potSizeInt = 0;
             revealCard = 0;
-
-            BitmapImage image = manager.getAvatar();
-            if (image != null)
-            {
-                playerAvatar.Source = image;
-            }
             if (!SpecMode)
             {
+                BitmapImage image = manager.getAvatar();
+                if (image != null)
+                {
+                    playerAvatar.Source = image;
+                }
+
                 playerAvatar.Visibility = Visibility.Visible;
                 credit.Content = "Credit: $" + playerCredit;
                 credit.Visibility = Visibility.Visible;
@@ -335,17 +364,20 @@ namespace GUI
             PotSizeLbl.Content = "Pot Size: $" + potSizeInt;
             PotSizeLbl.Visibility = Visibility.Visible;
             startGameSound.PlaySync();
-            if(SpecMode)
+            if(SpecMode && !ReplayMode)
                 DealCards(null);
 
         }
 
         public void PushWinners(List<string> winners)
         {
-            if (winners.Contains(manager.GetProfile().username))
-                WinnerSound.Play();
-            else
-                LoserSound.Play();
+            if (!ReplayMode)
+            {
+                if (winners.Contains(manager.GetProfile().username))
+                    WinnerSound.Play();
+                else
+                    LoserSound.Play();
+            }
             string winnersStr = "";
             foreach(string winner in winners)
             {
@@ -461,7 +493,14 @@ namespace GUI
 
         private void Quit_Click(object sender, RoutedEventArgs e)
         {
-            manager.QuitGame(gameID);
+            if (!ReplayMode)
+            {
+                manager.QuitGame(gameID);
+            }
+            else
+            {
+                manager.GoToGameCenter();
+            }
         }
 
         private void Bet_Button_Click(object sender, RoutedEventArgs e)
