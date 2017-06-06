@@ -28,7 +28,7 @@ namespace Gaming
             UserProfile Niv = new UserProfile("Niv", "123");
             PlayingUser nivPlayer = new PlayingUser(Niv.Username, 1000, g);
 
-            g.GetGamePref().SetStatus("active");
+            g.GetGamePref().SetStatus("Active");
             Assert.IsEmpty(g.GetPlayers());
             g.addPlayer(nivPlayer);
             Assert.False(g.GetPlayers().Contains(nivPlayer));

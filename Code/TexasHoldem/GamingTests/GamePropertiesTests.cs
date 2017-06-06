@@ -75,9 +75,9 @@ namespace GamingTests
         public void InitGame()
         {
             Game g = new Game(new GamePreferences());
-            Assert.True(g.GetGamePref().GetStatus().Equals("init"));
+            Assert.True(g.GetGamePref().GetStatus().Equals("Init"));
             g.InactivateGame();
-            Assert.True(g.GetGamePref().GetStatus().Equals("inactive"));
+            Assert.True(g.GetGamePref().GetStatus().Equals("Inactive"));
         }
     }
 }

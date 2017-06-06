@@ -77,7 +77,7 @@ namespace Gaming
             List<PlayingUser> winners = new List<PlayingUser>();
             List<string> userNames = new List<string>();
 
-            gamePref.SetStatus("active");
+            gamePref.SetStatus("Active");
 
             foreach (PlayingUser player in waitingList)
             {
@@ -213,7 +213,7 @@ namespace Gaming
 
 
         GameEnd:
-            gamePref.Status = "inactive";
+            gamePref.Status = "Inactive";
             ResetGame();
             Thread.Sleep(10000);
             if ((waitingList.Count + playerBets.Count) >= gamePref.GetMinPlayers())
@@ -246,9 +246,16 @@ namespace Gaming
             players.Remove(dealer);
             players.Insert(players.Count, dealer);
 
+            IEnumerable<PlayingUser> QuitPlayers = players.Where(user => user.GetStatus().Equals("Quit"));
+            foreach(PlayingUser player in QuitPlayers){
+                players.Remove(player);
+                playerBets.Remove(player);
+            }
+
+
             foreach (PlayingUser player in players)
             {
-                player.SetStatus("active");
+                player.SetStatus("Active");
                 playerHands.Remove(player.GetUserName());
                 playerBets[player] = player.GetCredit();
             }
@@ -480,7 +487,7 @@ namespace Gaming
             if ((players.Count + waitingList.Count) == gamePref.GetMaxPlayers())
                 throw new InvalidOperationException("Maximum number of players reached");
 
-            if (gamePref.GetStatus().Equals("active"))
+            if (gamePref.GetStatus().Equals("Active"))
             {
                 waitingList.Add(player);
                 return;
@@ -510,17 +517,21 @@ namespace Gaming
             if (!players.Contains(player))
                 throw new InvalidOperationException("Player not in game");
 
-            //player.GetAccount().Credit += player.GetCredit(); //gamecenter
-            players.Remove(player);
-            playerBets.Remove(player);
-
+            if (this.gamePref.GetStatus().Equals("Inactive") || this.gamePref.GetStatus().Equals("Init")) //not in middle of round
+            {
+                players.Remove(player);
+                playerBets.Remove(player);
+            }
+            else //in middle of round
+            {
+                player.SetStatus("Quit");
+            }
 
             var e = evt;
             if (e != null)
                 evt(player);
 
             player = null;
-
         }
 
         public void addSpectator(SpectatingUser spec)
@@ -667,7 +678,7 @@ namespace Gaming
 
         public void InactivateGame()
         {
-            gamePref.SetStatus("inactive");
+            gamePref.SetStatus("Inactive");
         }
 
         public int getGameID()

@@ -56,7 +56,7 @@ namespace GameSystem
         {
             activeGame func;
             List<Game> gamesInLeague = games.Where(game => user.League.getGames().Contains(game)).ToList();
-            gamesInLeague = gamesInLeague.Where(game => game.GetGamePref().GetStatus().Equals("active") || game.GetGamePref().GetStatus().Equals("init")).ToList();
+            gamesInLeague = gamesInLeague.Where(game => game.GetGamePref().GetStatus().Equals("Active") || game.GetGamePref().GetStatus().Equals("Init")).ToList();
             switch (criterion)
             {
                 case "playerName":
@@ -162,7 +162,7 @@ namespace GameSystem
         public List<List<Move>> getAllReplayesOfInActiveGames()
         {
             List<List<Move>> replayes = new List<List<Move>>();
-            games.Where(game => !game.GetGamePref().GetStatus().Equals("active")).ToList().ForEach(game => replayes.Add(game.GetGameReplay()));
+            games.Where(game => !game.GetGamePref().GetStatus().Equals("Active")).ToList().ForEach(game => replayes.Add(game.GetGameReplay()));
 
             return replayes;
 
