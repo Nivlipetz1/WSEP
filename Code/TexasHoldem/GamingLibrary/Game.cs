@@ -16,6 +16,7 @@ namespace Gaming
         private ObservableCollection<PlayingUser> players; //these will be of type playingUsers
         private List<PlayingUser> waitingList; //these will be of type playingUsers
         private List<SpectatingUser> spectators; //these will be of type spectators
+        private List<SpectatingUser> specWaitingList;
         private int[] pot; // pot[0] = main pot ||| pot[1] = sidepot
         private int bettingRound;
         private CardAnalyzer ca;
@@ -36,6 +37,7 @@ namespace Gaming
             players = new ObservableCollection<PlayingUser>();
             waitingList = new List<PlayingUser>();
             spectators = new List<SpectatingUser>();
+            specWaitingList = new List<SpectatingUser>();
             pot = new int[2];
             ca = new CardAnalyzer();
             gamePref = gp;
@@ -50,6 +52,7 @@ namespace Gaming
             players = new ObservableCollection<PlayingUser>();
             waitingList = new List<PlayingUser>();
             spectators = new List<SpectatingUser>();
+            specWaitingList = new List<SpectatingUser>();
             pot = new int[2];
             ca = new CardAnalyzer();
             gamePref = gp;
@@ -72,6 +75,11 @@ namespace Gaming
             return waitingList;
         }
 
+        public List<SpectatingUser> GetSpecWaitingList()
+        {
+            return specWaitingList;
+        }
+
         public void StartGame()
         {
             List<PlayingUser> winners = new List<PlayingUser>();
@@ -84,8 +92,14 @@ namespace Gaming
                 players.Add(player);
                 playerBets.Add(player, player.GetCredit());
             }
-
             waitingList.Clear();
+
+            foreach (SpectatingUser spec in specWaitingList)
+            {
+                spectators.Add(spec);
+            }
+            specWaitingList.Clear();
+
             updatePlayerBets(0, true);
             //SystemLogger.Log("game started","GameLogs.log");
             //if (gamePref.GetMinPlayers() > GetNumberOfPlayers())
@@ -543,8 +557,14 @@ namespace Gaming
         {
             if (!gamePref.AllowSpec())
                 throw new InvalidOperationException("Spectating is not allowed in this game");
-
-            spectators.Add(spec);
+            if (this.gamePref.GetStatus().Equals("Active"))
+            {
+                specWaitingList.Add(spec);
+            }
+            else
+            {
+                spectators.Add(spec);
+            }
         }
 
         public void removeSpectator(SpectatingUser spec)

@@ -23,7 +23,6 @@ namespace Gaming
             messages = new List<string>();
         }
 
-
         public string GetUserName()
         {
             return userName;
