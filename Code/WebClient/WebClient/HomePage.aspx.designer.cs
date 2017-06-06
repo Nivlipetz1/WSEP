@@ -22,24 +22,6 @@ namespace WebClient {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// usernameField control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox usernameField;
-        
-        /// <summary>
-        /// passwordField control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox passwordField;
-        
-        /// <summary>
         /// usernameLabel control.
         /// </summary>
         /// <remarks>
@@ -49,6 +31,15 @@ namespace WebClient {
         protected global::System.Web.UI.WebControls.Label usernameLabel;
         
         /// <summary>
+        /// usernameField control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox usernameField;
+        
+        /// <summary>
         /// passwordLabel control.
         /// </summary>
         /// <remarks>
@@ -56,6 +47,15 @@ namespace WebClient {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label passwordLabel;
+        
+        /// <summary>
+        /// passwordField control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox passwordField;
         
         /// <summary>
         /// LoginButton control.

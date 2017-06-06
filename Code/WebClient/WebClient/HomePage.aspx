@@ -15,23 +15,31 @@
             background-size:cover; 
             background-position:center;
         }
-        .auto-style1 {
-            width: 285px;
-            height: 84px;
-        }
     </style>
 </head>
-<body >
-    <form id="form1" runat="server">
-    <div style="height: 274px; width: 297px; position:absolute; top: 123px; left: 519px;">
-        <asp:TextBox ID="usernameField" runat="server" style="position:absolute; top: 87px; left: 126px;"></asp:TextBox>
-        <asp:TextBox TextMode="Password" runat="server" ID="passwordField" style="position:absolute; top: 127px; left: 126px;"></asp:TextBox>
-        <asp:Label ID="usernameLabel" runat="server" Text="Username:" style="position:absolute; top: 88px; left: 39px;" Font-Bold="True" ForeColor="White"></asp:Label>
-        <asp:Label ID="passwordLabel" runat="server" Text="Password:" style="position:absolute; top: 128px; left: 40px;" Font-Bold="True" ForeColor="White"></asp:Label>
-        <asp:Button ID="LoginButton" runat="server" Height="30px" style="position:absolute; top: 174px; left: 107px; bottom: 70px;" OnClick="Button1_Click" Text="Login" Width="133px" />
-        <asp:Label ID="invalidLabel" style="position:absolute; top: 226px; left: 79px;" runat="server" Font-Bold="True" ForeColor="Red" Text="Invalid username\password "></asp:Label>
+<body onbeforeunload="HandleBack">
+    <script lang="js" type="text/javascript">
+        window.history.forward();
+    </script>
+    <form id="form1" runat="server" style="width:100%;height:auto; min-width:1000px; min-height:1000px;">
+        <div style="text-align:center; margin-top:100px">
+            <img style="width:400px; height:100px;" class="auto-style1" src="Images/LOGIN_LOGO_WEB_white.png" />
         </div>
-    </form>
-        <img alt="" style="position:absolute; background-size:auto; top: 74px; left: 559px;" class="auto-style1" src="Images/LOGIN_LOGO_WEB_white.png" />
+        
+        <div style="text-align:center; margin-top:20px; margin-right:10px">
+            <asp:Label ID="usernameLabel" runat="server" Text="Username:" Font-Bold="True" ForeColor="White"></asp:Label>
+            <asp:TextBox ID="usernameField" runat="server"></asp:TextBox>
+        </div>
+        
+        <div style="text-align:center; margin-top:5px; margin-right:10px">
+            <asp:Label ID="passwordLabel" runat="server" Text="Password :" Font-Bold="True" ForeColor="White"></asp:Label>
+            <asp:TextBox TextMode="Password" runat="server" ID="passwordField"></asp:TextBox>
+        </div>
+        
+        <div style="text-align:center; margin-top:10px; margin-right:10px">
+            <asp:Button ID="LoginButton" runat="server" Height="30px" OnClick="Button1_Click" Text="Login" Width="133px" />
+            <asp:Label ID="invalidLabel" runat="server" Font-Bold="True" ForeColor="Red" Text="Invalid username\password "></asp:Label>
+        </div>
+ </form> 
 </body>
 </html>

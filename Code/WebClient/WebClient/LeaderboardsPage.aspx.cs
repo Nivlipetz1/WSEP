@@ -11,6 +11,8 @@ namespace WebClient
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!LoginPage.loggedIn)
+                Response.Redirect("HomePage.aspx");
             WinRateLabel.Visible = false;
             ProfitRateLabel.Visible = false;
             invalidLabel.Visible = false;
@@ -18,6 +20,7 @@ namespace WebClient
             ProfitRateValueLabel.Visible = false;
 
             loadTables();
+
         }
 
         private void loadTables()
@@ -34,25 +37,37 @@ namespace WebClient
             for (int i = 0; i < 20; i++)
             {
                 TableRow newRow = new TableRow();
+                TableCell indexCell = new TableCell();
                 TableCell firstCell = new TableCell();
                 TableCell secondCell = new TableCell();
+                indexCell.Text = "" + (i + 1);
                 firstCell.Text = games[i].getUsername();
                 secondCell.Text = games[i].getValue().ToString();
+                newRow.Cells.Add(indexCell);
+                newRow.Cells.Add(new TableCell());
+                newRow.Cells.Add(new TableCell());
+                newRow.Cells.Add(new TableCell());
+                newRow.Cells.Add(new TableCell());
                 newRow.Cells.Add(firstCell);
                 newRow.Cells.Add(new TableCell());
                 newRow.Cells.Add(new TableCell());
                 newRow.Cells.Add(new TableCell());
                 newRow.Cells.Add(new TableCell());
                 newRow.Cells.Add(secondCell);
+                newRow.Font.Bold = true;
                 table.Rows.Add(newRow);
             }
+
+            table.Rows[0].ForeColor = System.Drawing.Color.Gold;
+            table.Rows[1].ForeColor = System.Drawing.Color.Silver;
+            table.Rows[2].ForeColor = System.Drawing.Color.SandyBrown;
         }
 
         private List<Pair<string, int>> getGamesRecords()
         {
             List<Pair<string, int>> list = new List<Pair<string,int>>();
             for (int i = 0; i < 20; i++)
-                list.Add(new Pair<string,int>("Koren", 20 - i));
+                list.Add(new Pair<string,int>("Koren", 2222220 - i));
             return list;
         }
         

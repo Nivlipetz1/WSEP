@@ -22,6 +22,15 @@ namespace WebClient {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// Image1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image Image1;
+        
+        /// <summary>
         /// GrossProfitLabel control.
         /// </summary>
         /// <remarks>
@@ -76,24 +85,6 @@ namespace WebClient {
         protected global::System.Web.UI.WebControls.Table gamesTable;
         
         /// <summary>
-        /// WinRateLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label WinRateLabel;
-        
-        /// <summary>
-        /// ProfitRateLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ProfitRateLabel;
-        
-        /// <summary>
         /// UsernameLabel control.
         /// </summary>
         /// <remarks>
@@ -101,33 +92,6 @@ namespace WebClient {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label UsernameLabel;
-        
-        /// <summary>
-        /// invalidLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label invalidLabel;
-        
-        /// <summary>
-        /// WinRateValueLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label WinRateValueLabel;
-        
-        /// <summary>
-        /// ProfitRateValueLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ProfitRateValueLabel;
         
         /// <summary>
         /// userNameText control.
@@ -146,5 +110,50 @@ namespace WebClient {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button searchButton;
+        
+        /// <summary>
+        /// WinRateLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label WinRateLabel;
+        
+        /// <summary>
+        /// WinRateValueLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label WinRateValueLabel;
+        
+        /// <summary>
+        /// invalidLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label invalidLabel;
+        
+        /// <summary>
+        /// ProfitRateLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ProfitRateLabel;
+        
+        /// <summary>
+        /// ProfitRateValueLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ProfitRateValueLabel;
     }
 }

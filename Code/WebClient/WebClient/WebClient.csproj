@@ -57,6 +57,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\Statistics logo1.png" />
+    <Content Include="Images\table1.png" />
+    <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -71,10 +74,13 @@
     <Content Include="Images\HomeLable.png" />
     <Content Include="Images\Leaderboards logo.png" />
     <Content Include="Images\LOGIN_LOGO_WEB_white.png" />
-    <Content Include="Images\Statistics logo.png" />
-    <Content Include="Images\table.png" />
     <Content Include="LeaderBoardsPage.aspx" />
     <Content Include="HomePage.aspx" />
+    <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.6.4.js" />
+    <Content Include="Scripts\jquery-1.6.4.min.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.2.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.2.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
