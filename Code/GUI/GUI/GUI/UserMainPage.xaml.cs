@@ -61,6 +61,7 @@ namespace GUI
             {
                 await Communication.AuthFunctions.Instance.logout();
                 manager.ClearStatusFrame();
+                manager.isLoggedIn = false;
                 NavigationService.Navigate(new Login(manager));
             }
         }

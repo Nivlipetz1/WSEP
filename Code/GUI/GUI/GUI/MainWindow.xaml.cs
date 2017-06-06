@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -29,15 +30,15 @@ namespace GUI
         }
 
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            /*           if (loggedIn)
+                     if (manager.isLoggedIn)
                        {
-                           Communication.AuthFunctions.Instance.logout(prof.Username);
+                           await Communication.AuthFunctions.Instance.logout();
                        }
-                       loggedIn = false;
-                       */
-           manager.disconnectFromServer();
+            manager.isLoggedIn = false;
+                       
+           //manager.disconnectFromServer();
         }
 
 
