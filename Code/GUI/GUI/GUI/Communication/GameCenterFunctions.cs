@@ -63,6 +63,12 @@ namespace GUI.Communication
             return MoveTypesConverter.deserializeObject<List<List<Move>>>(res);
         }
 
+        public async Task<List<Move>> getReplayByGameId(int gameId)
+        {
+            string res = await gameCenterHubProxy.Invoke<string>("getReplayByGameId");
+            return MoveTypesConverter.deserializeObject<List<Move>>(res);
+        }
+
         public async Task<List<ClientGame>> getAllSpectatingGames()
         {
             return await gameCenterHubProxy.Invoke<List<ClientGame>>("getAllSpectatingGames");

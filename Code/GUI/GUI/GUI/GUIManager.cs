@@ -17,6 +17,7 @@ namespace GUI
     {
         Models.ClientUserProfile profile = null;
         Status status;
+        public bool isLoggedIn = false;
         private MainWindow mainWindow;
         Status statusWindow;
         public GUIManager(MainWindow mainWindow)
@@ -344,6 +345,7 @@ namespace GUI
                 UserMainPage umP = new UserMainPage(this);
                 mainWindow.statusFrame.NavigationService.Navigate(status);
                 mainWindow.mainFrame.NavigationService.Navigate(umP);
+                isLoggedIn = true;
             }
             else
             {
