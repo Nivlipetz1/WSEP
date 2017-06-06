@@ -369,7 +369,7 @@ namespace Gaming
                 Console.WriteLine(index);
                 PlayingUser currentUser = players.ElementAt(index);
                 int minimumBet = GetMaxBet() - playerBets[currentUser];
-                if (currentUser.GetStatus() != "Fold")
+                if (!(currentUser.GetStatus().Equals("Fold") && (currentUser.GetStatus().Equals("Quit")))) //player didn't fold
                 {
                     int bet = players[index].Bet(minimumBet);
                     while (bet < minimumBet && bet >= 0)
@@ -524,6 +524,11 @@ namespace Gaming
             }
             else //in middle of round
             {
+                if (playerHands.ContainsKey(player.GetUserName()))
+                {
+                    playerHands.Remove(player.GetUserName()); //remove this now so that their hand isn't calculated in CA
+                }
+
                 player.SetStatus("Quit");
             }
 
