@@ -232,6 +232,7 @@ namespace GUI
            Models.ClientGame game = await Communication.GameCenterFunctions.Instance.spectateGame(gameID);
             if (game != null)
             {
+                game.InitMessageList(profile.username);
                 AddGame(game);
                 await RefreshProfile();
                 GameFrame gameFrame = new GameFrame(this, game);
@@ -401,7 +402,7 @@ namespace GUI
                 Models.ClientGame game = await Communication.GameCenterFunctions.Instance.joinGame(gameID, credit);
                 if (game != null)
                 {
-                game.InitMessageList(profile.username);
+                    game.InitMessageList(profile.username);
                     AddGame(game);
                     await RefreshProfile();
                     GameFrame gameFrame = new GameFrame(this, game);

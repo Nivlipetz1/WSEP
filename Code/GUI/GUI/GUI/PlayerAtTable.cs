@@ -81,6 +81,7 @@ namespace GUI
             Fold();
             ReSetCards();
             Label.Visibility = Visibility.Hidden;
+            Avatar.Visibility = Visibility.Hidden;
             Username = "";
         }
     }

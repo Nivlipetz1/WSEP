@@ -32,6 +32,7 @@ namespace GUI
         private int potSizeInt = 0;
         private int playerCredit = 0;
         private int playerBet = 0;
+        private bool SpecMode;
 
         public static SoundPlayer snd = new SoundPlayer(Properties.Resources.cardsdealt1);
         public static SoundPlayer snd2 = new SoundPlayer(Properties.Resources.cardsdealt2);
@@ -39,11 +40,16 @@ namespace GUI
         public static SoundPlayer startGameSound = new SoundPlayer(Properties.Resources.TableOpenForBetting);
         public static SoundPlayer WinnerSound = new SoundPlayer(Properties.Resources.WeveGotAWinner);
         public static SoundPlayer LoserSound = new SoundPlayer(Properties.Resources.LoserSound);
+        public static SoundPlayer PlaceBetSound = new SoundPlayer(Properties.Resources.PlaceYourBets);
+        public static SoundPlayer SeeEmSound = new SoundPlayer(Properties.Resources.LetsSeeEm);
+        public static SoundPlayer ChecksSound = new SoundPlayer(Properties.Resources.Check);
+        public static SoundPlayer FoldsSound = new SoundPlayer(Properties.Resources.PlayerFolds);
         public Game(GUIManager manager, int gameID, bool SpecMode)
         {
             InitializeComponent();
             this.manager = manager;
             this.gameID = gameID;
+            this.SpecMode = SpecMode;
             players = new List<PlayerAtTable>();
             players.Add(new PlayerAtTable(player3, Card3, Card4, player3Avatar));
             players.Add(new PlayerAtTable(player4, Card1, Card2, player4Avatar));
@@ -152,11 +158,13 @@ namespace GUI
 
         public void DealCards(Models.PlayerHand hand)
         {
-
-            UserCard1.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.First.toImage(), UriKind.Relative));
-            UserCard2.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.Second.toImage(), UriKind.Relative));
-            UserCard1.Visibility = Visibility.Visible;
-            UserCard2.Visibility = Visibility.Visible;
+            if (!SpecMode)
+            {
+                UserCard1.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.First.toImage(), UriKind.Relative));
+                UserCard2.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.Second.toImage(), UriKind.Relative));
+                UserCard1.Visibility = Visibility.Visible;
+                UserCard2.Visibility = Visibility.Visible;
+            }
             snd.Play();
             MoveCard(Card1, 55, -150);
             MoveCard(Card2, 70, -150);
@@ -178,8 +186,16 @@ namespace GUI
 
         public void PushBetMove(Models.BetMove move)
         {
-            bet_sound.Play();
+            
             int bet = move.GetAmount();
+            if (bet > 0)
+            {
+                bet_sound.Play();
+            }
+            else
+            {
+                ChecksSound.Play();
+            }
             potSizeInt += bet;
             PotSizeLbl.Content = "Pot Size: $" + potSizeInt;
 
@@ -201,12 +217,13 @@ namespace GUI
                     return;
                 }
             }
+
         }
 
 
         public void PushFoldMove(Models.FoldMove move)
         {
-
+            FoldsSound.Play();
             if (move.foldingPlayer.Equals(manager.GetProfile().username))
             {
                 betted.Content = "Folded";
@@ -266,11 +283,13 @@ namespace GUI
 
         public void MyTurn(int minimumBet)
         {
+            PlaceBetSound.Play();
             Bet_Button.IsEnabled = true;
             Fold_Button.IsEnabled = true;
             this.minimumBet = minimumBet;
             MinimumBetLabel.Content = "Minimum Bet: $" + minimumBet;
             ShowBetElements();
+           
         }
 
         public void PushGameStartMove(Models.GameStartMove move)
@@ -281,7 +300,8 @@ namespace GUI
             }
             manager.UpdatePlayerList(gameID,move);
             playerBet = 0;
-            playerCredit = move.playerBets[manager.GetProfile().username];
+            if(!SpecMode)
+                playerCredit = move.playerBets[manager.GetProfile().username];
             RepositionCards();
             foreach (Models.ClientUserProfile prof in RemoveSelfFromPlayersList(manager.GetPlayers(gameID)))
             {
@@ -304,14 +324,19 @@ namespace GUI
             {
                 playerAvatar.Source = image;
             }
-            playerAvatar.Visibility = Visibility.Visible;
-            credit.Content = "Credit: $" + playerCredit;
-            credit.Visibility = Visibility.Visible;
-            betted.Content = "$0";
-            betted.Visibility = Visibility.Visible;
+            if (!SpecMode)
+            {
+                playerAvatar.Visibility = Visibility.Visible;
+                credit.Content = "Credit: $" + playerCredit;
+                credit.Visibility = Visibility.Visible;
+                betted.Content = "$0";
+                betted.Visibility = Visibility.Visible;
+            }
             PotSizeLbl.Content = "Pot Size: $" + potSizeInt;
             PotSizeLbl.Visibility = Visibility.Visible;
             startGameSound.PlaySync();
+            if(SpecMode)
+                DealCards(null);
 
         }
 
@@ -333,6 +358,7 @@ namespace GUI
         //didn't check this..
         public void PushEndGameMove(Models.EndGameMove move)
         {
+            SeeEmSound.PlaySync();
             foreach (PlayerAtTable player in players)
             {
                 foreach (string username in move.handRanks.Keys)
@@ -347,6 +373,56 @@ namespace GUI
                     }
                 }
             }
+            PlayWinnerHandRank(GetHighestHandRank(move));
+        }
+
+        private Models.CardAnalyzer.HandRank GetHighestHandRank(Models.EndGameMove move)
+        {
+            Models.CardAnalyzer.HandRank highestRank = Models.CardAnalyzer.HandRank.HighCard;
+            foreach(string username in move.handRanks.Keys)
+            {
+                if(move.handRanks[username] < highestRank)
+                {
+                    highestRank = move.handRanks[username];
+                }
+            }
+            return highestRank;
+        } 
+
+        private void PlayWinnerHandRank(Models.CardAnalyzer.HandRank rank)
+        {
+            SoundPlayer handRankSound = new SoundPlayer(Properties.Resources.HighCard);
+            switch (rank)
+            {
+                case Models.CardAnalyzer.HandRank.HighCard:
+                    break;
+                case Models.CardAnalyzer.HandRank.OnePair:
+                    handRankSound = new SoundPlayer(Properties.Resources.Pair);
+                    break;
+                case Models.CardAnalyzer.HandRank.TwoPair:
+                    handRankSound = new SoundPlayer(Properties.Resources.TwoPairs);
+                    break;
+                case Models.CardAnalyzer.HandRank.ThreeOfAKind:
+                    handRankSound = new SoundPlayer(Properties.Resources.ThreeOfAKind);
+                    break;
+                case Models.CardAnalyzer.HandRank.Flush:
+                    handRankSound = new SoundPlayer(Properties.Resources.Flush);
+                    break;
+                case Models.CardAnalyzer.HandRank.FullHouse:
+                    handRankSound = new SoundPlayer(Properties.Resources.FullHouse);
+                    break;
+                case Models.CardAnalyzer.HandRank.FourOfAKind:
+                    handRankSound = new SoundPlayer(Properties.Resources.FourOfAKind);
+                    break;
+                case Models.CardAnalyzer.HandRank.RoyalFlush:
+                    handRankSound = new SoundPlayer(Properties.Resources.StraighFlush);
+                    break;
+                case Models.CardAnalyzer.HandRank.StraightFlush:
+                    handRankSound = new SoundPlayer(Properties.Resources.StraighFlush);
+                    break;
+
+            }
+            handRankSound.PlaySync();
         }
 
 

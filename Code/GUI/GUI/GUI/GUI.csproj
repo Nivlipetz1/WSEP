@@ -25,7 +25,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>20</ApplicationRevision>
+    <ApplicationRevision>22</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -363,6 +363,20 @@
     <None Include="Resources\TableOpenForBetting.wav" />
     <None Include="Resources\WeveGotAWinner.wav" />
     <None Include="Resources\LoserSound.wav" />
+    <None Include="Resources\Flush.wav" />
+    <None Include="Resources\FourOfAKind.wav" />
+    <None Include="Resources\FullHouse.wav" />
+    <None Include="Resources\HighCard.wav" />
+    <None Include="Resources\Pair.wav" />
+    <None Include="Resources\StraighFlush.wav" />
+    <None Include="Resources\Straight.wav" />
+    <None Include="Resources\ThreeOfAKind.wav" />
+    <None Include="Resources\TwoPairs.wav" />
+    <None Include="Resources\LetsSeeEm.wav" />
+    <None Include="Resources\PlaceYourBets.wav" />
+    <None Include="Resources\PlayerChecks.wav" />
+    <None Include="Resources\PlayerFolds.wav" />
+    <None Include="Resources\Check.wav" />
     <Content Include="Sounds\cardPlace1.wav" />
   </ItemGroup>
   <ItemGroup>

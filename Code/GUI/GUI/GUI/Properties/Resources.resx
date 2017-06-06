@@ -142,4 +142,46 @@
   <data name="LoserSound" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LoserSound.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Flush" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Flush.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="FourOfAKind" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FourOfAKind.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="FullHouse" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FullHouse.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="HighCard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\HighCard.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Pair" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Pair.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="StraighFlush" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\StraighFlush.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Straight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Straight.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ThreeOfAKind" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ThreeOfAKind.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="TwoPairs" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TwoPairs.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="LetsSeeEm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LetsSeeEm.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PlaceYourBets" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PlaceYourBets.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Check" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Check.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PlayerChecks" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PlayerChecks.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PlayerFolds" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PlayerFolds.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
