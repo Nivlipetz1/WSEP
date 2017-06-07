@@ -77,3 +77,9 @@ D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\
 D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\MongoDB.Driver.xml
 D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\MongoDB.Driver.Core.xml
 D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\MongoDB.Bson.xml
+C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\MongoDB.Bson.dll
+C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\MongoDB.Bson.xml
+C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\MongoDB.Driver.dll
+C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\MongoDB.Driver.Core.dll
+C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\MongoDB.Driver.xml
+C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\MongoDB.Driver.Core.xml

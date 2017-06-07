@@ -71,6 +71,26 @@ namespace GameSystem.Data_Layer
             where logger.gameID == gameId
             select logger).First();
         }
+        public List<UserProfile> getTop20Users(string criterion)
+        {
+            switch (criterion)
+            {
+                case "gamesPlayed":
+                        return (from user in Users.AsQueryable()
+                            let gamesPlayed = user.UserStat.Losses + user.UserStat.Winnings
+                            orderby gamesPlayed
+                            select user).Take(20).ToList();
+                case "CashGain":
+                        return (from user in Users.AsQueryable()
+                                orderby user.UserStat.BiggestWin
+                                select user).Take(20).ToList();
+                case "totalGrossProfit":
+                        return (from user in Users.AsQueryable()
+                            orderby user.UserStat.TotalGrossProfit
+                            select user).Take(20).ToList();
+            }
+            return null;
+        }
     }
 
     public static class DbExtenstion
