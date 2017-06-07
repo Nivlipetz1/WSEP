@@ -85,6 +85,11 @@ namespace Gaming
                 playerBets.Add(player, player.GetCredit());
             }
 
+            foreach (PlayingUser player in players)
+            {
+                player.GainPerRound.Add(0);
+            }
+
             waitingList.Clear();
             updatePlayerBets(0, true);
             //SystemLogger.Log("game started","GameLogs.log");

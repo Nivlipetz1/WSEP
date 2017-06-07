@@ -8,6 +8,7 @@ using Gaming;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.IO;
+using GameSystem.Data_Layer;
 
 namespace GameSystem
 {
@@ -145,6 +146,8 @@ namespace GameSystem
             userStat.TotalGrossProfit += Grosssum;
             UserStat.AvgCashGain = (userStat.AvgCashGain * roundsPlayed + user.GainPerRound.Sum()) / (userStat.Winnings + userStat.Losses);
             userStat.AvgGrossProfit = userStat.TotalGrossProfit / (userStat.Winnings + userStat.Losses);
+            DBConnection.Instance.updateUserProfile(this);
+            
         }
     }
 }
