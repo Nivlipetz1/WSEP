@@ -26,5 +26,6 @@ namespace GameSystem
         bool unknownUserEditLeague(UserProfile user, League league);
 
         League getLeagueByID(int id);
+        List<Move> getReplayByGameId(int gameId);
     }
 }
