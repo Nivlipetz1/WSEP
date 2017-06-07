@@ -78,15 +78,15 @@ namespace GameSystem.Data_Layer
                 case "gamesPlayed":
                         return (from user in Users.AsQueryable()
                             let gamesPlayed = user.UserStat.Losses + user.UserStat.Winnings
-                            orderby gamesPlayed
+                            orderby gamesPlayed descending
                             select user).Take(20).ToList();
                 case "CashGain":
                         return (from user in Users.AsQueryable()
-                                orderby user.UserStat.BiggestWin
+                                orderby user.UserStat.BiggestWin descending
                                 select user).Take(20).ToList();
                 case "totalGrossProfit":
                         return (from user in Users.AsQueryable()
-                            orderby user.UserStat.TotalGrossProfit
+                            orderby user.UserStat.TotalGrossProfit descending
                             select user).Take(20).ToList();
             }
             return null;
