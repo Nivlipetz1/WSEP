@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Gaming;
+using GameSystem.Data_Layer;
 
 namespace GameSystem
 {
@@ -26,15 +27,16 @@ namespace GameSystem
             }
         }
         private Dictionary<String, UserProfile> activeUsers;
-        private Dictionary<String, UserProfile> users;
+
+        private List<UserProfile> users;
         private GameCenter gc;
 
         private TexasHoldemSystem()
         {
             activeUsers = new Dictionary<string, UserProfile>();
-            users = new Dictionary<string, UserProfile>();
+            users = new List<UserProfile>();
             gc = GameCenter.GameCenterFactory.getInstance();
-            gc.setUsers(users.Values);
+            gc.setUsers(activeUsers.Values);
         }
 
         public bool login(string userName, string password)
@@ -60,10 +62,10 @@ namespace GameSystem
             {
                 UserProfile user = new UserProfile(userName, password);
                 user.Credit = 200;
-                users.Add(userName, user);
                 user.League = gc.getLeagueByRank(0);
                 user.League.addUser(user);
-                gc.setUsers(users.Values);
+                users.AddUser(user);
+                //gc.setUsers(users.Values);
             }
             else return false;
 
@@ -73,15 +75,18 @@ namespace GameSystem
 
         public UserProfile getUser(string username, string password)
         {
-            UserProfile u = users[username];
+            UserProfile u = users.GetByName(username);
+            u.League = gc.getLeagueByRank(u.LeagueId);
             if (u.Password.Equals(password))
-                return users[username];
+                return u;
             else
                 throw new Exception("Wrong password");
         }
         public UserProfile getUser(string username)
         {
-            return users[username];
+            UserProfile u= users.GetByName(username); 
+            u.League = gc.getLeagueByRank(u.LeagueId);
+            return u;
         }
 
         public bool editUserName(string userName, UserProfile u)
@@ -89,6 +94,8 @@ namespace GameSystem
             if (activeUsers.ContainsKey(u.Username))
                 u.Username = userName;
             else return false;
+
+            DBConnection.Instance.updateUserProfile(u);
             return true;
         }
 
@@ -97,6 +104,8 @@ namespace GameSystem
             if (activeUsers.ContainsKey(u.Username))
                 u.Password = password;
             else return false;
+
+            DBConnection.Instance.updateUserProfile(u);
             return true;
         }
 
@@ -105,6 +114,8 @@ namespace GameSystem
             if (activeUsers.ContainsKey(u.Username))
                 u.Avatar = avatar;
             else return false;
+
+            DBConnection.Instance.updateUserProfile(u);
             return true;
         }
 
@@ -129,6 +140,11 @@ namespace GameSystem
         public void notify(string userName , string message)
         {
             NotificationService.Instance.notifyUser(userName , message);
+        }
+
+        public List<UserProfile> getTop20(string criterion)
+        {
+            return DBConnection.Instance.getTop20Users(criterion);   
         }
 
         public void clearUsers()

@@ -18,7 +18,7 @@ namespace AT
         GCServiceInterface gc;
         GameService gameService;
         SystemService us;
-        string username = "ohad", password = "123";
+        string username = "ohad", password = "213";
         ClientGame retGame;
         GamePreferences pref;
         [SetUp]
@@ -41,7 +41,6 @@ namespace AT
             GameCenter.GameCenterFactory.clean();
             TexasHoldemSystem.userSystemFactory.clean();
         }
-
         [Test]
 
         public void joinGameTest()

@@ -16,6 +16,7 @@ namespace Gaming
         private int roundsWon;
         private int roundsLost;
         private int biggestPotWon;
+        private List<int> gainPerRound;
 
         public PlayingUser(string name, int credit, Game game) : base (name,game)
         {
@@ -26,6 +27,7 @@ namespace Gaming
             biggestPotWon = 0;
             bestHand = CardAnalyzer.HandRank.HighCard;
             userInput = new UserInput();
+            gainPerRound = new List<int>();
         }
 
         public void SetFakeUserInput(Queue<string> inputs)
@@ -93,6 +95,11 @@ namespace Gaming
         {
             status = st;
         }
+        public List<int> GainPerRound
+        {
+            get { return gainPerRound; }
+            set { gainPerRound = value; }
+        }
 
         public int GetBlind(int amount)
         {
@@ -140,8 +147,11 @@ namespace Gaming
                 status = "AllIn";
             }
 
-            if(betInput>0)
-               credit -= betInput;
+            if (betInput > 0)
+            {
+                credit -= betInput;
+                gainPerRound[gainPerRound.Count-1] -= betInput;
+            }
             return betInput;
         }
 
@@ -165,6 +175,8 @@ namespace Gaming
 
             roundsWon++;
             credit+=amount;
+            gainPerRound[gainPerRound.Count - 1] += amount;
+            
         }
    }
 

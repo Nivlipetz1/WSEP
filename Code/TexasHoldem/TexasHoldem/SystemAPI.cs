@@ -19,5 +19,6 @@ namespace GameSystem
         bool isConnected(string username);
         UserProfile getUser(string username);
         UserProfile getUser(string username, string password);
+        List<UserProfile> getTop20(string criterion);
     }
 }
