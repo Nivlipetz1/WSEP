@@ -63,6 +63,12 @@ namespace GUI.Communication
             return MoveTypesConverter.deserializeObject<List<List<Move>>>(res);
         }
 
+        public async Task<List<Move>> getReplayByGameId(int gameId)
+        {
+            string res = await gameCenterHubProxy.Invoke<string>("getReplayByGameId");
+            return MoveTypesConverter.deserializeObject<List<Move>>(res);
+        }
+
         public async Task<List<ClientGame>> getAllSpectatingGames()
         {
             return await gameCenterHubProxy.Invoke<List<ClientGame>>("getAllSpectatingGames");
@@ -73,9 +79,9 @@ namespace GUI.Communication
             return await gameCenterHubProxy.Invoke<ClientGame>("joinGame", gameId, credit);
         }
 
-        public async Task<bool> spectateGame(int gameId)
+        public async Task<ClientGame> spectateGame(int gameId)
         {
-            return await gameCenterHubProxy.Invoke<bool>("spectateGame", gameId);
+            return await gameCenterHubProxy.Invoke<ClientGame>("spectateGame", gameId);
         }
 
         public async Task<bool> unknownUserEditLeague(int minimumLeagueRank)

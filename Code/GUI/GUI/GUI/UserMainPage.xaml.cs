@@ -27,27 +27,26 @@ namespace GUI
         {
             InitializeComponent();
             this.manager = manager;
+            ShowAvatar();
 
 
         }
 
         public void ShowAvatar()
         {
-            byte[] byte_avatar = manager.GetProfile().avatar;
+            Models.ClientUserProfile prof = manager.GetProfile();
 
-            if (byte_avatar != null)
+            BitmapImage image = manager.getAvatar();
+            if (image != null)
             {
-                var stream = new MemoryStream(byte_avatar);
-                stream.Seek(0, SeekOrigin.Begin);
-                var image = new BitmapImage();
-                image.BeginInit();
-                image.StreamSource = stream;
-                image.EndInit();
-
                 user_avatar.Source = image;
-
             }
+            username.Content = prof.username;
+            credit.Content = "Credit: $" + prof.credit;
+
         }
+
+
 
 
         private void EditProfile_Click(object sender, RoutedEventArgs e)
@@ -62,6 +61,7 @@ namespace GUI
             {
                 await Communication.AuthFunctions.Instance.logout();
                 manager.ClearStatusFrame();
+                manager.isLoggedIn = false;
                 NavigationService.Navigate(new Login(manager));
             }
         }
