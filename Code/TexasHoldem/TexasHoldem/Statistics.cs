@@ -6,6 +6,7 @@ namespace GameSystem
     {
         private int winnings;
         private int losses;
+        private int totalGames;
         private CardAnalyzer.HandRank highestHand;
         private int biggestWin;
         private int biggestWallet;
@@ -46,6 +47,19 @@ namespace GameSystem
             set
             {
                 losses = value;
+            }
+        }
+
+        public int TotalGames
+        {
+            get
+            {
+                return winnings + losses;
+            }
+
+            set
+            {
+                totalGames = value;
             }
         }
 
