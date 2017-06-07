@@ -14,7 +14,7 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\omerh\Desktop\</PublishUrl>
+    <PublishUrl>C:\poker-installer2\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -24,7 +24,8 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
+    <WebPage>publish.htm</WebPage>
+    <ApplicationRevision>22</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -49,6 +50,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.AspNet.SignalR.Client, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.SignalR.Client.2.2.2\lib\net45\Microsoft.AspNet.SignalR.Client.dll</HintPath>
@@ -58,6 +62,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -103,9 +108,15 @@
     <Compile Include="GamePM.xaml.cs">
       <DependentUpon>GamePM.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GameReplayCont.xaml.cs">
+      <DependentUpon>GameReplayCont.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUIManager.cs" />
     <Compile Include="InputDialog.xaml.cs">
       <DependentUpon>InputDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LoadingPage.xaml.cs">
+      <DependentUpon>LoadingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Card.cs" />
     <Compile Include="Models\CardAnalyzer.cs" />
@@ -118,6 +129,7 @@
     <Compile Include="Models\MoveTypesConverters.cs" />
     <Compile Include="Models\PlayerHand.cs" />
     <Compile Include="Models\Statistics.cs" />
+    <Compile Include="PlayerAtTable.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -170,7 +182,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="GameReplayCont.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="InputDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LoadingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -335,6 +355,28 @@
     <Resource Include="Images\Cards\S9.png" />
     <Resource Include="Images\question.png" />
     <None Include="Resources\chaching.wav" />
+    <Resource Include="Images\default_avatar.png" />
+    <Resource Include="Images\loading.gif" />
+    <None Include="Resources\loading.bmp" />
+    <None Include="Resources\loading.gif" />
+    <None Include="Resources\buzzer.wav" />
+    <None Include="Resources\TableOpenForBetting.wav" />
+    <None Include="Resources\WeveGotAWinner.wav" />
+    <None Include="Resources\LoserSound.wav" />
+    <None Include="Resources\Flush.wav" />
+    <None Include="Resources\FourOfAKind.wav" />
+    <None Include="Resources\FullHouse.wav" />
+    <None Include="Resources\HighCard.wav" />
+    <None Include="Resources\Pair.wav" />
+    <None Include="Resources\StraighFlush.wav" />
+    <None Include="Resources\Straight.wav" />
+    <None Include="Resources\ThreeOfAKind.wav" />
+    <None Include="Resources\TwoPairs.wav" />
+    <None Include="Resources\LetsSeeEm.wav" />
+    <None Include="Resources\PlaceYourBets.wav" />
+    <None Include="Resources\PlayerChecks.wav" />
+    <None Include="Resources\PlayerFolds.wav" />
+    <None Include="Resources\Check.wav" />
     <Content Include="Sounds\cardPlace1.wav" />
   </ItemGroup>
   <ItemGroup>

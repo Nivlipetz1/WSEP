@@ -17,15 +17,16 @@ namespace GUI
     {
         Models.ClientUserProfile profile = null;
         Status status;
+        public bool isLoggedIn = false;
         private MainWindow mainWindow;
         Status statusWindow;
-        Dictionary<int, int> mutexLocks = new Dictionary<int, int>();
         public GUIManager(MainWindow mainWindow)
         {
             this.mainWindow = mainWindow;
+            gamesList = new List<ClientGame>();
             this.status = new Status(this);
             gameList = new List<GameFrame>();
-            gamesList = new List<ClientGame>();
+            
             statusWindow = new Status(this);
             Communication.GameFunctions.Instance.serverToClient = this;
             Communication.GameCenterFunctions.Instance.serverToClient = this;
@@ -37,6 +38,7 @@ namespace GUI
 
         public void AddGame(ClientGame game)
         {
+            game.waitingList = new List<ClientUserProfile>();
             gamesList.Add(game);
         }
 
@@ -51,6 +53,16 @@ namespace GUI
             status.AddGameToList(gameFrame.gameID);
         }
 
+        public List<int> GetGameIDList()
+        {
+            List<int> list = new List<int>();
+            foreach(ClientGame game in gamesList)
+            {
+                list.Add(game.id);
+            }
+            return list;
+        }
+
 
         public void RemoveGameFrame(GameFrame gf)
         {
@@ -61,9 +73,50 @@ namespace GUI
             }
         }
 
+        public BitmapImage getAvatar()
+        {
+            byte[] byte_avatar = GetProfile().avatar;
+            BitmapImage image = null;
+            if (byte_avatar != null)
+            {
+                image = LoadImage(byte_avatar);
+            }
+            return image;
+        }
+
+        private static BitmapImage LoadImage(byte[] imageData)
+        {
+            if (imageData == null || imageData.Length == 0) return null;
+            var image = new BitmapImage();
+            using (var mem = new MemoryStream(imageData))
+            {
+                mem.Position = 0;
+                image.BeginInit();
+                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.UriSource = null;
+                image.StreamSource = mem;
+                image.EndInit();
+            }
+            image.Freeze();
+            return image;
+        }
+
+        internal string GetMessages(int gameID,string v)
+        {
+            Models.ClientGame game = findGame(gameID);
+            return game.GetMessages(v);
+        }
+
+        internal List<string> GetUsersForPM(int gameID)
+        {
+            Models.ClientGame game = findGame(gameID);
+            return new List<string>(game.messageList.Keys);
+        }
+
         internal void ConnectToServer()
         {
-        TRY_AGAIN:
+            TRY_AGAIN:
             if (!(Communication.Server.Instance.connect()))
             {
                 MessageBoxResult rs = MessageBox.Show("Could not connect.\nClick Yes to try again or No to quit", "No Connection", MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.No);
@@ -120,12 +173,13 @@ namespace GUI
 
         internal async void EditProfile(string username, string password, BitmapImage avatar,UserMainPage mainPage)
         {
+            string changedString = "";
             bool changed = false;
             if (!password.Equals(""))
             {
                 if (await Communication.AuthFunctions.Instance.editPassword(password))
                 {
-                    MessageBox.Show("Password Changed!");
+                    changedString += "Password Changed!\n";
                     changed = true;
                 }
             }
@@ -133,7 +187,7 @@ namespace GUI
             {
                 if (await Communication.AuthFunctions.Instance.editUserName(username))
                 {
-                    MessageBox.Show("Username Changed!");
+                    changedString += "Username Changed!\n";
                     changed = true;
                 }
             }
@@ -156,8 +210,8 @@ namespace GUI
                 {
                     if (await Communication.AuthFunctions.Instance.editAvatar(data))
                     {
-                        mainPage.ShowAvatar();
-                        MessageBox.Show("Avatar Changed!");
+                        
+                        changedString += "Avatar Changed!\n";
                         changed = true;
 
                     }
@@ -167,8 +221,29 @@ namespace GUI
 
             if (changed)
             {
+                MessageBox.Show(changedString,"Profile Updated",MessageBoxButton.OK,MessageBoxImage.Information);
                 await RefreshProfile();
+                mainPage.ShowAvatar();
                 mainWindow.mainFrame.NavigationService.GoBack();
+            }
+        }
+
+        internal async void JoinGameAsSpectator(int gameID)
+        {
+           Models.ClientGame game = await Communication.GameCenterFunctions.Instance.spectateGame(gameID);
+            if (game != null)
+            {
+                game.InitMessageList(profile.username);
+                AddGame(game);
+                await RefreshProfile();
+                GameFrame gameFrame = new GameFrame(this, game);
+                AddGameFrame(gameFrame);
+                gameFrame.Init(true);
+                NavigateToGameFrame(gameFrame);
+            }
+            else
+            {
+                MessageBox.Show("something went wrong:(");
             }
         }
 
@@ -200,6 +275,15 @@ namespace GUI
             return await Communication.GameFunctions.Instance.postMessage(message, gameID);
         }
 
+        internal async void GetReplay(int gameID)
+        {
+            List<Move> moves = await Communication.GameCenterFunctions.Instance.getReplayByGameId(gameID);
+            GameFrame gf = new GameFrame(this, gameID,moves);
+            AddGameFrame(gf);
+            gf.InitReplay();
+            NavigateToGameFrame(gf);
+        }
+
         internal IEnumerable<ClientUserProfile> GetPlayers(int gameID)
         {
             return findGame(gameID).players;
@@ -225,7 +309,7 @@ namespace GUI
             //while (gameList.Count == 0) ;
             foreach (GameFrame g in gameList)
             {
-                if (g.getGame().id == gameID)
+                if (g.getGameID() == gameID)
                 {
                     gameFrame = g;
                 }
@@ -270,6 +354,7 @@ namespace GUI
                 UserMainPage umP = new UserMainPage(this);
                 mainWindow.statusFrame.NavigationService.Navigate(status);
                 mainWindow.mainFrame.NavigationService.Navigate(umP);
+                isLoggedIn = true;
             }
             else
             {
@@ -279,57 +364,67 @@ namespace GUI
 
         public async Task<bool> SendPMMessage(string to, string message, int gameID)
         {
-            return await Communication.GameFunctions.Instance.postWhisperMessage(to, message, gameID);
+            if(await Communication.GameFunctions.Instance.postWhisperMessage(to, message, gameID))
+            {
+                ClientGame game = findGame(gameID);
+                game.AddMyMessage(to, message);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void NavigateToGameFrame(int selectedIndex)
         {
-            NavigateToGameFrame(gameList[selectedIndex]);
+            GameFrame wantedFrame = null;
+            foreach(GameFrame frame in gameList)
+            {
+                if (frame.gameID == selectedIndex)
+                {
+                    wantedFrame = frame;
+                    break;
+                }
+            }
+            if(wantedFrame!=null)
+                NavigateToGameFrame(wantedFrame);
         }
 
         public void NotifyTurn(int minimumBet, int gameID)
         {
+           // while (mutexLocks[gameID]) ;
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
-                Monitor.Enter(mutexLocks[gameID]);
-                try
-                {
-                    GameFrame wantedFrame = findGameFrame(gameID);
+                
+                GameFrame wantedFrame = findGameFrame(gameID);
                     wantedFrame.GameWindow.MyTurn(minimumBet);
-                }
-                finally
-                {
-                    Monitor.Exit(mutexLocks[gameID]);
-                }
             });
+        }
+
+        internal BitmapImage GetAvatar(int gameID, string username)
+        {
+            ClientGame game = findGame(gameID);
+            return LoadImage(game.GetAvatar(username));
         }
 
         internal async void JoinGame(int gameID, int credit)
         {
-            int mutexLock = new int();
-            mutexLocks.Add(gameID,mutexLock);
-            Monitor.Enter(mutexLocks[gameID]);
-            try
-            {
                 Models.ClientGame game = await Communication.GameCenterFunctions.Instance.joinGame(gameID, credit);
                 if (game != null)
                 {
+                    game.InitMessageList(profile.username);
                     AddGame(game);
                     await RefreshProfile();
                     GameFrame gameFrame = new GameFrame(this, game);
                     AddGameFrame(gameFrame);
-                    gameFrame.Init();
+                    gameFrame.Init(false);
                     NavigateToGameFrame(gameFrame);
                 }
                 else
                 {
                     MessageBox.Show("something went wrong:(");
                 }
-            }
-            finally
-            {
-                Monitor.Exit(mutexLocks[gameID]);
-            }
         }
 
         private void NavigateToGameFrame(GameFrame gameFrame)
@@ -339,18 +434,11 @@ namespace GUI
 
         public void PushHand(Models.PlayerHand hand, int gameID)
         {
+           // while (mutexLocks[gameID]) ;
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
-                Monitor.Enter(mutexLocks[gameID]);
-                try
-                {
-                    GameFrame wantedFrame = findGameFrame(gameID);
+                GameFrame wantedFrame = findGameFrame(gameID);
                     wantedFrame.GameWindow.DealCards(hand);
-                }
-                finally
-                {
-                    Monitor.Exit(mutexLocks[gameID]);
-                }
             });
         }
 
@@ -358,16 +446,8 @@ namespace GUI
         {
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
-                Monitor.Enter(mutexLocks[gameID]);
-                try
-                {
-                    GameFrame gameFrame = findGameFrame(gameID);
+                GameFrame gameFrame = findGameFrame(gameID);
                     gameFrame.GameWindow.PushWinners(winners);
-                }
-                finally
-                {
-                    Monitor.Exit(mutexLocks[gameID]);
-                }
             });
         }
 
@@ -375,18 +455,17 @@ namespace GUI
         {
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
+
                 MessageBox.Show("System Message:\n"+message);
             });
         }
 
         public void PushMoveToGame(Models.Move move, int gameID)
         {
+            //while (mutexLocks[gameID]) ;
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
-                Monitor.Enter(mutexLocks[gameID]);
-                try
-                {
-                    GameFrame wantedFrame = findGameFrame(gameID);
+                GameFrame wantedFrame = findGameFrame(gameID);
                     if (move is Models.BetMove)
                     {
                         wantedFrame.GameWindow.PushBetMove((Models.BetMove)move);
@@ -407,11 +486,6 @@ namespace GUI
                     {
                         wantedFrame.GameWindow.PushEndGameMove((Models.EndGameMove)move);
                     }
-                }
-                finally
-                {
-                    Monitor.Exit(mutexLocks[gameID]);
-                }
         });
         }
 
@@ -425,7 +499,8 @@ namespace GUI
                     RemoveGame(findGame(gameID));
                     RemoveGameFrame(findGameFrame(gameID));
                     await RefreshProfile();
-                    mainWindow.mainFrame.NavigationService.GoBack();
+                    GoToGameCenter();
+                    //mainWindow.mainFrame.NavigationService.GoBack();
              
                 }
                 else
@@ -433,18 +508,25 @@ namespace GUI
             }
         }
 
-        internal async void Bet(int gameID, int amount, int minimumBet, Game gameWindow)
+        internal async void Bet(int gameID, string amount, int minimumBet, Game gameWindow)
         {
-            if (amount >= minimumBet)
+            int betAmount = 0;
+            if (Int32.TryParse(amount,out betAmount) && betAmount >= minimumBet)
             {
-                if (await Communication.GameFunctions.Instance.bet(gameID, amount.ToString()))
+                if (await Communication.GameFunctions.Instance.bet(gameID, betAmount.ToString()))
                 {
                     gameWindow.HideBetElements();
                     //MessageBox.Show("Bet Accepted", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
+                else
+                {
+                    MessageBox.Show("Bet is over your credit! \nplease try again.", "Too Low!", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                
             }
             else
             {
+                
                 MessageBox.Show("Minimum bet is " + minimumBet + "! please try again.", "Too Low!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -463,6 +545,11 @@ namespace GUI
             mainWindow.mainFrame.NavigationService.Navigate(new GameCenter(this));
         }
 
+        internal void GoToUserMainPage()
+        {
+            mainWindow.mainFrame.NavigationService.Navigate(new UserMainPage(this));
+        }
+
         private Status GetStatusFrame()
         {
             return status;
@@ -472,21 +559,11 @@ namespace GUI
         {
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
-                Monitor.Enter(mutexLocks[gameID]);
-                try
-                {
-                    GameFrame gameFrame = findGameFrame(gameID);
+                GameFrame gameFrame = findGameFrame(gameID);
                     if (gameFrame != null)
                     {
-                        gameFrame.GamePM.AddPlayer(prof);
-
-                        gameFrame.getGame().AddPlayer(prof);
+                        gameFrame.getGame().AddPlayerToWaitingList(prof);
                     }
-                }
-                finally
-                {
-                    Monitor.Exit(mutexLocks[gameID]);
-                }
         });
         }
 
@@ -494,34 +571,42 @@ namespace GUI
         {
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
-                Monitor.Enter(mutexLocks[gameId]);
-                try
-                {
-                    GameFrame gameFrame = findGameFrame(gameId);
-                    gameFrame.GamePM.PushMessage(sender, message);
-                }
-                finally
-                {
-                    Monitor.Exit(mutexLocks[gameId]);
-                }
-
+                ClientGame game = findGame(gameId);
+                game.AddMessage(sender, message);
+                GameFrame gameFrame = findGameFrame(gameId);
+                gameFrame.GamePM.PushMessage(sender);
             });
         }
 
         public void PushChatMessage(int gameId, string sender, string message)
         {
+            //while (mutexLocks[gameId]) ;
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
-                Monitor.Enter(mutexLocks[gameId]);
-                try
-                {
-                    GameFrame gameFrame = findGameFrame(gameId);
+                
+                GameFrame gameFrame = findGameFrame(gameId);
                     gameFrame.GameChat.PushMessage(sender, message);
-                }
-                finally
-                {
-                    Monitor.Exit(mutexLocks[gameId]);
-                }
+            });
+        }
+
+        internal void UpdatePlayerList(int gameID, GameStartMove move)
+        {
+            Models.ClientGame game = findGame(gameID);
+            game.UpdatePlayerListFromWaitingList();
+            foreach (Models.ClientUserProfile prof in game.players)
+            {
+                prof.credit = move.playerBets[prof.username];
+            }
+        }
+
+        public void PlayerQuitGame(string player, int gameId)
+        {
+            Dispatcher.CurrentDispatcher.InvokeAsync(() =>
+            {
+                GameFrame gameFrame = findGameFrame(gameId);
+                ClientGame cg = findGame(gameId);
+                gameFrame.RemovePlayer(player);
+                cg.RemovePlayer(player);
             });
         }
     }
