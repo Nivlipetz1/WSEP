@@ -110,6 +110,12 @@ namespace GameSystem.Data_Layer
         {
             return Users.Find(user => user.Username == userName && user.Password == password).Count() > 0;
         }
+
+        public List<int> getAllAvailableReplayes()
+        {
+            return (from replay in Replayes.AsQueryable()
+                    select replay.gameID).ToList();
+        }
     }
 
     public static class DbExtenstion

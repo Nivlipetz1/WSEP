@@ -10,7 +10,7 @@
             width: 805px;
         }
         body { 
-            background-image: url('images/background3.jpg');
+            background-image: url('/images/background3.jpg');
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size:cover; 
@@ -26,12 +26,12 @@
 <body>
     <form id="form1" runat="server" style="width:100%;height:auto; min-width:1000px; min-height:1000px;">
         <div>
-            <asp:ImageButton src="Images/BackButton.png" OnClick="Back_Click" runat="server" style="position:absolute; top: -24px; left: -39px; height: 80px; width: 300px; margin-left: 2px;"  />
-            <asp:ImageButton src="Images/HomeLable.png" OnClick="Back_Click" runat="server"  style="position:absolute; top: 11px; left: 127px; height: 38px; width: 95px;"/>         
+            <asp:ImageButton src="/Images/BackButton.png" OnClick="Back_Click" runat="server" style="position:absolute; top: -24px; left: -39px; height: 80px; width: 300px; margin-left: 2px;"  />
+            <asp:ImageButton src="/Images/HomeLable.png" OnClick="Back_Click" runat="server"  style="position:absolute; top: 11px; left: 127px; height: 38px; width: 95px;"/>         
         </div>
 
         <div style="text-align:center">
-            <asp:Image ID="Image1" runat="server" src="Images/Leaderboards%20logo.png"/>
+            <asp:Image ID="Image1" runat="server" src="/Images/Leaderboards%20logo.png"/>
         </div>
          
         <asp:Table runat="server" HorizontalAlign="Center">
@@ -81,7 +81,7 @@
         
      
         <div style="text-align:center; margin-top:50px;">
-            <img src="Images/Statistics%20logo1.png"/>
+            <img src="/Images/Statistics%20logo1.png"/>
          </div>
 
         <div style="text-align:center">

@@ -182,6 +182,11 @@ namespace GameSystem
             return DBConnection.Instance.getReplayById(gameId).gameMoves;
         }
 
+        public List<int> getAllAvailableReplayes()
+        {
+            return DBConnection.Instance.getAllAvailableReplayes();
+        }
+
         public bool createNewLeague(int minimumRank)
         {
             foreach (League l in leagues.Values)
@@ -284,6 +289,5 @@ namespace GameSystem
                 return leagues[id];
             return null;
         }
-
     }
 }

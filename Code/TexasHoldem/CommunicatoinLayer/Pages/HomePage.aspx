@@ -8,7 +8,7 @@
             width: 805px;
         }
         body { 
-            background-image: url('images/background2.jpg');
+            background-image: url('/images/background2.jpg');
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size:cover; 
@@ -22,7 +22,7 @@
     </script>-->
     <form id="form1" runat="server" style="width:100%;height:auto; min-width:1000px; min-height:1000px;">
         <div style="text-align:center; margin-top:100px">
-            <img style="width:400px; height:100px;" class="auto-style1" src="Images/LOGIN_LOGO_WEB_white.png" />
+            <img style="width:400px; height:100px;" class="auto-style1" src="/Images/LOGIN_LOGO_WEB_white.png" />
         </div>
         
         <div style="text-align:center; margin-top:20px; margin-right:10px">

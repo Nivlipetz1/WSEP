@@ -51,5 +51,10 @@ namespace AT.Stubs
         {
             return null;
         }
+
+        public List<int> getAllAvailableReplayes()
+        {
+            return null;
+        }
     }
 }

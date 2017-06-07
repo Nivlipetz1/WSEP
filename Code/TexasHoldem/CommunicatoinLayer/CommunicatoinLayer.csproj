@@ -117,7 +117,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="HomePage.aspx" />
+    <Content Include="Pages\HomePage.aspx" />
     <Content Include="Images\BackButton.png" />
     <Content Include="Images\background2.jpg" />
     <Content Include="Images\background3.jpg" />
@@ -125,7 +125,7 @@
     <Content Include="Images\Leaderboards logo.png" />
     <Content Include="Images\LOGIN_LOGO_WEB_white.png" />
     <Content Include="Images\Statistics logo1.png" />
-    <Content Include="LeaderBoardsPage.aspx" />
+    <Content Include="Pages\LeaderBoardsPage.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -151,21 +151,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Encryption.cs" />
-    <Compile Include="HomePage.aspx.cs">
+    <Compile Include="Pages\HomePage.aspx.cs">
       <DependentUpon>HomePage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="HomePage.aspx.designer.cs">
+    <Compile Include="Pages\HomePage.aspx.designer.cs">
       <DependentUpon>HomePage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Hubs\AuthHub.cs" />
     <Compile Include="Hubs\GameCenterHub.cs" />
     <Compile Include="Hubs\GameHub.cs" />
-    <Compile Include="LeaderBoardsPage.aspx.cs">
+    <Compile Include="Pages\LeaderBoardsPage.aspx.cs">
       <DependentUpon>LeaderBoardsPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LeaderBoardsPage.aspx.designer.cs">
+    <Compile Include="Pages\LeaderBoardsPage.aspx.designer.cs">
       <DependentUpon>LeaderBoardsPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Managers\AuthManager.cs" />

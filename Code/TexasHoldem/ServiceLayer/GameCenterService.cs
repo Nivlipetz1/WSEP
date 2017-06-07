@@ -58,6 +58,11 @@ namespace ServiceLayer
             return g.GetPlayers().ConvertAll(x => (SpectatingUser)x).Union(g.GetSpectators()).Select(player1 => player1.GetUserName()).ToList();
         }
 
+        public List<int> getAllAvailableReplayes()
+        {
+            return gc.getAllAvailableReplayes();
+        }
+
         public bool unknownUserEditLeague(string userName, int minimumLeagueRank)
         {
             return gc.unknownUserEditLeague(system.getUser(userName), gc.getLeagueByID(minimumLeagueRank));
