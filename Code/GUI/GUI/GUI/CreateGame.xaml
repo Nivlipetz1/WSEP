@@ -9,7 +9,7 @@
       Title="CreateGame">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="./Images/background4.jpg" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="./Images/background3.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
 
         <Label Background="Black" OpacityMask="Black" Opacity="50" Foreground="WhiteSmoke" FontSize="35" FontWeight="Bold" FontStretch="Medium" Content="Create Game" HorizontalAlignment="Left" Margin="296,66,0,0" VerticalAlignment="Top"/>
@@ -21,8 +21,6 @@
         <Label Background="Black" OpacityMask="Black" Opacity="50" Foreground="WhiteSmoke" FontSize="16" FontWeight="Bold" FontStretch="Medium" Content="Type Policy:" HorizontalAlignment="Left" Margin="393,171,0,0" VerticalAlignment="Top"/>
         <Label Background="Black" OpacityMask="Black" Opacity="50" Foreground="WhiteSmoke" FontSize="16" FontWeight="Bold" FontStretch="Medium" Content="Chip Policy:" HorizontalAlignment="Left" Margin="393,233,0,0" VerticalAlignment="Top"/>
         <Label Background="Black" OpacityMask="Black" Opacity="50" Foreground="WhiteSmoke" FontSize="16" FontWeight="Bold" FontStretch="Medium" Content="Buy In Policy:" HorizontalAlignment="Left" Margin="389,290,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="Min_Players" HorizontalAlignment="Left" Height="31" Margin="157,171,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="136"/>
-        <TextBox x:Name="Max_Players" HorizontalAlignment="Left" Height="31" Margin="157,233,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="136"/>
         <TextBox x:Name="Small_Blind" HorizontalAlignment="Left" Height="31" Margin="158,290,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="136"/>
         <TextBox x:Name="Big_Blind" HorizontalAlignment="Left" Height="31" Margin="158,344,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="136"/>
         <CheckBox Name="Allow_Spec" Content="CheckBox" HorizontalAlignment="Left" Height="21" Margin="210,407,0,0" VerticalAlignment="Top" Width="16"/>
@@ -36,6 +34,8 @@
         <TextBox x:Name="Buy_In_Policy" HorizontalAlignment="Left" Height="31" Margin="505,290,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="136"/>
         <Button Name="New_Game"  Content="Create Game" HorizontalAlignment="Left" Margin="357,450,0,0" VerticalAlignment="Top" Width="159" Height="34" Click="New_Game_Click"/>
         <Button x:Name="GoBack"  Content="Go Back" HorizontalAlignment="Left" Margin="185,450,0,0" VerticalAlignment="Top" Width="159" Height="34" Click="GoBack_Click"/>
+        <ComboBox Name="minPlayers" SelectionChanged="minPlayers_SelectionChanged" DropDownOpened="minPlayers_DropDownOpened" HorizontalAlignment="Left" Margin="157,171,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox Name="maxPlayers" HorizontalAlignment="Left" Margin="157,239,0,0" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Page>

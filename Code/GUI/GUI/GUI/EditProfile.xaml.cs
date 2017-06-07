@@ -49,6 +49,7 @@ namespace GUI
             {
                 if (op.CheckFileExists){
                     avatar = new BitmapImage(new Uri(op.FileName, UriKind.Relative));
+                    filename.Text = op.FileName;
                 }
             }
         }

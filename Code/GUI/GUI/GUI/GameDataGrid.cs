@@ -10,6 +10,7 @@ namespace GUI
     {
         public int ID { get; set; }
         public int PlayersInGame { get; set; }
+        public int MinPlayers { get; set; }
         public int MaxPlayers { get; set; }
         public int BigBlind { get; set; }
         public int SmallBlind { get; set; }

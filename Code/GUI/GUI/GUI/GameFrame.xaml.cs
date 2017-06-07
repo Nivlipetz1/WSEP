@@ -25,27 +25,72 @@ namespace GUI
         public Game GameWindow { get; set; }
         public GameChat GameChat { get; set; }
         public GamePM GamePM { get; set; }
+        public GameReplayCont GameReplayCont { get; set; }
         public int gameID { get; set; }
+        private bool initialized = false;
+        private List<Models.Move> moves;
+        private int movesIndex = 0;
         public GameFrame(GUIManager manager, Models.ClientGame game)
         {
             this.manager = manager;
             this.game = game;
-            this.gameID = gameID;
+            this.gameID = game.id;
 
         }
 
-        public void Init()
+        public GameFrame(GUIManager manager, int gameID, List<Models.Move> moves)//USED ONLY FOR REPLAYS
         {
-            InitializeComponent();
-            gameFrame.NavigationService.Navigate(GameWindow = new Game(manager, gameID));
-            chatFrame.NavigationService.Navigate(GameChat = new GameChat(manager, gameID));
-            pmFrame.NavigationService.Navigate(GamePM = new GamePM(manager, gameID));
+            this.manager = manager;
+            this.game = null;
+            this.gameID = gameID;
+            this.moves = moves;
+
+        }
+
+        public void Init(bool SpecMode)
+        {
+            if (!initialized)
+            {
+                initialized = true;
+                InitializeComponent();
+                gameFrame.NavigationService.Navigate(GameWindow = new Game(manager, gameID, SpecMode, false));
+                chatFrame.NavigationService.Navigate(GameChat = new GameChat(manager, gameID));
+                pmFrame.NavigationService.Navigate(GamePM = new GamePM(manager, gameID));
+            }
+        }
+
+        public void InitReplay()
+        {
+            if (!initialized)
+            {
+                initialized = true;
+                InitializeComponent();
+                gameFrame.NavigationService.Navigate(GameWindow = new Game(manager, gameID, true,true));
+                chatFrame.NavigationService.Navigate(GameReplayCont = new GameReplayCont(this));
+            }
+           
         }
 
         public Models.ClientGame getGame()
         {
             return game;
             
+        }
+
+        public int getGameID()
+        {
+            return gameID;
+
+        }
+
+        internal void PushMove()
+        {
+            manager.PushMoveToGame(moves[movesIndex], gameID);
+            movesIndex++;
+            if(movesIndex == moves.Count)
+            {
+                GameReplayCont.DisablePlayButton();
+            }
         }
 
         public override string ToString()
@@ -55,15 +100,15 @@ namespace GUI
 
         internal void RemovePlayer(string username)
         {
-            GamePM.RemovePlayer(username);
+            GamePM.RefreshSelectionList();
             GameWindow.removePlayer(username);
             game.RemovePlayer(username);
         }
 
-        public void AddPlayer(Models.ClientUserProfile profile)
+        /*public void AddPlayer(Models.ClientUserProfile profile)
         {
             game.AddPlayer(profile);
-            GamePM.AddPlayer(profile);
-        }
+            GamePM.RefreshSelectionList();
+        }*/
     }
 }

@@ -21,24 +21,25 @@ namespace GUI
     public partial class Status : Page
     {
         GUIManager manager;
-        private List<int> gameIDList;
+        private List<string> gameIDList;
         public Status(GUIManager manager)
         {
             InitializeComponent();
             this.manager = manager;
-            gameIDList = new List<int>();
+            gameIDList = new List<string>();
+            RefreshGamesList();
         }
 
         public void AddGameToList(int gameID)
         {
-            gameIDList.Add(gameID);
-            GameList.ItemsSource = gameIDList;
+            gameIDList.Add(string.Format("Game {0}",gameID));
+            //GameList.ItemsSource = gameIDList;
         }
 
         public void RemoveGameFromList(int gameID)
         {
-            gameIDList.Remove(gameID);
-            GameList.ItemsSource = gameIDList;
+            gameIDList.Remove(string.Format("Game {0}", gameID));
+            //GameList.ItemsSource = gameIDList;
         }
 
         public void RefreshStatus()
@@ -48,20 +49,24 @@ namespace GUI
             this.username.Content = "Hello " + prof.username;
         }
 
+
+
         private void GoBtn_Click(object sender, RoutedEventArgs e)
         {
-            manager.NavigateToGameFrame(GameList.SelectedIndex);
+            if(!GameList.Text.Equals(""))
+               manager.NavigateToGameFrame(Int32.Parse(GameList.Text.Substring(4)));
         }
 
         private void GameList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            RefreshGamesList();
+            //RefreshGamesList();
         }
 
         private void RefreshGamesList(){
+            
             GameList.Items.Clear();
-            foreach (int gameID in gameIDList)
-                    GameList.Items.Add(gameID);
+            foreach (int gameID in manager.GetGameIDList())
+                    GameList.Items.Add("Game "+gameID);
         }
 
         private void GameList_DropDownOpened(object sender, EventArgs e)

@@ -84,6 +84,7 @@ namespace GUI
                 GameDataGrid gdg = new GameDataGrid { ID = game.id,
                                                       PlayersInGame = game.players.Count,
                                                       MaxPlayers = prefs.maxPlayers,
+                                                      MinPlayers = prefs.minPlayers,
                                                       BigBlind = prefs.bigBlind,
                                                       SmallBlind = prefs.smallBlind,
                                                       SpectatingAllowed = prefs.allowSpectators
@@ -108,7 +109,8 @@ namespace GUI
 
         private void spectateBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            GameDataGrid gdg = (GameDataGrid)Display_game_results.SelectedItem;
+            manager.JoinGameAsSpectator(gdg.ID);
         }
 
         private async void Spec_Click(object sender, RoutedEventArgs e)

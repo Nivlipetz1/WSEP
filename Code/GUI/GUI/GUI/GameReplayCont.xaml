@@ -1,0 +1,17 @@
+﻿<Page x:Class="GUI.GameReplayCont"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GUI"
+      mc:Ignorable="d" 
+      d:DesignHeight="284.5" d:DesignWidth="200"
+      Background="DarkSlateGray"
+      Title="GameReplayCont">
+
+    <Grid>
+        <Label Foreground="AntiqueWhite" FontSize="18" Content="Move #X From #X" HorizontalAlignment="Left" Margin="18,32,0,0" VerticalAlignment="Top" Height="33" Width="152"/>
+        <Button Name="NextMoveBtn" Click="NextMoveBtn_Click" Content="Next Move" FontSize="15" HorizontalAlignment="Left" Margin="18,136,0,0" VerticalAlignment="Top" Width="151"/>
+
+    </Grid>
+</Page>
