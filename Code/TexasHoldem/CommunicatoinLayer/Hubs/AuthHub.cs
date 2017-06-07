@@ -18,9 +18,9 @@ namespace CommunicatoinLayer.Hubs
         public bool login(string userName, string password)
         {
             SystemService userService = new SystemService();
-            if (userService.login(userName, password))
+            if (userService.login(userName, Encryption.CalculateMD5Hash(password)))
             {
-                AuthManager.Instance.Login(userName, password, Context.ConnectionId);
+                AuthManager.Instance.Login(userName, Encryption.CalculateMD5Hash(password), Context.ConnectionId);
                 //await Groups.Add(Context.ConnectionId, "loginUsers");
                 return true;
             }
@@ -31,7 +31,7 @@ namespace CommunicatoinLayer.Hubs
         public bool register(string userName, string password)
         {
             SystemService userService = new SystemService();
-            return userService.register(userName, password);
+            return userService.register(userName, Encryption.CalculateMD5Hash(password));
         }
 
         public ClientUserProfile getClientUser()
@@ -74,7 +74,7 @@ namespace CommunicatoinLayer.Hubs
                 return false;
             string userName = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             SystemService userService = new SystemService();
-            return userService.editPassword(password, userName);
+            return userService.editPassword(Encryption.CalculateMD5Hash(password), userName);
         }
 
         public bool editUserName(string newUserName)

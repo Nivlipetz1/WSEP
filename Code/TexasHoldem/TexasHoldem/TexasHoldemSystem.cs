@@ -142,9 +142,29 @@ namespace GameSystem
             NotificationService.Instance.notifyUser(userName , message);
         }
 
-        public List<UserProfile> getTop20(string criterion)
+        public List<Tuple<string,int>> getTop20(string criterion)
         {
             return DBConnection.Instance.getTop20Users(criterion);   
+        }
+
+        public double getCashGain(string name)
+        {
+            return DBConnection.Instance.getCashGain(name);
+        }
+
+        public double getGrossProfit(string name)
+        {
+            return DBConnection.Instance.getGrossProfit(name);
+        }
+
+        public bool isUserExist(string name)
+        {
+            return DBConnection.Instance.isUserExist(name);
+        }
+
+        public bool checkUserDetails(string userName, string password)
+        {
+            return DBConnection.Instance.checkUserDetails(userName , password);
         }
 
         public void clearUsers()

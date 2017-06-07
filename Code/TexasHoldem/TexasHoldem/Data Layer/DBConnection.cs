@@ -71,25 +71,50 @@ namespace GameSystem.Data_Layer
             where logger.gameID == gameId
             select logger).First();
         }
-        public List<UserProfile> getTop20Users(string criterion)
+        public List<Tuple<string,int>> getTop20Users(string criterion)
         {
             switch (criterion)
             {
                 case "gamesPlayed":
                         return (from user in Users.AsQueryable()
-                            let gamesPlayed = user.UserStat.Losses + user.UserStat.Winnings
-                            orderby gamesPlayed descending
-                            select user).Take(20).ToList();
-                case "CashGain":
+                            orderby user.UserStat.TotalGames descending
+                            select new Tuple<string,int>(user.Username , user.UserStat.Losses + user.UserStat.Winnings)).Take(20).ToList();
+                case "cashGain":
                         return (from user in Users.AsQueryable()
                                 orderby user.UserStat.BiggestWin descending
-                                select user).Take(20).ToList();
+                                select new Tuple<string, int>(user.Username, user.UserStat.BiggestWin)).Take(20).ToList();
                 case "totalGrossProfit":
                         return (from user in Users.AsQueryable()
                             orderby user.UserStat.TotalGrossProfit descending
-                            select user).Take(20).ToList();
+                            select new Tuple<string, int>(user.Username , user.UserStat.TotalGrossProfit)).Take(20).ToList();
             }
             return null;
+        }
+
+        public double getCashGain(string name)
+        {
+            return Users.Find(user => user.Username == name).First().UserStat.AvgCashGain;
+        }
+
+        public double getGrossProfit(string name)
+        {
+            return Users.Find(user => user.Username == name).First().UserStat.AvgGrossProfit;
+        }
+
+        public bool isUserExist(string userName)
+        {
+            return Users.Find(user => user.Username == userName).Count() > 0;
+        }
+
+        public bool checkUserDetails(string userName, string password)
+        {
+            return Users.Find(user => user.Username == userName && user.Password == password).Count() > 0;
+        }
+
+        public List<int> getAllAvailableReplayes()
+        {
+            return (from replay in Replayes.AsQueryable()
+                    select replay.gameID).ToList();
         }
     }
 

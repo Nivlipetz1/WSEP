@@ -10,6 +10,11 @@ namespace AT.Stubs
 {
     class SystemStub : AuthSystemServiceInterface
     {
+        public bool checkUserDetails(string userName, string password)
+        {
+            return true;
+        }
+
         public bool editAvatar(byte[] avatar, string u)
         {
             return true;
@@ -25,9 +30,19 @@ namespace AT.Stubs
             return true;
         }
 
-        public List<ClientUserProfile> getTop20(string criterion)
+        public double getCashGain(string name)
         {
-            return new List<ClientUserProfile>();
+            return 0;
+        }
+
+        public double getGrossProfit(string name)
+        {
+            return 0;
+        }
+
+        public List<Tuple<string,int>> getTop20(string criterion)
+        {
+            return new List<Tuple<string, int>>();
         }
 
         public ClientUserProfile getUser(string username)
@@ -36,6 +51,11 @@ namespace AT.Stubs
         }
 
         public bool isConnected(string username)
+        {
+            return true;
+        }
+
+        public bool isUserExist(string name)
         {
             return true;
         }
