@@ -5,16 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using Gaming;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using System.IO;
 
 namespace GameSystem
 {
     public class UserProfile
     {
+        public ObjectId Id { get; set; }
         private string username;
         private string password;
         private Image avatar;
+        private byte[] avatarContent;
         private int credit;
         private League league;
+        private int leagueId;
         private Statistics userStat;
 
         public string Username
@@ -29,10 +35,33 @@ namespace GameSystem
             set {password = value; }
         }
 
+        [BsonIgnore]
         public Image Avatar
         {
             get {return avatar;}
-            set {avatar = value;}
+            set
+            {
+                avatar = value;
+                if (avatar == null)
+                    return;
+                MemoryStream ms = new MemoryStream();
+                avatar.Save(ms, avatar.RawFormat);
+                avatarContent = ms.ToArray();
+            }
+        }
+
+        public byte[] AvatarContent
+        {
+            get { return avatarContent; }
+            set
+            {
+                avatarContent = value;
+                if (avatarContent == null)
+                    return;
+                MemoryStream ms = new MemoryStream(avatarContent);
+                Image returnImage = Image.FromStream(ms);
+                avatar = returnImage;
+            }
         }
 
         public int Credit
@@ -41,6 +70,7 @@ namespace GameSystem
             set { credit = value; }
         }
 
+        [BsonIgnore]
         public League League
         {
             get
@@ -51,6 +81,20 @@ namespace GameSystem
             set
             {
                 league = value;
+                LeagueId = league.minimumRank;
+            }
+        }
+
+        public int LeagueId
+        {
+            get
+            {
+                return leagueId;
+            }
+
+            set
+            {
+                leagueId = value;
             }
         }
 
@@ -77,13 +121,14 @@ namespace GameSystem
         {
             this.Username = username;
             this.Password = password;
-            this.Avatar = avatar;
+            Avatar = avatar;
             userStat = new Statistics();
         }
 
         public void setUserLeague(League league)
         {
             this.league = league;
+            
         }
 
         public void updateStatistics(PlayingUser user)

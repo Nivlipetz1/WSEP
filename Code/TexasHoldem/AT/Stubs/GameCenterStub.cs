@@ -46,5 +46,10 @@ namespace AT.Stubs
         {
             return null;
         }
+
+        public List<Move> getReplayByGameId(int gameId)
+        {
+            return null;
+        }
     }
 }

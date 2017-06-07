@@ -38,11 +38,11 @@ namespace AT
         [TestCase]
         public void successRegister()
         {
-            Assert.True(us.register("abc", "123"));
-            Assert.True(us.register("bcd", "1!@#sda"));
-            Assert.True(us.register("cde", "dsadasdas"));
-            Assert.True(us.register("def", "AS1 22   4"));
-            Assert.True(us.register("efg", "0"));
+            Assert.True(us.register("myTest"+new Random().Next(100), "123"));
+            Assert.True(us.register("bcd" + new Random().Next(100), "1!@#sda"));
+            Assert.True(us.register("cde" + new Random().Next(100), "dsadasdas"));
+            Assert.True(us.register("def" + new Random().Next(100), "AS1 22   4"));
+            Assert.True(us.register("efg" + new Random().Next(100), "0"));
         }
 
         [TestCase]
