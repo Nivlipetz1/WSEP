@@ -74,23 +74,23 @@ namespace Gaming
 
         public void StartGame()
         {
-            
+            List<PlayingUser> winners = new List<PlayingUser>();
+            List<string> userNames = new List<string>();
+
             gamePref.SetStatus("active");
 
-            while (waitingList.Count > 0)
+            foreach (PlayingUser player in waitingList)
             {
-                foreach (PlayingUser player in waitingList)
-                {
-                    players.Add(player);
-                    playerBets.Add(player, 0);
-                    waitingList.Remove(player);
-                }
+                players.Add(player);
+                playerBets.Add(player, player.GetCredit());
             }
-            
-            //SystemLogger.Log("game started","GameLogs.log");
-            if (gamePref.GetMinPlayers() > GetNumberOfPlayers())
-                throw new InvalidOperationException("Can't start game with less than the minimum number of players");
 
+            waitingList.Clear();
+            updatePlayerBets(0, true);
+            //SystemLogger.Log("game started","GameLogs.log");
+            //if (gamePref.GetMinPlayers() > GetNumberOfPlayers())
+            //   throw new InvalidOperationException("Can't start game with less than the minimum number of players");
+            Thread.Sleep(1000);
             int potInt = pot[0];
             //announce game started
             gameEnded = false;
@@ -98,8 +98,8 @@ namespace Gaming
 
             //send the array of players to all the observers
             PushStartGameMove();
-            Thread.Sleep(3000); //waiting for observers
-
+            //Thread.Sleep(2000); //waiting for observers
+            updatePlayerBets(0, false);
             //request small blind
             PlayingUser smallBlindPlayer = players.ElementAt(0);
             int smallBlindBet = smallBlindPlayer.GetBlind(gamePref.GetsB());
@@ -135,7 +135,10 @@ namespace Gaming
             {
                 GiveWinnings();
                 PushMoveToObservers(new EndGameMove(playerHands));
-                ResetGame();
+                winners = DetermineWinner();
+                userNames = spectators.Union(players).Select(user => user.GetUserName()).ToList();
+                NotificationService.Instance.pushWinners(userNames, winners.Select(winner => winner.GetUserName()).ToList(), id);
+                //ResetGame();
                 goto GameEnd;
             }
 
@@ -152,7 +155,10 @@ namespace Gaming
             {
                 GiveWinnings();
                 PushMoveToObservers(new EndGameMove(playerHands));
-                ResetGame();
+                winners = DetermineWinner();
+                userNames = spectators.Union(players).Select(user => user.GetUserName()).ToList();
+                NotificationService.Instance.pushWinners(userNames, winners.Select(winner => winner.GetUserName()).ToList(), id);
+                //ResetGame();
                 goto GameEnd;
             }
 
@@ -165,7 +171,10 @@ namespace Gaming
             {
                 GiveWinnings();
                 PushMoveToObservers(new EndGameMove(playerHands));
-                ResetGame();
+                winners = DetermineWinner();
+                userNames = spectators.Union(players).Select(user => user.GetUserName()).ToList();
+                NotificationService.Instance.pushWinners(userNames, winners.Select(winner => winner.GetUserName()).ToList(), id);
+                //ResetGame();
                 goto GameEnd;
             }
             cards[4] = gameDeck.DrawTableCard();
@@ -177,14 +186,17 @@ namespace Gaming
             {
                 GiveWinnings();
                 PushMoveToObservers(new EndGameMove(playerHands));
-                ResetGame();
+                winners = DetermineWinner();
+                userNames = spectators.Union(players).Select(user => user.GetUserName()).ToList();
+                NotificationService.Instance.pushWinners(userNames, winners.Select(winner => winner.GetUserName()).ToList(), id);
+                //ResetGame();
                 goto GameEnd;
             }
 
-            
+
             PushMoveToObservers(new EndGameMove(playerHands));
-            List<PlayingUser> winners = DetermineWinner();
-            List<string> userNames = spectators.Union(players).Select(user => user.GetUserName()).ToList();
+            winners = DetermineWinner();
+            userNames = spectators.Union(players).Select(user => user.GetUserName()).ToList();
             NotificationService.Instance.pushWinners(userNames, winners.Select(winner => winner.GetUserName()).ToList(), id);
             foreach (PlayingUser player in winners)
             {
@@ -193,18 +205,19 @@ namespace Gaming
 
             foreach (PlayingUser player in players)
             {
-                if (!winners.Contains(player)){
+                if (!winners.Contains(player))
+                {
                     player.SetRoundsLost(player.GetRoundsLost() + 1);
                 }
             }
 
-            
+
         GameEnd:
+            gamePref.Status = "inactive";
             ResetGame();
-            Thread.Sleep(30000);
+            Thread.Sleep(10000);
             if ((waitingList.Count + playerBets.Count) >= gamePref.GetMinPlayers())
                 StartGame();
-
 
         }
 
@@ -237,11 +250,18 @@ namespace Gaming
             {
                 player.SetStatus("active");
                 playerHands.Remove(player.GetUserName());
-                playerBets[player] = 0;
+                playerBets[player] = player.GetCredit();
             }
 
         }
 
+        private void updatePlayerBets(int amount , bool credit)
+        {
+            foreach(PlayingUser user in players)
+            {
+                playerBets[user] = (credit) ? user.GetCredit() : amount;
+            }
+        }
         private List<PlayingUser> DetermineWinner()
         {
             Dictionary<PlayingUser, CardAnalyzer.HandRank> playerScores = new Dictionary<PlayingUser, CardAnalyzer.HandRank>();
@@ -252,7 +272,7 @@ namespace Gaming
                 {
                     ca.setHand(player.GetHand());
                     playerScores.Add(player, ca.analyze());
-                    if (playerScores[player]< player.GetBestHand())
+                    if (playerScores[player] < player.GetBestHand())
                     {
                         player.SetBestHand(playerScores[player]);
                     }
@@ -320,7 +340,7 @@ namespace Gaming
             IDictionary<string, int> playerBetsString = new Dictionary<string, int>();
             foreach (PlayingUser player in playerBets.Keys)
             {
-                playerBetsString.Add(player.GetUserName(), playerBets[player]);//username
+                playerBetsString.Add(player.GetUserName(), player.GetCredit());//username
             }
             PushMoveToObservers(new GameStartMove(playerBetsString));
         }
@@ -401,8 +421,8 @@ namespace Gaming
 
         private bool EndOfBettingRound()
         {
-            int numOfFoldPlayers=0;
-            int numOfTalkedPlayers=0;
+            int numOfFoldPlayers = 0;
+            int numOfTalkedPlayers = 0;
             foreach (PlayingUser player in players)
             {
                 if (player.GetStatus() == "Active")
@@ -419,12 +439,12 @@ namespace Gaming
                 }
             }
 
-           /* if (numOfTalkedPlayers + numOfFoldPlayers == GetNumberOfPlayers())
-                return true;
-            
-            return false;*/
-           List<int> checkDistinctAmounts = playerBets.Values.ToList().Except(new List<int> { 0 }).Distinct().ToList();
-           return (checkDistinctAmounts.Count == 1);
+            /* if (numOfTalkedPlayers + numOfFoldPlayers == GetNumberOfPlayers())
+                 return true;
+
+             return false;*/
+            List<int> checkDistinctAmounts = playerBets.Values.ToList().Except(new List<int> { 0 }).Distinct().ToList();
+            return (checkDistinctAmounts.Count == 1);
         }
 
         internal void Message(SpectatingUser spectaitngUser, string v)
@@ -445,7 +465,7 @@ namespace Gaming
         {
             //chat.SendMessage(message);
             if (players.Contains(from))
-                return new List<SpectatingUser> {from, to};
+                return new List<SpectatingUser> { from, to };
             else
             {
                 if (spectators.Contains(to))
@@ -468,7 +488,7 @@ namespace Gaming
 
             //player.GetAccount().Credit -= player.GetCredit(); //gamecenter
             players.Add(player);
-            playerBets.Add(player, 0);
+            playerBets.Add(player, player.GetCredit());
             if (players.Count >= gamePref.GetMinPlayers())
             {
                 Thread thread = new Thread(new ThreadStart(StartGame));
@@ -478,7 +498,7 @@ namespace Gaming
 
         public void removeWaitingPlayer(PlayingUser player)
         {
-            if(waitingList.Contains(player))
+            if (waitingList.Contains(player))
                 waitingList.Remove(player);
         }
 
@@ -493,6 +513,7 @@ namespace Gaming
             //player.GetAccount().Credit += player.GetCredit(); //gamecenter
             players.Remove(player);
             playerBets.Remove(player);
+
 
             var e = evt;
             if (e != null)
@@ -568,15 +589,16 @@ namespace Gaming
                 spectator.PushMove(m);
                 userNames.Add(spectator.GetUserName());
             }
-                
+
             foreach (PlayingUser player in players)
             {
                 player.PushMove(m);
                 userNames.Add(player.GetUserName());
             }
 
-            NotificationService.Instance.pushMove(userNames, m , id);
+            NotificationService.Instance.pushMove(userNames, m, id);
             logger.AddMove(m);
+            Thread.Sleep(1000);
         }
 
         public GameLogger GetLogger()
