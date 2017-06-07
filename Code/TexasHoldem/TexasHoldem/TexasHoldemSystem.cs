@@ -131,6 +131,11 @@ namespace GameSystem
             NotificationService.Instance.notifyUser(userName , message);
         }
 
+        public List<UserProfile> getTop20(string criteria)
+        {
+            
+        }
+
         public void clearUsers()
         {
             users.Clear();
