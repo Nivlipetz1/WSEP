@@ -16,6 +16,8 @@
         <DataGrid HorizontalAlignment="Left" Margin="63,105,0,0" VerticalAlignment="Top" Height="224" Width="224"/>
         <Button Name="play" Content="Play Replay" HorizontalAlignment="Left" Margin="343,203,0,0" VerticalAlignment="Top" Width="75" Click="play_Click"/>
         <Label Background="Black" OpacityMask="Black" Opacity="50" Foreground="WhiteSmoke" FontSize="18" FontWeight="Bold" FontStretch="Medium" Content="Select Game:" HorizontalAlignment="Left" Margin="63,66,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="GameIDTxt" HorizontalAlignment="Left" Height="23" Margin="594,129,0,0" TextWrapping="Wrap" Text="Game ID" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Play" Name="playBtn" Click="playBtn_Click"  HorizontalAlignment="Left" Margin="594,170,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </Page>
