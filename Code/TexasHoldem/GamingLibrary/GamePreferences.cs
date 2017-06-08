@@ -40,7 +40,7 @@ namespace Gaming
             buyInPolicy = bIP;
             chipPolicy = cP;
             allowSpectators = aS;
-            status = "init";
+            status = "Init";
         }
 
         //testing
@@ -52,7 +52,7 @@ namespace Gaming
             bigBlind = 10;
             allowSpectators = true;
             buyInPolicy = 50;
-            status = "init";
+            status = "Init";
         }
 
         public string GetStatus()
