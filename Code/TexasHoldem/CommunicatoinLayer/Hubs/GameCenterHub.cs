@@ -43,7 +43,8 @@ namespace CommunicatoinLayer.Hubs
         public string getReplayByGameId(int gameId)
         {
             GameCenterService gc = new GameCenterService();
-            return JsonConvert.SerializeObject(gc.getReplayByGameId(gameId));
+            List<Move> moves = gc.getReplayByGameId(gameId);
+            return JsonConvert.SerializeObject(moves);
         }
 
         public List<int> getAllAvailableReplayes()

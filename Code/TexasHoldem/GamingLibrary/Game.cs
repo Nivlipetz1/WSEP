@@ -253,10 +253,10 @@ namespace Gaming
             players.Remove(dealer);
             players.Insert(players.Count, dealer);
 
+            playerHands = new Dictionary<string, PlayerHand>();
             foreach (PlayingUser player in players)
             {
                 player.SetStatus("active");
-                playerHands.Remove(player.GetUserName());
                 playerBets[player] = player.GetCredit();
             }
 
