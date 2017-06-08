@@ -29,6 +29,9 @@ namespace Gaming
         public delegate void SetHand(string userName, PlayerHand hand , int gameId);
         public static event SetHand setHandEvt;
 
+        public delegate void SaveReplay(GameLogger replay);
+        public static event SaveReplay saveReplayEvt;
+
         private NotificationService()
         {
 
@@ -78,6 +81,13 @@ namespace Gaming
             var e = setHandEvt;
             if (e != null)
                 e(userName, playerHand, gameId);
+        }
+
+        public void saveReplay(GameLogger replay)
+        {
+            var e = saveReplayEvt;
+            if (e != null)
+                e(replay);
         }
     }
 }

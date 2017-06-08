@@ -40,6 +40,18 @@ namespace CommunicatoinLayer.Hubs
             return JsonConvert.SerializeObject(gc.getAllReplayesOfInActiveGames());
         }
 
+        public string getReplayByGameId(int gameId)
+        {
+            GameCenterService gc = new GameCenterService();
+            return JsonConvert.SerializeObject(gc.getReplayByGameId(gameId));
+        }
+
+        public List<int> getAllAvailableReplayes()
+        {
+            GameCenterService gc = new GameCenterService();
+            return gc.getAllAvailableReplayes();
+        }
+
         public List<ClientGame> getAllSpectatingGames()
         {
             GameCenterService gc = new GameCenterService();

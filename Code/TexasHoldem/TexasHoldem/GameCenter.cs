@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Gaming;
 using System.Threading;
+using GameSystem.Data_Layer;
 
 namespace GameSystem
 {
     public class GameCenter : LeagueAPI , GameCenterInterface
     {
         List<Game> games = new List<Game>();
-        private static int GAMEID = 0;
         Dictionary<int, League> leagues = new Dictionary<int, League>();
         private ICollection<UserProfile> Users;
 
@@ -32,13 +32,23 @@ namespace GameSystem
         private GameCenter()
         {
             Users = new List<UserProfile>();
-            leagues.Add(0, new League(0, "League 0"));
+            List<League> l = DBConnection.Instance.getLeagues();
+            foreach(League league in l)
+            {
+                leagues.Add(league.minimumRank, league);
+            }
+            if(!leagues.ContainsKey(0))
+            {
+                League league = new League(0, "deafult league");
+                league.Save();
+                leagues.Add(0, league);
+            }
         }
 
         public Game createGame(GamePreferences preferecnces , UserProfile user)
         {
-            Game game = new Game(GAMEID,preferecnces);
-            GAMEID++;
+            int gameId = DBConnection.Instance.getNewGameId();
+            Game game = new Game(gameId, preferecnces);
             games.Add(game);
             user.League.addGame(game);
             game.evt += updateLeagueToUser;
@@ -167,6 +177,15 @@ namespace GameSystem
             return replayes;
 
         }
+        public List<Move> getReplayByGameId(int gameId)
+        {
+            return DBConnection.Instance.getReplayById(gameId).gameMoves;
+        }
+
+        public List<int> getAllAvailableReplayes()
+        {
+            return DBConnection.Instance.getAllAvailableReplayes();
+        }
 
         public bool createNewLeague(int minimumRank)
         {
@@ -177,6 +196,7 @@ namespace GameSystem
             }
             League league = new League(minimumRank, "League" + leagues.Count);
             leagues.Add(minimumRank, league);
+            league.Save();
             return true;
         }
 

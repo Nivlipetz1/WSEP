@@ -47,6 +47,16 @@ namespace ServiceLayer
             return system.editUserName(newUserName, system.getUser(userName));
         }
 
+        public bool checkUserDetails(string userName, string password)
+        {
+            return system.checkUserDetails(userName, password);
+        }
+
+        public List<Tuple<string,int>> getTop20(string criteria)
+        {
+            return system.getTop20(criteria);
+        }
+
         public ClientUserProfile getUser(string username)
         {
             if(system.isConnected(username))
@@ -87,6 +97,21 @@ namespace ServiceLayer
             if (string.IsNullOrWhiteSpace(password))
                 return false;
             return system.register(userName, password);
+        }
+
+        public double getCashGain(string name)
+        {
+            return system.getCashGain(name);
+        }
+
+        public double getGrossProfit(string name)
+        {
+            return system.getGrossProfit(name);
+        }
+
+        public bool isUserExist(string name)
+        {
+            return system.isUserExist(name);
         }
     }
 }

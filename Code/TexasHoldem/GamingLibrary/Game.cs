@@ -41,7 +41,7 @@ namespace Gaming
             pot = new int[2];
             ca = new CardAnalyzer();
             gamePref = gp;
-            logger = new GameLogger();
+            logger = new GameLogger(id);
             chat = new GameChat(this);
         }
 
@@ -56,7 +56,7 @@ namespace Gaming
             pot = new int[2];
             ca = new CardAnalyzer();
             gamePref = gp;
-            logger = new GameLogger();
+            logger = new GameLogger(id);
             chat = new GameChat(this);
         }
 
@@ -92,6 +92,12 @@ namespace Gaming
                 players.Add(player);
                 playerBets.Add(player, player.GetCredit());
             }
+
+            foreach (PlayingUser player in players)
+            {
+                player.GainPerRound.Add(0);
+            }
+
             waitingList.Clear();
 
             foreach (SpectatingUser spec in specWaitingList)
@@ -215,6 +221,7 @@ namespace Gaming
             foreach (PlayingUser player in winners)
             {
                 player.ReceiveWinnings(pot[0] / winners.Count);
+                
             }
 
             foreach (PlayingUser player in players)
@@ -242,6 +249,7 @@ namespace Gaming
                 if (player.GetStatus() != "Fold")
                 {
                     player.ReceiveWinnings(pot[0]);
+        
                 }
                 else
                 {

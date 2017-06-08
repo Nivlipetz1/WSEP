@@ -34,39 +34,3 @@ C:\Users\user\Google Drive\University\שנה ג\סדנא ליישום פרויק
 C:\Users\user\Google Drive\University\שנה ג\סדנא ליישום פרויקט בהנדסת תוכנה\WSEP\Code\TexasHoldem\AT\bin\Debug\ServiceLayer.dll
 C:\Users\user\Google Drive\University\שנה ג\סדנא ליישום פרויקט בהנדסת תוכנה\WSEP\Code\TexasHoldem\AT\bin\Debug\ServiceLayer.pdb
 C:\Users\user\Google Drive\University\שנה ג\סדנא ליישום פרויקט בהנדסת תוכנה\WSEP\Code\TexasHoldem\AT\obj\Debug\AT.dll
-C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\AT.dll.config
-C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\AT.dll
-C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\AT.pdb
-C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\Gaming.dll
-C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\GamingTests.dll
-C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\Logger.dll
-C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\nunit.framework.dll
-C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\ServiceLayer.dll
-C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\TexasHoldemSystem.exe
-C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\Gaming.pdb
-C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\GamingTests.pdb
-C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\Logger.pdb
-C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\ServiceLayer.pdb
-C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\TexasHoldemSystem.pdb
-C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\bin\Debug\nunit.framework.xml
-C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\obj\Debug\AT.csprojResolveAssemblyReference.cache
-C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\obj\Debug\AT.dll
-C:\Users\pc\Desktop\ohad\סמסטר ו\סדנא לפרויקט\WSEP\Code\TexasHoldem\AT\obj\Debug\AT.pdb
-D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\AT.dll.config
-D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\AT.dll
-D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\AT.pdb
-D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\Gaming.dll
-D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\GamingTests.dll
-D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\Logger.dll
-D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\nunit.framework.dll
-D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\ServiceLayer.dll
-D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\TexasHoldemSystem.exe
-D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\Gaming.pdb
-D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\GamingTests.pdb
-D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\Logger.pdb
-D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\ServiceLayer.pdb
-D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\TexasHoldemSystem.pdb
-D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\bin\Debug\nunit.framework.xml
-D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\obj\Debug\AT.csprojResolveAssemblyReference.cache
-D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\obj\Debug\AT.dll
-D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\obj\Debug\AT.pdb

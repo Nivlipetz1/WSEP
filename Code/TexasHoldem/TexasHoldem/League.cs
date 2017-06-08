@@ -4,15 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Gaming;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Driver;
 
 namespace GameSystem
 {
     public class League
     {
-        int minimumRank;
-        string name; 
-        HashSet<UserProfile> users;
-        Game[] games;
+        [BsonId]
+        public int minimumRank {set;get;}
+        public string name { set; get; }
+        [BsonIgnore]
+        public HashSet<UserProfile> users { set; get; }
+        [BsonIgnore]
+        public Game[] games { set; get; }
 
         public League(int minimumRank,string name)
         {
@@ -29,6 +34,8 @@ namespace GameSystem
 
         public bool addUser(UserProfile user)
         {
+            if (users == null)
+                users = new HashSet<UserProfile>();
             if (users.Contains(user))
                 return false;
             users.Add(user);
@@ -39,11 +46,22 @@ namespace GameSystem
 
         public bool removeUser(UserProfile user)
         {
+            if (users == null)
+                users = new HashSet<UserProfile>();
             if (!users.Contains(user))
                 return false;
             users.Remove(user);
             return true;
         }
+
+        public void addUsers(List<UserProfile> users)
+        {
+            foreach (UserProfile user in users)
+            {
+                addUser(user);
+            }
+        }
+
         public List<UserProfile> update(int newRank)
         {
             List<UserProfile> UserToRemove = new List<UserProfile>();
@@ -71,7 +89,9 @@ namespace GameSystem
 
         public void addGame(Game g)
         {
-            for(int i = 0; i < 50; i++)
+            if (games == null)
+                games = new Game[50];
+            for (int i = 0; i < 50; i++)
             {
                 if(games[i] == null)
                 {
@@ -84,6 +104,8 @@ namespace GameSystem
 
         public void removeGame(int gameID)
         {
+            if (games == null)
+                games = new Game[50];
             games[gameID] = null;
         }
     }

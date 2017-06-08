@@ -19,5 +19,10 @@ namespace GameSystem
         bool isConnected(string username);
         UserProfile getUser(string username);
         UserProfile getUser(string username, string password);
+        List<Tuple<string,int>> getTop20(string criterion);
+        double getCashGain(string name);
+        double getGrossProfit(string name);
+        bool isUserExist(string name);
+        bool checkUserDetails(string userName, string password);
     }
 }

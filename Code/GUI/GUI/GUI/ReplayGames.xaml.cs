@@ -20,9 +20,11 @@ namespace GUI
     /// </summary>
     public partial class ReplayGames : Page
     {
-        public ReplayGames()
+        private GUIManager manager;
+        public ReplayGames(GUIManager manager)
         {
             InitializeComponent();
+            this.manager = manager;
         }
         private void goBack_Click(object sender, RoutedEventArgs e)
         {
@@ -32,6 +34,11 @@ namespace GUI
         private void play_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new ReplayGamePlayback());
+        }
+
+        private void playBtn_Click(object sender, RoutedEventArgs e)
+        {
+            manager.GetReplay(int.Parse(GameIDTxt.Text));
         }
     }
 }

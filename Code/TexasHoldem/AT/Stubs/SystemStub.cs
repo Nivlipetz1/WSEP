@@ -10,6 +10,11 @@ namespace AT.Stubs
 {
     class SystemStub : AuthSystemServiceInterface
     {
+        public bool checkUserDetails(string userName, string password)
+        {
+            return true;
+        }
+
         public bool editAvatar(byte[] avatar, string u)
         {
             return true;
@@ -25,12 +30,32 @@ namespace AT.Stubs
             return true;
         }
 
+        public double getCashGain(string name)
+        {
+            return 0;
+        }
+
+        public double getGrossProfit(string name)
+        {
+            return 0;
+        }
+
+        public List<Tuple<string,int>> getTop20(string criterion)
+        {
+            return new List<Tuple<string, int>>();
+        }
+
         public ClientUserProfile getUser(string username)
         {
             return new ClientUserProfile(new GameSystem.UserProfile(username, "password"));
         }
 
         public bool isConnected(string username)
+        {
+            return true;
+        }
+
+        public bool isUserExist(string name)
         {
             return true;
         }

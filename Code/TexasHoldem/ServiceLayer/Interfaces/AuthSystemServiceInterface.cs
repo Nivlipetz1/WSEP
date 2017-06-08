@@ -24,6 +24,14 @@ namespace ServiceLayer.Interfaces
          bool logout(string u);
 
          bool register(string userName, string password);
-        
+        List<Tuple<string,int>> getTop20(string criteria);
+
+        double getCashGain(string name);
+
+        double getGrossProfit(string name);
+
+        bool isUserExist(string name);
+
+        bool checkUserDetails(string userName, string password);
     }
 }
