@@ -35,9 +35,9 @@ namespace Gaming
             userInput = new FakeInput(inputs);
         }
 
-        public void setInput(string input)
+        public bool setInput(string input)
         {
-            userInput.setInput(input);
+            return userInput.setInput(input);
         }
 
         public int GetRoundsWon()
@@ -128,18 +128,20 @@ namespace Gaming
                     {
                         if (betInput > credit)
                         {
+                            userInput.setAccepted(false);
                             continue;
                         }
                     }
                     else
                     {
+                        userInput.setAccepted(false);
                         continue;
                     }
 
                     break;
                 }
             }
-
+            userInput.setAccepted(true);
             status = "Talked";
 
             if (credit == 0)
@@ -178,7 +180,12 @@ namespace Gaming
             gainPerRound[gainPerRound.Count - 1] += amount;
             
         }
-   }
+
+        internal void SetFoldUserInput()
+        {
+            userInput = new FakeInput("Fold");
+        }
+    }
 
     class FakeInput : UserInputAPI
     {
@@ -187,6 +194,11 @@ namespace Gaming
         public FakeInput(Queue<string> inputs)
         {
             this.inputs = inputs;
+        }
+        public FakeInput(string input)
+        {
+            this.inputs = new Queue<string>();
+            inputs.Enqueue(input);
         }
         public string GetInput()
         {
@@ -197,9 +209,16 @@ namespace Gaming
             return input;
         }
 
-        public void setInput(string minimumBet)
+        public void setAccepted(bool accepted)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+        }
+
+
+        public bool setInput(string minimumBet)
+        {
+            //throw new NotImplementedException();
+            return true;
         }
     }
 

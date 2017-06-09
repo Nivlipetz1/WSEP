@@ -9,6 +9,7 @@ namespace Gaming
     interface UserInputAPI
     {
         string GetInput();
-        void setInput(string minimumBet);
+        bool setInput(string minimumBet);
+        void setAccepted(bool accepted);
     }
 }

@@ -552,6 +552,8 @@ namespace Gaming
                 }
 
                 player.SetStatus("Quit");
+                player.setInput("Fold");
+                player.SetFoldUserInput();
             }
 
             var e = evt;

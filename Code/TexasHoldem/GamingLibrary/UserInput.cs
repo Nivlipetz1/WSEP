@@ -9,19 +9,30 @@ namespace Gaming
     class UserInput : UserInputAPI
     {
         private string amount;
-        private bool hasInputBet = false;
+        private bool hasAnswer = false;
+        private bool betPlaced = false;
+        private bool betAccepted = false;
 
         public string GetInput()
         {
-            while(!hasInputBet);
-            hasInputBet = false;
+            while(!betPlaced);
+            betPlaced = false;
             return amount;
         }
 
-        public void setInput(string minimumBet)
+        public void setAccepted(bool accepted)
+        {
+            betAccepted = accepted;
+            hasAnswer = true;
+        }
+
+        public bool setInput(string minimumBet)
         {
             amount = minimumBet;
-            hasInputBet = true;
+            hasAnswer = false;
+            betPlaced = true;
+            while (!hasAnswer) ;
+            return betAccepted;
         }
     }
 }

@@ -21,8 +21,7 @@ namespace ServiceLayer
             if (game == null)
                 return false;
             PlayingUser player = game.GetPlayers().Where(pu => pu.GetUserName().Equals(user)).First();
-            player.setInput(minimumBet);
-            return true;
+            return player.setInput(minimumBet);
         }
 
         public List<string> removePlayer(string user, int gameID)
