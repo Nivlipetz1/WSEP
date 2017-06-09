@@ -41,6 +41,7 @@ namespace AT
             us.login("abc", "123");
             ClientUserProfile user = us.getUser("abc");
             Assert.True(us.editUserName("aaaaa", user.Username));
+             us.editUserName("abc", "aaaaa");
             
         }
 
@@ -69,6 +70,7 @@ namespace AT
             us.editPassword("124", user.Username);
             us.logout(user.Username);
             Assert.True(us.login("abc", "124"));
+            us.editPassword("123", user.Username);
         }
 
         [TestCase]
@@ -79,12 +81,12 @@ namespace AT
             Assert.False(us.editPassword("", user.Username));
             Assert.False(us.editPassword("    ", user.Username));
         }
-
+/*
         [TestCase]
         public void editAvatar()
         {
             
-            Image avatar = new Bitmap(@"C:\Users\pc\Desktop\Capture.PNG");
+            Image avatar = new Bitmap(@"C:\Users\naordalal\Desktop\Capture.PNG");
             byte[] avatarBytes = ServiceLayer.ImageConverter.imageToByteArray(avatar);
 
             us.login("abc", "123");
@@ -94,5 +96,6 @@ namespace AT
             Image a2 = ServiceLayer.ImageConverter.byteArrayToImage(arr);
             Assert.AreEqual(avatarBytes, arr);
         }
+        */
     }
 }

@@ -40,6 +40,12 @@ namespace CommunicatoinLayer.Hubs
             return JsonConvert.SerializeObject(gc.getAllReplayesOfInActiveGames());
         }
 
+        public string getReplayByGameId(int gameId)
+        {
+            GameCenterService gc = new GameCenterService();
+            return JsonConvert.SerializeObject(gc.getReplayByGameId(gameId));
+        }
+
         public List<ClientGame> getAllSpectatingGames()
         {
             GameCenterService gc = new GameCenterService();
@@ -67,10 +73,10 @@ namespace CommunicatoinLayer.Hubs
             return null;
         }
 
-        public bool spectateGame(int gameId)
+        public ClientGame spectateGame(int gameId)
         {
             if (!AuthManager.Instance.containsConnection(Context.ConnectionId))
-                return false;
+                return null;
             string userName = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             GameCenterService gc = new GameCenterService();
             List<string> usersToSend = new List<string>();
@@ -81,10 +87,10 @@ namespace CommunicatoinLayer.Hubs
                 SystemService userService = new SystemService();
                 ClientUserProfile userProfile =  userService.getUser(userName);
                 Clients.Clients(usersToSend.Select(user => AuthManager.Instance.GetConnectionIdByName(user)).ToList()).spectateGame(gameId, userProfile);
-                return true;
+                return gc.getGameById(gameId);
             }
 
-            return false;
+            return null;
         }
 
         public bool unknownUserEditLeague(int minimumLeagueRank)

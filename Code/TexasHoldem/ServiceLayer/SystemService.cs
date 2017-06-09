@@ -47,6 +47,11 @@ namespace ServiceLayer
             return system.editUserName(newUserName, system.getUser(userName));
         }
 
+        public List<ClientUserProfile> getTop20(string criteria)
+        {
+            return system.getTop20(criteria).Select(user => new ClientUserProfile(user)).ToList();
+        }
+
         public ClientUserProfile getUser(string username)
         {
             if(system.isConnected(username))
@@ -88,5 +93,7 @@ namespace ServiceLayer
                 return false;
             return system.register(userName, password);
         }
+
+
     }
 }

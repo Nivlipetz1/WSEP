@@ -24,6 +24,7 @@ namespace ServiceLayer.Interfaces
          bool logout(string u);
 
          bool register(string userName, string password);
+        List<ClientUserProfile> getTop20(string criteria);
         
     }
 }

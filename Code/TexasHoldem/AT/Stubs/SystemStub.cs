@@ -25,6 +25,11 @@ namespace AT.Stubs
             return true;
         }
 
+        public List<ClientUserProfile> getTop20(string criterion)
+        {
+            return new List<ClientUserProfile>();
+        }
+
         public ClientUserProfile getUser(string username)
         {
             return new ClientUserProfile(new GameSystem.UserProfile(username, "password"));
