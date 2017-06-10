@@ -13,13 +13,13 @@ namespace SystemTests
     public class GameCenterLeagueTest
     {
         GameCenter gc;
-        TexasHoldemSystem us;
+        GameSystem.TexasHoldemSystem us;
 
         [SetUp]
         public void before()
         {
             gc = GameCenter.GameCenterFactory.getInstance();
-            us = TexasHoldemSystem.userSystemFactory.getInstance();
+            us = GameSystem.TexasHoldemSystem.userSystemFactory.getInstance();
             us.register("user", "123");
             us.login("user", "123");
         }

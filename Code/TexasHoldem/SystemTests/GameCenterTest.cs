@@ -9,10 +9,14 @@ using GameSystem;
 
 namespace SystemTests
 {
+
+    [TestFixture]
+
     public class GameCenterTest
     {
+
         private GameCenter gameCenter = GameCenter.GameCenterFactory.getInstance();
-        private TexasHoldemSystem us = GameSystem.TexasHoldemSystem.userSystemFactory.getInstance();
+        private GameSystem.TexasHoldemSystem us = GameSystem.TexasHoldemSystem.userSystemFactory.getInstance();
         private UserProfile user1, user2;
 
         [SetUp]

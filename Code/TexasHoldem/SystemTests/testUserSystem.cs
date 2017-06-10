@@ -14,11 +14,11 @@ namespace SystemTests
 
     public class testUserSystem
     {
-        TexasHoldemSystem us;
+        GameSystem.TexasHoldemSystem us;
         [SetUp]
         public void before()
         {
-            us = TexasHoldemSystem.userSystemFactory.getInstance();
+            us = GameSystem.TexasHoldemSystem.userSystemFactory.getInstance();
         }
 
         [TearDown]

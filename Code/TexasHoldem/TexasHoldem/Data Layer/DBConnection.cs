@@ -32,6 +32,11 @@ namespace GameSystem.Data_Layer
             get { return LazyInstance.Value; }
         }
 
+        public List<UserProfile> GetUsers()
+        {
+            return Users.AsQueryable().ToList();
+        }
+
         public void updateUserProfile(UserProfile user)
         {
             Users.ReplaceOne(
@@ -120,6 +125,20 @@ namespace GameSystem.Data_Layer
 
     public static class DbExtenstion
     {
+        public static Boolean DeleteUser(this List<UserProfile> list, string element)
+        {
+            foreach (UserProfile p in DBConnection.Instance.GetUsers())
+            {
+                if (p.Username.Equals(element))
+                {
+                    DBConnection.Instance.Users.DeleteOne(u => u.Username.Equals(element));
+                    return true;
+                }
+
+            }
+            return false;
+        }
+
         public static void AddUser(this List<UserProfile> list, UserProfile element)
         {
             DBConnection.Instance.Users.InsertOne(element);
