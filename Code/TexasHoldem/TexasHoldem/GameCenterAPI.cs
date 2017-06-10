@@ -27,5 +27,6 @@ namespace GameSystem
 
         League getLeagueByID(int id);
         List<Move> getReplayByGameId(int gameId);
+        List<int> getAllAvailableReplayes();
     }
 }

@@ -47,9 +47,14 @@ namespace ServiceLayer
             return system.editUserName(newUserName, system.getUser(userName));
         }
 
-        public List<ClientUserProfile> getTop20(string criteria)
+        public bool checkUserDetails(string userName, string password)
         {
-            return system.getTop20(criteria).Select(user => new ClientUserProfile(user)).ToList();
+            return system.checkUserDetails(userName, password);
+        }
+
+        public List<Tuple<string,int>> getTop20(string criteria)
+        {
+            return system.getTop20(criteria);
         }
 
         public ClientUserProfile getUser(string username)
@@ -94,6 +99,19 @@ namespace ServiceLayer
             return system.register(userName, password);
         }
 
+        public double getCashGain(string name)
+        {
+            return system.getCashGain(name);
+        }
 
+        public double getGrossProfit(string name)
+        {
+            return system.getGrossProfit(name);
+        }
+
+        public bool isUserExist(string name)
+        {
+            return system.isUserExist(name);
+        }
     }
 }

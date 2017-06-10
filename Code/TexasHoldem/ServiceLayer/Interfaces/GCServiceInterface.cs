@@ -26,5 +26,6 @@ namespace ServiceLayer.Interfaces
         ClientGame getGameById(int gameId);
 
         List<Move> getReplayByGameId(int gameId);
+        List<int> getAllAvailableReplayes();
     }
 }

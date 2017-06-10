@@ -277,6 +277,7 @@ namespace GUI
 
         internal async void GetReplay(int gameID)
         {
+            
             List<Move> moves = await Communication.GameCenterFunctions.Instance.getReplayByGameId(gameID);
             GameFrame gf = new GameFrame(this, gameID,moves);
             AddGameFrame(gf);

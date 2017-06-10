@@ -38,7 +38,7 @@ namespace GUI
 
         private void playBtn_Click(object sender, RoutedEventArgs e)
         {
-            manager.GetReplay(Int32.Parse(GameIDTxt.Text));
+            manager.GetReplay(int.Parse(GameIDTxt.Text));
         }
     }
 }
