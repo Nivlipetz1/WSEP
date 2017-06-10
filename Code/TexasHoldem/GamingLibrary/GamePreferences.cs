@@ -223,7 +223,7 @@ namespace Gaming
             }
         }
 
-        public string Status
+        /*public string Status
         {
             get
             {
@@ -234,7 +234,7 @@ namespace Gaming
             {
                 status = value;
             }
-        }
+        }*/
 
     }
 }

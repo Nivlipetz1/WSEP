@@ -237,10 +237,10 @@ namespace Gaming
 
 
         GameEnd:
-            gamePref.Status = "Inactive";
+            gamePref.SetStatus("Inactive");
             ResetGame();
             Thread.Sleep(10000);
-            if ((waitingList.Count + playerBets.Count) >= gamePref.GetMinPlayers())
+            if ((waitingList.Count + players.Count) >= gamePref.GetMinPlayers())
                 StartGame();
 
         }
@@ -267,15 +267,27 @@ namespace Gaming
             bettingRound = 0;
             cards = null;
             gameDeck = new Deck();
-            PlayingUser dealer = players.First();
-            players.Remove(dealer);
-            players.Insert(players.Count, dealer);
 
-            IEnumerable<PlayingUser> QuitPlayers = players.Where(user => user.GetStatus().Equals("Quit"));
-            foreach(PlayingUser player in QuitPlayers){
+            List<PlayingUser>  quitPlayers = new List<PlayingUser>();
+            foreach(PlayingUser player in players)
+            {
+                if (player.GetStatus().Equals("Quit"))
+                    quitPlayers.Add(player);
+            }
+            foreach (PlayingUser player in quitPlayers)
+            {
                 players.Remove(player);
                 playerBets.Remove(player);
             }
+
+            PlayingUser dealer = players.First();
+            if (dealer != null)
+            {
+                players.Remove(dealer);
+                players.Insert(players.Count, dealer);
+            }
+
+
 
 
             foreach (PlayingUser player in players)
@@ -438,16 +450,6 @@ namespace Gaming
                 {
                     player.SetStatus("Active");
                 }
-                else if (player.GetStatus() == "Quit")
-                {
-                    quitPlayers.Add(player);
-                }
-            }
-
-            foreach(PlayingUser player in quitPlayers)
-            {
-                players.Remove(player);
-                playerBets.Remove(player);
             }
         }
 
@@ -554,7 +556,7 @@ namespace Gaming
             if (!players.Contains(player))
                 throw new InvalidOperationException("Player not in game");
 
-            if (this.gamePref.GetStatus().Equals("Inactive") || this.gamePref.GetStatus().Equals("Init")) //not in middle of round
+            if (gamePref.GetStatus().Equals("Inactive") || gamePref.GetStatus().Equals("Init")) //not in middle of round
             {
                 players.Remove(player);
                 playerBets.Remove(player);
@@ -566,12 +568,12 @@ namespace Gaming
                 player.SetFoldUserInput();
             }
             
-            var e = evt;
+           var e = evt;
             if (e != null)
                 evt(player);
             
 
-            player = null;
+            //player = null;
         }
 
         public void addSpectator(SpectatingUser spec)
