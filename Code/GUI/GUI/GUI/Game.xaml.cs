@@ -160,7 +160,7 @@ namespace GUI
 
         public void DealCards(Models.PlayerHand hand)
         {
-            if (!SpecMode)
+            if (!SpecMode && !ReplayMode)
             {
                 UserCard1.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.First.toImage(), UriKind.Relative));
                 UserCard2.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.Second.toImage(), UriKind.Relative));
@@ -340,6 +340,10 @@ namespace GUI
                             player.Credit = move.playerBets[prof.username];
                             player.SetAvatar(manager.GetAvatar(gameID, prof.username));
                             player.ShowLabels(prof.username);
+                            if (ReplayMode)
+                            {
+                                player.SetCards(move.playerHands[prof.username]);
+                            }
                             break;
                         }
                     }
@@ -363,9 +367,11 @@ namespace GUI
             }
             PotSizeLbl.Content = "Pot Size: $" + potSizeInt;
             PotSizeLbl.Visibility = Visibility.Visible;
-            startGameSound.PlaySync();
-            if(SpecMode && !ReplayMode)
+            startGameSound.PlaySync(); 
+            if (SpecMode || ReplayMode)
                 DealCards(null);
+            
+               
 
         }
 

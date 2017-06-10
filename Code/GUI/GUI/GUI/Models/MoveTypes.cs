@@ -20,10 +20,12 @@ namespace GUI.Models
     public class GameStartMove : Move
     {
         public Dictionary<string, int> playerBets { set; get; }
+        public Dictionary<string, PlayerHand> playerHands { set; get; }
 
-        public GameStartMove(Dictionary<string, int> playerBets)
+        public GameStartMove(Dictionary<string, int> playerBets, Dictionary<string, PlayerHand> playerHands)
         {
             this.playerBets = playerBets;
+            this.playerHands = playerHands;
         }
     }
 
