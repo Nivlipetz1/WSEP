@@ -297,7 +297,7 @@ namespace Gaming
             ca.setCardArray(cards);
             foreach (PlayingUser player in players)
             {
-                if (player.GetStatus() != "Fold")
+                if (!player.GetStatus().Equals("Fold") && !player.GetStatus().Equals("Quit"))
                 {
                     ca.setHand(player.GetHand());
                     playerScores.Add(player, ca.analyze());
@@ -442,7 +442,7 @@ namespace Gaming
 
             foreach (PlayingUser player in playerBets.Keys)
             {
-                if (!player.GetStatus().Equals("Fold"))
+                if (!player.GetStatus().Equals("Fold")|| !player.GetStatus().Equals("Quit"))
                     inc++;
             }
             return (inc == 1);
@@ -546,11 +546,6 @@ namespace Gaming
             }
             else //in middle of round
             {
-                if (playerHands.ContainsKey(player.GetUserName()))
-                {
-                    playerHands.Remove(player.GetUserName()); //remove this now so that their hand isn't calculated in CA
-                }
-
                 player.SetStatus("Quit");
                 player.setInput("Fold");
                 player.SetFoldUserInput();

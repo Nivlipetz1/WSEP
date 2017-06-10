@@ -6,21 +6,27 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_NewBackgroundProfile>True</_NewBackgroundProfile>
+    <_NewBackgroundProfile>False</_NewBackgroundProfile>
     <_PublishTargetUrl>C:\PublishTest</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="ApplicationInsights.config">
-      <publishTime>06/09/2017 22:52:14</publishTime>
+      <publishTime>06/10/2017 20:21:46</publishTime>
     </File>
     <File Include="bin/ApplicationInsights.config">
-      <publishTime>06/09/2017 22:52:14</publishTime>
+      <publishTime>06/10/2017 20:21:46</publishTime>
     </File>
     <File Include="bin/CommunicatoinLayer.dll">
-      <publishTime>06/10/2017 02:41:49</publishTime>
+      <publishTime>06/10/2017 21:48:46</publishTime>
+    </File>
+    <File Include="bin/CommunicatoinLayer.pdb">
+      <publishTime>06/10/2017 21:48:46</publishTime>
     </File>
     <File Include="bin/Gaming.dll">
-      <publishTime>06/10/2017 02:41:46</publishTime>
+      <publishTime>06/10/2017 21:48:43</publishTime>
+    </File>
+    <File Include="bin/Gaming.pdb">
+      <publishTime>06/10/2017 21:48:43</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.SignalR.Core.dll">
       <publishTime>05/04/2017 02:25:34</publishTime>
@@ -53,76 +59,82 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/13/2012 12:19:34</publishTime>
     </File>
     <File Include="bin/ServiceLayer.dll">
-      <publishTime>06/10/2017 02:41:48</publishTime>
+      <publishTime>06/10/2017 21:48:45</publishTime>
     </File>
     <File Include="bin/ServiceLayer.dll.config">
-      <publishTime>06/09/2017 22:47:10</publishTime>
+      <publishTime>06/10/2017 19:46:04</publishTime>
+    </File>
+    <File Include="bin/ServiceLayer.pdb">
+      <publishTime>06/10/2017 21:48:45</publishTime>
     </File>
     <File Include="bin/System.Runtime.InteropServices.RuntimeInformation.dll">
       <publishTime>06/11/2016 23:14:28</publishTime>
     </File>
     <File Include="bin/TexasHoldemSystem.exe">
-      <publishTime>06/10/2017 02:41:47</publishTime>
+      <publishTime>06/10/2017 21:48:44</publishTime>
     </File>
     <File Include="bin/TexasHoldemSystem.exe.config">
-      <publishTime>06/09/2017 22:47:10</publishTime>
+      <publishTime>06/10/2017 19:46:04</publishTime>
+    </File>
+    <File Include="bin/TexasHoldemSystem.pdb">
+      <publishTime>06/10/2017 21:48:44</publishTime>
     </File>
     <File Include="Images/BackButton.png">
-      <publishTime>06/09/2017 22:47:09</publishTime>
+      <publishTime>06/10/2017 19:46:04</publishTime>
     </File>
     <File Include="Images/background2.jpg">
-      <publishTime>06/09/2017 22:47:09</publishTime>
+      <publishTime>06/10/2017 19:46:04</publishTime>
     </File>
     <File Include="Images/background3.jpg">
-      <publishTime>06/09/2017 22:47:09</publishTime>
+      <publishTime>06/10/2017 19:46:04</publishTime>
     </File>
     <File Include="Images/HomeLable.png">
-      <publishTime>06/09/2017 22:47:09</publishTime>
+      <publishTime>06/10/2017 19:46:04</publishTime>
     </File>
     <File Include="Images/Leaderboards logo.png">
-      <publishTime>06/09/2017 22:47:09</publishTime>
+      <publishTime>06/10/2017 19:46:04</publishTime>
     </File>
     <File Include="Images/LOGIN_LOGO_WEB_white.png">
-      <publishTime>06/09/2017 22:47:09</publishTime>
+      <publishTime>06/10/2017 19:46:04</publishTime>
     </File>
     <File Include="Images/Statistics logo1.png">
-      <publishTime>06/09/2017 22:47:09</publishTime>
+      <publishTime>06/10/2017 19:46:04</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>06/09/2017 23:00:10</publishTime>
+      <publishTime>06/10/2017 20:21:46</publishTime>
     </File>
     <File Include="Pages/HomePage.aspx">
-      <publishTime>06/09/2017 22:47:09</publishTime>
+      <publishTime>06/10/2017 19:46:04</publishTime>
     </File>
     <File Include="Pages/LeaderBoardsPage.aspx">
-      <publishTime>06/09/2017 22:47:09</publishTime>
+      <publishTime>06/10/2017 19:46:04</publishTime>
     </File>
     <File Include="Scripts/jquery-3.1.1.js">
-      <publishTime>06/09/2017 22:47:09</publishTime>
+      <publishTime>06/10/2017 19:46:04</publishTime>
     </File>
     <File Include="Scripts/jquery-3.1.1.min.js">
-      <publishTime>06/09/2017 22:47:09</publishTime>
+      <publishTime>06/10/2017 19:46:04</publishTime>
     </File>
     <File Include="Scripts/jquery-3.1.1.min.map">
-      <publishTime>06/09/2017 22:47:09</publishTime>
+      <publishTime>06/10/2017 19:46:04</publishTime>
     </File>
     <File Include="Scripts/jquery-3.1.1.slim.js">
-      <publishTime>06/09/2017 22:47:09</publishTime>
+      <publishTime>06/10/2017 19:46:04</publishTime>
     </File>
     <File Include="Scripts/jquery-3.1.1.slim.min.js">
-      <publishTime>06/09/2017 22:47:09</publishTime>
+      <publishTime>06/10/2017 19:46:04</publishTime>
     </File>
     <File Include="Scripts/jquery-3.1.1.slim.min.map">
-      <publishTime>06/09/2017 22:47:09</publishTime>
+      <publishTime>06/10/2017 19:46:04</publishTime>
     </File>
     <File Include="Scripts/jquery.signalR-2.2.2.js">
-      <publishTime>06/09/2017 22:58:37</publishTime>
+      <publishTime>06/10/2017 19:46:04</publishTime>
     </File>
     <File Include="Scripts/jquery.signalR-2.2.2.min.js">
-      <publishTime>06/09/2017 22:58:37</publishTime>
+      <publishTime>06/10/2017 19:46:04</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/10/2017 02:41:50</publishTime>
+      <publishTime>06/10/2017 21:48:46</publishTime>
     </File>
   </ItemGroup>
 </Project>
