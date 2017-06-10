@@ -295,6 +295,7 @@ namespace GUI
             Fold_Button.IsEnabled = true;
             this.minimumBet = minimumBet;
             MinimumBetLabel.Content = "Minimum Bet: $" + minimumBet;
+            BetAmount.Text = minimumBet.ToString();
             ShowBetElements();
            
         }
@@ -324,6 +325,7 @@ namespace GUI
                             player.Credit = move.playerBets[username];
                             player.SetAvatar(null);
                             player.ShowLabels(username);
+                            //player.SetCards(move.playerHands[username]);
                             break;
                         }
                     }
@@ -340,10 +342,6 @@ namespace GUI
                             player.Credit = move.playerBets[prof.username];
                             player.SetAvatar(manager.GetAvatar(gameID, prof.username));
                             player.ShowLabels(prof.username);
-                            if (ReplayMode)
-                            {
-                                player.SetCards(move.playerHands[prof.username]);
-                            }
                             break;
                         }
                     }

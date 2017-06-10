@@ -605,9 +605,12 @@ namespace GUI
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
                 GameFrame gameFrame = findGameFrame(gameId);
-                ClientGame cg = findGame(gameId);
-                gameFrame.RemovePlayer(player);
-                cg.RemovePlayer(player);
+                if (gameFrame != null)
+                {
+                    ClientGame cg = findGame(gameId);
+                    gameFrame.RemovePlayer(player);
+                    cg.RemovePlayer(player);
+                }
             });
         }
     }
