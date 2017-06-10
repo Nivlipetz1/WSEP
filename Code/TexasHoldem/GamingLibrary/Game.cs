@@ -154,7 +154,7 @@ namespace Gaming
             if (gameEnded) //WAS gameEnded
             {
                 GiveWinnings();
-                PushMoveToObservers(new EndGameMove(playerHands));
+                PushMoveToObservers(new EndGameMove(playerHands),true);
                 winners = DetermineWinner();
                 userNames = spectators.Union(players).Select(user => user.GetUserName()).ToList();
                 NotificationService.Instance.pushWinners(userNames, winners.Select(winner => winner.GetUserName()).ToList(), id);
@@ -168,13 +168,13 @@ namespace Gaming
             cards[1] = flop[1];
             cards[2] = flop[2];
 
-            PushMoveToObservers(new NewCardMove(cards));
+            PushMoveToObservers(new NewCardMove(cards),true);
 
             TraversePlayers(0);
             if (gameEnded)
             {
                 GiveWinnings();
-                PushMoveToObservers(new EndGameMove(playerHands));
+                PushMoveToObservers(new EndGameMove(playerHands),true);
                 winners = DetermineWinner();
                 userNames = spectators.Union(players).Select(user => user.GetUserName()).ToList();
                 NotificationService.Instance.pushWinners(userNames, winners.Select(winner => winner.GetUserName()).ToList(), id);
@@ -184,13 +184,13 @@ namespace Gaming
 
             cards[3] = gameDeck.DrawTableCard();
 
-            PushMoveToObservers(new NewCardMove(cards));
+            PushMoveToObservers(new NewCardMove(cards),true);
 
             TraversePlayers(0);
             if (gameEnded)
             {
                 GiveWinnings();
-                PushMoveToObservers(new EndGameMove(playerHands));
+                PushMoveToObservers(new EndGameMove(playerHands),true);
                 winners = DetermineWinner();
                 userNames = spectators.Union(players).Select(user => user.GetUserName()).ToList();
                 NotificationService.Instance.pushWinners(userNames, winners.Select(winner => winner.GetUserName()).ToList(), id);
@@ -199,13 +199,13 @@ namespace Gaming
             }
             cards[4] = gameDeck.DrawTableCard();
 
-            PushMoveToObservers(new NewCardMove(cards));
+            PushMoveToObservers(new NewCardMove(cards),true);
 
             TraversePlayers(0);
             if (gameEnded)
             {
                 GiveWinnings();
-                PushMoveToObservers(new EndGameMove(playerHands));
+                PushMoveToObservers(new EndGameMove(playerHands),true);
                 winners = DetermineWinner();
                 userNames = spectators.Union(players).Select(user => user.GetUserName()).ToList();
                 NotificationService.Instance.pushWinners(userNames, winners.Select(winner => winner.GetUserName()).ToList(), id);
@@ -214,7 +214,7 @@ namespace Gaming
             }
 
 
-            PushMoveToObservers(new EndGameMove(playerHands));
+            PushMoveToObservers(new EndGameMove(playerHands),true);
             winners = DetermineWinner();
             userNames = spectators.Union(players).Select(user => user.GetUserName()).ToList();
             NotificationService.Instance.pushWinners(userNames, winners.Select(winner => winner.GetUserName()).ToList(), id);
@@ -361,7 +361,7 @@ namespace Gaming
             {
                 playerBetsString.Add(player.GetUserName(), playerBets[player]); //username
             }
-            PushMoveToObservers(new BetMove(playerBetsString, better, amt));
+            PushMoveToObservers(new BetMove(playerBetsString, better, amt),true);
         }
 
         private void PushStartGameMove()
@@ -371,7 +371,7 @@ namespace Gaming
             {
                 playerBetsString.Add(player.GetUserName(), player.GetCredit());//username
             }
-            PushMoveToObservers(new GameStartMove(playerBetsString));
+            PushMoveToObservers(new GameStartMove(playerBetsString),true);
         }
 
         private void PushFoldMove(PlayingUser pl)
@@ -381,7 +381,7 @@ namespace Gaming
             {
                 playerBetsString.Add(player.GetUserName(), playerBets[player]); //username
             }
-            PushMoveToObservers(new FoldMove(playerBetsString, pl));
+            PushMoveToObservers(new FoldMove(playerBetsString, pl),true);
         }
 
         private void TraversePlayers(int index)
@@ -627,7 +627,7 @@ namespace Gaming
             return playersAndHands;
         }
 
-        private void PushMoveToObservers(Move m)
+        private void PushMoveToObservers(Move m,bool sendToLogger)
         {
             List<string> userNames = new List<string>();
             foreach (SpectatingUser spectator in spectators)
@@ -638,12 +638,16 @@ namespace Gaming
 
             foreach (PlayingUser player in players)
             {
-                player.PushMove(m);
-                userNames.Add(player.GetUserName());
+                if (!player.GetStatus().Equals("Quit"))
+                {
+                    player.PushMove(m);
+                    userNames.Add(player.GetUserName());
+                }
             }
 
             NotificationService.Instance.pushMove(userNames, m, id);
-            logger.AddMove(m);
+            if(sendToLogger)
+                logger.AddMove(m);
             Thread.Sleep(1000);
         }
 
