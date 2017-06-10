@@ -35,6 +35,7 @@ namespace Gaming
     public class GameStartMove : Move
     {
         private IDictionary<string, int> playerBets;
+        private IDictionary<string, PlayerHand> playerHands = null;
         
         public GameStartMove(IDictionary<string, int> playerBets)
         {
@@ -42,9 +43,17 @@ namespace Gaming
             base.type = "GameStartMove";
         }
 
+        public GameStartMove(IDictionary<string, int> playerBets, IDictionary<string, PlayerHand> playerHands)
+        {
+            this.playerBets = playerBets;
+            this.playerHands = playerHands;
+            base.type = "GameStartMove";
+        }
+
         public override void update(ref IDictionary<string, int> playerBets, ref Card[] cards, ref IDictionary<string, PlayerHand> playerHands)
         {
             playerBets = this.playerBets;
+            playerHands = this.playerHands;
         }
 
         public IDictionary<string, int> PlayerBets

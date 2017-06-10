@@ -121,6 +121,7 @@ namespace Gaming
                 if (input.Equals("Fold"))
                 {
                     status = "Fold";
+                    userInput.setAccepted(true);
                     return -1;
                 }
                 else{

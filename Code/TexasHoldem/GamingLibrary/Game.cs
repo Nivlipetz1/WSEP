@@ -92,13 +92,17 @@ namespace Gaming
                 players.Add(player);
                 playerBets.Add(player, player.GetCredit());
             }
-
+            waitingList.Clear();
+            playerHands.Clear();
             foreach (PlayingUser player in players)
             {
                 player.GainPerRound.Add(0);
+                PlayerHand ph = gameDeck.drawPlayerHand();
+                player.SetHand(ph);
+                playerHands.Add(player.GetUserName(), ph); //only username
             }
 
-            waitingList.Clear();
+            
 
             foreach (SpectatingUser spec in specWaitingList)
             {
@@ -139,12 +143,11 @@ namespace Gaming
             PushBetMove(bigBlindPlayer, bigBlindBet);
 
             //draw hands
+
             foreach (PlayingUser player in players)
             {
-                PlayerHand ph = gameDeck.drawPlayerHand();
-                player.SetHand(ph);
-                NotificationService.Instance.setHand(player.GetUserName(), ph, id);
-                playerHands.Add(player.GetUserName(), ph); //only username
+                NotificationService.Instance.setHand(player.GetUserName(), player.GetHand(), id);
+
             }
 
 
@@ -371,7 +374,8 @@ namespace Gaming
             {
                 playerBetsString.Add(player.GetUserName(), player.GetCredit());//username
             }
-            PushMoveToObservers(new GameStartMove(playerBetsString),true);
+            PushMoveToObservers(new GameStartMove(playerBetsString),false);
+            logger.AddMove(new GameStartMove(playerBetsString, playerHands));
         }
 
         private void PushFoldMove(PlayingUser pl)
@@ -408,7 +412,8 @@ namespace Gaming
                     {
                         playerBets[currentUser] = 0;
                         playerHands.Remove(currentUser.GetUserName());//username
-                        currentUser.SetStatus("Fold");
+                        if(!currentUser.GetStatus().Equals("Quit"))
+                            currentUser.SetStatus("Fold");
                         PushFoldMove(currentUser);
                     }
 
@@ -426,13 +431,23 @@ namespace Gaming
             }
             pot[0] += bettingRound;
             bettingRound = 0;
-
+            List<PlayingUser> quitPlayers = new List<PlayingUser>();
             foreach (PlayingUser player in players)
             {
                 if (player.GetStatus() == "Talked")
                 {
                     player.SetStatus("Active");
                 }
+                else if (player.GetStatus() == "Quit")
+                {
+                    quitPlayers.Add(player);
+                }
+            }
+
+            foreach(PlayingUser player in quitPlayers)
+            {
+                players.Remove(player);
+                playerBets.Remove(player);
             }
         }
 
@@ -442,7 +457,7 @@ namespace Gaming
 
             foreach (PlayingUser player in playerBets.Keys)
             {
-                if (!player.GetStatus().Equals("Fold")|| !player.GetStatus().Equals("Quit"))
+                if (!player.GetStatus().Equals("Fold") && !player.GetStatus().Equals("Quit"))
                     inc++;
             }
             return (inc == 1);
@@ -550,10 +565,11 @@ namespace Gaming
                 player.setInput("Fold");
                 player.SetFoldUserInput();
             }
-
+            
             var e = evt;
             if (e != null)
                 evt(player);
+            
 
             player = null;
         }
@@ -646,6 +662,18 @@ namespace Gaming
             Thread.Sleep(1000);
         }
 
+
+        public PlayingUser getPlayerByUsername(string username)
+        {
+            PlayingUser wanted_value = null;
+            foreach(PlayingUser player in players)
+            {
+                if (player.GetUserName().Equals(username))
+                    wanted_value = player;
+            }
+            return wanted_value;
+        }
+
         public GameLogger GetLogger()
         {
             return logger;
@@ -653,7 +681,7 @@ namespace Gaming
 
         public List<PlayingUser> GetPlayers()
         {
-            return players.ToList();
+            return players.ToList().Where(sp => !sp.GetStatus().Equals("Quit")).ToList();
         }
 
         public List<SpectatingUser> GetSpectators()

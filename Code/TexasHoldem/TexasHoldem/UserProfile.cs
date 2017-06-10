@@ -68,7 +68,10 @@ namespace GameSystem
         public int Credit
         {
             get { return credit; }
-            set { credit = value; }
+            set {
+                credit = value;
+                DBConnection.Instance.updateUserProfile(this);
+            }
         }
 
         [BsonIgnore]
@@ -144,7 +147,7 @@ namespace GameSystem
             userStat.HighestHand = (userStat.HighestHand < user.GetBestHand()) ? userStat.HighestHand : user.GetBestHand();
             userStat.BiggestWallet = (Credit > userStat.BiggestWallet) ? Credit : userStat.BiggestWallet;
             userStat.TotalGrossProfit += Grosssum;
-            UserStat.AvgCashGain = (userStat.AvgCashGain * roundsPlayed + user.GainPerRound.Sum()) / (userStat.Winnings + userStat.Losses);
+            UserStat.AvgCashGain = (userStat.Winnings + userStat.Losses)==0 ? 0 : (userStat.AvgCashGain * roundsPlayed + user.GainPerRound.Sum()) / (userStat.Winnings + userStat.Losses);
             userStat.AvgGrossProfit = userStat.TotalGrossProfit / (userStat.Winnings + userStat.Losses);
             DBConnection.Instance.updateUserProfile(this);
             
