@@ -448,6 +448,7 @@ namespace GUI
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
                 GameFrame gameFrame = findGameFrame(gameID);
+                
                     gameFrame.GameWindow.PushWinners(winners);
             });
         }
@@ -467,6 +468,8 @@ namespace GUI
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
                 GameFrame wantedFrame = findGameFrame(gameID);
+                if (wantedFrame != null)
+                {
                     if (move is Models.BetMove)
                     {
                         wantedFrame.GameWindow.PushBetMove((Models.BetMove)move);
@@ -487,6 +490,7 @@ namespace GUI
                     {
                         wantedFrame.GameWindow.PushEndGameMove((Models.EndGameMove)move);
                     }
+                }
         });
         }
 
