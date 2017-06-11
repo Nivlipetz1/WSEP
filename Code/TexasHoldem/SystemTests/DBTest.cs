@@ -24,6 +24,7 @@ namespace TexasHoldemSystem.Data_Layer
             userList = db.GetUsers();
             gameReplayList = db.getAllAvailableReplayes();
             leagueList = db.getLeagues();
+            system.register("test123", "123");
 
         }
 
@@ -35,11 +36,32 @@ namespace TexasHoldemSystem.Data_Layer
 
         }
 
+        [Test]
+        public void LoggedInUsersNotDuplicatedInDB()
+        {
+            int count = 0;
+            system.login("test123", "123");
+            UserProfile test123 = system.getUser("test123");
+
+            Assert.True(system.isConnected("test123"));
+
+            foreach (UserProfile p in db.GetUsers())
+            {
+                if (p.Username.Equals(test123.Username))
+                {
+                    count++;
+                }
+            }
+
+            Assert.True(count == 1);
+    
+            system.logout(test123);
+        }
+
 
         [Test]
         public void UserListUpdated()
         {
-            system.register("test123", "123");
             UserProfile test = system.getUser("test123");
             Assert.False(userList.Contains(test));
             bool flag = false;
@@ -64,6 +86,7 @@ namespace TexasHoldemSystem.Data_Layer
             int count = 0;
             system.register("test123", "123");
             system.register("test123", "123");
+            system.register("test123", "123");
             foreach (UserProfile p in db.GetUsers())
             {
                 if (p.Username.Equals("test123"))
@@ -73,7 +96,6 @@ namespace TexasHoldemSystem.Data_Layer
             }
 
             Assert.True(count == 1);
-
         }
 
         [Test]
@@ -108,11 +130,5 @@ namespace TexasHoldemSystem.Data_Layer
             }
 
         }
-
-
-
-
-
-
     }
 }
