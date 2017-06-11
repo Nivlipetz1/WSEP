@@ -1,25 +1,20 @@
 ﻿using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MongoDB.Driver;
 using GameSystem;
 using Gaming;
 using GameSystem.Data_Layer;
-using ServiceLayer;
 
 namespace TexasHoldemSystem.Data_Layer
 {
     [TestFixture]
     public class DBtests
     {
-        DBConnection db = GameSystem.Data_Layer.DBConnection.Instance;
+        DBConnection db = DBConnection.Instance;
         List<int> gameReplayList;
         List<UserProfile> userList;
         List<League> leagueList;
-        SystemService us;
         GameSystem.TexasHoldemSystem system = GameSystem.TexasHoldemSystem.userSystemFactory.getInstance();
 
 
@@ -29,15 +24,15 @@ namespace TexasHoldemSystem.Data_Layer
             userList = db.GetUsers();
             gameReplayList = db.getAllAvailableReplayes();
             leagueList = db.getLeagues();
-            //us = new SystemService();
 
         }
 
         [TearDown]
         public void after()
         {
-            //delete user test123
             DbExtenstion.DeleteUser(db.GetUsers(), "test123");
+            DbExtenstion.DeleteReplay(999);
+
         }
 
 
@@ -66,21 +61,51 @@ namespace TexasHoldemSystem.Data_Layer
         [Test]
         public void RegisterDuplicatedUser()
         {
-//            us.register("test123", "123");
+            int count = 0;
+            system.register("test123", "123");
+            system.register("test123", "123");
+            foreach (UserProfile p in db.GetUsers())
+            {
+                if (p.Username.Equals("test123"))
+                {
+                    count++;
+                }
+            }
 
+            Assert.True(count == 1);
 
         }
 
         [Test]
         public void ReplayListUpdate()
         {
+            Assert.False(gameReplayList.Contains(999));
 
+            Game g = new Game(new GamePreferences());
+            PlayingUser p1 = new PlayingUser("niv",100,g);
+            Dictionary<string, int> playerbets = new Dictionary<string, int>();
+            playerbets.Add(p1.GetUserName(), 10);
+            GameLogger insert = new GameLogger(999);
+
+            insert.AddMove(new GameStartMove(playerbets));
+            Assert.True(db.getAllAvailableReplayes().Contains(999));
+            insert.AddMove(new BetMove(playerbets,p1,10));
+            Assert.True(db.getAllAvailableReplayes().Contains(999));
 
         }
 
         [Test]
-        public void LeaguesListUpdate()
+        public void LeaguesListExists()
         {
+            List<League> leagues= db.getLeagues();
+            if (leagues.Count == 1)
+            {
+                Assert.True(leagues.First().MinimumRank==0);
+            }
+            else if (leagues.Count==0) //no leagues => no users registered
+            {
+                Assert.True(db.GetUsers().Count==0);
+            }
 
         }
 

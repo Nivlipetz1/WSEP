@@ -139,6 +139,22 @@ namespace GameSystem.Data_Layer
             return false;
         }
 
+        public static Boolean DeleteReplay(int replayID)
+        {
+            foreach (int p in DBConnection.Instance.getAllAvailableReplayes())
+            {
+                if (p == replayID)
+                {
+                    DBConnection.Instance.Replayes.DeleteOne(i => i.gameID==replayID);
+                    return true;
+                }
+
+            }
+            return false;
+        }
+
+
+
         public static void AddUser(this List<UserProfile> list, UserProfile element)
         {
             DBConnection.Instance.Users.InsertOne(element);
