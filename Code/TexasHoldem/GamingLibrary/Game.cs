@@ -573,7 +573,7 @@ namespace Gaming
                 evt(player);
             
 
-            //player = null;
+            player = null;
         }
 
         public void addSpectator(SpectatingUser spec)
@@ -683,7 +683,7 @@ namespace Gaming
 
         public List<PlayingUser> GetPlayers()
         {
-            return players.ToList().Where(sp => !sp.GetStatus().Equals("Quit")).ToList();
+            return players.ToList();
         }
 
         public List<SpectatingUser> GetSpectators()
