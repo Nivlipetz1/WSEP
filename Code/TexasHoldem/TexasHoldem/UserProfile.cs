@@ -89,6 +89,7 @@ namespace GameSystem
             {
                 league = value;
                 LeagueId = league.minimumRank;
+                DBConnection.Instance.updateUserProfile(this);
             }
         }
 
@@ -143,15 +144,21 @@ namespace GameSystem
 
             int Grosssum = (from g in user.GainPerRound where g >= 0 select g).Sum();
             int roundsPlayed = userStat.Winnings + userStat.Losses;
-            
+
+            //Leaderboards
             userStat.Winnings += user.GetRoundsWon();
-            userStat.Losses += user.GetRoundsLost();
-            userStat.BiggestWin = (userStat.BiggestWin > user.GetMostWon()) ? userStat.BiggestWin : user.GetMostWon();
-            userStat.HighestHand = (userStat.HighestHand < user.GetBestHand()) ? userStat.HighestHand : user.GetBestHand();
-            userStat.BiggestWallet = (Credit > userStat.BiggestWallet) ? Credit : userStat.BiggestWallet;
+            userStat.Losses += user.GetRoundsLost(); //number of games played
+            
+            userStat.BiggestWin = Math.Max(userStat.BiggestWin, user.GetMostWon()); //highest cash gain
             userStat.TotalGrossProfit += Grosssum;
+            userStat.HighestHand = (userStat.HighestHand < user.GetBestHand()) ? userStat.HighestHand : user.GetBestHand();
+            userStat.BiggestWallet = Math.Max(Credit, userStat.BiggestWallet);
+
+
+            //Userstat            
             UserStat.AvgCashGain = (userStat.AvgCashGain * roundsPlayed + user.GainPerRound.Sum()) / (userStat.Winnings + userStat.Losses);
             userStat.AvgGrossProfit = (userStat.Winnings + userStat.Losses == 0) ? 0 : userStat.TotalGrossProfit / (userStat.Winnings + userStat.Losses);
+
             DBConnection.Instance.updateUserProfile(this);
             
         }

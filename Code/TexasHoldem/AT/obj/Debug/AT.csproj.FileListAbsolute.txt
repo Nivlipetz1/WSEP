@@ -59,3 +59,4 @@ D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\
 D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\obj\Debug\AT.csprojResolveAssemblyReference.cache
 D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\obj\Debug\AT.dll
 D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT\obj\Debug\AT.pdb
+C:\Users\user\Desktop\WSEP\Code\TexasHoldem\AT\obj\Debug\AT.csprojResolveAssemblyReference.cache

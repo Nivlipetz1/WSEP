@@ -40,7 +40,7 @@ namespace GameSystem
                 return false;
             users.Add(user);
             user.League = this;
-            TexasHoldemSystem.userSystemFactory.getInstance().notify(user.Username, "You Added to League " + name + " with rank " + minimumRank + " !");
+            //TexasHoldemSystem.userSystemFactory.getInstance().notify(user.Username, "You Added to League " + name + " with rank " + minimumRank + " !");
             return true;
         }
 

@@ -151,7 +151,7 @@ namespace GameSystem
             if (game.GetNumberOfPlayers() == game.GetGamePref().GetMaxPlayers())
                 return false;
 
-            PlayingUser playingUser = new PlayingUser(u.Username, credit, game);
+            PlayingUser playingUser = new PlayingUser(u.Username, credit - game.GetGamePref().BuyInPolicy, game);
             game.addPlayer(playingUser);
 
             u.UpdateCredit(-credit);
@@ -241,7 +241,7 @@ namespace GameSystem
                     currLeague.removeUser(user);
                     league.addUser(user);
                     user.League = league;
-                    return;
+                    goto End;
                 }
             }
 
@@ -250,6 +250,8 @@ namespace GameSystem
             League l = getLeagueByRank((user.Credit / 1000) * 1000);
             l.addUser(user);
             user.League = l;
+        End:
+            redistributesLeagues();
         }
 
 
@@ -265,13 +267,7 @@ namespace GameSystem
         }
         
         public UserProfile GetUserByName(string username){
-            foreach (UserProfile user in Users)
-            {
-                if (user.Username == username)
-                    return user;
-            }
-
-            return null;
+            return TexasHoldemSystem.userSystemFactory.getInstance().getUser(username);
         }
 
         public bool unknownUserEditLeague(UserProfile user, League league)
@@ -288,6 +284,46 @@ namespace GameSystem
             if(leagues.ContainsKey(id))
                 return leagues[id];
             return null;
+        }
+
+        private void redistributesLeagues()
+        {
+            DBConnection dbcon = DBConnection.Instance;
+            int numberOfUsers = dbcon.GetUsers().Count;
+            int numberOfLeagues = dbcon.getLeagues().Count;
+            double ratioPlayersPerLeague = numberOfUsers / numberOfLeagues;
+            int numberOfLeagues_should = numberOfLeagues;
+
+            if (ratioPlayersPerLeague < 2)
+                numberOfLeagues_should = numberOfUsers / 2;
+            ratioPlayersPerLeague = numberOfUsers / numberOfLeagues_should;
+
+            List<League> leagues = dbcon.getLeagues();
+            for(int i = numberOfLeagues - 1 ; i >= numberOfLeagues - numberOfLeagues_should; i--) {
+                if(ratioPlayersPerLeague - leagues[i].users.Count > 1)
+                    redistributesSpecificLeague(leagues, i, true, (int)Math.Floor(ratioPlayersPerLeague-leagues[i].users.Count), numberOfLeagues_should);
+                if(leagues[i].users.Count - ratioPlayersPerLeague > 1)
+                    redistributesSpecificLeague(leagues, i, false, (int)Math.Floor(leagues[i].users.Count - ratioPlayersPerLeague), numberOfLeagues_should);
+            }
+        }
+        
+        private void redistributesSpecificLeague(List<League> leagues, int leagueIndex, bool isAdd, int numberOfPlayersToMove, int numberOfLeagues)
+        {
+            if (!isAdd)
+            {
+                List<UserProfile> leagueUsers = leagues[leagueIndex].users.OrderBy(user => user.Credit).ToList();
+                leagues[leagueIndex - 1].addUsers(leagueUsers.GetRange(0, numberOfPlayersToMove));
+                return;
+            }
+
+            for (int i = leagueIndex - 1; i >= leagues.Count - numberOfLeagues && numberOfPlayersToMove > 0; i--)
+            {
+                List<UserProfile> leagueUsers = leagues[i].users.OrderBy(user => user.Credit).ToList();
+                int numberOfUserInPreviousLeague = leagueUsers.Count;
+                numberOfUserInPreviousLeague = Math.Min(numberOfUserInPreviousLeague, numberOfPlayersToMove);
+                leagues[leagueIndex].addUsers(leagueUsers.GetRange(leagueUsers.Count - 1 - numberOfUserInPreviousLeague, numberOfUserInPreviousLeague));
+                numberOfPlayersToMove -= numberOfUserInPreviousLeague;
+            }
         }
     }
 }

@@ -205,8 +205,7 @@ namespace Gaming
             NotificationService.Instance.pushWinners(userNames, winners.Select(winner => winner.GetUserName()).ToList(), id);
             foreach (PlayingUser player in winners)
             {
-                player.ReceiveWinnings(pot[0] / winners.Count);
-                
+                player.ReceiveWinnings(pot[0] / winners.Count , playerBets[player]);
             }
 
             foreach (PlayingUser player in players)
@@ -233,7 +232,7 @@ namespace Gaming
             {
                 if (player.GetStatus() != "Fold")
                 {
-                    player.ReceiveWinnings(pot[0]);
+                    player.ReceiveWinnings(pot[0] , playerBets[player]);
         
                 }
                 else
