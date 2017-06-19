@@ -31,7 +31,7 @@ namespace GUI.Models
             bigBlind = 10;
             allowSpectators = true;
             buyInPolicy = 50;
-            status = "Init";
+            status = "init";
         }
 
         public GamePreferences(int maxP,int minP,int sB,int bB,int tP,int bIP,int cP,bool aS)
@@ -42,7 +42,7 @@ namespace GUI.Models
             bigBlind = bB;
             allowSpectators = aS;
             buyInPolicy = buyInPolicy;
-            status = "Init";
+            status = "init";
             chipPolicy = cP;
             typePolicy = tP;
         }
