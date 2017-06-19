@@ -34,10 +34,10 @@ namespace GUI
         {
             if (!message.Text.Equals("") && (users.SelectedValue != null))
             {
-                if(await manager.SendPMMessage(users.SelectedItem as string,message.Text,gameID)){
-                    
+                if (await manager.SendPMMessage(users.SelectedItem as string, message.Text, gameID)) {
+
                     message.Text = "";
-                    messages.Text = manager.GetMessages(gameID,users.SelectedValue.ToString());
+                    messages.Text = manager.GetMessages(gameID, users.SelectedValue.ToString());
                     messages.Focus();
                     messages.CaretIndex = messages.Text.Length;
                     messages.ScrollToEnd();
@@ -48,19 +48,11 @@ namespace GUI
 
         private void users_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string messagesString = manager.GetMessages(gameID,users.SelectedValue.ToString());
+            string messagesString = manager.GetMessages(gameID, users.SelectedValue.ToString());
             messages.Text = messagesString;
             messages.CaretIndex = messages.Text.Length;
             messages.ScrollToEnd();
-        }
-        private void OnKeyDownHandler(object sender, KeyEventArgs e)
-        {
-            if (message.IsKeyboardFocused && e.Key == Key.Enter && !message.Text.Equals(""))
-            {
-                SendMessage_Click(sender, null);
-            }
-        }
-
+        } 
 
         public void PushMessage(string sender)
         {
