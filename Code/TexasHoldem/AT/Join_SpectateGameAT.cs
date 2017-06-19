@@ -65,7 +65,7 @@ namespace AT
             ClientGame g = gc.getAllSpectatingGames()[0];
             int NumberOfPlayersBefore = g.Spectators.Count;
             List<string> spec = null;
-            Assert.NotNull(spec=gc.spectateGame(g.getID(), "abc"));
+            spec = gc.spectateGame(g.getID(), "abc");
             Assert.AreEqual(NumberOfPlayersBefore + 1, spec.Count);
         }
 
@@ -82,7 +82,7 @@ namespace AT
         {
           
             ClientGame g = gc.getActiveGames("preferences", prefs, "abc")[0]; ;
-            Assert.NotNull(gc.joinGame(g.getID(), "ohad", 30));
+            gc.joinGame(g.getID(), "ohad", 30);
             
             List<ClientGame> games = gc.getActiveGames("playerName", "ohad","abc");
             Assert.AreEqual(1,games.Count);
