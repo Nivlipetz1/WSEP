@@ -166,11 +166,11 @@ namespace Gaming
             return Bet(minimumBet);
         }
 
-        internal void ReceiveWinnings(int amount)
+        internal void ReceiveWinnings(int amount , int betInRound)
         {
-            if (amount > biggestPotWon)
+            if (amount - betInRound > biggestPotWon)
             {
-                biggestPotWon = amount;
+                biggestPotWon = amount - betInRound;
             }
 
             roundsWon++;
