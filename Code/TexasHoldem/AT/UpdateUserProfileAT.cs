@@ -16,7 +16,7 @@ namespace AT
 {
     class UpdateUserProfileAT
     {
-       
+
         private AuthSystemServiceInterface us;
         [SetUp]
         public void before()
@@ -41,8 +41,8 @@ namespace AT
             us.login("abc", "123");
             ClientUserProfile user = us.getUser("abc");
             Assert.True(us.editUserName("aaaaa", user.Username));
-             us.editUserName("abc", "aaaaa");
-            
+            us.editUserName("abc", "aaaaa");
+
         }
 
         [TestCase]
@@ -98,21 +98,15 @@ namespace AT
             Assert.False(us.editPassword("    ", user.Username));
             us.logout("abc");
         }
-        /*
-                [TestCase]
-                public void editAvatar()
-                {
+        [TestCase]
+        public void editAvatar()
+        {
+            us.login("abc", "123");
+            ClientUserProfile user = us.getUser("abc");
+            Image avatar = new Bitmap(@"C:\Users\naordalal\Desktop\Capture.PNG");
+            us.editAvatar(ServiceLayer.ImageConverter.imageToByteArray(avatar), "abc");
+            Assert.Equals(ServiceLayer.ImageConverter.imageToByteArray(avatar), user.Avatar);
 
-                    Image avatar = new Bitmap(@"C:\Users\naordalal\Desktop\Capture.PNG");
-                    byte[] avatarBytes = ServiceLayer.ImageConverter.imageToByteArray(avatar);
-
-                    us.login("abc", "123");
-                    ClientUserProfile user = us.getUser("abc");
-                    Assert.True(us.editAvatar(avatarBytes, user.Username));
-                    byte[] arr = ServiceLayer.ImageConverter.imageToByteArray(TexasHoldemSystem.userSystemFactory.getInstance().getUser(user.Username).Avatar);
-                    Image a2 = ServiceLayer.ImageConverter.byteArrayToImage(arr);
-                    Assert.AreEqual(avatarBytes, arr);
-                }
-                */
+        }
     }
 }
