@@ -103,10 +103,17 @@ namespace AT
         {
             us.login("abc", "123");
             ClientUserProfile user = us.getUser("abc");
-            Image avatar = new Bitmap(@"C:\Users\naordalal\Desktop\Capture.PNG");
-            us.editAvatar(ServiceLayer.ImageConverter.imageToByteArray(avatar), "abc");
-            Assert.Equals(ServiceLayer.ImageConverter.imageToByteArray(avatar), user.Avatar);
-
+            try
+            {
+                Image avatar = new Bitmap(Environment.CurrentDirectory+ "\\AT\\avatar.jpg");
+                us.editAvatar(ServiceLayer.ImageConverter.imageToByteArray(avatar), "abc");
+                Assert.AreEqual(ServiceLayer.ImageConverter.imageToByteArray(avatar), user.Avatar);
+            }
+            catch(Exception e)
+            {
+                Exception s = e;
+                Assert.True(false);
+            }
         }
     }
 }
