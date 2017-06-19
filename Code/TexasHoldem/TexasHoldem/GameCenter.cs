@@ -265,13 +265,7 @@ namespace GameSystem
         }
         
         public UserProfile GetUserByName(string username){
-            foreach (UserProfile user in Users)
-            {
-                if (user.Username == username)
-                    return user;
-            }
-
-            return null;
+            return TexasHoldemSystem.userSystemFactory.getInstance().getUser(username);
         }
 
         public bool unknownUserEditLeague(UserProfile user, League league)
