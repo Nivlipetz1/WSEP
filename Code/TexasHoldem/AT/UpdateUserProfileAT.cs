@@ -54,12 +54,21 @@ namespace AT
         }
 
         [TestCase]
-        public void badEditUsername_Loggedin()
+        public void badEditUsername_EmptyUserName_Loggedin()
         {
             us.login("abc", "123");
             ClientUserProfile user = us.getUser("abc");
             Assert.False(us.editUserName("", user.Username));
+            us.logout("abc");
+        }
+
+        [TestCase]
+        public void badEditUsername_OnlySpacesUsername_Loggedin()
+        {
+            us.login("abc", "123");
+            ClientUserProfile user = us.getUser("abc");
             Assert.False(us.editUserName("   ", user.Username));
+            us.logout("abc");
         }
 
         [TestCase]
@@ -74,28 +83,36 @@ namespace AT
         }
 
         [TestCase]
-        public void badEditPassword()
+        public void badEditPassword_emptyPassword()
         {
             us.login("abc", "123");
             ClientUserProfile user = us.getUser("abc");
             Assert.False(us.editPassword("", user.Username));
-            Assert.False(us.editPassword("    ", user.Username));
+            us.logout("abc");
         }
-/*
         [TestCase]
-        public void editAvatar()
+        public void badEditPassword_onlySpacesPassword()
         {
-            
-            Image avatar = new Bitmap(@"C:\Users\naordalal\Desktop\Capture.PNG");
-            byte[] avatarBytes = ServiceLayer.ImageConverter.imageToByteArray(avatar);
-
             us.login("abc", "123");
             ClientUserProfile user = us.getUser("abc");
-            Assert.True(us.editAvatar(avatarBytes, user.Username));
-            byte[] arr = ServiceLayer.ImageConverter.imageToByteArray(TexasHoldemSystem.userSystemFactory.getInstance().getUser(user.Username).Avatar);
-            Image a2 = ServiceLayer.ImageConverter.byteArrayToImage(arr);
-            Assert.AreEqual(avatarBytes, arr);
+            Assert.False(us.editPassword("    ", user.Username));
+            us.logout("abc");
         }
-        */
+        /*
+                [TestCase]
+                public void editAvatar()
+                {
+
+                    Image avatar = new Bitmap(@"C:\Users\naordalal\Desktop\Capture.PNG");
+                    byte[] avatarBytes = ServiceLayer.ImageConverter.imageToByteArray(avatar);
+
+                    us.login("abc", "123");
+                    ClientUserProfile user = us.getUser("abc");
+                    Assert.True(us.editAvatar(avatarBytes, user.Username));
+                    byte[] arr = ServiceLayer.ImageConverter.imageToByteArray(TexasHoldemSystem.userSystemFactory.getInstance().getUser(user.Username).Avatar);
+                    Image a2 = ServiceLayer.ImageConverter.byteArrayToImage(arr);
+                    Assert.AreEqual(avatarBytes, arr);
+                }
+                */
     }
 }
