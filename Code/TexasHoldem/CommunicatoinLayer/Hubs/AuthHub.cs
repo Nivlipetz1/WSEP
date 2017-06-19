@@ -83,7 +83,13 @@ namespace CommunicatoinLayer.Hubs
                 return false;
             string userName = AuthManager.Instance.GetNameByConnectionId(Context.ConnectionId);
             SystemService userService = new SystemService();
-            return userService.editUserName(newUserName, userName);
+            if (userService.editUserName(newUserName, userName))
+            {
+                AuthManager.Instance.updateUserName(userName, newUserName);
+                return true;
+            }
+                
+            return false;
         }
 
 

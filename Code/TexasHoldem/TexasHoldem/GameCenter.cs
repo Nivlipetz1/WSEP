@@ -154,7 +154,7 @@ namespace GameSystem
             PlayingUser playingUser = new PlayingUser(u.Username, credit, game);
             game.addPlayer(playingUser);
 
-            u.Credit = u.Credit - credit;
+            u.UpdateCredit(-credit);
             return true;
         }
 
@@ -228,7 +228,7 @@ namespace GameSystem
         public void updateLeagueToUser(PlayingUser playingUser)
         {
             UserProfile user = GetUserByName(playingUser.GetUserName());
-            user.Credit += playingUser.GetCredit();
+            user.UpdateCredit(playingUser.GetCredit());
             user.updateStatistics(playingUser);
 
             if (user.UserStat.Winnings + user.UserStat.Losses < 10)

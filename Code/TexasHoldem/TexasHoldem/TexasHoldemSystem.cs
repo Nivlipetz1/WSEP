@@ -92,7 +92,11 @@ namespace GameSystem
         public bool editUserName(string userName, UserProfile u)
         {
             if (activeUsers.ContainsKey(u.Username))
+            {
+                activeUsers.Remove(u.Username);
                 u.Username = userName;
+                activeUsers[u.Username] = u;
+            }   
             else return false;
 
             DBConnection.Instance.updateUserProfile(u);
