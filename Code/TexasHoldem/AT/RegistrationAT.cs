@@ -39,20 +39,30 @@ namespace AT
         public void successRegister()
         {
             Assert.True(us.register("myTest"+new Random().Next(100), "123"));
-            Assert.True(us.register("bcd" + new Random().Next(100), "1!@#sda"));
-            Assert.True(us.register("cde" + new Random().Next(100), "dsadasdas"));
-            Assert.True(us.register("def" + new Random().Next(100), "AS1 22   4"));
-            Assert.True(us.register("efg" + new Random().Next(100), "0"));
         }
 
         [TestCase]
-        public void BadUsernameRegister()
+        public void BadUsername_Only_Number_Register()
         {
-            Assert.False(us.register("1", "ab1"));
-            Assert.False(us.register("        ", "ab1"));
-            Assert.False(us.register("", "ab1"));
+            Assert.False(us.register("123", "ab1"));
+        }
+        [TestCase]
+        public void BadUsername_Only_signes_Register()
+        {
             Assert.False(us.register("$$", "ab1"));
         }
+        [TestCase]
+        public void BadUsername_Empty_username_Register()
+        {
+            Assert.False(us.register("", "ab1"));
+        }
+        [TestCase]
+        public void BadUsername_Only_spaces_Register()
+        {
+            Assert.False(us.register("        ", "ab1"));
+        }
+
+
 
         [TestCase]
         public void emptyPasswordRegister()
@@ -71,7 +81,6 @@ namespace AT
         {
             us.register("abc", "123");
             Assert.False(us.register("abc", "123"));
-            Assert.False(us.register("abc", "1"));
         }
     }
 }

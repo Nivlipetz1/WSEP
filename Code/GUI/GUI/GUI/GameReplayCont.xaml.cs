@@ -21,15 +21,27 @@ namespace GUI
     public partial class GameReplayCont : Page
     {
         public GameFrame gameFrame {get; set;}
-        public GameReplayCont(GameFrame gf)
+        private int numOfMoves;
+        private int moveCounter = 0;
+        public GameReplayCont(GameFrame gf,int numOfMoves)
         {
             InitializeComponent();
+            this.numOfMoves = numOfMoves;
+            RefreshLabel();
             this.gameFrame = gf;
+
         }
 
         private void NextMoveBtn_Click(object sender, RoutedEventArgs e)
         {
             gameFrame.PushMove();
+            moveCounter++;
+            RefreshLabel();
+        }
+
+        private void RefreshLabel()
+        {
+            moveCountLbl.Content = "Move #" + moveCounter + " From #" + numOfMoves;
         }
 
         internal void DisablePlayButton()

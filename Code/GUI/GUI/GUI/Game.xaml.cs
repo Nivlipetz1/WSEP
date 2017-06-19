@@ -160,7 +160,7 @@ namespace GUI
 
         public void DealCards(Models.PlayerHand hand)
         {
-            if (!SpecMode)
+            if (!SpecMode && !ReplayMode)
             {
                 UserCard1.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.First.toImage(), UriKind.Relative));
                 UserCard2.Source = new BitmapImage(new Uri(@"Images\Cards\" + hand.Second.toImage(), UriKind.Relative));
@@ -295,6 +295,7 @@ namespace GUI
             Fold_Button.IsEnabled = true;
             this.minimumBet = minimumBet;
             MinimumBetLabel.Content = "Minimum Bet: $" + minimumBet;
+            BetAmount.Text = minimumBet.ToString();
             ShowBetElements();
            
         }
@@ -324,6 +325,7 @@ namespace GUI
                             player.Credit = move.playerBets[username];
                             player.SetAvatar(null);
                             player.ShowLabels(username);
+                            //player.SetCards(move.playerHands[username]);
                             break;
                         }
                     }
@@ -363,9 +365,11 @@ namespace GUI
             }
             PotSizeLbl.Content = "Pot Size: $" + potSizeInt;
             PotSizeLbl.Visibility = Visibility.Visible;
-            startGameSound.PlaySync();
-            if(SpecMode && !ReplayMode)
+            startGameSound.PlaySync(); 
+            if (SpecMode || ReplayMode)
                 DealCards(null);
+            
+               
 
         }
 
@@ -495,7 +499,7 @@ namespace GUI
         {
             if (!ReplayMode)
             {
-                manager.QuitGame(gameID);
+                manager.QuitGame(gameID, SpecMode);
             }
             else
             {

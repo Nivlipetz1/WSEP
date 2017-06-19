@@ -35,14 +35,14 @@ namespace AT
         [TestCase]
         public void Logout_Loggedin()
         {
-            Assert.True(us.login("abc", "123"));
+            us.login("abc", "123");
             ClientUserProfile prof = us.getUser("abc");
             Assert.True(us.logout(prof.Username));
-            Assert.False(us.logout(prof.Username));
+           
         }
 
         [TestCase]
-        public void Logout_NotLoggedin()
+        public void Logout_NotLoggedin()//Try to logout user that already logout user.
         {
            // ClientUserProfile prof = us.getUser("abc");
             Assert.False(us.logout("abc"));

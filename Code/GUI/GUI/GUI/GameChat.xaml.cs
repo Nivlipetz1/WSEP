@@ -40,6 +40,13 @@ namespace GUI
                 }
             }
         }
+        private void OnKeyDownHandler(object sender, KeyEventArgs e)
+        {
+            if (message.IsKeyboardFocusWithin && e.Key == Key.Enter && !message.Text.Equals(""))
+            {
+                SendMessageToChat_Click(sender, null);
+            }
+        }
 
         public void PushMessage(string sender, string message)
         {

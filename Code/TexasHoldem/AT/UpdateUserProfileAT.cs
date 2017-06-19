@@ -16,7 +16,7 @@ namespace AT
 {
     class UpdateUserProfileAT
     {
-       
+
         private AuthSystemServiceInterface us;
         [SetUp]
         public void before()
@@ -41,8 +41,8 @@ namespace AT
             us.login("abc", "123");
             ClientUserProfile user = us.getUser("abc");
             Assert.True(us.editUserName("aaaaa", user.Username));
-             us.editUserName("abc", "aaaaa");
-            
+            us.editUserName("abc", "aaaaa");
+
         }
 
         [TestCase]
@@ -54,12 +54,21 @@ namespace AT
         }
 
         [TestCase]
-        public void badEditUsername_Loggedin()
+        public void badEditUsername_EmptyUserName_Loggedin()
         {
             us.login("abc", "123");
             ClientUserProfile user = us.getUser("abc");
             Assert.False(us.editUserName("", user.Username));
+            us.logout("abc");
+        }
+
+        [TestCase]
+        public void badEditUsername_OnlySpacesUsername_Loggedin()
+        {
+            us.login("abc", "123");
+            ClientUserProfile user = us.getUser("abc");
             Assert.False(us.editUserName("   ", user.Username));
+            us.logout("abc");
         }
 
         [TestCase]
@@ -74,28 +83,37 @@ namespace AT
         }
 
         [TestCase]
-        public void badEditPassword()
+        public void badEditPassword_emptyPassword()
         {
             us.login("abc", "123");
             ClientUserProfile user = us.getUser("abc");
             Assert.False(us.editPassword("", user.Username));
-            Assert.False(us.editPassword("    ", user.Username));
+            us.logout("abc");
         }
-/*
+        [TestCase]
+        public void badEditPassword_onlySpacesPassword()
+        {
+            us.login("abc", "123");
+            ClientUserProfile user = us.getUser("abc");
+            Assert.False(us.editPassword("    ", user.Username));
+            us.logout("abc");
+        }
         [TestCase]
         public void editAvatar()
         {
-            
-            Image avatar = new Bitmap(@"C:\Users\naordalal\Desktop\Capture.PNG");
-            byte[] avatarBytes = ServiceLayer.ImageConverter.imageToByteArray(avatar);
-
             us.login("abc", "123");
             ClientUserProfile user = us.getUser("abc");
-            Assert.True(us.editAvatar(avatarBytes, user.Username));
-            byte[] arr = ServiceLayer.ImageConverter.imageToByteArray(TexasHoldemSystem.userSystemFactory.getInstance().getUser(user.Username).Avatar);
-            Image a2 = ServiceLayer.ImageConverter.byteArrayToImage(arr);
-            Assert.AreEqual(avatarBytes, arr);
+            try
+            {
+                Image avatar = new Bitmap(Environment.CurrentDirectory+ "\\AT\\avatar.jpg");
+                us.editAvatar(ServiceLayer.ImageConverter.imageToByteArray(avatar), "abc");
+                Assert.AreEqual(ServiceLayer.ImageConverter.imageToByteArray(avatar), user.Avatar);
+            }
+            catch(Exception e)
+            {
+                Exception s = e;
+                Assert.True(false);
+            }
         }
-        */
     }
 }

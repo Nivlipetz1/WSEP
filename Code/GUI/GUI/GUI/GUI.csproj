@@ -25,7 +25,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>22</ApplicationRevision>
+    <ApplicationRevision>24</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -377,6 +377,7 @@
     <None Include="Resources\PlayerChecks.wav" />
     <None Include="Resources\PlayerFolds.wav" />
     <None Include="Resources\Check.wav" />
+    <Resource Include="Images\Cards\H10.png" />
     <Content Include="Sounds\cardPlace1.wav" />
   </ItemGroup>
   <ItemGroup>

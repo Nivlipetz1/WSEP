@@ -66,7 +66,8 @@ namespace GUI
                 initialized = true;
                 InitializeComponent();
                 gameFrame.NavigationService.Navigate(GameWindow = new Game(manager, gameID, true,true));
-                chatFrame.NavigationService.Navigate(GameReplayCont = new GameReplayCont(this));
+                chatFrame.NavigationService.Navigate(GameReplayCont = new GameReplayCont(this,moves.Count));
+                pmFrame.Foreground = new SolidColorBrush(Colors.DarkSlateGray);
             }
            
         }
@@ -104,6 +105,8 @@ namespace GUI
             GameWindow.removePlayer(username);
             game.RemovePlayer(username);
         }
+
+
 
         /*public void AddPlayer(Models.ClientUserProfile profile)
         {

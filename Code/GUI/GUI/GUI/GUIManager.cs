@@ -222,7 +222,7 @@ namespace GUI
             if (changed)
             {
                 MessageBox.Show(changedString,"Profile Updated",MessageBoxButton.OK,MessageBoxImage.Information);
-                await RefreshProfile();
+                await RefreshProfile(); //@TODO
                 mainPage.ShowAvatar();
                 mainWindow.mainFrame.NavigationService.GoBack();
             }
@@ -448,6 +448,7 @@ namespace GUI
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
                 GameFrame gameFrame = findGameFrame(gameID);
+                
                     gameFrame.GameWindow.PushWinners(winners);
             });
         }
@@ -467,6 +468,8 @@ namespace GUI
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
                 GameFrame wantedFrame = findGameFrame(gameID);
+                if (wantedFrame != null)
+                {
                     if (move is Models.BetMove)
                     {
                         wantedFrame.GameWindow.PushBetMove((Models.BetMove)move);
@@ -487,25 +490,43 @@ namespace GUI
                     {
                         wantedFrame.GameWindow.PushEndGameMove((Models.EndGameMove)move);
                     }
+                }
         });
         }
 
-        internal async void QuitGame(int gameID)
+        internal async void QuitGame(int gameID, bool specMode)
         {
             MessageBoxResult rs = MessageBox.Show("Are you sure you want to quit?", "Quit", MessageBoxButton.YesNo, MessageBoxImage.Information, MessageBoxResult.No);
             if (rs == MessageBoxResult.Yes)
             {
-                if (await Communication.GameFunctions.Instance.removePlayer(gameID))
+                if (specMode)
                 {
-                    RemoveGame(findGame(gameID));
-                    RemoveGameFrame(findGameFrame(gameID));
-                    await RefreshProfile();
-                    GoToGameCenter();
-                    //mainWindow.mainFrame.NavigationService.GoBack();
-             
+                    if (await Communication.GameFunctions.Instance.removeSpectator(gameID))
+                    {
+                        RemoveGame(findGame(gameID));
+                        RemoveGameFrame(findGameFrame(gameID));
+                        await RefreshProfile();
+                        GoToGameCenter();
+                        //mainWindow.mainFrame.NavigationService.GoBack();
+                    }
+                    else
+                        MessageBox.Show("Something went wrong", "Information", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+
                 else
-                    MessageBox.Show("Something went wrong", "Information", MessageBoxButton.OK, MessageBoxImage.Error);
+                {
+                    if (await Communication.GameFunctions.Instance.removePlayer(gameID))
+                    {
+                        RemoveGame(findGame(gameID));
+                        RemoveGameFrame(findGameFrame(gameID));
+                        await RefreshProfile();
+                        GoToGameCenter();
+                        //mainWindow.mainFrame.NavigationService.GoBack();
+
+                    }
+                    else
+                        MessageBox.Show("Something went wrong", "Information", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 
@@ -605,9 +626,12 @@ namespace GUI
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
                 GameFrame gameFrame = findGameFrame(gameId);
-                ClientGame cg = findGame(gameId);
-                gameFrame.RemovePlayer(player);
-                cg.RemovePlayer(player);
+                if (gameFrame != null)
+                {
+                    ClientGame cg = findGame(gameId);
+                    gameFrame.RemovePlayer(player);
+                    cg.RemovePlayer(player);
+                }
             });
         }
     }

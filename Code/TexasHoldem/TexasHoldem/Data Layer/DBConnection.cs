@@ -19,7 +19,7 @@ namespace GameSystem.Data_Layer
         private DBConnection()
         {
             var client = new MongoClient();
-            var db = client.GetDatabase("pokerDB");
+            var db = client.GetDatabase("pokerDB_test");
             Users =  db.GetCollection<UserProfile>("Users");
             Replayes = db.GetCollection<GameLogger>("Replayes");
             Leagues = db.GetCollection<League>("Leagues");
