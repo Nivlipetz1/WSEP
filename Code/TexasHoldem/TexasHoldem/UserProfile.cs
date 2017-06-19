@@ -71,6 +71,12 @@ namespace GameSystem
             set { credit = value; }
         }
 
+        public void UpdateCredit(int val)
+        {
+            Credit += val;
+            DBConnection.Instance.updateUserProfile(this);
+        }
+
         [BsonIgnore]
         public League League
         {
@@ -145,7 +151,7 @@ namespace GameSystem
             userStat.BiggestWallet = (Credit > userStat.BiggestWallet) ? Credit : userStat.BiggestWallet;
             userStat.TotalGrossProfit += Grosssum;
             UserStat.AvgCashGain = (userStat.AvgCashGain * roundsPlayed + user.GainPerRound.Sum()) / (userStat.Winnings + userStat.Losses);
-            userStat.AvgGrossProfit = userStat.TotalGrossProfit / (userStat.Winnings + userStat.Losses);
+            userStat.AvgGrossProfit = (userStat.Winnings + userStat.Losses == 0) ? 0 : userStat.TotalGrossProfit / (userStat.Winnings + userStat.Losses);
             DBConnection.Instance.updateUserProfile(this);
             
         }

@@ -66,7 +66,8 @@ namespace GUI.Communication
         public async Task<List<Move>> getReplayByGameId(int gameId)
         {
             string res = await gameCenterHubProxy.Invoke<string>("getReplayByGameId" , gameId);
-            return MoveTypesConverter.deserializeObject<List<Move>>(res);
+            List<Move> moves = MoveTypesConverter.deserializeObject<List<Move>>(res);
+            return moves;
         }
 
         public async Task<List<ClientGame>> getAllSpectatingGames()

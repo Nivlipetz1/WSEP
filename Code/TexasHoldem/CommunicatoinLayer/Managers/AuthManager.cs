@@ -64,6 +64,15 @@ namespace CommunicatoinLayer.Managers
         }
 
 
+        public void updateUserName(string userName, string newUserName)
+        {
+            string connectionId = _usersByName[userName];
+            _usersByConnectionId[connectionId] = newUserName;
+            string val1;
+            _usersByName.TryRemove(userName, out val1);
+            _usersByName[newUserName] = connectionId;
+        }
+
         public string GetConnectionIdByName(string name)
         {
             return _usersByName[name];
@@ -88,6 +97,5 @@ namespace CommunicatoinLayer.Managers
         {
             get { return LazyInstance.Value; }
         }
-
     }
 }

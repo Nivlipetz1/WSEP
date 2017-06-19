@@ -16,7 +16,6 @@ namespace Gaming
         private ObservableCollection<PlayingUser> players; //these will be of type playingUsers
         private List<PlayingUser> waitingList; //these will be of type playingUsers
         private List<SpectatingUser> spectators; //these will be of type spectators
-        private List<SpectatingUser> specWaitingList;
         private int[] pot; // pot[0] = main pot ||| pot[1] = sidepot
         private int bettingRound;
         private CardAnalyzer ca;
@@ -37,7 +36,6 @@ namespace Gaming
             players = new ObservableCollection<PlayingUser>();
             waitingList = new List<PlayingUser>();
             spectators = new List<SpectatingUser>();
-            specWaitingList = new List<SpectatingUser>();
             pot = new int[2];
             ca = new CardAnalyzer();
             gamePref = gp;
@@ -52,7 +50,6 @@ namespace Gaming
             players = new ObservableCollection<PlayingUser>();
             waitingList = new List<PlayingUser>();
             spectators = new List<SpectatingUser>();
-            specWaitingList = new List<SpectatingUser>();
             pot = new int[2];
             ca = new CardAnalyzer();
             gamePref = gp;
@@ -75,17 +72,12 @@ namespace Gaming
             return waitingList;
         }
 
-        public List<SpectatingUser> GetSpecWaitingList()
-        {
-            return specWaitingList;
-        }
-
         public void StartGame()
         {
             List<PlayingUser> winners = new List<PlayingUser>();
             List<string> userNames = new List<string>();
 
-            gamePref.SetStatus("Active");
+            gamePref.SetStatus("active");
 
             foreach (PlayingUser player in waitingList)
             {
@@ -99,13 +91,6 @@ namespace Gaming
             }
 
             waitingList.Clear();
-
-            foreach (SpectatingUser spec in specWaitingList)
-            {
-                spectators.Add(spec);
-            }
-            specWaitingList.Clear();
-
             updatePlayerBets(0, true);
             //SystemLogger.Log("game started","GameLogs.log");
             //if (gamePref.GetMinPlayers() > GetNumberOfPlayers())
@@ -234,7 +219,7 @@ namespace Gaming
 
 
         GameEnd:
-            gamePref.Status = "Inactive";
+            gamePref.Status = "inactive";
             ResetGame();
             Thread.Sleep(10000);
             if ((waitingList.Count + playerBets.Count) >= gamePref.GetMinPlayers())
@@ -268,17 +253,10 @@ namespace Gaming
             players.Remove(dealer);
             players.Insert(players.Count, dealer);
 
-            IEnumerable<PlayingUser> QuitPlayers = players.Where(user => user.GetStatus().Equals("Quit"));
-            foreach(PlayingUser player in QuitPlayers){
-                players.Remove(player);
-                playerBets.Remove(player);
-            }
-
-
+            playerHands = new Dictionary<string, PlayerHand>();
             foreach (PlayingUser player in players)
             {
-                player.SetStatus("Active");
-                playerHands.Remove(player.GetUserName());
+                player.SetStatus("active");
                 playerBets[player] = player.GetCredit();
             }
 
@@ -391,7 +369,7 @@ namespace Gaming
                 Console.WriteLine(index);
                 PlayingUser currentUser = players.ElementAt(index);
                 int minimumBet = GetMaxBet() - playerBets[currentUser];
-                if (!(currentUser.GetStatus().Equals("Fold") && (currentUser.GetStatus().Equals("Quit")))) //player didn't fold
+                if (currentUser.GetStatus() != "Fold")
                 {
                     int bet = players[index].Bet(minimumBet);
                     while (bet < minimumBet && bet >= 0)
@@ -509,7 +487,7 @@ namespace Gaming
             if ((players.Count + waitingList.Count) == gamePref.GetMaxPlayers())
                 throw new InvalidOperationException("Maximum number of players reached");
 
-            if (gamePref.GetStatus().Equals("Active"))
+            if (gamePref.GetStatus().Equals("active"))
             {
                 waitingList.Add(player);
                 return;
@@ -539,40 +517,25 @@ namespace Gaming
             if (!players.Contains(player))
                 throw new InvalidOperationException("Player not in game");
 
-            if (this.gamePref.GetStatus().Equals("Inactive") || this.gamePref.GetStatus().Equals("Init")) //not in middle of round
-            {
-                players.Remove(player);
-                playerBets.Remove(player);
-            }
-            else //in middle of round
-            {
-                if (playerHands.ContainsKey(player.GetUserName()))
-                {
-                    playerHands.Remove(player.GetUserName()); //remove this now so that their hand isn't calculated in CA
-                }
+            //player.GetAccount().Credit += player.GetCredit(); //gamecenter
+            players.Remove(player);
+            playerBets.Remove(player);
 
-                player.SetStatus("Quit");
-            }
 
             var e = evt;
             if (e != null)
                 evt(player);
 
             player = null;
+
         }
 
         public void addSpectator(SpectatingUser spec)
         {
             if (!gamePref.AllowSpec())
                 throw new InvalidOperationException("Spectating is not allowed in this game");
-            if (this.gamePref.GetStatus().Equals("Active"))
-            {
-                specWaitingList.Add(spec);
-            }
-            else
-            {
-                spectators.Add(spec);
-            }
+
+            spectators.Add(spec);
         }
 
         public void removeSpectator(SpectatingUser spec)
@@ -711,7 +674,7 @@ namespace Gaming
 
         public void InactivateGame()
         {
-            gamePref.SetStatus("Inactive");
+            gamePref.SetStatus("inactive");
         }
 
         public int getGameID()
