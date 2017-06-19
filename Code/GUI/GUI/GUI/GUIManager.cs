@@ -494,22 +494,39 @@ namespace GUI
         });
         }
 
-        internal async void QuitGame(int gameID)
+        internal async void QuitGame(int gameID, bool specMode)
         {
             MessageBoxResult rs = MessageBox.Show("Are you sure you want to quit?", "Quit", MessageBoxButton.YesNo, MessageBoxImage.Information, MessageBoxResult.No);
             if (rs == MessageBoxResult.Yes)
             {
-                if (await Communication.GameFunctions.Instance.removePlayer(gameID))
+                if (specMode)
                 {
-                    RemoveGame(findGame(gameID));
-                    RemoveGameFrame(findGameFrame(gameID));
-                    await RefreshProfile();
-                    GoToGameCenter();
-                    //mainWindow.mainFrame.NavigationService.GoBack();
-             
+                    if (await Communication.GameFunctions.Instance.removeSpectator(gameID))
+                    {
+                        RemoveGame(findGame(gameID));
+                        RemoveGameFrame(findGameFrame(gameID));
+                        await RefreshProfile();
+                        GoToGameCenter();
+                        //mainWindow.mainFrame.NavigationService.GoBack();
+                    }
+                    else
+                        MessageBox.Show("Something went wrong", "Information", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+
                 else
-                    MessageBox.Show("Something went wrong", "Information", MessageBoxButton.OK, MessageBoxImage.Error);
+                {
+                    if (await Communication.GameFunctions.Instance.removePlayer(gameID))
+                    {
+                        RemoveGame(findGame(gameID));
+                        RemoveGameFrame(findGameFrame(gameID));
+                        await RefreshProfile();
+                        GoToGameCenter();
+                        //mainWindow.mainFrame.NavigationService.GoBack();
+
+                    }
+                    else
+                        MessageBox.Show("Something went wrong", "Information", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 

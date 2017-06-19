@@ -499,7 +499,7 @@ namespace GUI
         {
             if (!ReplayMode)
             {
-                manager.QuitGame(gameID);
+                manager.QuitGame(gameID, SpecMode);
             }
             else
             {

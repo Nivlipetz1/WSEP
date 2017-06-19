@@ -106,6 +106,8 @@ namespace GUI
             game.RemovePlayer(username);
         }
 
+
+
         /*public void AddPlayer(Models.ClientUserProfile profile)
         {
             game.AddPlayer(profile);
