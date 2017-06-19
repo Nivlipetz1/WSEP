@@ -42,6 +42,7 @@ namespace GUI
         }
         private void OnKeyDownHandler(object sender, KeyEventArgs e)
         {
+            if (message.IsKeyboardFocused && e.Key == Key.Enter && !message.Text.Equals(""))
             {
                 SendMessageToChat_Click(sender, null);
             }
