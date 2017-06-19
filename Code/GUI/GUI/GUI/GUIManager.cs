@@ -222,7 +222,7 @@ namespace GUI
             if (changed)
             {
                 MessageBox.Show(changedString,"Profile Updated",MessageBoxButton.OK,MessageBoxImage.Information);
-                await RefreshProfile();
+                await RefreshProfile(); //@TODO
                 mainPage.ShowAvatar();
                 mainWindow.mainFrame.NavigationService.GoBack();
             }

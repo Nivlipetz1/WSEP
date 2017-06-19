@@ -40,6 +40,12 @@ namespace GUI
                 }
             }
         }
+        private void OnKeyDownHandler(object sender, KeyEventArgs e)
+        {
+            {
+                SendMessageToChat_Click(sender, null);
+            }
+        }
 
         public void PushMessage(string sender, string message)
         {

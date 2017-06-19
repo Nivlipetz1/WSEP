@@ -53,6 +53,14 @@ namespace GUI
             messages.CaretIndex = messages.Text.Length;
             messages.ScrollToEnd();
         }
+        private void OnKeyDownHandler(object sender, KeyEventArgs e)
+        {
+            if (message.IsKeyboardFocused && e.Key == Key.Enter && !message.Text.Equals(""))
+            {
+                SendMessage_Click(sender, null);
+            }
+        }
+
 
         public void PushMessage(string sender)
         {
