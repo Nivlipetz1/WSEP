@@ -21,7 +21,7 @@ namespace Gaming
         public PlayingUser(string name, int credit, Game game) : base (name,game)
         {
             this.credit = credit;
-            status = "Active";
+            status = "active";
             roundsWon = 0;
             roundsLost = 0;
             biggestPotWon = 0;
@@ -103,7 +103,7 @@ namespace Gaming
 
         public int GetBlind(int amount)
         {
-            status = "Active";
+            status = "active";
             credit -= amount;
             return amount;
         }

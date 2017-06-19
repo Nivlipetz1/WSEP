@@ -408,7 +408,7 @@ namespace Gaming
             {
                 if (player.GetStatus() == "Talked")
                 {
-                    player.SetStatus("Active");
+                    player.SetStatus("active");
                 }
             }
         }
@@ -431,7 +431,7 @@ namespace Gaming
             int numOfTalkedPlayers = 0;
             foreach (PlayingUser player in players)
             {
-                if (player.GetStatus() == "Active")
+                if (player.GetStatus() == "active")
                 {
                     return false;
                 }

@@ -122,11 +122,8 @@ namespace GameSystem.Data_Layer
             return (from replay in Replayes.AsQueryable()
                     select replay.gameID).ToList();
         }
-    }
 
-    public static class DbExtenstion
-    {
-        public static Boolean DeleteReplay(int replayID)
+        public bool deleteReplay(int replayID)
         {
             foreach (int p in DBConnection.Instance.getAllAvailableReplayes())
             {
@@ -140,8 +137,7 @@ namespace GameSystem.Data_Layer
             return false;
         }
 
-
-        public static Boolean DeleteUser(this List<UserProfile> list, string element)
+        public bool deleteUser(string element)
         {
             foreach (UserProfile p in DBConnection.Instance.GetUsers())
             {
@@ -154,7 +150,10 @@ namespace GameSystem.Data_Layer
             }
             return false;
         }
+    }
 
+    public static class DbExtenstion
+    {
 
         public static void AddUser(this List<UserProfile> list, UserProfile element)
         {

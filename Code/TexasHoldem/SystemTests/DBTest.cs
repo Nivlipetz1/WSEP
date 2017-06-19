@@ -30,9 +30,8 @@ namespace SystemTest{
         [TearDown]
         public void after()
         {
-            DbExtenstion.DeleteUser(db.GetUsers(), "test123");
-            DbExtenstion.DeleteReplay(999);
-
+            db.deleteUser("test123");
+            db.deleteReplay(999);
         }
 
         [Test]

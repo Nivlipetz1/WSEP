@@ -21,6 +21,9 @@ namespace ServiceLayer
             if (game == null)
                 return false;
             PlayingUser player = game.GetPlayers().Where(pu => pu.GetUserName().Equals(user)).First();
+            int bet;
+            if(int.TryParse(minimumBet , out bet) && player.GetCredit() < bet)
+                return false;
             player.setInput(minimumBet);
             return true;
         }

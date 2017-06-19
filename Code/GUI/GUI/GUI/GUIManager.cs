@@ -222,7 +222,7 @@ namespace GUI
             if (changed)
             {
                 MessageBox.Show(changedString,"Profile Updated",MessageBoxButton.OK,MessageBoxImage.Information);
-                await RefreshProfile(); //@TODO
+                await RefreshProfile();
                 mainPage.ShowAvatar();
                 mainWindow.mainFrame.NavigationService.GoBack();
             }
@@ -277,7 +277,6 @@ namespace GUI
 
         internal async void GetReplay(int gameID)
         {
-            
             List<Move> moves = await Communication.GameCenterFunctions.Instance.getReplayByGameId(gameID);
             GameFrame gf = new GameFrame(this, gameID,moves);
             AddGameFrame(gf);
@@ -397,9 +396,8 @@ namespace GUI
            // while (mutexLocks[gameID]) ;
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
-                
                 GameFrame wantedFrame = findGameFrame(gameID);
-                    wantedFrame.GameWindow.MyTurn(minimumBet);
+                wantedFrame.GameWindow.MyTurn(minimumBet);
             });
         }
 
@@ -605,7 +603,6 @@ namespace GUI
             //while (mutexLocks[gameId]) ;
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {
-                
                 GameFrame gameFrame = findGameFrame(gameId);
                     gameFrame.GameChat.PushMessage(sender, message);
             });

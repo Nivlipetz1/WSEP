@@ -41,7 +41,7 @@ namespace GUI.Models
             smallBlind = sB;
             bigBlind = bB;
             allowSpectators = aS;
-            buyInPolicy = buyInPolicy;
+            buyInPolicy = bIP;
             status = "init";
             chipPolicy = cP;
             typePolicy = tP;
