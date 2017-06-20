@@ -394,7 +394,7 @@ namespace GUI
         //didn't check this..
         public void PushEndGameMove(Models.EndGameMove move)
         {
-            SeeEmSound.PlaySync();
+            SeeEmSound.Play();
             foreach (PlayerAtTable player in players)
             {
                 foreach (string username in move.handRanks.Keys)
