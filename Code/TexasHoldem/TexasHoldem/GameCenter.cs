@@ -290,16 +290,16 @@ namespace GameSystem
         {
             DBConnection dbcon = DBConnection.Instance;
             int numberOfUsers = dbcon.GetUsers().Count;
-            int numberOfLeagues = dbcon.getLeagues().Count;
-            double ratioPlayersPerLeague = numberOfUsers / numberOfLeagues;
-            int numberOfLeagues_should = numberOfLeagues;
+            double numberOfLeagues = dbcon.getLeagues().Count;
+            double ratioPlayersPerLeague = numberOfUsers / (double)numberOfLeagues;
+            int numberOfLeagues_should = (int)numberOfLeagues;
 
             if (ratioPlayersPerLeague < 2)
                 numberOfLeagues_should = numberOfUsers / 2;
-            ratioPlayersPerLeague = numberOfUsers / numberOfLeagues_should;
+            ratioPlayersPerLeague = (double)numberOfUsers / (double)numberOfLeagues_should;
 
-            List<League> leagues = dbcon.getLeagues();
-            for(int i = numberOfLeagues - 1 ; i >= numberOfLeagues - numberOfLeagues_should; i--) {
+            List<League> leagues = dbcon.getLeagues().OrderBy(league=>league.MinimumRank).ToList();
+            for(int i = (int)numberOfLeagues - 1 ; i > numberOfLeagues - numberOfLeagues_should; i--) {
                 if(ratioPlayersPerLeague - leagues[i].users.Count > 1)
                     redistributesSpecificLeague(leagues, i, true, (int)Math.Floor(ratioPlayersPerLeague-leagues[i].users.Count), numberOfLeagues_should);
                 if(leagues[i].users.Count - ratioPlayersPerLeague > 1)
@@ -313,6 +313,7 @@ namespace GameSystem
             {
                 List<UserProfile> leagueUsers = leagues[leagueIndex].users.OrderBy(user => user.Credit).ToList();
                 leagues[leagueIndex - 1].addUsers(leagueUsers.GetRange(0, numberOfPlayersToMove));
+                leagues[leagueIndex].removeUsers(leagueUsers.GetRange(0, numberOfPlayersToMove));
                 return;
             }
 
@@ -321,7 +322,8 @@ namespace GameSystem
                 List<UserProfile> leagueUsers = leagues[i].users.OrderBy(user => user.Credit).ToList();
                 int numberOfUserInPreviousLeague = leagueUsers.Count;
                 numberOfUserInPreviousLeague = Math.Min(numberOfUserInPreviousLeague, numberOfPlayersToMove);
-                leagues[leagueIndex].addUsers(leagueUsers.GetRange(leagueUsers.Count - 1 - numberOfUserInPreviousLeague, numberOfUserInPreviousLeague));
+                leagues[leagueIndex].addUsers(leagueUsers.GetRange(leagueUsers.Count - numberOfUserInPreviousLeague, numberOfUserInPreviousLeague));
+                leagues[i].removeUsers(leagueUsers.GetRange(leagueUsers.Count - numberOfUserInPreviousLeague, numberOfUserInPreviousLeague));
                 numberOfPlayersToMove -= numberOfUserInPreviousLeague;
             }
         }

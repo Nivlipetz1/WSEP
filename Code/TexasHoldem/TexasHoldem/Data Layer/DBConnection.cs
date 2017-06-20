@@ -1,6 +1,8 @@
 ﻿using GameSystem;
 using Gaming;
+using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,10 +21,16 @@ namespace GameSystem.Data_Layer
         private DBConnection()
         {
             var client = new MongoClient();
-            var db = client.GetDatabase("pokerDB_test");
+            var db = client.GetDatabase("pokerDB");
             Users =  db.GetCollection<UserProfile>("Users");
             Replayes = db.GetCollection<GameLogger>("Replayes");
             Leagues = db.GetCollection<League>("Leagues");
+
+            var filter = Builders<UserProfile>.Filter.Or(Builders<UserProfile>.Filter.Eq("LeagueId", "1000") , Builders<UserProfile>.Filter.Eq("LeagueId", "2000"),
+                Builders<UserProfile>.Filter.Eq("LeagueId", "3000"));
+            var update = Builders<UserProfile>.Update.Set("LeagueId", "0");
+            Users.UpdateMany(filter, update);
+
 
             NotificationService.saveReplayEvt += saveReplay;
         }
@@ -48,9 +56,10 @@ namespace GameSystem.Data_Layer
 
         public List<League> getLeagues()
         {
-            Leagues.AsQueryable().ForEachAsync(league => league.addUsers(Users.Find(user => user.LeagueId == league.minimumRank).ToList()));
-            
-            return Leagues.AsQueryable().ToList();
+            List<League> leagues = Leagues.AsQueryable().ToList();
+            leagues.ForEach(league => league.addUsers(Users.Find(user => user.LeagueId == league.minimumRank).ToList()));
+
+            return leagues;
         }
 
         public int getNewGameId()

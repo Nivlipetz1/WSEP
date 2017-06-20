@@ -56,9 +56,20 @@ namespace GameSystem
 
         public void addUsers(List<UserProfile> users)
         {
+            if (this.users == null)
+                this.users = new HashSet<UserProfile>();
             foreach (UserProfile user in users)
             {
                 addUser(user);
+            }
+        }
+
+        public void removeUsers(List<UserProfile> u)
+        {
+            foreach(UserProfile user in u)
+            {
+                if (users.Contains(user))
+                    users.Remove(user);
             }
         }
 
