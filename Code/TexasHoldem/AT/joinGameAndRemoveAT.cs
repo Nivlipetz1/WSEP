@@ -80,9 +80,9 @@ namespace AT
             us.register("a1", "1");
             us.register("a2", "1");
             us.register("a3", "1");
-            gc.joinGame(game.getID(), "a1", 100));
-            gc.joinGame(game.getID(), "a2", 100));
-            gc.joinGame(game.getID(), "a3", 100));
+            gc.joinGame(game.getID(), "a1", 100);
+            gc.joinGame(game.getID(), "a2", 100);
+            gc.joinGame(game.getID(), "a3", 100);
             Assert.Null(gc.joinGame(game.getID(), username, 50));
             game.Players.Remove(us.getUser(username));
         }
