@@ -572,5 +572,7 @@ namespace GUI
             else
                 BetAmount.Text = "" + (currentAmount + betAmount);
         }
+
+        
     }
 }
