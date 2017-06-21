@@ -33,8 +33,8 @@
         <Image Name="TurnCard" Visibility="Hidden" Height="70" Source="./Images/Cards/S10.png" Canvas.Left="241" Canvas.Top="152"/>
         <Image Name="UserCard1" Visibility="Hidden" Height="70" Source="./Images/Cards/S1.png" Canvas.Left="241" Canvas.Top="152"/>
         <Image Name="UserCard2" Visibility="Hidden" Height="70" Source="./Images/Cards/S1.png" Canvas.Left="241" Canvas.Top="152"/>
-        <TextBox Name="BetAmount" Visibility="Hidden" Height="20" Canvas.Left="18" TextWrapping="Wrap" Text="" Canvas.Top="467" Width="65"/>
-        <Button Name="Bet_Button" Click="Bet_Button_Click" Visibility="Hidden" Content="Bet" Canvas.Left="99" Canvas.Top="465" Width="75"/>
+        <TextBox Name="BetAmount" Visibility="Hidden" Height="20" Canvas.Left="11" TextWrapping="Wrap" Text="" Canvas.Top="471" Width="75"/>
+        <Button Name="Bet_Button" Click="Bet_Button_Click" Visibility="Hidden" Content="Bet" Canvas.Left="99" Canvas.Top="471" Width="75"/>
         <Button Name="Fold_Button" Click="Fold_Button_Click" Visibility="Hidden" Content="Fold" Canvas.Left="99" Canvas.Top="494" Width="75"/>
         <Label Name="player1" Visibility="Hidden" Content="Label" Canvas.Left="30" Canvas.Top="388"/>
         <Image Name="player1Avatar" Visibility="Hidden" Source="./Images/default_avatar.png" Height="20" Width="20" Canvas.Left="10" Canvas.Top="398"/>
@@ -56,10 +56,37 @@
         <Button Name="Quit" Click="Quit_Click" Content="Quit" Canvas.Left="487" Canvas.Top="493" Width="75"/>
         <Button x:Name="BackToGC" Click="BackToGC_Click"  Content="Game Center" Canvas.Left="487" Canvas.Top="463" Width="75"/>
         <Button Name="startgameBtn" Visibility="Hidden"/>
-        <Label Name="MinimumBetLabel" Content="Label" Visibility="Hidden" Canvas.Left="20" Canvas.Top="440"/>
+        <Label Name="MinimumBetLabel" Content="Label" Visibility="Hidden" Canvas.Top="397"/>
         <Label Name="PotSizeLbl" Visibility="Hidden"  Content="Label" Canvas.Left="203" Canvas.Top="332" Width="125"/>
         <Label Name="SpecLbl" FontSize="19" Visibility="Hidden" Content="Spectator Mode" Canvas.Left="10" Canvas.Top="525" Width="150"/>
-        <Button x:Name="CheckBtn" Click="CheckBtn_Click" Visibility="Hidden" Content="Check" Canvas.Left="19" Canvas.Top="494" Width="75"/>
+        <Button x:Name="CheckBtn" Click="CheckBtn_Click" Visibility="Hidden" Content="Check" Canvas.Left="11" Canvas.Top="496" Width="75"/>
+        <Button x:Name="BlackChip100Btn" Click="ChipBtn_Click" Content="" Visibility="Hidden" Canvas.Top="423" Width="40" Height="42" BorderBrush="{x:Null}">
+            <Button.Background>
+                <ImageBrush ImageSource="Images/chips/chips_black.png" Stretch="Uniform"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="BlueChip10Btn" Click="ChipBtn_Click" Content="" Visibility="Hidden" Canvas.Left="80" Canvas.Top="423" Width="40" Height="42" BorderBrush="{x:Null}">
+            <Button.Background>
+                <ImageBrush ImageSource="Images/chips/chips_blue.png" Stretch="Uniform"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="GreenChip25Btn1" Content="" Canvas.Left="40" Canvas.Top="423" Visibility="Hidden" Width="40" Height="42" Click="ChipBtn_Click" BorderBrush="{x:Null}">
+            <Button.Background>
+                <ImageBrush ImageSource="Images/chips/chips_green.png" Stretch="Uniform"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="RedChip5Btn" Content="" Canvas.Left="120" Canvas.Top="423" Visibility="Hidden" Width="40" Height="42" RenderTransformOrigin="0.4,-0.233" Click="ChipBtn_Click" BorderBrush="{x:Null}">
+            <Button.Background>
+                <ImageBrush ImageSource="Images/chips/chips_red.png" Stretch="Uniform"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="WhiteChip1Btn" Cursor="Hand" Content="" Canvas.Left="160" Canvas.Top="423" Visibility="Hidden" Width="40" Height="42" Click="ChipBtn_Click" BorderBrush="{x:Null}" Foreground="{x:Null}">
+            <Button.Background>
+                <ImageBrush ImageSource="Images/chips/chips_white.png" Stretch="Uniform"/>
+            </Button.Background>
+            
+            
+        </Button>
     </Canvas>
 </Page>
 
