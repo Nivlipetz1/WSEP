@@ -41,8 +41,6 @@ namespace SystemTest{
             system.login("test123", "123");
             UserProfile test123 = system.getUser("test123");
 
-            Assert.True(system.isConnected("test123"));
-
             foreach (UserProfile p in db.GetUsers())
             {
                 if (p.Username.Equals(test123.Username))
@@ -58,10 +56,9 @@ namespace SystemTest{
 
 
         [Test]
-        public void UserListUpdated()
+        public void UserListUpdatedAfterRegistration()
         {
             UserProfile test = system.getUser("test123");
-            Assert.False(userList.Contains(test));
             bool flag = false;
 
             foreach(UserProfile p in db.GetUsers())
@@ -69,13 +66,10 @@ namespace SystemTest{
                 if (p.Username.Equals(test.Username))
                 {
                     flag = true; 
-                    Assert.True(true);
                 }
             }
 
-            if(!flag)
-                Assert.True(false);
-
+            Assert.True(flag);
         }
 
         [Test]
@@ -99,8 +93,6 @@ namespace SystemTest{
         [Test]
         public void ReplayListUpdate()
         {
-            Assert.False(gameReplayList.Contains(999));
-
             Game g = new Game(new GamePreferences());
             PlayingUser p1 = new PlayingUser("niv",100,g);
             Dictionary<string, int> playerbets = new Dictionary<string, int>();
@@ -108,8 +100,6 @@ namespace SystemTest{
             GameLogger insert = new GameLogger(999);
 
             insert.AddMove(new GameStartMove(playerbets));
-            Assert.True(db.getAllAvailableReplayes().Contains(999));
-            insert.AddMove(new BetMove(playerbets,p1,10));
             Assert.True(db.getAllAvailableReplayes().Contains(999));
 
         }
