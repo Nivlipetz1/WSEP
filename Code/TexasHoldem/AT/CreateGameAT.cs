@@ -62,7 +62,7 @@ namespace AT
         }
 
         [TestCase]
-        public void Invalid_createGame_MaxminPlayers()
+        public void Invalid_createGame_Max_minPlayers()
         {
             var ex = Assert.Throws<InvalidOperationException>(() => new GamePreferences(0, 2, 5, 10, 1, 2, 3, true));
             Assert.That(ex.Message == "Maximum number of players must be greater then minimum players");
