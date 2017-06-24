@@ -115,5 +115,23 @@ namespace AT
                 Assert.True(false);
             }
         }
+
+        [TestCase]
+        public void badEditAvatar_PictureTooBig()
+        {
+            us.login("abc", "123");
+            ClientUserProfile user = us.getUser("abc");
+            try
+            {
+                Image avatar = new Bitmap(Environment.CurrentDirectory + "\\AT\\avatarBIG.jpg");
+                us.editAvatar(ServiceLayer.ImageConverter.imageToByteArray(avatar), "abc");
+                Assert.AreNotEqual(ServiceLayer.ImageConverter.imageToByteArray(avatar), user.Avatar);
+            }
+            catch (Exception e)
+            {
+                Exception s = e;
+                Assert.True(false);
+            }
+        }
     }
 }
