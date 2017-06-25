@@ -67,7 +67,7 @@ namespace GUI
                 InitializeComponent();
                 gameFrame.NavigationService.Navigate(GameWindow = new Game(manager, gameID, true,true));
                 chatFrame.NavigationService.Navigate(GameReplayCont = new GameReplayCont(this,moves.Count));
-                pmFrame.Foreground = new SolidColorBrush(Colors.DarkSlateGray);
+                pmFrame.NavigationService.Navigate(new GamePM());
             }
            
         }

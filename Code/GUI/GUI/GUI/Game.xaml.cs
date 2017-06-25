@@ -87,9 +87,12 @@ namespace GUI
 
             if (SpecMode)
             {
+                if (ReplayMode)
+                {
+                    SpecLbl.Content = "Replay Mode";
+                }
                 SpecLbl.Visibility = Visibility.Visible;
             }
-
         }
 
         private void RepositionCards()

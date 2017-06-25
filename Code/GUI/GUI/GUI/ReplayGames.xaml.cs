@@ -25,7 +25,18 @@ namespace GUI
         {
             InitializeComponent();
             this.manager = manager;
+            
         }
+
+        public async void initReplayesList()
+        {
+            List<int> list = await manager.getAllAvailableReplayes();
+            foreach (int id in list)
+            {
+                GameIDTxt.Items.Add(id);
+            }
+        }
+
         private void goBack_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
@@ -40,5 +51,6 @@ namespace GUI
         {
             manager.GetReplay(int.Parse(GameIDTxt.Text));
         }
+
     }
 }
