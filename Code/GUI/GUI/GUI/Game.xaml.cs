@@ -330,6 +330,7 @@ namespace GUI
             RepositionCards();
             if (ReplayMode)
             {
+                Dictionary<String, Models.PlayerHand> playerHands = manager.findGameFrame(gameID).getRoundCards();
                 foreach (string username in move.playerBets.Keys)
                 {
                     foreach (PlayerAtTable player in players)
@@ -339,7 +340,13 @@ namespace GUI
                             player.Credit = move.playerBets[username];
                             player.SetAvatar(null);
                             player.ShowLabels(username);
-                            //player.SetCards(move.playerHands[username]);
+                            try {
+                                player.SetCards(playerHands[player.Username]);
+                            }
+                            catch
+                            {
+                                
+                            }
                             break;
                         }
                     }
