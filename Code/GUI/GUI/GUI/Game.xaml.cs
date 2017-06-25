@@ -461,6 +461,9 @@ namespace GUI
                 case Models.CardAnalyzer.HandRank.FourOfAKind:
                     handRankSound = new SoundPlayer(Properties.Resources.FourOfAKind);
                     break;
+                case Models.CardAnalyzer.HandRank.Straight:
+                    handRankSound = new SoundPlayer(Properties.Resources.Straight);
+                    break;
                 case Models.CardAnalyzer.HandRank.RoyalFlush:
                     handRankSound = new SoundPlayer(Properties.Resources.StraighFlush);
                     break;
