@@ -527,7 +527,6 @@ namespace GUI
                     else
                         MessageBox.Show("Something went wrong", "Information", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-
                 else
                 {
                     if (await Communication.GameFunctions.Instance.removePlayer(gameID))
@@ -537,7 +536,6 @@ namespace GUI
                         await RefreshProfile();
                         GoToGameCenter();
                         //mainWindow.mainFrame.NavigationService.GoBack();
-
                     }
                     else
                         MessageBox.Show("Something went wrong", "Information", MessageBoxButton.OK, MessageBoxImage.Error);

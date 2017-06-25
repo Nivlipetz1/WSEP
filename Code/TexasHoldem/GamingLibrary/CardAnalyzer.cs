@@ -361,6 +361,9 @@ namespace Gaming
 
         private bool CheckIfCardExists(Card card)
         {
+            if (cardArray == null)
+                return false;
+
             foreach (Card cardFromTable in cardArray)
             {
                 if (card.equals(cardFromTable))
