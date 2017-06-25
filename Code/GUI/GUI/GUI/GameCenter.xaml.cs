@@ -39,7 +39,9 @@ namespace GUI
 
         private void Replay_games_click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new ReplayGames(manager));
+            ReplayGames replay = new ReplayGames(manager);
+            replay.initReplayesList();
+            NavigationService.Navigate(replay);
         }
 
         private void GoBack_Click(object sender, RoutedEventArgs e)

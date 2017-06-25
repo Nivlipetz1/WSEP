@@ -70,6 +70,12 @@ namespace GUI.Communication
             return moves;
         }
 
+        public async Task<List<int>> getAllAvailableReplayes()
+        {
+            List<int> res = await gameCenterHubProxy.Invoke<List<int>>("getAllAvailableReplayes");
+            return res;
+        }
+
         public async Task<List<ClientGame>> getAllSpectatingGames()
         {
             return await gameCenterHubProxy.Invoke<List<ClientGame>>("getAllSpectatingGames");

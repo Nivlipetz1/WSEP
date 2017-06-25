@@ -245,6 +245,11 @@ namespace GUI
             
         }
 
+        internal async Task<List<int>> getAllAvailableReplayes()
+        {
+            return await Communication.GameCenterFunctions.Instance.getAllAvailableReplayes();
+        }
+
         internal async void JoinGameAsSpectator(int gameID)
         {
            Models.ClientGame game = await Communication.GameCenterFunctions.Instance.spectateGame(gameID);
