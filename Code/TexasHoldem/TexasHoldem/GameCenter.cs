@@ -4,6 +4,8 @@ using System.Linq;
 using Gaming;
 using System.Threading;
 using GameSystem.Data_Layer;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace GameSystem
 {
@@ -62,7 +64,7 @@ namespace GameSystem
         }
 
         delegate List<Game> activeGame(object param , List<Game> games);
-        public List<Game> getActiveGames(String criterion , object param , UserProfile user)
+        public List<Game> getActiveGames(string criterion , object param , UserProfile user)
         {
             activeGame func;
             List<Game> gamesInLeague = games.Where(game => user.League.getGames().Contains(game)).ToList();
@@ -94,11 +96,12 @@ namespace GameSystem
         private List<Game> getAllActiveGamesByPlayerName(object playerName , List<Game> games)
         {
             List<Game> activeGames = new List<Game>();
+            string name = JsonConvert.DeserializeObject<string>(((JObject)playerName).ToString());
             foreach (Game game in games)
             {
                 List<PlayingUser> players = game.GetPlayers();
 
-                if (players.Where(u => ((PlayingUser)u).GetUserName().Equals(playerName)).ToList().Count > 0)
+                if (players.Where(u => ((PlayingUser)u).GetUserName().Equals(name)).ToList().Count > 0)
                     activeGames.Add(game);
             }
 
@@ -107,12 +110,14 @@ namespace GameSystem
 
         private List<Game> getAllActiveGamesByPotSize(object potSize , List<Game> games)
         {
-            return games.Where(game => game.GetPotSize() == (int)potSize).ToList();
+            int pot = JsonConvert.DeserializeObject<int>(((JObject)potSize).ToString());
+            return games.Where(game => game.GetPotSize() == pot).ToList();
         }
 
         private List<Game> getAllActiveGamesByGamePreference(object preferences , List<Game> games)
         {
-            return games.Where(game => contained(game.GetGamePref(), (GamePreferences)preferences)).ToList();
+            GamePreferences gamePref = JsonConvert.DeserializeObject<GamePreferences>(((JObject)preferences).ToString());
+            return games.Where(game => contained(game.GetGamePref(), gamePref)).ToList();
         }
 
         private bool contained(GamePreferences gamePreferences, GamePreferences preferences)
