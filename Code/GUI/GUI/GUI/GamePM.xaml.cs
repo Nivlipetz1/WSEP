@@ -30,6 +30,16 @@ namespace GUI
             RefreshSelectionList();
         }
 
+        public GamePM()
+        {
+            InitializeComponent();
+            message.Visibility = Visibility.Hidden;
+            messages.Visibility = Visibility.Hidden;
+            users.Visibility = Visibility.Hidden;
+            SendMessage.Visibility = Visibility.Hidden;
+            pmLbl.Visibility = Visibility.Hidden;
+        }
+
         private async void SendMessage_Click(object sender, RoutedEventArgs e)
         {
             if (!message.Text.Equals("") && (users.SelectedValue != null))

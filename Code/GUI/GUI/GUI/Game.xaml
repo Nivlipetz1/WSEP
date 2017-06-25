@@ -77,7 +77,7 @@
         <Button Name="startgameBtn" Visibility="Hidden"/>
         <Label Name="MinimumBetLabel" Content="Label" Visibility="Hidden" Canvas.Top="397"/>
         <Label Name="PotSizeLbl" Visibility="Hidden"  Content="Label" Canvas.Left="203" Canvas.Top="332" Width="125"/>
-        <Label Name="SpecLbl" FontSize="25" Visibility="Hidden" Content="Spectator Mode" Canvas.Left="10" Canvas.Top="496" Width="190" Height="65"/>
+        <Label Name="SpecLbl" FontSize="25" Visibility="Hidden" Content="Spectator Mode" Canvas.Left="10" Canvas.Top="476" Width="190" Height="65"/>
         <Button x:Name="CheckBtn" Click="CheckBtn_Click" Visibility="Hidden" Content="Check" Canvas.Left="11" Canvas.Top="496" Width="75"/>
         <Button x:Name="BlackChip100Btn"  Cursor="Hand" Click="ChipBtn_Click" Content="" Visibility="Hidden" Canvas.Top="423" Width="40" Height="42" BorderBrush="{x:Null}">
             <Button.Background>
