@@ -57,15 +57,23 @@ namespace GUI
 
             int minP = (int)minPlayers.SelectedItem;
             int maxP = (int)maxPlayers.SelectedItem;
-            int sB = Int32.Parse(Small_Blind.Text);
-            int bB = Int32.Parse(Big_Blind.Text);
-            int cP = Int32.Parse(Chip_Policy.Text);
-            int bIP = Int32.Parse(Buy_In_Policy.Text);
-            int tP = 0;
-            bool aS = Allow_Spec.IsChecked.Value;
-            Models.GamePreferences pref = new Models.GamePreferences(maxP, minP, sB, bB, tP, bIP, cP, aS);
+            try {
+                int sB = Int32.Parse(Small_Blind.Text);
+                int bB = Int32.Parse(Big_Blind.Text);
+                int cP = Int32.Parse(Chip_Policy.Text);
+                int bIP = Int32.Parse(Buy_In_Policy.Text);
+                int tP = 0;
+                bool aS = Allow_Spec.IsChecked.Value;
+                Models.GamePreferences pref = new Models.GamePreferences(maxP, minP, sB, bB, tP, bIP, cP, aS);
 
-            manager.CreateGame(pref);
+                manager.CreateGame(pref);
+
+            }
+            catch
+            {
+                MessageBox.Show("bad input :(");
+                manager.GoToGameCenter();
+            }
 /*
             ///FOR DEBUG
             Models.ClientGame game = new Models.ClientGame();
