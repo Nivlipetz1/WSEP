@@ -175,6 +175,18 @@ namespace GUI
         {
             string changedString = "";
             bool changed = false;
+
+
+            //input validation
+            if (password.Equals(" "))
+            {
+                goto badInput;
+            }
+            else if (!username.Contains('@'))
+            {
+                goto badInput;
+            }
+
             if (!password.Equals(""))
             {
                 if (await Communication.AuthFunctions.Instance.editPassword(password))
@@ -183,7 +195,7 @@ namespace GUI
                     changed = true;
                 }
             }
-            if (!username.Equals(""))
+            if (!username.Equals("")) //edit email
             {
                 if (await Communication.AuthFunctions.Instance.editUserName(username))
                 {
@@ -226,6 +238,11 @@ namespace GUI
                 mainPage.ShowAvatar();
                 mainWindow.mainFrame.NavigationService.GoBack();
             }
+
+            badInput:
+                MessageBox.Show(changedString, "Profile failed to update", MessageBoxButton.OK, MessageBoxImage.Information);
+                mainWindow.mainFrame.NavigationService.GoBack();
+            
         }
 
         internal async void JoinGameAsSpectator(int gameID)

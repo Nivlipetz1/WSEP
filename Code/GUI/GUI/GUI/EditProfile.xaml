@@ -13,8 +13,8 @@
             <ImageBrush ImageSource="./Images/background3.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
         <Label Content="Edit Profile:" FontSize="40" Foreground="WhiteSmoke" HorizontalAlignment="Left" Margin="128,68,0,0" VerticalAlignment="Top"/>
-        <Label Content="Username" Foreground="WhiteSmoke" HorizontalAlignment="Left" Margin="84,158,0,0" VerticalAlignment="Top"/>
-        <Label Content="Email" Foreground="WhiteSmoke" HorizontalAlignment="Left" Margin="84,205,0,0" VerticalAlignment="Top"/>
+        <Label Content="Email" Foreground="WhiteSmoke" HorizontalAlignment="Left" Margin="84,158,0,0" VerticalAlignment="Top"/>
+        <Label Content="Password" Foreground="WhiteSmoke" HorizontalAlignment="Left" Margin="84,205,0,0" VerticalAlignment="Top"/>
         <TextBox Name="Username" HorizontalAlignment="Left" Height="23" Margin="179,162,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox Name="Password" HorizontalAlignment="Left" Height="23" Margin="179,207,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Button Name="Save" Click="Save_Click" Content="Save" HorizontalAlignment="Left" Margin="321,278,0,0" VerticalAlignment="Top" Width="75"/>
