@@ -271,7 +271,7 @@ namespace GUI
             MinimumBetLabel.Visibility = Visibility.Hidden;
             CheckBtn.Visibility = Visibility.Hidden;
             BlackChip100Btn.Visibility = Visibility.Hidden;
-            GreenChip25Btn1.Visibility = Visibility.Hidden;
+            GreenChip25Btn.Visibility = Visibility.Hidden;
             BlueChip10Btn.Visibility = Visibility.Hidden;
             RedChip5Btn.Visibility = Visibility.Hidden;
             WhiteChip1Btn.Visibility = Visibility.Hidden;
@@ -284,7 +284,7 @@ namespace GUI
             Fold_Button.Visibility = Visibility.Visible;
             MinimumBetLabel.Visibility = Visibility.Visible;
             BlackChip100Btn.Visibility = Visibility.Visible;
-            GreenChip25Btn1.Visibility = Visibility.Visible;
+            GreenChip25Btn.Visibility = Visibility.Visible;
             BlueChip10Btn.Visibility = Visibility.Visible;
             RedChip5Btn.Visibility = Visibility.Visible;
             WhiteChip1Btn.Visibility = Visibility.Visible;
