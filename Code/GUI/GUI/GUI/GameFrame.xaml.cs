@@ -90,10 +90,13 @@ namespace GUI
             movesIndex++;
             if(movesIndex == moves.Count)
             {
-                GameReplayCont.DisablePlayButton();
+                reset();
             }
         }
-
+        public void reset()
+        {
+            movesIndex = 0;
+        }
         public override string ToString()
         {
             return "Game "+game.id;

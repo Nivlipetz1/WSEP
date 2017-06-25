@@ -80,9 +80,9 @@ namespace AT
             us.register("a1", "1");
             us.register("a2", "1");
             us.register("a3", "1");
-            Assert.NotNull(gc.joinGame(game.getID(), "a1", 100));
-            Assert.NotNull(gc.joinGame(game.getID(), "a2", 100));
-            Assert.NotNull(gc.joinGame(game.getID(), "a3", 100));
+            gc.joinGame(game.getID(), "a1", 100);
+            gc.joinGame(game.getID(), "a2", 100);
+            gc.joinGame(game.getID(), "a3", 100);
             Assert.Null(gc.joinGame(game.getID(), username, 50));
             game.Players.Remove(us.getUser(username));
         }
@@ -92,7 +92,7 @@ namespace AT
             pref = new GamePreferences(8, 2, 5, 10, 1, 2, 3, true);
             ClientGame game = gc.createGame(pref, username);
             gc.joinGame(game.getID(), username, 3);
-            Assert.NotNull(gameService.removePlayer(username, game.getID()));
+            gameService.removePlayer(username, game.getID());
             Assert.False(game.Players.Contains(us.getUser(username)));
         }
 

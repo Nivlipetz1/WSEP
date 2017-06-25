@@ -378,6 +378,11 @@
     <None Include="Resources\PlayerFolds.wav" />
     <None Include="Resources\Check.wav" />
     <Resource Include="Images\Cards\H10.png" />
+    <Resource Include="Images\chips\chips_black.png" />
+    <Resource Include="Images\chips\chips_blue.png" />
+    <Resource Include="Images\chips\chips_green.png" />
+    <Resource Include="Images\chips\chips_red.png" />
+    <Resource Include="Images\chips\chips_white.png" />
     <Content Include="Sounds\cardPlace1.wav" />
   </ItemGroup>
   <ItemGroup>

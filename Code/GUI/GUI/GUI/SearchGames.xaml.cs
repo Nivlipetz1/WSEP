@@ -102,9 +102,22 @@ namespace GUI
             InputDialog inputDialog = new InputDialog("How much credit would you like to use?", "0");
             int credit = 0;
             if (inputDialog.ShowDialog() == true)
-                 credit = Int32.Parse(inputDialog.Answer);
-            //Join game function
-            manager.JoinGame(gdg.ID,credit);
+            {
+                try
+                {
+                    credit = Int32.Parse(inputDialog.Answer);
+                    manager.JoinGame(gdg.ID, credit);
+                }
+                catch
+                {
+                    MessageBox.Show("bad input :(");
+                    manager.GoToGameCenter();
+                }
+            }
+
+            //TODO: need this?
+            MessageBox.Show("bad input :(");
+            manager.GoToGameCenter();
         }
 
         private void spectateBtn_Click(object sender, RoutedEventArgs e)

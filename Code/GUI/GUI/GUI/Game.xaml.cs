@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Media;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -269,6 +270,11 @@ namespace GUI
             Fold_Button.Visibility = Visibility.Hidden;
             MinimumBetLabel.Visibility = Visibility.Hidden;
             CheckBtn.Visibility = Visibility.Hidden;
+            BlackChip100Btn.Visibility = Visibility.Hidden;
+            GreenChip25Btn1.Visibility = Visibility.Hidden;
+            BlueChip10Btn.Visibility = Visibility.Hidden;
+            RedChip5Btn.Visibility = Visibility.Hidden;
+            WhiteChip1Btn.Visibility = Visibility.Hidden;
         }
 
         public void ShowBetElements()
@@ -277,6 +283,11 @@ namespace GUI
             Bet_Button.Visibility = Visibility.Visible;
             Fold_Button.Visibility = Visibility.Visible;
             MinimumBetLabel.Visibility = Visibility.Visible;
+            BlackChip100Btn.Visibility = Visibility.Visible;
+            GreenChip25Btn1.Visibility = Visibility.Visible;
+            BlueChip10Btn.Visibility = Visibility.Visible;
+            RedChip5Btn.Visibility = Visibility.Visible;
+            WhiteChip1Btn.Visibility = Visibility.Visible;
             if (minimumBet == 0)
             {
                 CheckBtn.IsEnabled = true;
@@ -394,7 +405,7 @@ namespace GUI
         //didn't check this..
         public void PushEndGameMove(Models.EndGameMove move)
         {
-            SeeEmSound.PlaySync();
+            SeeEmSound.Play();
             foreach (PlayerAtTable player in players)
             {
                 foreach (string username in move.handRanks.Keys)
@@ -547,5 +558,21 @@ namespace GUI
         {
             manager.Bet(gameID, "0", minimumBet, this);
         }
+
+        private void ChipBtn_Click(object sender, RoutedEventArgs e)
+        {
+            
+            string name= ((Button) e.Source).Name;
+            int betAmount = int.Parse(Regex.Replace(name, "[a-zA-Z]", ""));
+            int currentAmount;
+            if (!int.TryParse(BetAmount.Text, out currentAmount))
+            {
+                BetAmount.Text = "" + betAmount;
+            }
+            else
+                BetAmount.Text = "" + (currentAmount + betAmount);
+        }
+
+        
     }
 }
