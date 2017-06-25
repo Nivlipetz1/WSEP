@@ -286,7 +286,7 @@ namespace GameSystem
             return null;
         }
 
-        private void redistributesLeagues()
+        public void redistributesLeagues()
         {
             DBConnection dbcon = DBConnection.Instance;
             int numberOfUsers = dbcon.GetUsers().Count;
