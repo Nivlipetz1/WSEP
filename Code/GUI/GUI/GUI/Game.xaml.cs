@@ -337,7 +337,13 @@ namespace GUI
                             player.Credit = move.playerBets[username];
                             player.SetAvatar(null);
                             player.ShowLabels(username);
-                            player.SetCards(playerHands[username]);
+                            try {
+                                player.SetCards(playerHands[player.Username]);
+                            }
+                            catch
+                            {
+                                
+                            }
                             break;
                         }
                     }
