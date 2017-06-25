@@ -176,17 +176,6 @@ namespace GUI
             string changedString = "";
             bool changed = false;
 
-
-            //input validation
-            if (password.Equals(" "))
-            {
-                goto badInput;
-            }
-            else if (!username.Contains('@'))
-            {
-                goto badInput;
-            }
-
             if (!password.Equals(""))
             {
                 if (await Communication.AuthFunctions.Instance.editPassword(password))
