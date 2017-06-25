@@ -36,6 +36,7 @@ namespace GUI
         {
             //send to manager to get results and then
             //show them using showResults
+
             string criterion = "";
             object param = null;
             if (!player_name.Text.Equals(""))
@@ -62,7 +63,7 @@ namespace GUI
                 param = new Models.GamePreferences(-1, -1, sB, -1, tP, bI, cP, aS);
                 criterion = "gamepreference";
             }
-
+            playBtn.IsEnabled = true;
             List<Models.ClientGame> gameList = await manager.SearchGames(criterion, param);
             showResults(gameList);
         }
@@ -111,13 +112,8 @@ namespace GUI
                 catch
                 {
                     MessageBox.Show("bad input :(");
-                    manager.GoToGameCenter();
                 }
             }
-
-            //TODO: need this?
-            MessageBox.Show("bad input :(");
-            manager.GoToGameCenter();
         }
 
         private void spectateBtn_Click(object sender, RoutedEventArgs e)
@@ -129,6 +125,7 @@ namespace GUI
         private async void Spec_Click(object sender, RoutedEventArgs e)
         {
             List<Models.ClientGame> gameList = await manager.SearchGamesToSpectate();
+            playBtn.IsEnabled = false;
             showResults(gameList);
         }
     }
