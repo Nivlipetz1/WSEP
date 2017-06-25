@@ -19,7 +19,7 @@
                     <ControlTemplate TargetType="Button">
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="BorderBrush" Value="#FF4788c8" />
+                                <Setter Property="BorderBrush" Value="#FF4788c8" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                 </ControlTemplate>

@@ -111,13 +111,8 @@ namespace GUI
                 catch
                 {
                     MessageBox.Show("bad input :(");
-                    manager.GoToGameCenter();
                 }
             }
-
-            //TODO: need this?
-            MessageBox.Show("bad input :(");
-            manager.GoToGameCenter();
         }
 
         private void spectateBtn_Click(object sender, RoutedEventArgs e)
