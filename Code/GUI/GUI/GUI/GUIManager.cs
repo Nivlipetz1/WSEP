@@ -320,7 +320,7 @@ namespace GUI
             return game;
         }
 
-        private GameFrame findGameFrame(int gameID)
+        public GameFrame findGameFrame(int gameID)
         {
             GameFrame gameFrame = null;
             //while (gameList.Count == 0) ;

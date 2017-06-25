@@ -19,11 +19,11 @@
                     <ControlTemplate TargetType="Button">
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-<<<<<<< HEAD
+
                                 <Setter  Property="BorderBrush" Value="#FF4788c8" />
-=======
+
                                 <!--<Setter TargetName="border" Property="BorderBrush" Value="#FF4788c8" />-->
->>>>>>> 34d224a5f0e422addf011ca1e765a0e0856775f0
+
                             </Trigger>
                         </ControlTemplate.Triggers>
                 </ControlTemplate>

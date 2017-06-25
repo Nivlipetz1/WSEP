@@ -116,5 +116,19 @@ namespace GUI
             game.AddPlayer(profile);
             GamePM.RefreshSelectionList();
         }*/
+
+        internal Dictionary<string,Models.PlayerHand> getRoundCards()
+        {
+            if (!moves[movesIndex-1].type.Equals("GameStartMove"))
+                return null;
+            int innerIndex = movesIndex;
+            while(!moves[innerIndex].type.Equals("EndGameMove"))
+            {
+                innerIndex++;
+            }
+            Models.EndGameMove move =(Models.EndGameMove) moves[innerIndex];
+            return move.playerHands;
+
+        }
     }
 }
