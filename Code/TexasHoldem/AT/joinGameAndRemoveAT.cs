@@ -18,7 +18,7 @@ namespace AT
         GCServiceInterface gc;
         GameService gameService;
         SystemService us;
-        string username = "ohad", password = "213";
+        string username = "test321", password = "test123";
         ClientGame retGame;
         GamePreferences pref;
         [SetUp]
@@ -47,8 +47,8 @@ namespace AT
         {
             pref = new GamePreferences(8, 2, 5, 10, 1, 2, 3, true);
             ClientGame game = gc.createGame(pref, username);
-
-            List<String> users = gc.joinGame(game.getID(), username, 50);
+            us.getUser(username).Credit = 1000;
+            List<String> users = gc.joinGame(game.getID(), username, 10);
             Assert.True(users.Contains(us.getUser(username).Username));
         }
 
@@ -56,8 +56,8 @@ namespace AT
         public void joinGameTwiceTest()
         {
             ClientGame game = gc.createGame(pref, username);
-            List<String> users = gc.joinGame(game.getID(), username, 50);
-            gc.joinGame(game.getID(), username, 60);
+            List<String> users = gc.joinGame(game.getID(), username, 10);
+            gc.joinGame(game.getID(), username, 10);
             Assert.True(users.Contains(us.getUser(username).Username));
         }
         [Test]

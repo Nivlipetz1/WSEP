@@ -40,11 +40,12 @@ namespace AT
         public void Valid_createGame()
         {
             GamePreferences prefs = new GamePreferences(8, 2, 5, 10, 1, 2, 3, true);
-           // ClientUserProfile ohadUser = new ClientUserProfile (new UserProfile("ohad", "213"));
-            us.login("ohad","213");
-            gc.createGame(prefs, "ohad");
-            Assert.AreEqual(gc.getActiveGames("preferences" , prefs , "ohad").Count(), 1);
-            us.logout("ohad");
+            // ClientUserProfile ohadUser = new ClientUserProfile (new UserProfile("ohad", "213"));
+            string username = "test321", password = "test123";
+            us.login(username,password);
+            ClientGame game= gc.createGame(prefs, username);
+            Assert.NotNull(game);
+            us.logout(username);
         }
 
         [TestCase]

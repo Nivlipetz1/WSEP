@@ -147,5 +147,84 @@ namespace SystemTests
             user.UserStat.Winnings = 12;
             Assert.False(gc.unknownUserEditLeague(user, league2));
         }
+
+        [TestCase]
+        public void redistributesLeagues2PlayersDifferentLeaguesTest()
+        {
+            League league0 = new League(0, "l0");
+            League league1 = new League(1000, "l1");
+
+            UserProfile higherLeagueUser = new UserProfile("user1", "1");
+            higherLeagueUser.Credit = 1700;
+            higherLeagueUser.League = league1;
+            league1.addUser(higherLeagueUser);
+
+            UserProfile lowerLeagueUser = new UserProfile("user2", "2");
+            higherLeagueUser.Credit = 500;
+            lowerLeagueUser.League = league0;
+            league0.addUser(lowerLeagueUser);
+            gc.redistributesLeagues();
+            Assert.True(league1.isUser(lowerLeagueUser) && league1.isUser(higherLeagueUser));
+        }
+
+        [TestCase]
+        public void redistributesLeaguesMoveTheBestPlayerFromLowerLeagueTest()
+        {
+            League league0 = new League(0, "l0");
+            League league1 = new League(1000, "l1");
+
+            UserProfile higherLeagueUser = new UserProfile("user1", "1");
+            higherLeagueUser.Credit = 1700;
+            higherLeagueUser.League = league1;
+            league1.addUser(higherLeagueUser);
+
+            UserProfile lowerLeagueUser = new UserProfile("user2", "2");
+            higherLeagueUser.Credit = 500;
+            lowerLeagueUser.League = league0;
+            league0.addUser(lowerLeagueUser);
+
+            UserProfile lowerLeagueUser1 = new UserProfile("user3", "1");
+            lowerLeagueUser1.Credit = 600;
+            lowerLeagueUser1.League = league0;
+            league0.addUser(lowerLeagueUser1);
+
+            UserProfile lowerLeagueUser2 = new UserProfile("user4", "1");
+            lowerLeagueUser2.Credit = 700;
+            lowerLeagueUser2.League = league0;
+            league0.addUser(lowerLeagueUser2);
+
+            gc.redistributesLeagues();
+            Assert.True(league0.isUser(lowerLeagueUser) && league1.isUser(higherLeagueUser) && league0.isUser(lowerLeagueUser1) && league1.isUser(lowerLeagueUser2));
+        }
+
+        [TestCase]
+        public void redistributesLeaguesMoveTheWorstPlayerFromHigherLeagueTest()
+        {
+            League league0 = new League(0, "l0");
+            League league1 = new League(1000, "l1");
+
+            UserProfile higherLeagueUser = new UserProfile("user1", "1");
+            higherLeagueUser.Credit = 1700;
+            higherLeagueUser.League = league1;
+            league1.addUser(higherLeagueUser);
+
+            UserProfile lowerLeagueUser = new UserProfile("user2", "2");
+            higherLeagueUser.Credit = 1500;
+            lowerLeagueUser.League = league1;
+            league1.addUser(lowerLeagueUser);
+
+            UserProfile lowerLeagueUser1 = new UserProfile("user3", "1");
+            lowerLeagueUser1.Credit = 1600;
+            lowerLeagueUser1.League = league1;
+            league1.addUser(lowerLeagueUser1);
+
+            UserProfile lowerLeagueUser2 = new UserProfile("user4", "1");
+            lowerLeagueUser2.Credit = 700;
+            lowerLeagueUser2.League = league0;
+            league0.addUser(lowerLeagueUser2);
+
+            gc.redistributesLeagues();
+            Assert.True(league0.isUser(lowerLeagueUser) && league1.isUser(higherLeagueUser) && league1.isUser(lowerLeagueUser1) && league0.isUser(lowerLeagueUser2));
+        }
     }
 }

@@ -96,7 +96,11 @@ namespace GameSystem
         private List<Game> getAllActiveGamesByPlayerName(object playerName , List<Game> games)
         {
             List<Game> activeGames = new List<Game>();
-            string name = JsonConvert.DeserializeObject<string>(((JObject)playerName).ToString());
+            string name;
+            if (playerName is JObject)
+                name = JsonConvert.DeserializeObject<string>(((JObject)playerName).ToString());
+            else
+                name = (string)playerName;
             foreach (Game game in games)
             {
                 List<PlayingUser> players = game.GetPlayers();
@@ -110,13 +114,22 @@ namespace GameSystem
 
         private List<Game> getAllActiveGamesByPotSize(object potSize , List<Game> games)
         {
-            int pot = JsonConvert.DeserializeObject<int>(((JObject)potSize).ToString());
+            int pot;
+            if (potSize is JObject)
+                pot = JsonConvert.DeserializeObject<int>(((JObject)potSize).ToString());
+            else
+                pot = (int)potSize;
             return games.Where(game => game.GetPotSize() == pot).ToList();
         }
 
         private List<Game> getAllActiveGamesByGamePreference(object preferences , List<Game> games)
         {
-            GamePreferences gamePref = JsonConvert.DeserializeObject<GamePreferences>(((JObject)preferences).ToString());
+
+            GamePreferences gamePref;
+            if (preferences is JObject)
+                gamePref = JsonConvert.DeserializeObject<GamePreferences>(((JObject)preferences).ToString());
+            else
+                gamePref = (GamePreferences)preferences;
             return games.Where(game => contained(game.GetGamePref(), gamePref)).ToList();
         }
 
@@ -291,7 +304,7 @@ namespace GameSystem
             return null;
         }
 
-        private void redistributesLeagues()
+        public void redistributesLeagues()
         {
             DBConnection dbcon = DBConnection.Instance;
             int numberOfUsers = dbcon.GetUsers().Count;

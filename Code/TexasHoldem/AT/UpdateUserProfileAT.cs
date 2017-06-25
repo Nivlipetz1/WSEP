@@ -98,6 +98,7 @@ namespace AT
             Assert.False(us.editPassword("    ", user.Username));
             us.logout("abc");
         }
+
         [TestCase]
         public void editAvatar()
         {
@@ -105,29 +106,12 @@ namespace AT
             ClientUserProfile user = us.getUser("abc");
             try
             {
-                Image avatar = new Bitmap(Environment.CurrentDirectory+ "\\AT\\avatar.jpg");
-                us.editAvatar(ServiceLayer.ImageConverter.imageToByteArray(avatar), "abc");
-                Assert.AreEqual(ServiceLayer.ImageConverter.imageToByteArray(avatar), user.Avatar);
+                string path = @"D:\BackUpNaorComputer\NaorComputer\שנה ג - סמסטר ב\סדנא\WSEP\Code\TexasHoldem\AT";
+                Image avatar = new Bitmap(path + "\\avatar.jpg");
+                bool ret = us.editAvatar(ServiceLayer.ImageConverter.imageToByteArray(avatar), "abc");
+                Assert.True(ret);
             }
             catch(Exception e)
-            {
-                Exception s = e;
-                Assert.True(false);
-            }
-        }
-
-        [TestCase]
-        public void badEditAvatar_PictureTooBig()
-        {
-            us.login("abc", "123");
-            ClientUserProfile user = us.getUser("abc");
-            try
-            {
-                Image avatar = new Bitmap(Environment.CurrentDirectory + "\\AT\\avatarBIG.jpg");
-                us.editAvatar(ServiceLayer.ImageConverter.imageToByteArray(avatar), "abc");
-                Assert.AreNotEqual(ServiceLayer.ImageConverter.imageToByteArray(avatar), user.Avatar);
-            }
-            catch (Exception e)
             {
                 Exception s = e;
                 Assert.True(false);
