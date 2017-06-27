@@ -13,6 +13,7 @@ namespace GUI.Models
         public List<ClientUserProfile> players { set; get; }
         public List<ClientUserProfile> spectators { set; get; }
         public List<ClientUserProfile> waitingList { set; get; }
+        public List<ClientUserProfile> waitingListSpec { set; get; }
         public int[] pot { set; get; }
         public GamePreferences gamePref { set; get; }
         public Dictionary<string, int> playerBets { set; get; }
@@ -35,6 +36,12 @@ namespace GUI.Models
         public void AddPlayerToWaitingList(ClientUserProfile profile)
         {
             waitingList.Add(profile);
+            messageList.Add(profile.username, "");
+        }
+
+        public void AddSpecToWaitingList(ClientUserProfile profile)
+        {
+            waitingListSpec.Add(profile);
             messageList.Add(profile.username, "");
         }
 
@@ -76,6 +83,12 @@ namespace GUI.Models
             }
 
             waitingList.Clear();
+            foreach (Models.ClientUserProfile prof in waitingListSpec)
+            {
+                spectators.Add(prof);
+            }
+
+            waitingListSpec.Clear();
         }
 
         public byte[] GetAvatar(string username)
