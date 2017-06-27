@@ -39,6 +39,7 @@ namespace GUI
         public void AddGame(ClientGame game)
         {
             game.waitingList = new List<ClientUserProfile>();
+            game.waitingListSpec = new List<ClientUserProfile>();
             gamesList.Add(game);
         }
 
@@ -100,6 +101,21 @@ namespace GUI
             }
             image.Freeze();
             return image;
+        }
+
+        internal bool isStringAPlayer(string str, int gameID)
+        {
+            Models.ClientGame game = findGame(gameID);
+            bool value = false;
+            foreach (Models.ClientUserProfile prof in game.players)
+            {
+                if (prof.username.Equals(str))
+                {
+                    value = true;
+                    break;
+                }
+            }
+            return value;
         }
 
         internal string GetMessages(int gameID,string v)
@@ -226,6 +242,7 @@ namespace GUI
                 await RefreshProfile();
                 mainPage.ShowAvatar();
                 mainWindow.mainFrame.NavigationService.GoBack();
+                return;
             }
 
             badInput:
@@ -579,6 +596,11 @@ namespace GUI
             mainWindow.mainFrame.NavigationService.Navigate(new UserMainPage(this));
         }
 
+        internal void StopReplay(int gameID)
+        {
+            findGameFrame(gameID).quitReplay();
+        }
+
         private Status GetStatusFrame()
         {
             return status;
@@ -594,6 +616,18 @@ namespace GUI
                         gameFrame.getGame().AddPlayerToWaitingList(prof);
                     }
         });
+        }
+
+        public void SpecJoinedGame(int gameID, Models.ClientUserProfile prof)
+        {
+            Dispatcher.CurrentDispatcher.InvokeAsync(() =>
+            {
+                GameFrame gameFrame = findGameFrame(gameID);
+                if (gameFrame != null)
+                {
+                    gameFrame.getGame().AddSpecToWaitingList(prof);
+                }
+            });
         }
 
         public void PushPMMessage(int gameId, string sender, string message)
@@ -629,7 +663,7 @@ namespace GUI
 
         public void PlayerQuitGame(string player, int gameId)
         {
-            Dispatcher.CurrentDispatcher.InvokeAsync(() =>
+            Dispatcher.CurrentDispatcher.InvokeAsync(async() =>
             {
                 GameFrame gameFrame = findGameFrame(gameId);
                 if (gameFrame != null)
@@ -637,6 +671,10 @@ namespace GUI
                     ClientGame cg = findGame(gameId);
                     gameFrame.RemovePlayer(player);
                     cg.RemovePlayer(player);
+                    RemoveGame(findGame(gameId));
+                    RemoveGameFrame(findGameFrame(gameId));
+                    await RefreshProfile();
+                    GoToGameCenter();
                 }
             });
         }
