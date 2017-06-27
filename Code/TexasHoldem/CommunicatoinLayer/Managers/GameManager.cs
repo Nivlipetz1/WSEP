@@ -25,6 +25,7 @@ namespace CommunicatoinLayer.Managers
             NotificationService.pushWinnersEvt += pushWinners;
             NotificationService.pushYourTurnEvt += pushYourTurn;
             NotificationService.setHandEvt += setHand;
+            NotificationService.pushRemovePlayerEvt += removePlayer;
         }
 
         public static GameManager Instance
@@ -60,6 +61,11 @@ namespace CommunicatoinLayer.Managers
         public void joinGame(string userName, int gameId)
         {
             
+        }
+
+        public void removePlayer(string user , int gameID, List<string> usersToSend)
+        {
+            Clients.Clients(usersToSend.Select(u => AuthManager.Instance.GetConnectionIdByName(u)).ToList()).removePlayer(user, gameID);
         }
     }
 }

@@ -40,7 +40,9 @@ namespace Gaming
 
         public delegate void UpdateCreditEvt(string userName , int credit);
         public static event UpdateCreditEvt updateCreditEvt;
-        
+
+        public delegate void pushRemovePlayer(string userName, int gameId , List<string> users);
+        public static event pushRemovePlayer pushRemovePlayerEvt;
 
         private NotificationService()
         {
@@ -119,6 +121,13 @@ namespace Gaming
             var e = updateCreditEvt;
             if (e != null)
                 e(userName,credit);
+        }
+
+        public void removePlayer(string user , int gameId , List<string> usersToSend)
+        {
+            var e = pushRemovePlayerEvt;
+            if (e != null)
+                e(user, gameId , usersToSend);
         }
     }
 }

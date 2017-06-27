@@ -704,12 +704,20 @@ namespace Gaming
          */
         public void CheckPlayersCredits()
         {
+            List<string> playersToRemove = new List<string>();
             foreach(PlayingUser pl in players)
             {
                 if (pl.GetCredit() < gamePref.GetbB())
                 {
-                    removePlayer(pl);
+                    playersToRemove.Add(pl.GetUserName());
                 }
+            }
+            List<string> playersToSend = players.ToList().Select(p => p.GetUserName()).ToList();
+            playersToSend.AddRange(spectators.ToList().Select(s => s.GetUserName()));
+            foreach(string playerToRemove in playersToRemove)
+            {
+                NotificationService.Instance.removePlayer(playerToRemove , id , playersToSend);
+                playersToSend.Remove(playerToRemove);
             }
         }
     }
