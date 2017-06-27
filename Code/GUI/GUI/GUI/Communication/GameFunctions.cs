@@ -54,6 +54,10 @@ namespace GUI.Communication
 
             gameHubProxy.On<string, int>("removeSpectator", (user, gameID) =>
             {
+                Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    serverToClient.SpecQuitGame(user, gameID);
+                });
             });
 
             gameHubProxy.On<string, string , int>("pushMessage", (user, message , gameID) =>

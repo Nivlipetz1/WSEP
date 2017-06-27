@@ -33,9 +33,24 @@ namespace GUI.Models
             }
         }
 
+        public void RemoveSpec(string username)
+        {
+            foreach (ClientUserProfile prof in players)
+            {
+                if (prof.username.Equals(username))
+                {
+                    spectators.Remove(prof);
+                    messageList.Remove(username);
+                    return;
+                }
+            }
+        }
+
+
         public void AddPlayerToWaitingList(ClientUserProfile profile)
         {
             waitingList.Add(profile);
+
             messageList.Add(profile.username, "");
         }
 

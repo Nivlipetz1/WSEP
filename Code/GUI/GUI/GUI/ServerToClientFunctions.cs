@@ -18,6 +18,7 @@ namespace GUI
         void SpecJoinedGame(int gameID, Models.ClientUserProfile prof);
         void PushWinners(List<string> winners, int gameID);
         void PlayerQuitGame(string prof, int gameID);
+        void SpecQuitGame(string prof, int gameID);
         void dbUp();
         void dbDown();
         //Missing Functions:

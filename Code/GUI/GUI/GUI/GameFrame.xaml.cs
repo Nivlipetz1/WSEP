@@ -135,5 +135,11 @@ namespace GUI
             return move.playerHands;
 
         }
+
+        internal void RemoveSpec(string player)
+        {
+            GamePM.RefreshSelectionList();
+            game.RemoveSpec(player);
+        }
     }
 }

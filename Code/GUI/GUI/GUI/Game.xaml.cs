@@ -46,7 +46,7 @@ namespace GUI
         public static SoundPlayer SeeEmSound = new SoundPlayer(Properties.Resources.LetsSeeEm);
         public static SoundPlayer ChecksSound = new SoundPlayer(Properties.Resources.Check);
         public static SoundPlayer FoldsSound = new SoundPlayer(Properties.Resources.PlayerFolds);
-        public Game(GUIManager manager, int gameID, bool SpecMode, bool ReplayMode)
+        public Game(GUIManager manager, int gameID, bool SpecMode, bool ReplayMode, bool limited)
         {
             InitializeComponent();
             this.manager = manager;
@@ -92,6 +92,12 @@ namespace GUI
                     SpecLbl.Content = "Replay Mode";
                 }
                 SpecLbl.Visibility = Visibility.Visible;
+            }
+            SpectatorsLbl.Content = "Spectators: " + manager.GetSpectators(gameID).Count();
+            SpectatorsLbl.Visibility = Visibility.Visible;
+            if (limited)
+            {
+                PotLimitLbl.Visibility = Visibility.Visible;
             }
         }
 
@@ -266,6 +272,14 @@ namespace GUI
             }
         }
 
+        public void updateSpec()
+        {
+
+            SpectatorsLbl.Content = "Spectators: " + manager.GetSpectators(gameID).Count();
+        }
+
+        
+
         public void HideBetElements()
         {
             BetAmount.Visibility = Visibility.Hidden;
@@ -386,6 +400,7 @@ namespace GUI
             }
             PotSizeLbl.Content = "Pot Size: $" + potSizeInt;
             PotSizeLbl.Visibility = Visibility.Visible;
+            updateSpec();
             startGameSound.PlaySync(); 
             if (SpecMode || ReplayMode)
                 DealCards(null);

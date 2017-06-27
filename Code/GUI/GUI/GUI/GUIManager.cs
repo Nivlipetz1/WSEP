@@ -10,6 +10,7 @@ using System.Windows.Media.Imaging;
 using System.IO;
 using System.Windows.Threading;
 using System.Threading;
+using System.Windows.Input;
 
 namespace GUI
 {
@@ -641,6 +642,7 @@ namespace GUI
                 if (gameFrame != null)
                 {
                     gameFrame.getGame().AddSpecToWaitingList(prof);
+
                 }
             });
         }
@@ -676,6 +678,21 @@ namespace GUI
             }
         }
 
+        public void SpecQuitGame(string player, int gameId)
+        {
+            Dispatcher.CurrentDispatcher.InvokeAsync(() =>
+            {
+                GameFrame gameFrame = findGameFrame(gameId);
+                if (gameFrame != null)
+                {
+                    ClientGame cg = findGame(gameId);
+                    gameFrame.RemoveSpec(player);
+                    cg.RemoveSpec(player);
+                    gameFrame.GameWindow.updateSpec();
+                }
+            });
+        }
+
         public void PlayerQuitGame(string player, int gameId)
         {
             Dispatcher.CurrentDispatcher.InvokeAsync(async() =>
@@ -702,7 +719,8 @@ namespace GUI
         {
             Application.Current.Dispatcher.InvokeAsync(() =>
             {
-                MessageBox.Show("DB is down", "System Message", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("DB is down\nWill be back shortly.. please hold on.", "System Message", MessageBoxButton.OK, MessageBoxImage.Information);
+                Mouse.OverrideCursor = Cursors.Wait;
                 lock (this)
                 {
                     Monitor.Wait(this);
@@ -716,6 +734,9 @@ namespace GUI
             {
                 Monitor.PulseAll(this);
             }
+            Application.Current.Dispatcher.InvokeAsync(() => { 
+                        Mouse.OverrideCursor = null;
+            });
         }
     }
 }
