@@ -377,6 +377,16 @@ namespace Gaming
                     }
                     if (bet >= 0) //check|call|raise
                     {
+                        if (gamePref.GetTypePolicy() == GamePreferences.LIMIT)
+                        {
+                            if (bet > pot[0])
+                            {
+                                int updatedCredit = players[index].GetCredit() + (bet - pot[0]);
+                                players[index].SetCredit(updatedCredit);
+                                bet = pot[0];
+                            }
+                        }
+                        
                         playerBets[currentUser] += bet;
                         bettingRound += bet;
                         PushBetMove(currentUser, bet);
