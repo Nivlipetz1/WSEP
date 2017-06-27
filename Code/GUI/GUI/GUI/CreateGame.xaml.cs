@@ -62,7 +62,7 @@ namespace GUI
                 int bB = Int32.Parse(Big_Blind.Text);
                 int cP = Int32.Parse(Chip_Policy.Text);
                 int bIP = Int32.Parse(Buy_In_Policy.Text);
-                int tP = 0;
+                int tP = Type_Policy.SelectedIndex+1;
                 bool aS = Allow_Spec.IsChecked.Value;
                 Models.GamePreferences pref = new Models.GamePreferences(maxP, minP, sB, bB, tP, bIP, cP, aS);
 
