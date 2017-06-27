@@ -27,7 +27,6 @@
         <ComboBox Name="Type_Policy"  HorizontalAlignment="Left" Height="32" Margin="504,171,0,0" VerticalAlignment="Top" Width="136">
             <ComboBoxItem Content="Limit" HorizontalAlignment="Left" Width="134"/>
             <ComboBoxItem Content="No Limit" HorizontalAlignment="Left" Width="134"/>
-            <ComboBoxItem Content="Pot Limit" HorizontalAlignment="Left" Width="134"/>
 
         </ComboBox>
         <TextBox Name="Chip_Policy" HorizontalAlignment="Left" Height="31" Margin="504,233,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="136" />
