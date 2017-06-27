@@ -87,9 +87,12 @@ namespace GUI
 
             if (SpecMode)
             {
+                if (ReplayMode)
+                {
+                    SpecLbl.Content = "Replay Mode";
+                }
                 SpecLbl.Visibility = Visibility.Visible;
             }
-
         }
 
         private void RepositionCards()
@@ -271,7 +274,7 @@ namespace GUI
             MinimumBetLabel.Visibility = Visibility.Hidden;
             CheckBtn.Visibility = Visibility.Hidden;
             BlackChip100Btn.Visibility = Visibility.Hidden;
-            GreenChip25Btn1.Visibility = Visibility.Hidden;
+            GreenChip25Btn.Visibility = Visibility.Hidden;
             BlueChip10Btn.Visibility = Visibility.Hidden;
             RedChip5Btn.Visibility = Visibility.Hidden;
             WhiteChip1Btn.Visibility = Visibility.Hidden;
@@ -284,7 +287,7 @@ namespace GUI
             Fold_Button.Visibility = Visibility.Visible;
             MinimumBetLabel.Visibility = Visibility.Visible;
             BlackChip100Btn.Visibility = Visibility.Visible;
-            GreenChip25Btn1.Visibility = Visibility.Visible;
+            GreenChip25Btn.Visibility = Visibility.Visible;
             BlueChip10Btn.Visibility = Visibility.Visible;
             RedChip5Btn.Visibility = Visibility.Visible;
             WhiteChip1Btn.Visibility = Visibility.Visible;
@@ -327,6 +330,7 @@ namespace GUI
             RepositionCards();
             if (ReplayMode)
             {
+                Dictionary<String, Models.PlayerHand> playerHands = manager.findGameFrame(gameID).getRoundCards();
                 foreach (string username in move.playerBets.Keys)
                 {
                     foreach (PlayerAtTable player in players)
@@ -336,7 +340,13 @@ namespace GUI
                             player.Credit = move.playerBets[username];
                             player.SetAvatar(null);
                             player.ShowLabels(username);
-                            //player.SetCards(move.playerHands[username]);
+                            try {
+                                player.SetCards(playerHands[player.Username]);
+                            }
+                            catch
+                            {
+                                
+                            }
                             break;
                         }
                     }

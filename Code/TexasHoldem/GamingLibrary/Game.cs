@@ -92,7 +92,7 @@ namespace Gaming
 
             waitingList.Clear();
             updatePlayerBets(0, true);
-            //SystemLogger.Log("game started","GameLogs.log");
+            SystemLogger.Log("game started","GameLogs.txt");
             //if (gamePref.GetMinPlayers() > GetNumberOfPlayers())
             //   throw new InvalidOperationException("Can't start game with less than the minimum number of players");
             Thread.Sleep(1000);
@@ -384,7 +384,7 @@ namespace Gaming
                     else //fold
                     {
                         playerBets[currentUser] = 0;
-                        playerHands.Remove(currentUser.GetUserName());//username
+                        //playerHands.Remove(currentUser.GetUserName());//username
                         currentUser.SetStatus("Fold");
                         PushFoldMove(currentUser);
                     }

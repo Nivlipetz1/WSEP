@@ -42,6 +42,8 @@ namespace GUI
             gameFrame.PushMove();
             moveCounter++;
             RefreshLabel();
+            if (moveCounter >= numOfMoves)
+                moveCounter = 0;
         }
 
         private void RefreshLabel()

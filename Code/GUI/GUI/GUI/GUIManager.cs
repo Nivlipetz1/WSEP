@@ -176,17 +176,6 @@ namespace GUI
             string changedString = "";
             bool changed = false;
 
-
-            //input validation
-            if (password.Equals(" "))
-            {
-                goto badInput;
-            }
-            else if (!username.Contains('@'))
-            {
-                goto badInput;
-            }
-
             if (!password.Equals(""))
             {
                 if (await Communication.AuthFunctions.Instance.editPassword(password))
@@ -243,6 +232,11 @@ namespace GUI
                 MessageBox.Show(changedString, "Profile failed to update", MessageBoxButton.OK, MessageBoxImage.Information);
                 mainWindow.mainFrame.NavigationService.GoBack();
             
+        }
+
+        internal async Task<List<int>> getAllAvailableReplayes()
+        {
+            return await Communication.GameCenterFunctions.Instance.getAllAvailableReplayes();
         }
 
         internal async void JoinGameAsSpectator(int gameID)
@@ -320,7 +314,7 @@ namespace GUI
             return game;
         }
 
-        private GameFrame findGameFrame(int gameID)
+        public GameFrame findGameFrame(int gameID)
         {
             GameFrame gameFrame = null;
             //while (gameList.Count == 0) ;
@@ -527,7 +521,6 @@ namespace GUI
                     else
                         MessageBox.Show("Something went wrong", "Information", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-
                 else
                 {
                     if (await Communication.GameFunctions.Instance.removePlayer(gameID))
@@ -537,7 +530,6 @@ namespace GUI
                         await RefreshProfile();
                         GoToGameCenter();
                         //mainWindow.mainFrame.NavigationService.GoBack();
-
                     }
                     else
                         MessageBox.Show("Something went wrong", "Information", MessageBoxButton.OK, MessageBoxImage.Error);

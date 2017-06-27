@@ -76,17 +76,5 @@ namespace AT
             foreach (ClientGame g in games)
                 Assert.True(g.GamePref.AllowSpec());
         }
-
-        [TestCase]
-        public void valid_gameListByName()
-        {
-          
-            ClientGame g = gc.getActiveGames("preferences", prefs, "abc")[0]; ;
-            gc.joinGame(g.getID(), "ohad", 30);
-            
-            List<ClientGame> games = gc.getActiveGames("playerName", "ohad","abc");
-            Assert.AreEqual(1,games.Count);
-            //Assert.True(games[0].GetUserProfiles().Contains(userProf));s
-        }
     }
 }

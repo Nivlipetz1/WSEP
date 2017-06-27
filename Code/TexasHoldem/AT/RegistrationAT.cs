@@ -38,7 +38,7 @@ namespace AT
         [TestCase]
         public void successRegister()
         {
-            Assert.True(us.register("myTest"+new Random().Next(100), "123"));
+            Assert.True(us.register("myTest"+new Random().Next(1000), "123"));
         }
 
         [TestCase]

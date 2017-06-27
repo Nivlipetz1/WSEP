@@ -9,9 +9,10 @@ namespace Logger
 {
     public static class SystemLogger
     {
+        private static string path = @"C:\Users\naordalal\Desktop\";
         public static void Log(string message , string file)
         {
-            using (StreamWriter w = File.AppendText(file))
+            using (StreamWriter w = File.AppendText(path + file))
             {
                 Log(message, w);
             }
@@ -29,7 +30,7 @@ namespace Logger
 
         public static string getLogFile(string file)
         {
-            using (StreamReader r = File.OpenText(file))
+            using (StreamReader r = File.OpenText(path + file))
             {
                 return readLog(r);
             }

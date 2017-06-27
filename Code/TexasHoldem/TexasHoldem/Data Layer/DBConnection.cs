@@ -172,7 +172,7 @@ namespace GameSystem.Data_Layer
         public static bool ContainsKey(this List<UserProfile> list , string key)
         {
             IMongoCollection<UserProfile> coll = DBConnection.Instance.Users;
-            return coll.Find(user => user.Username == key).ToList().Count == 1;
+            return coll.Find(user => user.Username == key).ToList().Count >= 1;
         }
 
         public static UserProfile GetByName(this List<UserProfile> list, string name)

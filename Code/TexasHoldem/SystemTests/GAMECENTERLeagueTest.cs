@@ -197,8 +197,7 @@ namespace SystemTests
             Assert.True(league0.isUser(lowerLeagueUser) && league1.isUser(higherLeagueUser) && league0.isUser(lowerLeagueUser1) && league1.isUser(lowerLeagueUser2));
         }
 
-        [TestCase]
-        public void redistributesLeaguesMoveTheBestPlayerFromLowerLeagueTest()
+        public void redistributesLeaguesMoveTheWorstPlayerFromHigherLeagueTest()
         {
             League league0 = new League(0, "l0");
             League league1 = new League(1000, "l1");
