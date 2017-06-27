@@ -76,6 +76,11 @@ namespace Gaming
             return credit;
         }
 
+        public void SetCredit(int credit)
+        {
+            this.credit=credit;
+        }
+
         public void SetHand(PlayerHand hand)
         {
             this.hand = hand;

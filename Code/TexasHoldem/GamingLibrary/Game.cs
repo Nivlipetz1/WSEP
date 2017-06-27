@@ -72,6 +72,11 @@ namespace Gaming
             return waitingList;
         }
 
+        public int GetNumberWaitingList()
+        {
+            return waitingList.Count;
+        }
+
         public void StartGame()
         {
             List<PlayingUser> winners = new List<PlayingUser>();
@@ -220,7 +225,8 @@ namespace Gaming
         GameEnd:
             gamePref.Status = "inactive";
             ResetGame();
-            Thread.Sleep(10000);
+            CheckPlayersCredits();
+            Thread.Sleep(12000);
             if ((waitingList.Count + playerBets.Count) >= gamePref.GetMinPlayers())
                 StartGame();
 
@@ -377,6 +383,16 @@ namespace Gaming
                     }
                     if (bet >= 0) //check|call|raise
                     {
+                        if (gamePref.GetTypePolicy() == GamePreferences.LIMIT)
+                        {
+                            if (bet > pot[0])
+                            {
+                                int updatedCredit = players[index].GetCredit() + (bet - pot[0]);
+                                players[index].SetCredit(updatedCredit);
+                                bet = pot[0];
+                            }
+                        }
+                        
                         playerBets[currentUser] += bet;
                         bettingRound += bet;
                         PushBetMove(currentUser, bet);
@@ -679,6 +695,22 @@ namespace Gaming
         public int getGameID()
         {
             return id;
+        }
+
+        /**
+         * 
+         * This function will check at end of game if players have enough credit to cover the big blind
+         * Whoever doesn't have enough credit, will be kicked out.
+         */
+        public void CheckPlayersCredits()
+        {
+            foreach(PlayingUser pl in players)
+            {
+                if (pl.GetCredit() < gamePref.GetbB())
+                {
+                    removePlayer(pl);
+                }
+            }
         }
     }
 }

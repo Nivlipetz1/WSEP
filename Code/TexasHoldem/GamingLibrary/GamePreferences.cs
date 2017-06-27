@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace Gaming
 {
+
+
     public class GamePreferences
     {
         private int maxPlayers;
@@ -19,9 +21,10 @@ namespace Gaming
         private string status;
 
         //typePolicy:
-        const int LIMIT = 1;
-        const int NO_LIMIT = 2;
-        const int POT_LIMIT = 3;
+        public const int LIMIT = 1;
+        public const int NO_LIMIT = 2;
+        public const int POT_LIMIT = 3;
+
 
         public GamePreferences(int maxP, int minP, int sB, int bB, int tP, int bIP, int cP, Boolean aS)
         {
