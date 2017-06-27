@@ -14,7 +14,7 @@ namespace GameSystem
 {
     public class UserProfile
     {
-        public ObjectId Id { get; set; }
+        [BsonId]
         private string username;
         private string password;
         private Image avatar;

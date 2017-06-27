@@ -1,6 +1,7 @@
 ﻿using GameSystem;
 using Gaming;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using System;
@@ -77,7 +78,7 @@ namespace GameSystem.Data_Layer
             GlobalTryCatch<object>(() =>
             {
                 Users.ReplaceOne(
-                    u => u.Id == user.Id,
+                    u => u.Username == user.Username,
                     user,
                     new UpdateOptions { IsUpsert = true });
                 return null;
@@ -235,7 +236,7 @@ namespace GameSystem.Data_Layer
                 UserProfile userProf = Users.Find(u => u.Username == user.UserName).First();
                 userProf.Credit += user.Credit;
                 Users.ReplaceOne(
-                        u => u.Username == user.UserName,
+                        u => u.Username == userProf.Username,
                         userProf,
                         new UpdateOptions { IsUpsert = true });
 
@@ -246,7 +247,7 @@ namespace GameSystem.Data_Layer
 
     internal class UserCreditInGame
     {
-        public ObjectId Id { get; set; }
+        [BsonId]
         public string UserName { set; get; }
         public int Credit { set; get; }
 
@@ -278,7 +279,6 @@ namespace GameSystem.Data_Layer
                 IMongoCollection<UserProfile> coll = DBConnection.Instance.Users;
                 return coll.Find(user => user.Username == key).ToList().Count >= 1;
             });
-
         }
 
         public static UserProfile GetByName(this List<UserProfile> list, string name)
