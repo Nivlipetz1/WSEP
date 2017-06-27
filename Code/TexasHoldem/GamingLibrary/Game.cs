@@ -263,6 +263,8 @@ namespace Gaming
             {
                 player.SetStatus("active");
                 playerBets[player] = player.GetCredit();
+                NotificationService.Instance.updateCredit(player.GetUserName(), player.GetCredit() - player.creditInPreviousRound);
+                player.creditInPreviousRound = player.GetCredit();
             }
 
         }
@@ -389,7 +391,6 @@ namespace Gaming
                             {
                                 int updatedCredit = players[index].GetCredit() + (bet - bettingRound);
                                 players[index].SetCredit(updatedCredit);
-                                NotificationService.Instance.updateCredit(players[index].GetUserName(), bet - bettingRound);
                                 bet = bettingRound;
                             }
                         }
@@ -504,6 +505,7 @@ namespace Gaming
                 throw new InvalidOperationException("Maximum number of players reached");
 
             NotificationService.Instance.updateCredit(player.GetUserName(), player.GetCredit());
+            player.creditInPreviousRound = player.GetCredit();
             if (gamePref.GetStatus().Equals("active"))
             {
                 waitingList.Add(player);
@@ -704,21 +706,27 @@ namespace Gaming
          */
         public void CheckPlayersCredits()
         {
-            List<string> playersToRemove = new List<string>();
+            List<PlayingUser> playersToRemove = new List<PlayingUser>();
             foreach(PlayingUser pl in players)
             {
                 if (pl.GetCredit() < gamePref.GetbB())
                 {
-                    playersToRemove.Add(pl.GetUserName());
+                    playersToRemove.Add(pl);
                 }
             }
             List<string> playersToSend = players.ToList().Select(p => p.GetUserName()).ToList();
             playersToSend.AddRange(spectators.ToList().Select(s => s.GetUserName()));
-            foreach(string playerToRemove in playersToRemove)
+            foreach(PlayingUser playerToRemove in playersToRemove)
             {
-                NotificationService.Instance.removePlayer(playerToRemove , id , playersToSend);
-                playersToSend.Remove(playerToRemove);
+                NotificationService.Instance.removePlayer(playerToRemove.GetUserName() , id , playersToSend);
+                playersToSend.Remove(playerToRemove.GetUserName());
+                players.Remove(playerToRemove);
+                playerBets.Remove(playerToRemove);
+                var e = evt;
+                if (e != null)
+                    evt(playerToRemove);
             }
+
         }
     }
 }

@@ -249,7 +249,7 @@ namespace GameSystem
         {
             UserProfile user = GetUserByName(playingUser.GetUserName());
             user.UpdateCredit(playingUser.GetCredit());
-            DBConnection.Instance.updateUserCredit(playingUser.GetUserName(), -playingUser.GetCredit());
+            DBConnection.Instance.updateUserCredit(playingUser.GetUserName(), -playingUser.creditInPreviousRound);
             user.updateStatistics(playingUser);
 
             if (user.UserStat.Winnings + user.UserStat.Losses < 10)
