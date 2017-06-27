@@ -24,7 +24,7 @@ namespace CommunicatoinLayer.Hubs
             ClientGame game =  gc.createGame(preferecnces , userName);
             return game;
         }
-
+        
         public List<ClientGame> getActiveGames(string criterion, object param)
         {
             if (!AuthManager.Instance.containsConnection(Context.ConnectionId))
