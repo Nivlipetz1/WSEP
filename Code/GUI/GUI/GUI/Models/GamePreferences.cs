@@ -19,9 +19,9 @@ namespace GUI.Models
         public string status { set; get; }
 
         //typePolicy:
-        const int LIMIT = 1;
-        const int NO_LIMIT = 2;
-        const int POT_LIMIT = 3;
+        public const int LIMIT = 1;
+        public const int NO_LIMIT = 2;
+        
 
         public GamePreferences()
         {

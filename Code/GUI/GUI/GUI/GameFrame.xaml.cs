@@ -53,7 +53,7 @@ namespace GUI
             {
                 initialized = true;
                 InitializeComponent();
-                gameFrame.NavigationService.Navigate(GameWindow = new Game(manager, gameID, SpecMode, false));
+                gameFrame.NavigationService.Navigate(GameWindow = new Game(manager, gameID, SpecMode, false, game.gamePref.typePolicy == Models.GamePreferences.LIMIT));
                 chatFrame.NavigationService.Navigate(GameChat = new GameChat(manager, gameID));
                 pmFrame.NavigationService.Navigate(GamePM = new GamePM(manager, gameID,SpecMode));
             }
@@ -65,7 +65,7 @@ namespace GUI
             {
                 initialized = true;
                 InitializeComponent();
-                gameFrame.NavigationService.Navigate(GameWindow = new Game(manager, gameID, true,true));
+                gameFrame.NavigationService.Navigate(GameWindow = new Game(manager, gameID, true,true,game.gamePref.typePolicy==Models.GamePreferences.LIMIT));
                 chatFrame.NavigationService.Navigate(GameReplayCont = new GameReplayCont(this,moves.Count));
                 pmFrame.NavigationService.Navigate(new GamePM());
             }
