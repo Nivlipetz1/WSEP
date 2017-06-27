@@ -39,6 +39,7 @@ namespace GUI
         public void AddGame(ClientGame game)
         {
             game.waitingList = new List<ClientUserProfile>();
+            game.waitingListSpec = new List<ClientUserProfile>();
             gamesList.Add(game);
         }
 
@@ -100,6 +101,21 @@ namespace GUI
             }
             image.Freeze();
             return image;
+        }
+
+        internal bool isStringAPlayer(string str, int gameID)
+        {
+            Models.ClientGame game = findGame(gameID);
+            bool value = false;
+            foreach (Models.ClientUserProfile prof in game.players)
+            {
+                if (prof.username.Equals(str))
+                {
+                    value = true;
+                    break;
+                }
+            }
+            return value;
         }
 
         internal string GetMessages(int gameID,string v)
@@ -226,6 +242,7 @@ namespace GUI
                 await RefreshProfile();
                 mainPage.ShowAvatar();
                 mainWindow.mainFrame.NavigationService.GoBack();
+                return;
             }
 
             badInput:
@@ -594,6 +611,18 @@ namespace GUI
                         gameFrame.getGame().AddPlayerToWaitingList(prof);
                     }
         });
+        }
+
+        public void SpectatorJoinedGame(int gameID, Models.ClientUserProfile prof)
+        {
+            Dispatcher.CurrentDispatcher.InvokeAsync(() =>
+            {
+                GameFrame gameFrame = findGameFrame(gameID);
+                if (gameFrame != null)
+                {
+                    gameFrame.getGame().AddSpecToWaitingList(prof);
+                }
+            });
         }
 
         public void PushPMMessage(int gameId, string sender, string message)

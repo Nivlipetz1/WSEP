@@ -55,7 +55,7 @@ namespace GUI
                 InitializeComponent();
                 gameFrame.NavigationService.Navigate(GameWindow = new Game(manager, gameID, SpecMode, false));
                 chatFrame.NavigationService.Navigate(GameChat = new GameChat(manager, gameID));
-                pmFrame.NavigationService.Navigate(GamePM = new GamePM(manager, gameID));
+                pmFrame.NavigationService.Navigate(GamePM = new GamePM(manager, gameID,SpecMode));
             }
         }
 

@@ -22,10 +22,12 @@ namespace GUI
     {
         GUIManager manager;
         int gameID;
-        public GamePM(GUIManager manager, int gameID)
+        bool specMode;
+        public GamePM(GUIManager manager, int gameID, bool specMode)
         {
             this.manager = manager;
             this.gameID = gameID;
+            this.specMode = specMode;
             InitializeComponent();
             RefreshSelectionList();
         }
@@ -62,6 +64,13 @@ namespace GUI
             messages.Text = messagesString;
             messages.CaretIndex = messages.Text.Length;
             messages.ScrollToEnd();
+            if (specMode)
+            {
+                if (manager.isStringAPlayer(users.SelectedValue.ToString(), gameID))
+                    SendMessage.IsEnabled = false;
+                else
+                    SendMessage.IsEnabled = true;
+            }
         } 
 
         public void PushMessage(string sender)
@@ -72,6 +81,13 @@ namespace GUI
             messages.Text = manager.GetMessages(gameID, sender);
                 messages.CaretIndex = messages.Text.Length;
                 messages.ScrollToEnd();
+            if (specMode)
+            {
+                if (manager.isStringAPlayer(users.SelectedValue.ToString(), gameID))
+                    SendMessage.IsEnabled = false;
+                else
+                    SendMessage.IsEnabled = true;
+            }
         }
 
         public void RefreshSelectionList()

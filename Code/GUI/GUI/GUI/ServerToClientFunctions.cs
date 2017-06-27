@@ -15,6 +15,7 @@ namespace GUI
        void PushPMMessage(int gameId, string sender, string message);
        void PushChatMessage(int gameId, string sender, string message);
         void PlayerJoinedGame(int gameID, Models.ClientUserProfile prof);
+        void SpecJoinedGame(int gameID, Models.ClientUserProfile prof);
         void PushWinners(List<string> winners, int gameID);
         void PlayerQuitGame(string prof, int gameID);
         void dbUp();
