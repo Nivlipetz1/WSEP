@@ -686,10 +686,14 @@ namespace GUI
                     ClientGame cg = findGame(gameId);
                     gameFrame.RemovePlayer(player);
                     cg.RemovePlayer(player);
-                    RemoveGame(findGame(gameId));
-                    RemoveGameFrame(findGameFrame(gameId));
-                    await RefreshProfile();
-                    GoToGameCenter();
+
+                    if (profile.username.Equals(player))
+                    {
+                        RemoveGame(findGame(gameId));
+                        RemoveGameFrame(findGameFrame(gameId));
+                        await RefreshProfile();
+                        GoToGameCenter();
+                    }
                 }
             });
         }
