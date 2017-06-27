@@ -72,6 +72,11 @@ namespace GUI
            
         }
 
+        public void quitReplay()
+        {
+            GameReplayCont.run = false;
+        }
+
         public Models.ClientGame getGame()
         {
             return game;

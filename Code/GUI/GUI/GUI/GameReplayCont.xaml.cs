@@ -25,7 +25,7 @@ namespace GUI
         public GameFrame gameFrame {get; set;}
         private int numOfMoves;
         private int moveCounter = 0;
-        private bool run;
+        public bool run;
         private Thread t1;
         public GameReplayCont(GameFrame gf,int numOfMoves)
         {

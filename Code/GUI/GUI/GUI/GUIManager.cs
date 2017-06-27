@@ -596,6 +596,11 @@ namespace GUI
             mainWindow.mainFrame.NavigationService.Navigate(new UserMainPage(this));
         }
 
+        internal void StopReplay(int gameID)
+        {
+            findGameFrame(gameID).quitReplay();
+        }
+
         private Status GetStatusFrame()
         {
             return status;

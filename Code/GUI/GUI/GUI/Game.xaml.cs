@@ -527,6 +527,7 @@ namespace GUI
             }
             else
             {
+                manager.StopReplay(gameID);
                 manager.GoToGameCenter();
             }
         }
