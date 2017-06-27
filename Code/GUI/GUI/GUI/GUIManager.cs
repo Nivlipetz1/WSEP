@@ -190,7 +190,11 @@ namespace GUI
         internal async void EditProfile(string username, string password, BitmapImage avatar,UserMainPage mainPage)
         {
             string changedString = "";
+            string notChanged = "";
             bool changed = false;
+
+            if (password.Equals("") && username.Equals("") && avatar==null)
+                notChanged = "Nothing to Change";
 
             if (!password.Equals(""))
             {
@@ -199,6 +203,10 @@ namespace GUI
                     changedString += "Password Changed!\n";
                     changed = true;
                 }
+                else
+                {
+                    notChanged += "Password Not Changed!\n";
+                }
             }
             if (!username.Equals("")) //edit email
             {
@@ -206,6 +214,10 @@ namespace GUI
                 {
                     changedString += "Username Changed!\n";
                     changed = true;
+                }
+                else
+                {
+                    notChanged += "Username Not Changed!\n";
                 }
             }
             if (avatar != null)
@@ -232,21 +244,24 @@ namespace GUI
                         changed = true;
 
                     }
+                    else
+                    {
+                        notChanged += "Avatar Not Changed!\n";
+                    }
                 }
 
             }
 
             if (changed)
             {
-                MessageBox.Show(changedString,"Profile Updated",MessageBoxButton.OK,MessageBoxImage.Information);
+                MessageBox.Show(changedString+"\n"+notChanged,"Profile Updated",MessageBoxButton.OK,MessageBoxImage.Information);
                 await RefreshProfile();
                 mainPage.ShowAvatar();
                 mainWindow.mainFrame.NavigationService.GoBack();
                 return;
             }
 
-            badInput:
-                MessageBox.Show(changedString, "Profile failed to update", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(notChanged, "Profile failed to update", MessageBoxButton.OK, MessageBoxImage.Information);
                 mainWindow.mainFrame.NavigationService.GoBack();
             
         }
