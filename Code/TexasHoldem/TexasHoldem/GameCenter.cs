@@ -67,7 +67,11 @@ namespace GameSystem
         public List<Game> getActiveGames(string criterion , object param , UserProfile user)
         {
             activeGame func;
-            List<Game> gamesInLeague = games.Where(game => user.League.getGames().Contains(game)).ToList();
+            List<Game> gamesInLeague;
+            if (user.UserStat.Winnings + user.UserStat.Losses >= 10)
+                gamesInLeague = games.Where(game => user.League.getGames().Contains(game)).ToList();
+            else
+                gamesInLeague = games;
             gamesInLeague = gamesInLeague.Where(game => game.GetGamePref().GetStatus().Equals("active") || game.GetGamePref().GetStatus().Equals("init")).ToList();
             switch (criterion)
             {
