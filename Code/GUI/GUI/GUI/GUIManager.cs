@@ -613,7 +613,7 @@ namespace GUI
         });
         }
 
-        public void SpectatorJoinedGame(int gameID, Models.ClientUserProfile prof)
+        public void SpecJoinedGame(int gameID, Models.ClientUserProfile prof)
         {
             Dispatcher.CurrentDispatcher.InvokeAsync(() =>
             {

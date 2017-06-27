@@ -44,6 +44,10 @@ namespace GUI.Communication
 
             gameCenterHubProxy.On<int, ClientUserProfile>("spectateGame", (gameID , userProfile) =>
             {
+                Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    serverToClient.SpecJoinedGame(gameID, userProfile);
+                });
             });
         }
 
