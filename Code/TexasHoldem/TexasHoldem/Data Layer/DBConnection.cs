@@ -17,22 +17,48 @@ namespace GameSystem.Data_Layer
         internal IMongoCollection<GameLogger> Replayes { get; set; }
         internal IMongoCollection<UserProfile> Users { get; set; }
         internal IMongoCollection<League> Leagues { get; set; }
+        internal IMongoCollection<League> usersCredit { get; set; }
+
+        private MongoClient client;
 
         private DBConnection()
         {
-            var client = new MongoClient();
-            var db = client.GetDatabase("pokerDB");
-            Users =  db.GetCollection<UserProfile>("Users");
-            Replayes = db.GetCollection<GameLogger>("Replayes");
-            Leagues = db.GetCollection<League>("Leagues");
-
-            var filter = Builders<UserProfile>.Filter.Or(Builders<UserProfile>.Filter.Eq("LeagueId", "1000") , Builders<UserProfile>.Filter.Eq("LeagueId", "2000"),
-                Builders<UserProfile>.Filter.Eq("LeagueId", "3000"));
-            var update = Builders<UserProfile>.Update.Set("LeagueId", "0");
-            Users.UpdateMany(filter, update);
-
+            connect();
 
             NotificationService.saveReplayEvt += saveReplay;
+        }
+
+        private void connect()
+        {
+            client = new MongoClient();
+            var db = client.GetDatabase("pokerDB");
+            Users = db.GetCollection<UserProfile>("Users");
+            Replayes = db.GetCollection<GameLogger>("Replayes");
+            Leagues = db.GetCollection<League>("Leagues");
+            usersCredit = db.GetCollection<League>("usersCredit");
+            /*var filter = Builders<UserProfile>.Filter.Or(Builders<UserProfile>.Filter.Eq("LeagueId", "1000") , Builders<UserProfile>.Filter.Eq("LeagueId", "2000"),
+                Builders<UserProfile>.Filter.Eq("LeagueId", "3000"));
+            var update = Builders<UserProfile>.Update.Set("LeagueId", "0");
+            Users.UpdateMany(filter, update);*/
+        }
+
+        public T GlobalTryCatch<T>(Func<T> action)
+        {
+            try
+            {
+                return action.Invoke();
+            }
+            catch (MongoConnectionException)
+            {
+                NotificationService.Instance.dbDown();
+                client.ListDatabases();   //block until db is up
+                NotificationService.Instance.dbUp();
+                return GlobalTryCatch(() => { return action.Invoke(); }); ;
+            }
+            catch (Exception)
+            {
+                return default(T);
+            }
         }
 
         public static DBConnection Instance
@@ -45,13 +71,17 @@ namespace GameSystem.Data_Layer
             return Users.AsQueryable().ToList();
         }
 
-
         public void updateUserProfile(UserProfile user)
         {
-            Users.ReplaceOne(
-                u => u.Id == user.Id,
-                user,
-                new UpdateOptions { IsUpsert = true });
+            GlobalTryCatch<object>(() =>
+            {
+                Users.ReplaceOne(
+                    u => u.Id == user.Id,
+                    user,
+                    new UpdateOptions { IsUpsert = true });
+                return null;
+            });
+
         }
 
         public List<League> getLeagues()
@@ -69,15 +99,19 @@ namespace GameSystem.Data_Layer
 
         public void saveReplay(GameLogger replay)
         {
-            if (Replayes.Find(repl => repl.gameID == replay.gameID).ToList().Count > 0)
+            GlobalTryCatch<object>(() =>
             {
-                Replayes.ReplaceOne(
-                    repl => repl.gameID == replay.gameID,
-                    replay,
-                    new UpdateOptions { IsUpsert = true });
-            }
-            else
-                Replayes.InsertOne(replay);
+                if (Replayes.Find(repl => repl.gameID == replay.gameID).Count() > 0)
+                {
+                    Replayes.ReplaceOne(
+                        repl => repl.gameID == replay.gameID,
+                        replay,
+                        new UpdateOptions { IsUpsert = true });
+                }
+                else
+                    Replayes.InsertOne(replay);
+                return null;
+            });
         }
 
         public GameLogger getReplayById(int gameId)
@@ -108,22 +142,35 @@ namespace GameSystem.Data_Layer
 
         public double getCashGain(string name)
         {
-            return Users.Find(user => user.Username == name).First().UserStat.AvgCashGain;
+            return GlobalTryCatch<double>(() =>
+            {
+                return Users.Find(user => user.Username == name).First().UserStat.AvgCashGain;
+            });
         }
 
         public double getGrossProfit(string name)
         {
-            return Users.Find(user => user.Username == name).First().UserStat.AvgGrossProfit;
+            return GlobalTryCatch<double>(() =>
+            {
+                return Users.Find(user => user.Username == name).First().UserStat.AvgGrossProfit;
+            });
         }
 
         public bool isUserExist(string userName)
         {
-            return Users.Find(user => user.Username == userName).Count() > 0;
+            return GlobalTryCatch<bool>(() =>
+            {
+                return Users.Find(user => user.Username == userName).Count() > 0;
+            });
         }
 
         public bool checkUserDetails(string userName, string password)
         {
-            return Users.Find(user => user.Username == userName && user.Password == password).Count() > 0;
+            return GlobalTryCatch<bool>(() =>
+            {
+                return Users.Find(user => user.Username == userName && user.Password == password).Count() > 0;
+            });
+           
         }
 
         public List<int> getAllAvailableReplayes()
@@ -166,24 +213,44 @@ namespace GameSystem.Data_Layer
 
         public static void AddUser(this List<UserProfile> list, UserProfile element)
         {
-            DBConnection.Instance.Users.InsertOne(element);
+            DBConnection db = DBConnection.Instance;
+            db.GlobalTryCatch<object>(() =>
+            {
+                db.Users.InsertOne(element);
+                return null;
+            });
         }
 
         public static bool ContainsKey(this List<UserProfile> list , string key)
         {
-            IMongoCollection<UserProfile> coll = DBConnection.Instance.Users;
-            return coll.Find(user => user.Username == key).ToList().Count >= 1;
+            DBConnection db = DBConnection.Instance;
+            return db.GlobalTryCatch<bool>(() =>
+            {
+                IMongoCollection<UserProfile> coll = DBConnection.Instance.Users;
+                return coll.Find(user => user.Username == key).ToList().Count >= 1;
+            });
+
         }
 
         public static UserProfile GetByName(this List<UserProfile> list, string name)
         {
-            IMongoCollection<UserProfile> coll = DBConnection.Instance.Users;
-            return coll.Find(user => user.Username == name).First();
+            DBConnection db = DBConnection.Instance;
+            return db.GlobalTryCatch<UserProfile>(() =>
+            {
+                IMongoCollection<UserProfile> coll = DBConnection.Instance.Users;
+                return coll.Find(user => user.Username == name).First();
+            });
+
         }
 
         public static void Save(this League league)
         {
-            DBConnection.Instance.Leagues.InsertOne(league);
+            DBConnection db = DBConnection.Instance;
+            db.GlobalTryCatch<object>(() =>
+            {
+                DBConnection.Instance.Leagues.InsertOne(league);
+                return null;
+            });
         }
     }
 }

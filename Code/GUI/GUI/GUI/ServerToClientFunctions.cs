@@ -17,6 +17,8 @@ namespace GUI
         void PlayerJoinedGame(int gameID, Models.ClientUserProfile prof);
         void PushWinners(List<string> winners, int gameID);
         void PlayerQuitGame(string prof, int gameID);
+        void dbUp();
+        void dbDown();
         //Missing Functions:
         //a player has joined the game
         //a playe has quit the game

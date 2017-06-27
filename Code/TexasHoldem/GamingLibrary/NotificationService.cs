@@ -32,6 +32,13 @@ namespace Gaming
         public delegate void SaveReplay(GameLogger replay);
         public static event SaveReplay saveReplayEvt;
 
+        public delegate void PushDbDown();
+        public static event PushDbDown pushDbDownEvt;
+
+        public delegate void PushDbUp();
+        public static event PushDbUp pushDbUpEvt;
+
+
         private NotificationService()
         {
 
@@ -67,6 +74,20 @@ namespace Gaming
             var e = pushWinnersEvt;
             if (e != null)
                 e(userNames, winners , gameId);
+        }
+
+        public void dbDown()
+        {
+            var e = pushDbDownEvt;
+            if (e != null)
+                e();
+        }
+
+        public void dbUp()
+        {
+            var e = pushDbUpEvt;
+            if (e != null)
+                e();
         }
 
         public void pushYourTurn(string userName , int minimumBet , int gameId)

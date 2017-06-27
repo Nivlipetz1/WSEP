@@ -95,6 +95,8 @@ namespace GameSystem
 
         public Game[] getGames()
         {
+            if (games == null)
+                games = new Game[50];
             return games;
         }
 

@@ -640,5 +640,25 @@ namespace GUI
                 }
             });
         }
+
+        public void dbDown()
+        {
+            Application.Current.Dispatcher.InvokeAsync(() =>
+            {
+                MessageBox.Show("DB is down", "System Message", MessageBoxButton.OK, MessageBoxImage.Information);
+                lock (this)
+                {
+                    Monitor.Wait(this);
+                }
+            });
+        }
+
+        public void dbUp()
+        {
+            lock (this)
+            {
+                Monitor.PulseAll(this);
+            }
+        }
     }
 }

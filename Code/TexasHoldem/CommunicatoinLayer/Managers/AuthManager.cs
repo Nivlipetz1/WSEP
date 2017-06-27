@@ -26,6 +26,8 @@ namespace CommunicatoinLayer.Managers
 
             NotificationService.notifyAllUsesrEvt += notifyAllUsers;
             NotificationService.notifyUserEvt += notifyUser;
+            NotificationService.pushDbDownEvt += dbDown;
+            NotificationService.pushDbUpEvt += dbUp;
         }
 
         private IHubConnectionContext<dynamic> Clients { set; get; }
@@ -91,6 +93,16 @@ namespace CommunicatoinLayer.Managers
         public bool containsUserName(string userName)
         {
             return _usersByName.ContainsKey(userName);
+        }
+
+        private void dbDown()
+        {
+            Clients.All.dbDown();
+        }
+
+        private void dbUp()
+        {
+            Clients.All.dbUp();
         }
 
         public static AuthManager Instance

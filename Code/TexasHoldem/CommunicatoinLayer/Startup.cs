@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.SignalR;
+﻿using GameSystem.Data_Layer;
+using Microsoft.AspNet.SignalR;
 using Newtonsoft.Json;
 using Owin;
 using System;

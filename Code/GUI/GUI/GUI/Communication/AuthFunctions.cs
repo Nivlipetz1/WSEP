@@ -40,7 +40,20 @@ namespace GUI.Communication
                 {
                     serverToClient.Notify(message);
                 });
-        });
+            });
+
+            authHubProxy.On("dbDown", () =>
+            {
+                Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    serverToClient.dbDown();
+                });
+            });
+
+            authHubProxy.On("dbUp", () =>
+            {
+                serverToClient.dbUp();
+            });
         }
 
         public async Task<bool> register(string userName, string password)
