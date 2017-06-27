@@ -658,7 +658,7 @@ namespace GUI
 
         public void PlayerQuitGame(string player, int gameId)
         {
-            Dispatcher.CurrentDispatcher.InvokeAsync(() =>
+            Dispatcher.CurrentDispatcher.InvokeAsync(async() =>
             {
                 GameFrame gameFrame = findGameFrame(gameId);
                 if (gameFrame != null)
@@ -666,6 +666,10 @@ namespace GUI
                     ClientGame cg = findGame(gameId);
                     gameFrame.RemovePlayer(player);
                     cg.RemovePlayer(player);
+                    RemoveGame(findGame(gameId));
+                    RemoveGameFrame(findGameFrame(gameId));
+                    await RefreshProfile();
+                    GoToGameCenter();
                 }
             });
         }

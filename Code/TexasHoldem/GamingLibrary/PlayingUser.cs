@@ -148,11 +148,6 @@ namespace Gaming
 
             status = "Talked";
 
-            if (credit == 0)
-            {
-                status = "AllIn";
-            }
-
             if (betInput > 0)
             {
                 credit -= betInput;
