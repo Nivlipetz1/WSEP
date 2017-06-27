@@ -173,6 +173,7 @@ namespace GameSystem
             game.addPlayer(playingUser);
 
             u.UpdateCredit(-credit);
+            DBConnection.Instance.updateUserCredit(u.Username, credit);
             return true;
         }
 

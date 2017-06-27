@@ -150,6 +150,7 @@ namespace Gaming
             if (betInput > 0)
             {
                 credit -= betInput;
+                NotificationService.Instance.updateCredit(GetUserName() , -betInput);
                 gainPerRound[gainPerRound.Count-1] -= betInput;
             }
             return betInput;
@@ -175,6 +176,7 @@ namespace Gaming
 
             roundsWon++;
             credit+=amount;
+            NotificationService.Instance.updateCredit(GetUserName() ,  amount);
             gainPerRound[gainPerRound.Count - 1] += amount;
             
         }

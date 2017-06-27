@@ -38,6 +38,9 @@ namespace Gaming
         public delegate void PushDbUp();
         public static event PushDbUp pushDbUpEvt;
 
+        public delegate void UpdateCreditEvt(string userName , int credit);
+        public static event UpdateCreditEvt updateCreditEvt;
+        
 
         private NotificationService()
         {
@@ -109,6 +112,13 @@ namespace Gaming
             var e = saveReplayEvt;
             if (e != null)
                 e(replay);
+        }
+
+        public void updateCredit(string userName , int credit)
+        {
+            var e = updateCreditEvt;
+            if (e != null)
+                e(userName,credit);
         }
     }
 }

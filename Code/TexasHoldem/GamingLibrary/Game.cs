@@ -486,6 +486,7 @@ namespace Gaming
             if ((players.Count + waitingList.Count) == gamePref.GetMaxPlayers())
                 throw new InvalidOperationException("Maximum number of players reached");
 
+            NotificationService.Instance.updateCredit(player.GetUserName(), player.GetCredit());
             if (gamePref.GetStatus().Equals("active"))
             {
                 waitingList.Add(player);
@@ -520,13 +521,12 @@ namespace Gaming
             players.Remove(player);
             playerBets.Remove(player);
 
-
+            NotificationService.Instance.updateCredit(player.GetUserName() , -player.GetCredit());
             var e = evt;
             if (e != null)
                 evt(player);
 
             player = null;
-
         }
 
         public void addSpectator(SpectatingUser spec)
