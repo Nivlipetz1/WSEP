@@ -113,7 +113,8 @@ namespace Gaming
             //request small blind
             PlayingUser smallBlindPlayer = players.ElementAt(0);
             int smallBlindBet = smallBlindPlayer.GetBlind(gamePref.GetsB());
-            bettingRound += smallBlindBet;
+            //bettingRound += smallBlindBet;
+            pot[0] += smallBlindBet;
             playerBets[smallBlindPlayer] = smallBlindBet;
 
             //send small blind move
@@ -122,7 +123,7 @@ namespace Gaming
             //request big blind
             PlayingUser bigBlindPlayer = players.ElementAt(1);
             int bigBlindBet = bigBlindPlayer.GetBlind(gamePref.GetbB());
-            bettingRound += bigBlindBet;
+            pot[0] += bigBlindBet;
             playerBets[bigBlindPlayer] = bigBlindBet;
 
             //send big blind move
@@ -387,11 +388,11 @@ namespace Gaming
                     {
                         if (gamePref.GetTypePolicy() == GamePreferences.LIMIT)
                         {
-                            if (bet > bettingRound)
+                            if (bet > pot[0])
                             {
-                                int updatedCredit = players[index].GetCredit() + (bet - bettingRound);
+                                int updatedCredit = players[index].GetCredit() + (bet - pot[0]);
                                 players[index].SetCredit(updatedCredit);
-                                bet = bettingRound;
+                                bet = pot[0];
                             }
                         }
                         
