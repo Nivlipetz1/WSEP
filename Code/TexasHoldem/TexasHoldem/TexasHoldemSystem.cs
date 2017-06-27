@@ -37,6 +37,7 @@ namespace GameSystem
             users = new List<UserProfile>();
             gc = GameCenter.GameCenterFactory.getInstance();
             gc.setUsers(activeUsers.Values);
+            DBConnection.Instance.updateUsersCredit();
         }
 
         public bool login(string userName, string password)

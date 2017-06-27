@@ -17,7 +17,7 @@ namespace GameSystem.Data_Layer
         internal IMongoCollection<GameLogger> Replayes { get; set; }
         internal IMongoCollection<UserProfile> Users { get; set; }
         internal IMongoCollection<League> Leagues { get; set; }
-        internal IMongoCollection<Tuple<string, int>> usersCredit { get; set; }
+        internal IMongoCollection<UserCreditInGame> usersCredit { get; set; }
 
         private MongoClient client;
 
@@ -36,7 +36,7 @@ namespace GameSystem.Data_Layer
             Users = db.GetCollection<UserProfile>("Users");
             Replayes = db.GetCollection<GameLogger>("Replayes");
             Leagues = db.GetCollection<League>("Leagues");
-            usersCredit = db.GetCollection<Tuple<string,int>>("usersCredit");
+            usersCredit = db.GetCollection<UserCreditInGame>("usersCredit");
             /*var filter = Builders<UserProfile>.Filter.Or(Builders<UserProfile>.Filter.Eq("LeagueId", "1000") , Builders<UserProfile>.Filter.Eq("LeagueId", "2000"),
                 Builders<UserProfile>.Filter.Eq("LeagueId", "3000"));
             var update = Builders<UserProfile>.Update.Set("LeagueId", "0");
@@ -56,7 +56,7 @@ namespace GameSystem.Data_Layer
                 NotificationService.Instance.dbUp();
                 return GlobalTryCatch(() => { return action.Invoke(); }); ;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return default(T);
             }
@@ -212,34 +212,48 @@ namespace GameSystem.Data_Layer
         {
             GlobalTryCatch<object>(() =>
             {
-                Tuple<string,int> user = usersCredit.Find(u => u.Item1 == userName).FirstOrDefault<Tuple<string,int>>();
-                if (user != default(Tuple<string,int>))
+                UserCreditInGame user = usersCredit.Find(u => u.UserName == userName).FirstOrDefault<UserCreditInGame>();
+                if (user != default(UserCreditInGame))
                 {
+                    user.Credit += credit;
                     usersCredit.ReplaceOne(
-                        u => u.Item1 == userName,
-                        new Tuple<string, int>(userName , user.Item2 + credit),
+                        u => u.UserName == userName,
+                        user,
                         new UpdateOptions { IsUpsert = true });
                 }
                 else
-                    usersCredit.InsertOne(new Tuple<string, int>(userName, credit));
+                    usersCredit.InsertOne(new UserCreditInGame(userName, credit));
                 return null;
             });
         }
 
         public void updateUsersCredit()
         {
-            List<Tuple<string,int>> users = usersCredit.AsQueryable().ToList();
-            foreach(Tuple<string, int> user in users)
+            List<UserCreditInGame> users = usersCredit.AsQueryable().ToList();
+            foreach(UserCreditInGame user in users)
             {
-                UserProfile userProf = Users.Find(u => u.Username == user.Item1).First();
-                userProf.Credit += user.Item2;
+                UserProfile userProf = Users.Find(u => u.Username == user.UserName).First();
+                userProf.Credit += user.Credit;
                 Users.ReplaceOne(
-                        u => u.Username == user.Item1,
+                        u => u.Username == user.UserName,
                         userProf,
                         new UpdateOptions { IsUpsert = true });
 
-                usersCredit.DeleteOne(u => u.Item1 == user.Item1);
+                usersCredit.DeleteOne(u => u.UserName == user.UserName);
             }
+        }
+    }
+
+    internal class UserCreditInGame
+    {
+        public ObjectId Id { get; set; }
+        public string UserName { set; get; }
+        public int Credit { set; get; }
+
+        public UserCreditInGame(string name , int credit)
+        {
+            UserName = name;
+            Credit = credit;
         }
     }
 

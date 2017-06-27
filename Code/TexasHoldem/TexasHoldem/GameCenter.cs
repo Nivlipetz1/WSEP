@@ -175,7 +175,6 @@ namespace GameSystem
             game.addPlayer(playingUser);
 
             u.UpdateCredit(-credit);
-            DBConnection.Instance.updateUserCredit(u.Username, credit);
             return true;
         }
 
@@ -250,6 +249,7 @@ namespace GameSystem
         {
             UserProfile user = GetUserByName(playingUser.GetUserName());
             user.UpdateCredit(playingUser.GetCredit());
+            DBConnection.Instance.updateUserCredit(playingUser.GetUserName(), -playingUser.GetCredit());
             user.updateStatistics(playingUser);
 
             if (user.UserStat.Winnings + user.UserStat.Losses < 10)

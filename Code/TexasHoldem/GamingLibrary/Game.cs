@@ -385,11 +385,12 @@ namespace Gaming
                     {
                         if (gamePref.GetTypePolicy() == GamePreferences.LIMIT)
                         {
-                            if (bet > pot[0])
+                            if (bet > bettingRound)
                             {
-                                int updatedCredit = players[index].GetCredit() + (bet - pot[0]);
+                                int updatedCredit = players[index].GetCredit() + (bet - bettingRound);
                                 players[index].SetCredit(updatedCredit);
-                                bet = pot[0];
+                                NotificationService.Instance.updateCredit(players[index].GetUserName(), bet - bettingRound);
+                                bet = bettingRound;
                             }
                         }
                         
@@ -537,7 +538,6 @@ namespace Gaming
             players.Remove(player);
             playerBets.Remove(player);
 
-            NotificationService.Instance.updateCredit(player.GetUserName() , -player.GetCredit());
             var e = evt;
             if (e != null)
                 evt(player);

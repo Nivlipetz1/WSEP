@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GUI.exe" size="6285824">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GUI.exe" size="6285312">
       <assemblyIdentity name="GUI" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Rge8FTI6awQgXuVYude3Vy1nMkJOmNhbdyNCTdNBodQ=</dsig:DigestValue>
+        <dsig:DigestValue>YhawCEniYbT/FHEs9mJOtJM3wqdWtKcF2yP3YkNPVXc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
