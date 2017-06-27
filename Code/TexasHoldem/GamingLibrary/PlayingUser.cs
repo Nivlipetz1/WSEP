@@ -110,6 +110,7 @@ namespace Gaming
         {
             status = "active";
             credit -= amount;
+            NotificationService.Instance.updateCredit(GetUserName(), -amount);
             return amount;
         }
 
