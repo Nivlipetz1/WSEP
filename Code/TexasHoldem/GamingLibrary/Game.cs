@@ -72,6 +72,11 @@ namespace Gaming
             return waitingList;
         }
 
+        public int GetNumberWaitingList()
+        {
+            return waitingList.Count;
+        }
+
         public void StartGame()
         {
             List<PlayingUser> winners = new List<PlayingUser>();

@@ -166,7 +166,9 @@ namespace GameSystem
                 return false;
             if (game.GetGamePref().GetBuyInPolicy() > credit)
                 return false;
-            if (game.GetNumberOfPlayers() == game.GetGamePref().GetMaxPlayers())
+            if (game.GetNumberOfPlayers()+game.GetNumberWaitingList() == game.GetGamePref().GetMaxPlayers())
+                return false;
+            if (credit < game.GetGamePref().GetbB())
                 return false;
 
             PlayingUser playingUser = new PlayingUser(u.Username, credit - game.GetGamePref().BuyInPolicy, game);
