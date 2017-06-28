@@ -63,9 +63,9 @@ namespace GameSystem
             {
                 UserProfile user = new UserProfile(userName, password);
                 user.Credit = 200;
+                users.AddUser(user);
                 user.League = gc.getLeagueByRank(0);
                 user.League.addUser(user);
-                users.AddUser(user);
                 //gc.setUsers(users.Values);
             }
             else return false;

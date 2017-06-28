@@ -293,7 +293,7 @@ namespace GUI
 
         internal async void Register(string username, string password)
         {
-            if (await Communication.AuthFunctions.Instance.register(username, password))
+            if (!username.Trim().Equals("") && !password.Trim().Equals("") && await Communication.AuthFunctions.Instance.register(username, password))
             {
                 MessageBox.Show("You can now login with you credentials.", "Registration Successful!", MessageBoxButton.OK, MessageBoxImage.Information);
                 mainWindow.mainFrame.NavigationService.GoBack();

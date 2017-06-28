@@ -1,4 +1,7 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson.Serialization.Options;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -47,6 +50,7 @@ namespace Gaming
             playerBets = this.playerBets;
         }
 
+        [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
         public IDictionary<string, int> PlayerBets
         {
             get
@@ -85,7 +89,7 @@ namespace Gaming
             return playerBets;
         }
 
-
+        [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
         public IDictionary<string, int> PlayerBets
         {
             get
@@ -147,6 +151,7 @@ namespace Gaming
             return playerBets;
         }
 
+        [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
         public IDictionary<string, int> PlayerBets
         {
             get
@@ -179,6 +184,7 @@ namespace Gaming
         private IDictionary<string, CardAnalyzer.HandRank> handRanks;
         private CardAnalyzer ca = new CardAnalyzer();
 
+        [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
         public IDictionary<string, PlayerHand> PlayerHands
         {
             get
@@ -191,6 +197,7 @@ namespace Gaming
             }
         }
 
+        [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
         public IDictionary<string, CardAnalyzer.HandRank> HandRanks
         {
             get

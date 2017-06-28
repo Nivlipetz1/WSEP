@@ -65,7 +65,7 @@ namespace GUI
             {
                 initialized = true;
                 InitializeComponent();
-                gameFrame.NavigationService.Navigate(GameWindow = new Game(manager, gameID, true,true,game.gamePref.typePolicy==Models.GamePreferences.LIMIT));
+                gameFrame.NavigationService.Navigate(GameWindow = new Game(manager, gameID, true, true, false));
                 chatFrame.NavigationService.Navigate(GameReplayCont = new GameReplayCont(this,moves.Count));
                 pmFrame.NavigationService.Navigate(new GamePM());
             }

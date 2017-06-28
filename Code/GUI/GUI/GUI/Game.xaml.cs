@@ -91,9 +91,10 @@ namespace GUI
                 {
                     SpecLbl.Content = "Replay Mode";
                 }
+                else
+                    SpectatorsLbl.Content = "Spectators: " + manager.GetSpectators(gameID).Count();
                 SpecLbl.Visibility = Visibility.Visible;
             }
-            SpectatorsLbl.Content = "Spectators: " + manager.GetSpectators(gameID).Count();
             SpectatorsLbl.Visibility = Visibility.Visible;
             if (limited)
             {
@@ -400,7 +401,8 @@ namespace GUI
             }
             PotSizeLbl.Content = "Pot Size: $" + potSizeInt;
             PotSizeLbl.Visibility = Visibility.Visible;
-            updateSpec();
+            if(!ReplayMode && SpecMode)
+                updateSpec();
             startGameSound.PlaySync(); 
             if (SpecMode || ReplayMode)
                 DealCards(null);

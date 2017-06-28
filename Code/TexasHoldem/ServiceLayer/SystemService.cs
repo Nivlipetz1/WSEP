@@ -36,7 +36,7 @@ namespace ServiceLayer
         {
             if(string.IsNullOrWhiteSpace(newUserName))
                 return false;
-            Regex r = new Regex("^[a-zA-Z0-9@.]*$");
+            Regex r = new Regex("^[a-zA-Z0-9@]*$");
             if (!r.IsMatch(newUserName))
             {
                 return false;
@@ -86,7 +86,7 @@ namespace ServiceLayer
         {
             if (string.IsNullOrWhiteSpace(userName))
                 return false;
-            Regex r = new Regex("^[a-zA-Z0-9@.]*$");
+            Regex r = new Regex("^[a-zA-Z0-9@]*$");
             if (!r.IsMatch(userName))
             {
                 return false;
